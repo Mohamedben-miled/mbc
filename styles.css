@@ -211,12 +211,7 @@ a:hover {
     height: 45px;
     width: auto;
     object-fit: contain;
-    filter: brightness(0) invert(1);
     transition: all 0.3s ease;
-}
-
-.header.scrolled .logo-img {
-    filter: brightness(0) invert(0);
 }
 
 .logo a {
