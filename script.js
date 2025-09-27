@@ -1,0 +1,486 @@
+/**
+ * MBC Expert Comptable - Clean JavaScript
+ * Optimized and well-structured code
+ */
+
+// ========================================
+// 1. UTILITY FUNCTIONS
+// ========================================
+
+/**
+ * Debounce function to limit function calls
+ * @param {Function} func - Function to debounce
+ * @param {number} wait - Wait time in milliseconds
+ * @returns {Function} Debounced function
+ */
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
+
+/**
+ * Throttle function to limit function calls
+ * @param {Function} func - Function to throttle
+ * @param {number} limit - Time limit in milliseconds
+ * @returns {Function} Throttled function
+ */
+function throttle(func, limit) {
+    let inThrottle;
+    return function() {
+        const args = arguments;
+        const context = this;
+        if (!inThrottle) {
+            func.apply(context, args);
+            inThrottle = true;
+            setTimeout(() => inThrottle = false, limit);
+        }
+    };
+}
+
+/**
+ * Check if element is in viewport
+ * @param {Element} element - Element to check
+ * @returns {boolean} True if element is in viewport
+ */
+function isInViewport(element) {
+    const rect = element.getBoundingClientRect();
+    return (
+        rect.top >= 0 &&
+        rect.left >= 0 &&
+        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+        rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+    );
+}
+
+// ========================================
+// 2. HEADER SCROLL EFFECT
+// ========================================
+
+class HeaderScrollEffect {
+    constructor() {
+        this.header = null;
+        this.init();
+    }
+
+    init() {
+        this.header = document.querySelector('.header');
+        if (!this.header) return;
+
+        this.bindEvents();
+    }
+
+    bindEvents() {
+        window.addEventListener('scroll', throttle(() => {
+            this.handleScroll();
+        }, 10));
+    }
+
+    handleScroll() {
+        const scrollY = window.scrollY;
+        
+        if (scrollY > 50) {
+            this.header.classList.add('scrolled');
+        } else {
+            this.header.classList.remove('scrolled');
+        }
+    }
+}
+
+// ========================================
+// 3. MOBILE MENU FUNCTIONALITY
+// ========================================
+
+class MobileMenu {
+    constructor() {
+        this.menuToggle = null;
+        this.navList = null;
+        this.isOpen = false;
+        this.init();
+    }
+
+    init() {
+        // Create mobile menu toggle if it doesn't exist
+        this.createMobileMenuToggle();
+        this.bindEvents();
+    }
+
+    createMobileMenuToggle() {
+        const header = document.querySelector('.header-content');
+        if (!header || document.querySelector('.mobile-menu-toggle')) return;
+
+        const menuToggle = document.createElement('button');
+        menuToggle.className = 'mobile-menu-toggle';
+        menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+        menuToggle.setAttribute('aria-label', 'Ouvrir le menu');
+        menuToggle.setAttribute('aria-expanded', 'false');
+        
+        header.appendChild(menuToggle);
+        this.menuToggle = menuToggle;
+        this.navList = document.querySelector('.nav-list');
+    }
+
+    bindEvents() {
+        if (!this.menuToggle) return;
+
+        this.menuToggle.addEventListener('click', () => this.toggle());
+        
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (this.isOpen && !e.target.closest('.header-content')) {
+                this.close();
+            }
+        });
+
+        // Close menu on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && this.isOpen) {
+                this.close();
+            }
+        });
+    }
+
+    toggle() {
+        this.isOpen ? this.close() : this.open();
+    }
+
+    open() {
+        this.isOpen = true;
+        this.menuToggle.setAttribute('aria-expanded', 'true');
+        this.menuToggle.setAttribute('aria-label', 'Fermer le menu');
+        this.menuToggle.innerHTML = '<i class="fas fa-times"></i>';
+        
+        if (this.navList) {
+            this.navList.classList.add('mobile-open');
+        }
+    }
+
+    close() {
+        this.isOpen = false;
+        this.menuToggle.setAttribute('aria-expanded', 'false');
+        this.menuToggle.setAttribute('aria-label', 'Ouvrir le menu');
+        this.menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+        
+        if (this.navList) {
+            this.navList.classList.remove('mobile-open');
+        }
+    }
+}
+
+// ========================================
+// 3. SMOOTH SCROLLING
+// ========================================
+
+class SmoothScroll {
+    constructor() {
+        this.init();
+    }
+
+    init() {
+        // Smooth scrolling for anchor links
+        document.addEventListener('click', (e) => {
+            const link = e.target.closest('a[href^="#"]');
+            if (!link) return;
+
+            const targetId = link.getAttribute('href').substring(1);
+            const targetElement = document.getElementById(targetId);
+            
+            if (targetElement) {
+                e.preventDefault();
+                this.scrollToElement(targetElement);
+            }
+        });
+    }
+
+    scrollToElement(element) {
+        const headerHeight = document.querySelector('.header').offsetHeight;
+        const targetPosition = element.offsetTop - headerHeight - 20;
+        
+        window.scrollTo({
+            top: targetPosition,
+            behavior: 'smooth'
+        });
+    }
+}
+
+// ========================================
+// 4. SCROLL ANIMATIONS
+// ========================================
+
+class ScrollAnimations {
+    constructor() {
+        this.animatedElements = new Set();
+        this.init();
+    }
+
+    init() {
+        // Use Intersection Observer for better performance
+        if ('IntersectionObserver' in window) {
+            this.setupIntersectionObserver();
+        } else {
+            // Fallback for older browsers
+            this.setupScrollListener();
+        }
+    }
+
+    setupIntersectionObserver() {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    this.animateElement(entry.target);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
+
+        // Observe elements that should be animated
+        const elementsToAnimate = document.querySelectorAll('.ecosystem-card, .service-card, .creation-card, .review-card, .resource-card');
+        elementsToAnimate.forEach(el => observer.observe(el));
+    }
+
+    setupScrollListener() {
+        const animateElements = () => {
+            const elements = document.querySelectorAll('.ecosystem-card, .service-card, .creation-card, .review-card, .resource-card');
+            elements.forEach(el => {
+                if (isInViewport(el) && !this.animatedElements.has(el)) {
+                    this.animateElement(el);
+                }
+            });
+        };
+
+        window.addEventListener('scroll', throttle(animateElements, 100));
+    }
+
+    animateElement(element) {
+        this.animatedElements.add(element);
+        element.classList.add('fade-in');
+    }
+}
+
+// ========================================
+// 5. SERVICE CARDS INTERACTIONS
+// ========================================
+
+class ServiceCards {
+    constructor() {
+        this.init();
+    }
+
+    init() {
+        const serviceCards = document.querySelectorAll('.service-card');
+        
+        serviceCards.forEach(card => {
+            this.addHoverEffects(card);
+            this.addClickHandler(card);
+        });
+    }
+
+    addHoverEffects(card) {
+        card.addEventListener('mouseenter', () => {
+            card.style.transform = 'translateY(-5px)';
+        });
+        
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = 'translateY(0)';
+        });
+    }
+
+    addClickHandler(card) {
+        card.addEventListener('click', () => {
+            // Add click functionality here if needed
+            console.log('Service card clicked:', card.querySelector('h3').textContent);
+        });
+    }
+}
+
+// ========================================
+// 6. FORM HANDLING
+// ========================================
+
+class FormHandler {
+    constructor() {
+        this.init();
+    }
+
+    init() {
+        const forms = document.querySelectorAll('form');
+        forms.forEach(form => this.setupForm(form));
+    }
+
+    setupForm(form) {
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            this.handleSubmit(form);
+        });
+    }
+
+    handleSubmit(form) {
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData);
+        
+        // Add form submission logic here
+        console.log('Form submitted:', data);
+        
+        // Show success message
+        this.showMessage('Message envoyé avec succès!', 'success');
+    }
+
+    showMessage(message, type) {
+        // Create and show notification
+        const notification = document.createElement('div');
+        notification.className = `notification notification-${type}`;
+        notification.textContent = message;
+        
+        document.body.appendChild(notification);
+        
+        setTimeout(() => {
+            notification.remove();
+        }, 3000);
+    }
+}
+
+// ========================================
+// 7. PERFORMANCE MONITORING
+// ========================================
+
+class PerformanceMonitor {
+    constructor() {
+        this.init();
+    }
+
+    init() {
+        // Monitor page load performance
+        window.addEventListener('load', () => {
+            this.logPerformanceMetrics();
+        });
+    }
+
+    logPerformanceMetrics() {
+        if ('performance' in window) {
+            const navigation = performance.getEntriesByType('navigation')[0];
+            const loadTime = navigation.loadEventEnd - navigation.loadEventStart;
+            
+            console.log(`Page load time: ${loadTime}ms`);
+        }
+    }
+}
+
+// ========================================
+// 8. SERVICE WORKER REGISTRATION
+// ========================================
+
+class ServiceWorkerManager {
+    constructor() {
+        this.init();
+    }
+
+    init() {
+        if ('serviceWorker' in navigator) {
+            this.registerServiceWorker();
+        }
+    }
+
+    registerServiceWorker() {
+        navigator.serviceWorker.register('sw.js')
+            .then(registration => {
+                console.log('ServiceWorker registered successfully');
+            })
+            .catch(error => {
+                console.log('ServiceWorker registration failed:', error);
+            });
+    }
+}
+
+// ========================================
+// 9. LAZY LOADING
+// ========================================
+
+class LazyLoader {
+    constructor() {
+        this.init();
+    }
+
+    init() {
+        if ('IntersectionObserver' in window) {
+            this.setupLazyLoading();
+        } else {
+            this.loadAllImages();
+        }
+    }
+
+    setupLazyLoading() {
+        const imageObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    this.loadImage(img);
+                    imageObserver.unobserve(img);
+                }
+            });
+        });
+
+        const lazyImages = document.querySelectorAll('img[data-src]');
+        lazyImages.forEach(img => imageObserver.observe(img));
+    }
+
+    loadImage(img) {
+        img.src = img.dataset.src;
+        img.removeAttribute('data-src');
+        img.classList.add('loaded');
+    }
+
+    loadAllImages() {
+        const lazyImages = document.querySelectorAll('img[data-src]');
+        lazyImages.forEach(img => this.loadImage(img));
+    }
+}
+
+// ========================================
+// 10. INITIALIZATION
+// ========================================
+
+class App {
+    constructor() {
+        this.init();
+    }
+
+    init() {
+        // Wait for DOM to be ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => this.initializeComponents());
+        } else {
+            this.initializeComponents();
+        }
+    }
+
+    initializeComponents() {
+        try {
+            // Initialize all components
+            new HeaderScrollEffect();
+            new MobileMenu();
+            new SmoothScroll();
+            new ScrollAnimations();
+            new ServiceCards();
+            new FormHandler();
+            new PerformanceMonitor();
+            new ServiceWorkerManager();
+            new LazyLoader();
+
+            console.log('MBC Expert Comptable website loaded successfully!');
+        } catch (error) {
+            console.error('Error initializing app:', error);
+        }
+    }
+}
+
+// Start the application
+new App();
