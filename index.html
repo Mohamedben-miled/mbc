@@ -61,7 +61,6 @@
                         <li><a href="#services" class="nav-link">Services</a></li>
                         <li><a href="#simulateurs" class="nav-link">Simulateurs</a></li>
                         <li><a href="#blog" class="nav-link">Blog</a></li>
-                        <li><a href="#connexion" class="nav-link">Connexion</a></li>
                         <li><a href="#contact" class="nav-link">Contact</a></li>
                     </ul>
                 </nav>
@@ -73,10 +72,32 @@
                         <option value="en">EN</option>
                         <option value="ar">AR</option>
                     </select>
+                    <button class="mobile-menu-toggle" aria-label="Ouvrir le menu mobile">
+                        <i class="fas fa-bars"></i>
+                    </button>
                 </div>
             </div>
         </div>
     </header>
+
+    <!-- Business Suggestion Chatbot -->
+    <div class="business-chatbot" id="businessChatbot">
+        <div class="chatbot-avatar">
+            <i class="fas fa-lightbulb"></i>
+        </div>
+        <div class="chatbot-message">
+            <div class="message-bubble">
+                <p class="message-text">💡 Prêt à créer votre entreprise ? Je peux vous accompagner !</p>
+            </div>
+            <div class="message-actions">
+                <button class="btn-chatbot btn-primary">Découvrir</button>
+                <button class="btn-chatbot btn-secondary">Plus tard</button>
+            </div>
+        </div>
+        <button class="chatbot-close" aria-label="Fermer">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
 
     <!-- Main Content -->
     <main role="main">
@@ -405,5 +426,109 @@
 
     <!-- Scripts -->
     <script src="script.js"></script>
+    <script>
+        // Business Suggestion Chatbot
+        document.addEventListener('DOMContentLoaded', function() {
+            const chatbot = document.getElementById('businessChatbot');
+            const closeBtn = document.querySelector('.chatbot-close');
+            const discoverBtn = document.querySelector('.btn-primary');
+            const laterBtn = document.querySelector('.btn-secondary');
+            const messageText = document.querySelector('.message-text');
+            const header = document.querySelector('.header');
+
+            // Business suggestion messages
+            const businessMessages = [
+                "💡 Prêt à créer votre entreprise ? Je peux vous accompagner !",
+                "🚀 Votre idée d'entreprise mérite d'être réalisée ! Parlons-en !",
+                "💼 Créer une entreprise en France ? C'est plus simple avec MBC !",
+                "🌟 Transformez votre projet en succès entrepreneurial !",
+                "📈 Besoin d'aide pour votre création d'entreprise ? Je suis là !",
+                "💡 Votre rêve d'entrepreneur peut devenir réalité !",
+                "🎯 Prêt à lancer votre business ? Commençons ensemble !",
+                "💪 Créer une entreprise franco-maghrébine ? C'est notre spécialité !"
+            ];
+
+            let lastScrollTime = 0;
+            let lastMessageTime = 0;
+            let isChatbotVisible = false;
+            let messageInterval;
+
+            // Header scroll effect
+            function handleScroll() {
+                if (window.scrollY > 100) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+
+                // Show chatbot periodically while scrolling
+                const currentTime = Date.now();
+                const scrollTime = currentTime - lastScrollTime;
+                
+                if (scrollTime > 2000 && !isChatbotVisible) { // 2 seconds between scrolls
+                    const timeSinceLastMessage = currentTime - lastMessageTime;
+                    if (timeSinceLastMessage > 30000) { // 30 seconds between messages
+                        showRandomMessage();
+                        lastMessageTime = currentTime;
+                    }
+                }
+                
+                lastScrollTime = currentTime;
+            }
+
+            // Show random business message
+            function showRandomMessage() {
+                const randomMessage = businessMessages[Math.floor(Math.random() * businessMessages.length)];
+                messageText.textContent = randomMessage;
+                chatbot.classList.add('active');
+                isChatbotVisible = true;
+
+                // Auto-hide after 8 seconds if not interacted with
+                setTimeout(() => {
+                    if (isChatbotVisible) {
+                        hideChatbot();
+                    }
+                }, 8000);
+            }
+
+            // Hide chatbot
+            function hideChatbot() {
+                chatbot.classList.remove('active');
+                isChatbotVisible = false;
+            }
+
+            // Close chatbot
+            closeBtn.addEventListener('click', hideChatbot);
+
+            // Discover button
+            discoverBtn.addEventListener('click', function() {
+                hideChatbot();
+                // Redirect to services or contact
+                window.location.href = '#services';
+            });
+
+            // Later button
+            laterBtn.addEventListener('click', function() {
+                hideChatbot();
+            });
+
+            // Close on outside click
+            document.addEventListener('click', function(e) {
+                if (!chatbot.contains(e.target) && isChatbotVisible) {
+                    hideChatbot();
+                }
+            });
+
+            // Add scroll listener
+            window.addEventListener('scroll', handleScroll);
+
+            // Show first message after 5 seconds
+            setTimeout(() => {
+                if (!isChatbotVisible) {
+                    showRandomMessage();
+                }
+            }, 5000);
+        });
+    </script>
 </body>
 </html>
