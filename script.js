@@ -4,7 +4,113 @@
  */
 
 // ========================================
-// 1. UTILITY FUNCTIONS
+// 1. SIMULATOR FUNCTIONS
+// ========================================
+
+/**
+ * Open simulators modal
+ */
+function openSimulatorsModal() {
+    // Prevent default link behavior
+    event.preventDefault();
+    
+    const modal = document.getElementById('simulatorsModal');
+    if (modal) {
+        modal.classList.add('show');
+        document.body.style.overflow = 'hidden';
+        
+        // Initialize simulators
+        initializeSimulators();
+    } else {
+        // If modal doesn't exist, redirect to index.html
+        console.log('Modal not found, redirecting to index.html');
+        window.location.href = 'index.html#simulators';
+    }
+    return false;
+}
+
+/**
+ * Close simulators modal
+ */
+function closeSimulatorsModal() {
+    const modal = document.getElementById('simulatorsModal');
+    if (modal) {
+        modal.classList.remove('show');
+        document.body.style.overflow = 'auto';
+    }
+}
+
+/**
+ * Initialize simulators functionality
+ */
+function initializeSimulators() {
+    // Tab Navigation
+    const tabs = document.querySelectorAll('.nav-tab');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    tabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+            const targetTab = this.getAttribute('data-tab');
+            
+            // Remove active class from all tabs and contents
+            tabs.forEach(t => t.classList.remove('active'));
+            tabContents.forEach(content => content.classList.remove('active'));
+            
+            // Add active class to clicked tab and corresponding content
+            this.classList.add('active');
+            const targetContent = document.getElementById(targetTab);
+            if (targetContent) {
+                targetContent.classList.add('active');
+            }
+        });
+    });
+
+    // TVA Calculator - Real-time calculation
+    const tvaHtInput = document.getElementById('tva-ht');
+    const tvaRateSelect = document.getElementById('tva-rate');
+    const tvaAmountInput = document.getElementById('tva-amount');
+    const tvaTtcInput = document.getElementById('tva-ttc');
+
+    function calculateTVA() {
+        const ht = parseFloat(tvaHtInput.value) || 0;
+        const rate = parseFloat(tvaRateSelect.value) / 100;
+        const tva = ht * rate;
+        const ttc = ht + tva;
+        
+        tvaAmountInput.value = tva.toFixed(2) + ' €';
+        tvaTtcInput.value = ttc.toFixed(2) + ' €';
+    }
+
+    if (tvaHtInput) {
+        tvaHtInput.addEventListener('input', calculateTVA);
+        tvaRateSelect.addEventListener('change', calculateTVA);
+    }
+}
+
+// ========================================
+// 2. MODAL EVENT LISTENERS
+// ========================================
+
+// Initialize modal event listeners when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    // Close modal when clicking outside
+    window.addEventListener('click', function(event) {
+        const modal = document.getElementById('simulatorsModal');
+        if (modal && event.target === modal) {
+            closeSimulatorsModal();
+        }
+    });
+
+    // Close modal with Escape key
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape') {
+            closeSimulatorsModal();
+        }
+    });
+});
+
+// ========================================
+// 3. UTILITY FUNCTIONS
 // ========================================
 
 /**
