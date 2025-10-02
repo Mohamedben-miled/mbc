@@ -183,12 +183,12 @@
                                 <div class="service-badge">
                                     <span>Le plus populaire</span>
                                 </div>
-                                <div class="service-icon">
-                                    <i class="fas fa-calculator" aria-hidden="true"></i>
-                                </div>
+                        <div class="service-icon">
+                            <i class="fas fa-calculator" aria-hidden="true"></i>
+                        </div>
                                 <div class="service-content">
-                                    <h3>Expertise Comptable</h3>
-                                    <p>Sortez du chaos administratif avec une gestion comptable claire et organisée</p>
+                        <h3>Expertise Comptable</h3>
+                        <p>Sortez du chaos administratif avec une gestion comptable claire et organisée</p>
                                     <div class="service-benefits">
                                         <div class="benefit-item">
                                             <i class="fas fa-check"></i>
@@ -213,13 +213,13 @@
                                         <span class="feature-tag">Suivi mensuel</span>
                                     </div>
                                 </div>
-                            </article>
-                            <article class="service-card">
-                                <div class="service-icon">
-                                    <i class="fas fa-file-invoice" aria-hidden="true"></i>
-                                </div>
+                    </article>
+                    <article class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-file-invoice" aria-hidden="true"></i>
+                        </div>
                                 <div class="service-content">
-                                    <h3>Fiscalité</h3>
+                        <h3>Fiscalité</h3>
                                     <p>Naviguez sereinement dans le labyrinthe fiscal avec nos experts</p>
                                     <div class="service-benefits">
                                         <div class="benefit-item">
@@ -245,14 +245,14 @@
                                         <span class="feature-tag">Conseil expert</span>
                                     </div>
                                 </div>
-                            </article>
-                            <article class="service-card">
-                                <div class="service-icon">
-                                    <i class="fas fa-users" aria-hidden="true"></i>
-                                </div>
+                    </article>
+                    <article class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-users" aria-hidden="true"></i>
+                        </div>
                                 <div class="service-content">
-                                    <h3>Social & Paie</h3>
-                                    <p>Simplifiez la gestion de vos obligations sociales et salariales</p>
+                        <h3>Social & Paie</h3>
+                        <p>Simplifiez la gestion de vos obligations sociales et salariales</p>
                                     <div class="service-benefits">
                                         <div class="benefit-item">
                                             <i class="fas fa-check"></i>
@@ -277,18 +277,18 @@
                                         <span class="feature-tag">Conformité légale</span>
                                     </div>
                                 </div>
-                            </article>
+                    </article>
                         </div>
                         
                         <!-- Page 2 -->
                         <div class="services-page" data-page="2">
-                            <article class="service-card">
-                                <div class="service-icon">
-                                    <i class="fas fa-chart-line" aria-hidden="true"></i>
-                                </div>
+                    <article class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-chart-line" aria-hidden="true"></i>
+                        </div>
                                 <div class="service-content">
-                                    <h3>Conseil</h3>
-                                    <p>Construisez votre succès avec un accompagnement stratégique personnalisé</p>
+                        <h3>Conseil</h3>
+                        <p>Construisez votre succès avec un accompagnement stratégique personnalisé</p>
                                     <div class="service-benefits">
                                         <div class="benefit-item">
                                             <i class="fas fa-check"></i>
@@ -313,7 +313,7 @@
                                         <span class="feature-tag">Accompagnement</span>
                                     </div>
                                 </div>
-                            </article>
+                    </article>
                             <article class="service-card">
                                 <div class="service-icon">
                                     <i class="fas fa-building" aria-hidden="true"></i>
@@ -587,16 +587,17 @@
                                 <h3>Calculateur de TVA</h3>
                                 <div class="simulator-form">
                                     <div class="form-group">
-                                        <label for="tva-ht">Montant HT</label>
-                                        <input type="number" id="tva-ht" placeholder="0.00" step="0.01">
+                                        <label for="tva-ht">Montant HT (€)</label>
+                                        <input type="number" id="tva-ht" placeholder="10000" step="0.01" value="10000" onchange="calculateTVA()" oninput="calculateTVA()">
                                     </div>
                                     <div class="form-group">
                                         <label for="tva-rate">Taux de TVA</label>
-                                        <select id="tva-rate">
-                                            <option value="20">20%</option>
-                                            <option value="10">10%</option>
-                                            <option value="5.5">5.5%</option>
-                                            <option value="2.1">2.1%</option>
+                                        <select id="tva-rate" onchange="calculateTVA()">
+                                            <option value="20">20% - Taux normal</option>
+                                            <option value="10">10% - Taux intermédiaire</option>
+                                            <option value="5.5">5,5% - Taux réduit</option>
+                                            <option value="2.1">2,1% - Taux super réduit</option>
+                                            <option value="0">0% - Exonéré</option>
                                         </select>
                                     </div>
                                     <div class="form-group">
@@ -659,31 +660,35 @@
                                 <h3>Simulateur de charges sociales</h3>
                                 <div class="simulator-form">
                                     <div class="form-group">
-                                        <label for="charges-brut">Rémunération brute annuelle</label>
-                                        <input type="number" id="charges-brut" placeholder="0.00" step="0.01">
+                                        <label for="charges-brut">Rémunération brute annuelle (€)</label>
+                                        <input type="number" id="charges-brut" placeholder="50000" step="1000" value="50000" onchange="calculateCharges()" oninput="calculateCharges()">
                                     </div>
                                     <div class="form-group">
                                         <label for="charges-status">Statut juridique</label>
-                                        <select id="charges-status">
+                                        <select id="charges-status" onchange="calculateCharges()">
                                             <option value="salarie">Salarié</option>
                                             <option value="micro">Micro-entreprise</option>
                                             <option value="auto">Auto-entrepreneur</option>
-                                            <option value="sarl">SARL</option>
-                                            <option value="sas">SAS</option>
+                                            <option value="sarl">SARL (gérant minoritaire)</option>
+                                            <option value="sas">SAS (président)</option>
                                         </select>
                                     </div>
                                     <div class="form-group">
                                         <label for="charges-total">Total charges sociales</label>
-                                        <input type="text" id="charges-total" readonly>
+                                        <input type="text" id="charges-total" readonly value="0.00 €">
                                     </div>
                                     <div class="form-group">
                                         <label for="charges-net">Net après charges</label>
-                                        <input type="text" id="charges-net" readonly>
+                                        <input type="text" id="charges-net" readonly value="0.00 €">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="charges-taux">Taux de charges</label>
+                                        <input type="text" id="charges-taux" readonly value="0.00 %">
                                     </div>
                                     <p class="disclaimer">* Ces calculs sont des estimations. Consultez un expert-comptable pour des calculs précis.</p>
                                     <div class="simulator-actions">
                                         <button class="btn btn-secondary">
-                                            <i class="fas fa-save"></i> Sauvegarder / Charger
+                                            <i class="fas fa-save"></i> Sauvegarder
                                         </button>
                                         <button class="btn btn-primary">
                                             <i class="fas fa-file-pdf"></i> Exporter en PDF
@@ -696,39 +701,41 @@
                         <!-- Épargne & Retraite Tab -->
                         <div class="tab-content" id="epargne">
                             <div class="simulator-card">
-                                <h3>Simulateur de sortie du PER</h3>
+                                <h3>Simulateur d'épargne retraite</h3>
                                 <div class="simulator-form">
                                     <div class="form-group">
-                                        <label for="per-age">Âge</label>
-                                        <input type="number" id="per-age" placeholder="Votre âge">
+                                        <label for="epargne-age">Âge actuel</label>
+                                        <input type="number" id="epargne-age" placeholder="35" min="18" max="65" value="35" onchange="calculateEpargne()" oninput="calculateEpargne()">
                                     </div>
                                     <div class="form-group">
-                                        <label for="per-montant">Montant du rachat</label>
-                                        <input type="number" id="per-montant" placeholder="0.00" step="0.01">
+                                        <label for="epargne-retraite">Âge de départ à la retraite</label>
+                                        <input type="number" id="epargne-retraite" placeholder="62" min="55" max="70" value="62" onchange="calculateEpargne()" oninput="calculateEpargne()">
                                     </div>
                                     <div class="form-group">
-                                        <label for="per-type">Type de sortie</label>
-                                        <select id="per-type">
-                                            <option value="partiel">Rachat partiel</option>
-                                            <option value="total">Rachat total</option>
-                                        </select>
+                                        <label for="epargne-mensuel">Épargne mensuelle (€)</label>
+                                        <input type="number" id="epargne-mensuel" placeholder="300" step="50" min="0" value="300" onchange="calculateEpargne()" oninput="calculateEpargne()">
                                     </div>
                                     <div class="form-group">
-                                        <label for="per-situation">Situation</label>
-                                        <select id="per-situation">
-                                            <option value="actif">Actif</option>
-                                            <option value="retraite">Retraité</option>
-                                        </select>
+                                        <label for="epargne-rendement">Rendement annuel estimé (%)</label>
+                                        <input type="number" id="epargne-rendement" placeholder="3.0" step="0.1" min="0" max="15" value="3.0" onchange="calculateEpargne()" oninput="calculateEpargne()">
                                     </div>
                                     <div class="form-group">
-                                        <label for="per-impot">Imposition estimée</label>
-                                        <input type="text" id="per-impot" readonly>
+                                        <label for="epargne-duree">Durée d'épargne</label>
+                                        <input type="text" id="epargne-duree" readonly value="27 ans">
                                     </div>
                                     <div class="form-group">
-                                        <label for="per-net">Montant net estimé</label>
-                                        <input type="text" id="per-net" readonly value="0.00 €">
+                                        <label for="epargne-total">Capital constitué</label>
+                                        <input type="text" id="epargne-total" readonly value="0.00 €">
                                     </div>
+                                    <div class="form-group">
+                                        <label for="epargne-rente">Rente mensuelle estimée</label>
+                                        <input type="text" id="epargne-rente" readonly value="0.00 €">
+                                    </div>
+                                    <p class="disclaimer">* Simulation basée sur un rendement constant. Les performances passées ne préjugent pas des performances futures.</p>
                                     <div class="simulator-actions">
+                                        <button class="btn btn-secondary">
+                                            <i class="fas fa-save"></i> Sauvegarder
+                                        </button>
                                         <button class="btn btn-primary">
                                             <i class="fas fa-file-pdf"></i> Exporter en PDF
                                         </button>
@@ -744,15 +751,15 @@
                                 <div class="simulator-form">
                                     <div class="form-group">
                                         <label for="aide-revenus">Revenus fiscaux annuels</label>
-                                        <input type="number" id="aide-revenus" placeholder="0.00" step="0.01">
+                                        <input type="number" id="aide-revenus" placeholder="25000" step="1000" value="25000" onchange="calculateAides()" oninput="calculateAides()">
                                     </div>
                                     <div class="form-group">
                                         <label for="aide-loyer">Loyer mensuel (charges comprises)</label>
-                                        <input type="number" id="aide-loyer" placeholder="0.00" step="0.01">
+                                        <input type="number" id="aide-loyer" placeholder="600" step="50" value="600" onchange="calculateAides()" oninput="calculateAides()">
                                     </div>
                                     <div class="form-group">
                                         <label for="aide-famille">Situation familiale</label>
-                                        <select id="aide-famille">
+                                        <select id="aide-famille" onchange="calculateAides()">
                                             <option value="celibataire">Célibataire</option>
                                             <option value="couple">Couple</option>
                                             <option value="divorce">Divorcé(e)</option>
@@ -760,7 +767,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="aide-enfants">Nombre d'enfants à charge</label>
-                                        <select id="aide-enfants">
+                                        <select id="aide-enfants" onchange="calculateAides()">
                                             <option value="0">0</option>
                                             <option value="1">1</option>
                                             <option value="2">2</option>
@@ -770,10 +777,10 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="aide-zone">Zone géographique</label>
-                                        <select id="aide-zone">
-                                            <option value="1">Zone 1</option>
-                                            <option value="2">Zone 2</option>
-                                            <option value="3">Zone 3</option>
+                                        <select id="aide-zone" onchange="calculateAides()">
+                                            <option value="1">Zone 1 (Paris, grandes métropoles)</option>
+                                            <option value="2" selected>Zone 2 (Agglomérations > 250k hab.)</option>
+                                            <option value="3">Zone 3 (Autres communes)</option>
                                         </select>
                                     </div>
                                     <div class="aide-result">
@@ -782,6 +789,9 @@
                                     </div>
                                     <p class="disclaimer">* Cette estimation est donnée à titre indicatif. Le montant réel de votre aide peut varier en fonction de votre situation précise.</p>
                                     <div class="simulator-actions">
+                                        <button class="btn btn-secondary">
+                                            <i class="fas fa-save"></i> Sauvegarder
+                                        </button>
                                         <button class="btn btn-primary">
                                             <i class="fas fa-file-pdf"></i> Exporter en PDF
                                         </button>
@@ -954,7 +964,118 @@
 
         });
 
-        // Simulators are now handled by script.js
+        // Slider functionality for simulators
+        function initializeSliders() {
+            // TVA HT Slider (0 to 100,000)
+            initializeSlider('tva-ht', 0, 100000, 10000, (value) => {
+                return value.toLocaleString('fr-FR');
+            });
+            
+            // TVA Rate Slider (0 to 25%)
+            initializeSlider('tva-rate', 0, 25, 20, (value) => {
+                return value.toString();
+            });
+        }
+        
+        function initializeSlider(id, min, max, defaultValue, formatter) {
+            const track = document.getElementById(id + '-thumb').parentElement;
+            const thumb = document.getElementById(id + '-thumb');
+            const fill = document.getElementById(id + '-fill');
+            const valueSpan = document.getElementById(id + '-value');
+            const hiddenInput = document.getElementById(id);
+            
+            let isDragging = false;
+            let currentValue = defaultValue;
+            
+            // Set initial position
+            updateSlider(currentValue);
+            
+            function updateSlider(value) {
+                currentValue = Math.max(min, Math.min(max, value));
+                const percentage = ((currentValue - min) / (max - min)) * 100;
+                
+                thumb.style.left = percentage + '%';
+                fill.style.width = percentage + '%';
+                valueSpan.textContent = formatter(currentValue);
+                hiddenInput.value = currentValue;
+                
+                // Auto-calculate TVA if both values are set
+                if (id === 'tva-ht' || id === 'tva-rate') {
+                    calculateTVA();
+                }
+            }
+            
+            function getValueFromPosition(clientX) {
+                const rect = track.getBoundingClientRect();
+                const percentage = Math.max(0, Math.min(100, ((clientX - rect.left) / rect.width) * 100));
+                return min + (percentage / 100) * (max - min);
+            }
+            
+            // Mouse events
+            thumb.addEventListener('mousedown', (e) => {
+                isDragging = true;
+                e.preventDefault();
+            });
+            
+            track.addEventListener('click', (e) => {
+                if (!isDragging) {
+                    const value = getValueFromPosition(e.clientX);
+                    updateSlider(value);
+                }
+            });
+            
+            document.addEventListener('mousemove', (e) => {
+                if (isDragging) {
+                    const value = getValueFromPosition(e.clientX);
+                    updateSlider(value);
+                }
+            });
+            
+            document.addEventListener('mouseup', () => {
+                isDragging = false;
+            });
+            
+            // Touch events for mobile
+            thumb.addEventListener('touchstart', (e) => {
+                isDragging = true;
+                e.preventDefault();
+            });
+            
+            document.addEventListener('touchmove', (e) => {
+                if (isDragging) {
+                    const touch = e.touches[0];
+                    const value = getValueFromPosition(touch.clientX);
+                    updateSlider(value);
+                }
+            });
+            
+            document.addEventListener('touchend', () => {
+                isDragging = false;
+            });
+        }
+        
+        function calculateTVA() {
+            const htValue = parseFloat(document.getElementById('tva-ht').value) || 0;
+            const rateValue = parseFloat(document.getElementById('tva-rate').value) || 0;
+            
+            const tvaAmount = htValue * (rateValue / 100);
+            const ttcAmount = htValue + tvaAmount;
+            
+            document.getElementById('tva-amount').value = tvaAmount.toLocaleString('fr-FR', {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            }) + ' €';
+            
+            document.getElementById('tva-ttc').value = ttcAmount.toLocaleString('fr-FR', {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            }) + ' €';
+        }
+        
+        // Initialize sliders when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeSliders();
+        });
 
 
         // Intelligent Chatbot Functions
@@ -1312,6 +1433,99 @@
             
             // Initialize first page
             showPage(1);
+        });
+
+        // TVA calculation function
+        function calculateTVA() {
+            const ht = parseFloat(document.getElementById('tva-ht').value) || 0;
+            const rate = parseFloat(document.getElementById('tva-rate').value) / 100;
+            const tva = ht * rate;
+            const ttc = ht + tva;
+            
+            document.getElementById('tva-amount').value = tva.toLocaleString('fr-FR', {minimumFractionDigits: 2}) + ' €';
+            document.getElementById('tva-ttc').value = ttc.toLocaleString('fr-FR', {minimumFractionDigits: 2}) + ' €';
+        }
+
+        // Simulator calculation functions
+        function calculateCharges() {
+            const brut = parseFloat(document.getElementById('charges-brut').value) || 0;
+            const status = document.getElementById('charges-status').value;
+            
+            let taux = 0;
+            switch(status) {
+                case 'salarie': taux = 0.22; break; // 22% charges salariales
+                case 'micro': taux = 0.22; break; // 22% charges micro-entreprise
+                case 'auto': taux = 0.22; break; // 22% charges auto-entrepreneur
+                case 'sarl': taux = 0.45; break; // 45% charges gérant SARL
+                case 'sas': taux = 0.42; break; // 42% charges président SAS
+            }
+            
+            const charges = brut * taux;
+            const net = brut - charges;
+            
+            document.getElementById('charges-total').value = charges.toLocaleString('fr-FR', {minimumFractionDigits: 2}) + ' €';
+            document.getElementById('charges-net').value = net.toLocaleString('fr-FR', {minimumFractionDigits: 2}) + ' €';
+            document.getElementById('charges-taux').value = (taux * 100).toFixed(1) + ' %';
+        }
+
+        function calculateEpargne() {
+            const ageActuel = parseInt(document.getElementById('epargne-age').value) || 35;
+            const ageRetraite = parseInt(document.getElementById('epargne-retraite').value) || 62;
+            const mensuel = parseFloat(document.getElementById('epargne-mensuel').value) || 300;
+            const rendement = parseFloat(document.getElementById('epargne-rendement').value) / 100 || 0.03;
+            
+            const duree = ageRetraite - ageActuel;
+            const mois = duree * 12;
+            const rendementMensuel = rendement / 12;
+            
+            // Calcul du capital avec intérêts composés
+            let capital = 0;
+            for (let i = 0; i < mois; i++) {
+                capital = (capital + mensuel) * (1 + rendementMensuel);
+            }
+            
+            // Rente mensuelle estimée (4% du capital par an)
+            const renteMensuelle = (capital * 0.04) / 12;
+            
+            document.getElementById('epargne-duree').value = duree + ' ans';
+            document.getElementById('epargne-total').value = capital.toLocaleString('fr-FR', {minimumFractionDigits: 0}) + ' €';
+            document.getElementById('epargne-rente').value = renteMensuelle.toLocaleString('fr-FR', {minimumFractionDigits: 0}) + ' €';
+        }
+
+        function calculateAides() {
+            const revenus = parseFloat(document.getElementById('aide-revenus').value) || 0;
+            const loyer = parseFloat(document.getElementById('aide-loyer').value) || 0;
+            const famille = document.getElementById('aide-famille').value;
+            const enfants = parseInt(document.getElementById('aide-enfants').value) || 0;
+            const zone = parseInt(document.getElementById('aide-zone').value) || 1;
+            
+            // Calcul simplifié des APL (estimation)
+            let plafondRessources = 12000; // Base célibataire
+            if (famille === 'couple') plafondRessources += 6000;
+            plafondRessources += enfants * 3000;
+            
+            let plafondLoyer = 300; // Zone 3
+            if (zone === 2) plafondLoyer = 350;
+            if (zone === 1) plafondLoyer = 400;
+            
+            let aide = 0;
+            if (revenus <= plafondRessources && loyer <= plafondLoyer) {
+                aide = Math.min(loyer * 0.4, plafondLoyer * 0.4);
+                aide = Math.max(0, aide - (revenus * 0.01));
+            }
+            
+            document.getElementById('aide-amount').textContent = Math.round(aide) + ' €';
+        }
+
+        // Initialize calculations on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Wait a bit for modal to be ready
+            setTimeout(function() {
+                if (typeof calculateTVA === 'function') calculateTVA();
+                if (typeof calculateCharges === 'function') calculateCharges();
+                if (typeof calculateEpargne === 'function') calculateEpargne();
+                if (typeof calculateAides === 'function') calculateAides();
+            }, 100);
         });
     </script>
     <script src="script.js"></script>

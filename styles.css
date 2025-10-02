@@ -2730,9 +2730,88 @@ input:checked + .slider:before {
     }
 }
 
-/* ========================================
-   9. COMPANY CREATION SECTION
-   ======================================== */
+/* Slider Component for Simulators */
+.slider-container {
+    margin: 0.5rem 0 1rem 0;
+}
+
+.slider-track {
+    position: relative;
+    width: 100%;
+    height: 8px;
+    background: #e5e7eb;
+    border-radius: 4px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.slider-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background: linear-gradient(135deg, #296871, #10b981);
+    border-radius: 4px;
+    transition: width 0.2s ease;
+    width: 50%;
+}
+
+.slider-thumb {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    background: linear-gradient(135deg, #296871, #10b981);
+    border: 3px solid white;
+    border-radius: 50%;
+    cursor: grab;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    transition: all 0.2s ease;
+    z-index: 10;
+}
+
+.slider-thumb:hover {
+    transform: translate(-50%, -50%) scale(1.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.slider-thumb:active {
+    cursor: grabbing;
+    transform: translate(-50%, -50%) scale(1.2);
+}
+
+.slider-value {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 0.75rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #296871;
+    background: rgba(41, 104, 113, 0.1);
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    border: 1px solid rgba(41, 104, 113, 0.2);
+}
+
+/* Responsive slider */
+@media (max-width: 768px) {
+    .slider-thumb {
+        width: 24px;
+        height: 24px;
+    }
+    
+    .slider-track {
+        height: 10px;
+    }
+    
+    .slider-value {
+        font-size: 1rem;
+        padding: 0.75rem;
+    }
+}
 .company-creation {
     padding: 5rem 0;
     background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
@@ -3398,11 +3477,14 @@ input:checked + .slider:before {
 @media (max-width: 768px) {
     .modal.show {
         padding: 1rem;
+        align-items: flex-start;
+        padding-top: 2rem;
     }
     
     .modal-content {
         max-height: 95vh;
         border-radius: 20px;
+        width: 95%;
     }
     
     .modal-header {
@@ -3423,11 +3505,12 @@ input:checked + .slider:before {
         right: 1rem;
         width: 40px;
         height: 40px;
-    font-size: 1.5rem;
+        font-size: 1.5rem;
     }
     
     .modal-body {
         padding: 2rem 1.5rem;
+        max-height: calc(95vh - 120px);
     }
     
     .simulators-content {
@@ -3442,6 +3525,7 @@ input:checked + .slider:before {
     .nav-tab {
         padding: 0.75rem 1rem;
         font-size: 0.85rem;
+    }
         min-width: 120px;
     }
     
@@ -4282,34 +4366,46 @@ input:checked + .slider:before {
     animation: slideIn 0.3s ease;
     position: relative;
     border: 1px solid rgba(255, 255, 255, 0.2);
-    overflow: hidden;
+    display: flex;
+    flex-direction: column;
 }
 
-/* Custom Scrollbar for Modal */
-.modal-content::-webkit-scrollbar {
+/* Modal Body - Scrollable */
+.modal-body {
+    padding: 2rem;
+    background: #ffffff;
+    position: relative;
+    flex: 1;
+    overflow-y: auto;
+    max-height: calc(90vh - 140px); /* Account for header height */
+}
+
+/* Custom Scrollbar for Modal Body */
+.modal-body::-webkit-scrollbar {
     width: 8px;
 }
 
-.modal-content::-webkit-scrollbar-track {
-    background: #f1f5f9;
+.modal-body::-webkit-scrollbar-track {
+    background: #f8fafc;
     border-radius: 4px;
+    margin: 8px 0;
 }
 
-.modal-content::-webkit-scrollbar-thumb {
-    background: linear-gradient(135deg, #296871 0%, #1e4a52 100%);
+.modal-body::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #296871 0%, #10b981 100%);
     border-radius: 4px;
     border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-.modal-content::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(135deg, #1e4a52 0%, #296871 100%);
+.modal-body::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #10b981 0%, #296871 100%);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 /* Firefox scrollbar */
-.modal-content {
+.modal-body {
     scrollbar-width: thin;
-    scrollbar-color: #296871 #f1f5f9;
+    scrollbar-color: #296871 #f8fafc;
     scroll-behavior: smooth;
 }
 
@@ -5800,6 +5896,400 @@ input:checked + .slider:before {
     .simulator-actions {
         flex-direction: column;
     }
+    
+    /* Enhanced Mobile Responsive for Simulators */
+    .modal.show {
+        padding: 1rem;
+        align-items: flex-start;
+        padding-top: 2rem;
+    }
+    
+    .modal-content {
+        width: 100%;
+        max-width: 100%;
+        max-height: 95vh;
+        margin: 0;
+        border-radius: 16px;
+    }
+    
+    .modal-header {
+        padding: 2rem 1.5rem;
+        border-radius: 16px 16px 0 0;
+    }
+    
+    .modal-header h2 {
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .modal-header p {
+        font-size: 0.9rem;
+        opacity: 0.9;
+    }
+    
+    .modal-body {
+        padding: 1.5rem;
+        max-height: calc(95vh - 120px);
+    }
+    
+    .simulators-nav {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        padding: 4px;
+        margin-bottom: 1.5rem;
+        gap: 2px;
+    }
+    
+    .nav-tab {
+        min-width: 100px;
+        padding: 0.75rem 1rem;
+        font-size: 0.85rem;
+        flex-shrink: 0;
+    }
+    
+    .simulators-content {
+        flex-direction: column;
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+    }
+    
+    .simulators-main {
+        gap: 1rem;
+    }
+    
+    .simulator-card {
+        padding: 1.5rem;
+        border-radius: 12px;
+        margin-bottom: 1rem;
+    }
+    
+    .simulator-card h3 {
+        font-size: 1.25rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .simulator-form {
+        gap: 1rem;
+    }
+    
+    .form-group {
+        margin-bottom: 1rem;
+    }
+    
+    .form-group label {
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .form-group input,
+    .form-group select {
+        padding: 0.875rem;
+        font-size: 1rem;
+        border-radius: 8px;
+    }
+    
+    .simulator-actions {
+        flex-direction: column;
+        gap: 0.75rem;
+        margin-top: 1.5rem;
+    }
+    
+    .simulator-actions .btn {
+        width: 100%;
+        padding: 0.875rem 1rem;
+        font-size: 0.9rem;
+    }
+    
+    .simulators-sidebar {
+        order: -1;
+        margin-bottom: 1.5rem;
+    }
+    
+    .history-card,
+    .tips-card {
+        padding: 1.5rem;
+        border-radius: 12px;
+        margin-bottom: 1rem;
+    }
+    
+    .history-card h4,
+    .tips-card h4 {
+        font-size: 1.1rem;
+        margin-bottom: 1rem;
+    }
+    
+    .tip-item {
+        padding: 1rem;
+        margin-bottom: 0.75rem;
+    }
+    
+    .tip-item i {
+        font-size: 1.25rem;
+        margin-right: 0.75rem;
+    }
+    
+    .tip-item p {
+        font-size: 0.85rem;
+        line-height: 1.4;
+    }
+    
+    .aide-result {
+        padding: 1rem;
+        border-radius: 8px;
+        margin: 1rem 0;
+    }
+    
+    .aide-label {
+        font-size: 0.9rem;
+    }
+    
+    .aide-amount {
+        font-size: 1.5rem;
+    }
+    
+    .disclaimer {
+        font-size: 0.8rem;
+        margin-top: 1rem;
+        padding: 0.75rem;
+    }
+}
+
+/* Tablet Responsive Styles */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .modal.show {
+        padding: 1.5rem;
+    }
+    
+    .modal-content {
+        width: 95%;
+        max-width: 800px;
+    }
+    
+    .modal-header {
+        padding: 2rem;
+    }
+    
+    .modal-body {
+        padding: 2rem;
+    }
+    
+    .simulators-nav {
+        gap: 3px;
+    }
+    
+    .nav-tab {
+        padding: 0.8rem 1.1rem;
+        font-size: 0.9rem;
+        min-width: 110px;
+    }
+    
+    .simulator-card {
+        padding: 2rem;
+    }
+    
+    .simulator-form {
+        gap: 1.25rem;
+    }
+    
+    .form-group input,
+    .form-group select {
+        padding: 0.9rem;
+    }
+    
+    .simulator-actions {
+        flex-direction: row;
+        gap: 1rem;
+    }
+    
+    .simulator-actions .btn {
+        flex: 1;
+        padding: 0.9rem 1.25rem;
+    }
+    
+    .simulators-sidebar {
+        order: 0;
+    }
+    
+    .history-card,
+    .tips-card {
+        padding: 2rem;
+    }
+}
+
+/* Large Desktop Responsive */
+@media (min-width: 1200px) {
+    .modal-content {
+        max-width: 1000px;
+    }
+    
+    .modal-body {
+        padding: 2.5rem;
+    }
+    
+    .simulators-content {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: 2.5rem;
+    }
+    
+    .simulators-main {
+        gap: 2rem;
+    }
+    
+    .simulator-card {
+        padding: 2.5rem;
+    }
+    
+    .simulator-form {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+        align-items: start;
+    }
+    
+    .form-group:last-of-type,
+    .simulator-actions {
+        grid-column: 1 / -1;
+    }
+    
+    .simulator-actions {
+        margin-top: 2rem;
+    }
+}
+
+/* Extra Small Mobile */
+@media (max-width: 480px) {
+    .modal.show {
+        padding: 0.5rem;
+        padding-top: 1rem;
+    }
+    
+    .modal-content {
+        border-radius: 12px;
+        max-height: 98vh;
+    }
+    
+    .modal-header {
+        padding: 1.5rem 1rem;
+        border-radius: 12px 12px 0 0;
+    }
+    
+    .modal-header h2 {
+        font-size: 1.25rem;
+    }
+    
+    .modal-header p {
+        font-size: 0.85rem;
+    }
+    
+    .modal-body {
+        padding: 1rem;
+        max-height: calc(98vh - 100px);
+    }
+    
+    .simulators-nav {
+        padding: 3px;
+        margin-bottom: 1rem;
+    }
+    
+    .nav-tab {
+        min-width: 85px;
+        padding: 0.6rem 0.75rem;
+        font-size: 0.8rem;
+    }
+    
+    .simulator-card {
+        padding: 1rem;
+        border-radius: 10px;
+    }
+    
+    .simulator-card h3 {
+        font-size: 1.1rem;
+        margin-bottom: 1rem;
+    }
+    
+    .form-group {
+        margin-bottom: 0.75rem;
+    }
+    
+    .form-group label {
+        font-size: 0.85rem;
+    }
+    
+    .form-group input,
+    .form-group select {
+        padding: 0.75rem;
+        font-size: 0.95rem;
+    }
+    
+    .simulator-actions .btn {
+        padding: 0.75rem 0.875rem;
+        font-size: 0.85rem;
+    }
+    
+    .history-card,
+    .tips-card {
+        padding: 1rem;
+    }
+    
+    .tip-item {
+        padding: 0.75rem;
+    }
+    
+    .tip-item i {
+        font-size: 1.1rem;
+        margin-right: 0.5rem;
+    }
+    
+    .aide-amount {
+        font-size: 1.25rem;
+    }
+    
+    .disclaimer {
+        font-size: 0.75rem;
+        padding: 0.5rem;
+    }
+    
+    /* Touch-friendly improvements for mobile */
+    .modal-close {
+        width: 44px;
+        height: 44px;
+        font-size: 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .nav-tab {
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: transparent;
+    }
+    
+    .form-group input,
+    .form-group select {
+        touch-action: manipulation;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+    }
+    
+    .simulator-actions .btn {
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: transparent;
+        min-height: 44px;
+    }
+    
+    /* Improve scrolling on iOS */
+    .modal-body {
+        -webkit-overflow-scrolling: touch;
+        overscroll-behavior: contain;
+    }
+    
+    .simulators-nav {
+        -webkit-overflow-scrolling: touch;
+        overscroll-behavior-x: contain;
+    }
+}
     
     .cta-buttons {
         flex-direction: column;
