@@ -218,18 +218,15 @@ class MobileMenu {
     }
 
     createMobileMenuToggle() {
-        const header = document.querySelector('.header-content');
-        if (!header || document.querySelector('.mobile-menu-toggle')) return;
-
-        const menuToggle = document.createElement('button');
-        menuToggle.className = 'mobile-menu-toggle';
-        menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
-        menuToggle.setAttribute('aria-label', 'Ouvrir le menu');
-        menuToggle.setAttribute('aria-expanded', 'false');
-        
-        header.appendChild(menuToggle);
-        this.menuToggle = menuToggle;
+        // Use existing mobile menu toggle button
+        this.menuToggle = document.querySelector('.mobile-menu-toggle');
         this.navList = document.querySelector('.nav-list');
+        
+        if (this.menuToggle) {
+            // Ensure proper initial state
+            this.menuToggle.setAttribute('aria-expanded', 'false');
+            this.menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+        }
     }
 
     bindEvents() {
@@ -250,6 +247,16 @@ class MobileMenu {
                 this.close();
             }
         });
+        
+        // Close menu when clicking on navigation links
+        if (this.navList) {
+            const navLinks = this.navList.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    this.close();
+                });
+            });
+        }
     }
 
     toggle() {
@@ -261,10 +268,14 @@ class MobileMenu {
         this.menuToggle.setAttribute('aria-expanded', 'true');
         this.menuToggle.setAttribute('aria-label', 'Fermer le menu');
         this.menuToggle.innerHTML = '<i class="fas fa-times"></i>';
+        this.menuToggle.classList.add('active');
         
         if (this.navList) {
             this.navList.classList.add('mobile-open');
         }
+        
+        // Prevent body scroll
+        document.body.classList.add('mobile-menu-open');
     }
 
     close() {
@@ -272,10 +283,14 @@ class MobileMenu {
         this.menuToggle.setAttribute('aria-expanded', 'false');
         this.menuToggle.setAttribute('aria-label', 'Ouvrir le menu');
         this.menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+        this.menuToggle.classList.remove('active');
         
         if (this.navList) {
             this.navList.classList.remove('mobile-open');
         }
+        
+        // Restore body scroll
+        document.body.classList.remove('mobile-menu-open');
     }
 }
 
