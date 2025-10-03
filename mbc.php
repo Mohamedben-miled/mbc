@@ -1,9 +1,25 @@
+<?php
+session_start();
+require_once 'config/database.php';
+require_once 'includes/auth.php';
+require_once 'includes/translations.php';
+
+$auth = new Auth();
+
+$pageTitle = __("about.hero.title") . " - MBC Expert Comptable";
+$pageDescription = __("about.hero.subtitle");
+
+// SEO Meta Tags
+$seoKeywords = "Majdi Besbes, expert comptable, OEC, Île-de-France, franco-maghrébin, comptabilité";
+$ogImage = "https://mbc-expertcomptable.fr/assets/Majdi.png";
+$twitterImage = "https://mbc-expertcomptable.fr/assets/Majdi.png";
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MBC - À propos de Majdi Besbes | Expert-Comptable</title>
+    <title><?php echo $pageTitle; ?></title>
     
     <!-- SEO Meta Tags -->
     <meta name="description" content="Découvrez Majdi Besbes, expert-comptable inscrit au tableau de l'OEC Île-de-France. Spécialisé dans l'accompagnement des entrepreneurs franco-maghrébins.">
@@ -25,7 +41,6 @@
     <meta name="twitter:image" content="https://mbc-expertcomptable.fr/assets/Majdi.png">
     
     <!-- Preload Critical Resources -->
-    <link rel="preload" href="styles.css" as="style">
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" as="style">
     
     <!-- DNS Prefetch -->
@@ -55,22 +70,70 @@
                 <!-- Navigation -->
                 <nav class="nav" role="navigation" aria-label="Navigation principale">
                     <ul class="nav-list">
-                        <li><a href="index.html#accueil" class="nav-link">Accueil</a></li>
-                        <li><a href="mbc.html" class="nav-link active" aria-current="page">MBC</a></li>
-                        <li><a href="services.html" class="nav-link">Services</a></li>
-                        <li><a href="#" class="nav-link simulators-link">Simulateurs</a></li>
-                        <li><a href="blog.html" class="nav-link">Blog</a></li>
-                        <li><a href="contact.html" class="nav-link">Contact</a></li>
+                        <li><a href="index.php#accueil" class="nav-link"><?php echo __('nav.home'); ?></a></li>
+                        <li><a href="mbc.php" class="nav-link active" aria-current="page"><?php echo __('nav.about'); ?></a></li>
+                        <li><a href="services.php" class="nav-link"><?php echo __('nav.services'); ?></a></li>
+                        <li><a href="#" class="nav-link simulators-link"><?php echo __('nav.simulators'); ?></a></li>
+                        <li><a href="blog-dynamic.php" class="nav-link"><?php echo __('nav.blog'); ?></a></li>
+                        <li><a href="contact-form.php" class="nav-link"><?php echo __('nav.contact'); ?></a></li>
                     </ul>
                 </nav>
 
                 <!-- Header Utils -->
                 <div class="header-utils">
-                    <select class="language-selector" aria-label="Sélectionner la langue">
-                        <option value="fr">FR</option>
-                        <option value="en">EN</option>
-                        <option value="ar">AR</option>
+                    <select class="language-selector" aria-label="Sélectionner la langue" onchange="changeLanguage(this.value)">
+                        <option value="fr" <?php echo getCurrentLanguage() === 'fr' ? 'selected' : ''; ?>>🇫🇷 FR</option>
+                        <option value="en" <?php echo getCurrentLanguage() === 'en' ? 'selected' : ''; ?>>🇬🇧 EN</option>
+                        <option value="zh" <?php echo getCurrentLanguage() === 'zh' ? 'selected' : ''; ?>>🇨🇳 中文</option>
                     </select>
+                    
+                    <!-- Authentication Section -->
+                    <div class="auth-section">
+                        <?php
+                        if ($auth->isLoggedIn()): 
+                            $currentUser = $auth->getCurrentUser(); ?>
+                            <!-- User is logged in -->
+                            <div class="user-menu">
+                                <span class="user-greeting">Bonjour, <?php echo htmlspecialchars($currentUser['full_name']); ?></span>
+                                <div class="user-dropdown">
+                                    <button class="user-dropdown-toggle" aria-expanded="false">
+                                        <i class="fas fa-user-circle"></i>
+                                        <i class="fas fa-chevron-down"></i>
+                                    </button>
+                                    <div class="user-dropdown-menu">
+                                        <?php if ($auth->isAdmin()): ?>
+                                            <a href="admin/dashboard.php" class="dropdown-item">
+                                                <i class="fas fa-tachometer-alt"></i> Dashboard
+                                            </a>
+                                            <a href="admin/blog.php" class="dropdown-item">
+                                                <i class="fas fa-blog"></i> Gestion Blog
+                                            </a>
+                                            <a href="admin/contact.php" class="dropdown-item">
+                                                <i class="fas fa-envelope"></i> Messages
+                                            </a>
+                                            <a href="admin/users.php" class="dropdown-item">
+                                                <i class="fas fa-users"></i> Utilisateurs
+                                            </a>
+                                            <a href="admin/profile.php" class="dropdown-item">
+                                                <i class="fas fa-user-edit"></i> Profil
+                                            </a>
+                                        <?php endif; ?>
+                                        <a href="admin/logout.php" class="dropdown-item logout">
+                                            <i class="fas fa-sign-out-alt"></i> Déconnexion
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php else: ?>
+                            <!-- User is not logged in -->
+                            <div class="auth-buttons">
+                                <a href="admin/login.php" class="btn btn-outline btn-sm">
+                                    <i class="fas fa-sign-in-alt"></i> Connexion
+                                </a>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+                    
                     <button class="mobile-menu-toggle" aria-label="Ouvrir le menu mobile">
                         <i class="fas fa-bars"></i>
                     </button>
@@ -89,12 +152,12 @@
             <div class="container">
                 <div class="mbc-hero-content">
                     <div class="mbc-hero-text">
-                        <h1 class="mbc-hero-title">À propos de MBC</h1>
-                        <p class="mbc-hero-subtitle">Expert-comptable inscrit au tableau de l'OEC Île-de-France</p>
-                        <p class="mbc-hero-description">Découvrez l'expertise de Majdi Besbes, votre partenaire comptable spécialisé dans l'accompagnement des entrepreneurs franco-maghrébins.</p>
+                        <h1 class="mbc-hero-title"><?php echo __('about.hero.title'); ?></h1>
+                        <p class="mbc-hero-subtitle"><?php echo __('about.hero.subtitle'); ?></p>
+                        <p class="mbc-hero-description"><?php echo __('about.hero.subtitle'); ?></p>
                         <div class="mbc-hero-cta">
-                            <a href="#contact" class="btn btn-primary">Prendre rendez-vous</a>
-                            <a href="#services" class="btn btn-secondary">Nos services</a>
+                            <a href="#contact" class="btn btn-primary"><?php echo __('home.cta_section.button2'); ?></a>
+                            <a href="#services" class="btn btn-secondary"><?php echo __('home.services.title'); ?></a>
                         </div>
                     </div>
                     <div class="mbc-hero-image">
@@ -109,7 +172,7 @@
             <div class="container">
                 <div class="mbc-about-content">
                     <div class="mbc-about-text">
-                        <h2 id="about-title">Notre expertise au service de votre réussite</h2>
+                        <h2 id="about-title"><?php echo __('about.expertise.title'); ?></h2>
                         <div class="mbc-description">
                             <p>MBC High Value Business Consulting est votre partenaire de confiance pour tous vos besoins comptables et fiscaux. Dirigé par Majdi Besbes, expert-comptable inscrit au tableau de l'Ordre des Experts-Comptables d'Île-de-France, nous offrons une expertise comptable de haut niveau adaptée aux entrepreneurs franco-maghrébins.</p>
                             
@@ -119,7 +182,7 @@
                         </div>
                         
                         <div class="mbc-cta">
-                            <a href="#contact" class="btn btn-primary btn-large">Démarrer un projet avec nous</a>
+                            <a href="#contact" class="btn btn-primary btn-large"><?php echo __('btn.start_project'); ?></a>
                         </div>
                     </div>
                     
@@ -144,8 +207,8 @@
                             <div class="credential-icon">
                                 <i class="fas fa-globe" aria-hidden="true"></i>
                             </div>
-                            <h3>Expertise Internationale</h3>
-                            <p>Spécialisé dans les enjeux franco-maghrébins</p>
+                            <h3><?php echo __('home.why_choose.reason1.title'); ?></h3>
+                            <p><?php echo __('home.why_choose.reason1.description'); ?></p>
                         </div>
                     </div>
                 </div>
@@ -217,7 +280,7 @@
                     <div class="social-cta">
                         <h3>Prêt à nous rejoindre ?</h3>
                         <p>Découvrez comment nous pouvons vous accompagner dans votre projet entrepreneurial</p>
-                        <a href="#contact" class="btn btn-primary btn-large">Contactez-nous</a>
+                        <a href="#contact" class="btn btn-primary btn-large"><?php echo __('btn.contact_us'); ?></a>
                     </div>
                 </div>
             </div>
@@ -227,11 +290,11 @@
         <section class="mbc-cta-section section" aria-labelledby="cta-title">
             <div class="container">
                 <div class="cta-content">
-                    <h2 id="cta-title">Prêt à transformer votre gestion comptable ?</h2>
-                    <p>Rejoignez des centaines d'entrepreneurs qui font confiance à MBC pour leur expertise comptable</p>
+                    <h2 id="cta-title"><?php echo __('home.cta_section.title'); ?></h2>
+                    <p><?php echo __('home.cta_section.subtitle'); ?></p>
                     <div class="cta-buttons">
-                        <a href="#contact" class="btn btn-secondary btn-large">Nous contacter</a>
-                        <a href="#devis" class="btn btn-primary btn-large">Obtenir un devis</a>
+                        <a href="#contact" class="btn btn-secondary btn-large"><?php echo __('home.cta_section.button2'); ?></a>
+                        <a href="#devis" class="btn btn-primary btn-large"><?php echo __('home.cta_section.button1'); ?></a>
                     </div>
                 </div>
             </div>
@@ -485,8 +548,8 @@
                     <h3>Besoin d'un calcul plus précis ?</h3>
                     <p>Ces simulateurs donnent des estimations. Pour des calculs précis adaptés à votre situation, prenez rendez-vous avec l'un de nos experts-comptables.</p>
                     <div class="cta-buttons">
-                        <button class="btn btn-primary">Prendre rendez-vous avec un expert</button>
-                        <button class="btn btn-secondary">Demander un devis personnalisé</button>
+                        <button class="btn btn-primary"><?php echo __('btn.book_expert'); ?></button>
+                        <button class="btn btn-secondary"><?php echo __('btn.free_quote'); ?></button>
                     </div>
                 </div>
             </div>
@@ -510,7 +573,7 @@
                     </div>
                 </div>
                 <div class="footer-section">
-                    <h4>Liens rapides</h4>
+                    <h4><?php echo __('footer.quick_links'); ?></h4>
                     <ul>
                         <li><a href="index.html">Accueil</a></li>
                         <li><a href="mbc.html">À propos</a></li>
@@ -519,16 +582,16 @@
                     </ul>
                 </div>
                 <div class="footer-section">
-                    <h4>Services</h4>
+                    <h4><?php echo __('footer.services'); ?></h4>
                     <ul>
-                        <li><a href="index.html#services">Expertise Comptable</a></li>
-                        <li><a href="index.html#services">Fiscalité</a></li>
-                        <li><a href="index.html#services">Création d'entreprise</a></li>
-                        <li><a href="index.html#services">Conseil</a></li>
+                        <li><a href="index.html#services"><?php echo __('home.expertise.title'); ?></a></li>
+                        <li><a href="index.html#services"><?php echo __('home.fiscalite.title'); ?></a></li>
+                        <li><a href="index.html#services"><?php echo __('home.service_conseil.feature1'); ?></a></li>
+                        <li><a href="index.html#services"><?php echo __('home.conseil.title'); ?></a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
-                    <h4>Contact</h4>
+                    <h4><?php echo __('footer.contact'); ?></h4>
                     <div class="contact-info">
                         <p><i class="fas fa-envelope" aria-hidden="true"></i> contact@mbc-expertcomptable.fr</p>
                         <p><i class="fas fa-phone" aria-hidden="true"></i> +33 1 XX XX XX XX</p>
@@ -1281,6 +1344,22 @@
                 });
             }
         });
+        
+        // Language change function
+        function changeLanguage(lang) {
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = 'change-language.php';
+            
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = 'lang';
+            input.value = lang;
+            
+            form.appendChild(input);
+            document.body.appendChild(form);
+            form.submit();
+        }
     </script>
     <script src="script.js"></script>
     <script src="chatbot.js"></script>

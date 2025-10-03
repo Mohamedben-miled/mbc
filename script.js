@@ -88,11 +88,53 @@ function initializeSimulators() {
 }
 
 // ========================================
-// 2. MODAL EVENT LISTENERS
+// 2. USER DROPDOWN FUNCTIONALITY
+// ========================================
+
+/**
+ * Initialize user dropdown functionality
+ */
+function initializeUserDropdown() {
+    const userDropdownToggle = document.querySelector('.user-dropdown-toggle');
+    const userDropdownMenu = document.querySelector('.user-dropdown-menu');
+    
+    if (userDropdownToggle && userDropdownMenu) {
+        // Ensure dropdown is hidden on page load
+        userDropdownMenu.classList.remove('show');
+        userDropdownToggle.setAttribute('aria-expanded', 'false');
+        
+        userDropdownToggle.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            const isExpanded = this.getAttribute('aria-expanded') === 'true';
+            this.setAttribute('aria-expanded', !isExpanded);
+            
+            if (!isExpanded) {
+                userDropdownMenu.classList.add('show');
+            } else {
+                userDropdownMenu.classList.remove('show');
+            }
+        });
+        
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!userDropdownToggle.contains(e.target) && !userDropdownMenu.contains(e.target)) {
+                userDropdownToggle.setAttribute('aria-expanded', 'false');
+                userDropdownMenu.classList.remove('show');
+            }
+        });
+    }
+}
+
+// ========================================
+// 3. MODAL EVENT LISTENERS
 // ========================================
 
 // Initialize modal event listeners when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
+    // Initialize user dropdown
+    initializeUserDropdown();
     // Close modal when clicking outside
     window.addEventListener('click', function(event) {
         const modal = document.getElementById('simulatorsModal');

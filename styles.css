@@ -17,6 +17,772 @@ header, .header, .header-content {
     background-color: transparent !important;
 }
 
+/* ========================================
+   AUTHENTICATION STYLES
+   ======================================== */
+.auth-section {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.user-menu {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.user-greeting {
+    font-size: 0.875rem;
+    color: #6b7280;
+    font-weight: 500;
+}
+
+.user-dropdown {
+    position: relative;
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: inline-block !important;
+}
+
+/* User dropdown visibility fixes */
+.user-menu {
+    display: inline-block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    margin-right: 0.5rem;
+}
+
+.user-greeting {
+    display: inline-block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    color: white !important;
+    font-weight: 500;
+}
+
+/* Auth section layout */
+.auth-section {
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
+}
+
+/* Ensure dropdown menu is properly positioned */
+.user-dropdown-menu {
+    position: absolute !important;
+    top: calc(100% + 8px) !important;
+    right: 0 !important;
+    background: white !important;
+    border: 1px solid #e5e7eb !important;
+    border-radius: 0.5rem !important;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15) !important;
+    min-width: 200px !important;
+    z-index: 9999 !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    transform: translateY(-10px) !important;
+    transition: all 0.2s ease !important;
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+.user-dropdown-menu.show {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translateY(0) !important;
+}
+
+/* Hover effect removed to prevent conflicts with JavaScript */
+
+.user-dropdown-toggle {
+    display: flex !important;
+    align-items: center;
+    gap: 0.5rem;
+    background: white;
+    border: 1px solid #d1d5db;
+    border-radius: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 0.875rem;
+    opacity: 1 !important;
+    visibility: visible !important;
+    color: #374151;
+    /* Force visibility on all pages */
+    opacity: 1;
+    visibility: visible;
+}
+
+.user-dropdown-toggle:hover {
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.user-dropdown-toggle i:first-child {
+    color: #667eea;
+    font-size: 1.125rem;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+.user-dropdown-toggle i:last-child {
+    color: #6b7280;
+    font-size: 0.75rem;
+    transition: transform 0.2s ease;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+.user-dropdown-toggle[aria-expanded="true"] i:last-child {
+    transform: rotate(180deg);
+}
+
+.user-dropdown-menu {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5rem;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15);
+    min-width: 200px;
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.2s ease;
+    /* Force hidden state on page load */
+    display: none;
+}
+
+.user-dropdown-menu.show {
+    display: block;
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    color: #374151;
+    text-decoration: none;
+    font-size: 0.875rem;
+    transition: background-color 0.2s ease;
+    border-bottom: 1px solid #f3f4f6;
+    white-space: nowrap;
+}
+
+.dropdown-item:last-child {
+    border-bottom: none;
+}
+
+.dropdown-item:hover {
+    background-color: #f9fafb;
+    color: #1f2937;
+}
+
+.dropdown-item.logout {
+    color: #dc2626;
+}
+
+.dropdown-item.logout:hover {
+    background-color: #fef2f2;
+    color: #b91c1c;
+}
+
+.dropdown-item i {
+    width: 1rem;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.auth-buttons {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.btn-sm {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    border-radius: 0.375rem;
+}
+
+.btn-outline {
+    background: rgba(102, 126, 234, 0.1);
+    border: 2px solid #667eea;
+    color: white;
+    font-weight: 600;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-outline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s;
+}
+
+.btn-outline:hover::before {
+    left: 100%;
+}
+
+.btn-outline:hover {
+    background: #667eea;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+}
+
+/* Notification Styles */
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 10000;
+    max-width: 400px;
+    animation: slideIn 0.3s ease;
+}
+
+.notification.success {
+    background: #10b981;
+    color: white;
+}
+
+.notification.error {
+    background: #ef4444;
+    color: white;
+}
+
+.notification-content {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.notification-content i {
+    font-size: 1.25rem;
+}
+
+.notification-content button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.25rem;
+    cursor: pointer;
+    margin-left: auto;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+}
+
+.notification-content button:hover {
+    opacity: 1;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Form Error Styles */
+.form-error {
+    color: #ef4444;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.form-error::before {
+    content: '⚠';
+    font-size: 0.75rem;
+}
+
+/* Contact Form Styles */
+.modern-form input,
+.modern-form textarea,
+.modern-form select {
+    color: #374151 !important;
+    background-color: white !important;
+    border: 1px solid #d1d5db !important;
+    padding: 0.75rem !important;
+    border-radius: 0.5rem !important;
+    font-size: 1rem !important;
+    transition: all 0.2s ease !important;
+}
+
+.modern-form input:focus,
+.modern-form textarea:focus,
+.modern-form select:focus {
+    outline: none !important;
+    border-color: #667eea !important;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1) !important;
+}
+
+.modern-form input::placeholder,
+.modern-form textarea::placeholder {
+    color: #9ca3af !important;
+}
+
+.modern-form label {
+    color: #374151 !important;
+    font-weight: 500 !important;
+    margin-bottom: 0.5rem !important;
+    display: block !important;
+}
+
+/* Mobile Auth Styles */
+.mobile-auth {
+    padding: 1rem;
+    border-top: 1px solid #e5e7eb;
+    margin-top: 1rem;
+}
+
+.mobile-user-info {
+    text-align: center;
+}
+
+.mobile-user-info p {
+    margin-bottom: 1rem;
+    color: #6b7280;
+    font-size: 0.875rem;
+}
+
+.mobile-user-info .btn {
+    margin: 0.25rem;
+}
+
+/* Contact Form Fixes */
+.contact-form input,
+.contact-form select,
+.contact-form textarea {
+    color: #1e293b !important;
+    background: white !important;
+}
+
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+    color: #64748b !important;
+}
+
+.contact-form select option {
+    color: #1e293b !important;
+    background: white !important;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    color: #1e293b !important;
+    background: white !important;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: #64748b !important;
+}
+
+.form-group select option {
+    color: #1e293b !important;
+    background: white !important;
+}
+
+/* Notifications - Consolidated */
+.notification {
+    position: fixed !important;
+    top: 20px !important;
+    right: 20px !important;
+    z-index: 10000 !important;
+    max-width: 400px !important;
+    animation: slideIn 0.3s ease !important;
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+.notification.success {
+    background: #10b981 !important;
+    color: white !important;
+}
+
+.notification.error {
+    background: #ef4444 !important;
+    color: white !important;
+}
+
+.notification-content {
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.75rem !important;
+    padding: 1rem !important;
+    border-radius: 0.5rem !important;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15) !important;
+}
+
+.notification-content i {
+    font-size: 1.25rem !important;
+}
+
+.notification-content button {
+    background: none !important;
+    border: none !important;
+    color: white !important;
+    font-size: 1.25rem !important;
+    cursor: pointer !important;
+    margin-left: auto !important;
+    opacity: 0.7 !important;
+    transition: opacity 0.2s !important;
+}
+
+.notification-content button:hover {
+    opacity: 1 !important;
+}
+
+/* Form Errors */
+.form-error {
+    color: #ef4444;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* User Dropdown Styles */
+.user-menu {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.user-greeting {
+    color: white !important;
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    background: rgba(255, 255, 255, 0.1);
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.375rem;
+    backdrop-filter: blur(10px);
+}
+
+.user-dropdown {
+    position: relative;
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: block !important;
+    z-index: 10000;
+}
+
+.user-dropdown-toggle {
+    display: flex !important;
+    align-items: center;
+    gap: 0.5rem;
+    background: white;
+    border: 1px solid #d1d5db;
+    border-radius: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 0.875rem;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+.user-dropdown-toggle:hover {
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.user-dropdown-toggle i:first-child {
+    color: #667eea;
+    font-size: 1.125rem;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+.user-dropdown-toggle i:last-child {
+    color: #6b7280;
+    font-size: 0.75rem;
+    transition: transform 0.2s ease;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+.user-dropdown-toggle[aria-expanded="true"] i:last-child {
+    transform: rotate(180deg);
+}
+
+.dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    color: #374151;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+    font-size: 0.875rem;
+    border-radius: 0.375rem;
+    margin: 0.125rem;
+    white-space: nowrap;
+}
+
+.dropdown-item:hover {
+    background-color: #f9fafb;
+}
+
+.dropdown-item i {
+    width: 16px;
+    color: #6b7280;
+    flex-shrink: 0;
+}
+
+.dropdown-item.logout {
+    border-top: 1px solid #e5e7eb;
+    color: #dc2626;
+    margin-top: 0.5rem;
+    padding-top: 1rem;
+}
+
+.dropdown-item.logout:hover {
+    background-color: #fef2f2;
+}
+
+.dropdown-item.logout i {
+    color: #dc2626;
+}
+
+/* Header z-index fix */
+.header {
+    position: relative;
+    z-index: 1000;
+}
+
+.header-utils {
+    position: relative;
+    z-index: 1001;
+}
+
+/* Language Selector Styles */
+.language-selector {
+    background: white;
+    border: 1px solid #d1d5db;
+    border-radius: 0.375rem;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.875rem;
+    color: #374151;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    min-width: 80px;
+}
+
+.language-selector:hover {
+    border-color: #9ca3af;
+    background-color: #f9fafb;
+}
+
+.language-selector:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.language-selector option {
+    padding: 0.5rem;
+    font-size: 0.875rem;
+}
+
+/* Mobile Navigation Styles */
+.mobile-nav {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.mobile-nav.active {
+    display: block;
+    opacity: 1;
+    visibility: visible;
+}
+
+.mobile-nav-content {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 280px;
+    height: 100vh;
+    background: white;
+    padding: 2rem;
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+    overflow-y: auto;
+}
+
+.mobile-nav.active .mobile-nav-content {
+    transform: translateX(0);
+}
+
+.mobile-nav-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 2rem 0;
+}
+
+.mobile-nav-link {
+    display: block;
+    padding: 1rem 0;
+    color: #1f2937;
+    text-decoration: none;
+    font-weight: 500;
+    border-bottom: 1px solid #e5e7eb;
+    transition: color 0.3s ease;
+}
+
+.mobile-nav-link:hover {
+    color: #296871;
+}
+
+.mobile-auth {
+    padding-top: 2rem;
+    border-top: 1px solid #e5e7eb;
+}
+
+.mobile-user-info {
+    text-align: center;
+}
+
+.mobile-user-info p {
+    margin-bottom: 1rem;
+    color: #6b7280;
+    font-size: 0.875rem;
+}
+
+.mobile-user-info .btn {
+    margin: 0.25rem;
+    display: block;
+    width: 100%;
+}
+
+/* Mobile Menu Toggle */
+.mobile-menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #1f2937;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 0.375rem;
+    transition: background-color 0.3s ease;
+}
+
+.mobile-menu-toggle:hover {
+    background-color: #f3f4f6;
+}
+
+/* Responsive Auth Styles */
+@media (max-width: 768px) {
+    .user-greeting {
+        display: none;
+    }
+    
+    .auth-buttons {
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+    
+    .btn-sm {
+        padding: 0.375rem 0.75rem;
+        font-size: 0.75rem;
+    }
+    
+    .language-selector {
+        min-width: 70px;
+        padding: 0.375rem 0.5rem;
+        font-size: 0.75rem;
+    }
+    
+    .mobile-menu-toggle {
+        display: block;
+    }
+    
+    .nav {
+        display: none;
+    }
+    
+    .auth-section {
+        display: none;
+    }
+    
+    .language-selector {
+        display: none;
+    }
+}
+
+@media (min-width: 769px) {
+    .mobile-nav {
+        display: none !important;
+    }
+    
+    .mobile-menu-toggle {
+        display: none !important;
+    }
+    
+    /* Ensure navigation stays on one line on desktop */
+    .nav-list {
+        display: flex !important;
+        flex-wrap: nowrap !important;
+        align-items: center;
+        gap: 1.5rem;
+    }
+    
+    .nav-list li {
+        flex-shrink: 0;
+        margin: 0;
+    }
+    
+    .nav-link {
+        white-space: nowrap;
+        display: inline-block;
+    }
+}
+
 html {
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
@@ -193,6 +959,7 @@ a:hover {
     padding: 1rem 0;
     background: transparent !important;
     background-color: transparent !important;
+    flex-wrap: nowrap;
 }
 
 .logo {
@@ -219,10 +986,20 @@ a:hover {
     color: inherit;
 }
 
-.nav-list {
+.nav {
     display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.nav-list {
+    display: flex !important;
     list-style: none;
     gap: 2rem;
+    align-items: center;
+    flex-wrap: nowrap;
+    margin: 0;
+    padding: 0;
 }
 
 .nav-link {
@@ -232,6 +1009,8 @@ a:hover {
     border-radius: 6px;
     transition: all 0.3s ease;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    white-space: nowrap;
+    display: inline-block;
 }
 
 .nav-link:hover,
@@ -1570,7 +2349,7 @@ a:hover {
 .btn-outline {
     background: transparent;
     border: 2px solid #296871;
-    color: #296871;
+    color: white;
 }
 
 .btn-outline:hover {
@@ -3690,12 +4469,13 @@ input:checked + .slider:before {
         visibility: visible;
     }
     
-    .nav-list li {
-        margin: 1rem 0;
-        transform: translateY(30px);
-        opacity: 0;
-        transition: all 0.3s ease;
-    }
+.nav-list li {
+    margin: 0;
+    transform: translateY(30px);
+    opacity: 0;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+}
     
     .nav-list.mobile-open li {
         transform: translateY(0);
@@ -7953,6 +8733,55 @@ body.contact-page .header {
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
+/* Contact Page User Dropdown Fix */
+body.contact-page .user-dropdown {
+    position: relative;
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: block !important;
+    z-index: 10001;
+}
+
+body.contact-page .user-dropdown-toggle {
+    display: flex !important;
+    align-items: center;
+    gap: 0.5rem;
+    background: white;
+    border: 1px solid #d1d5db;
+    border-radius: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 0.875rem;
+    opacity: 1 !important;
+    visibility: visible !important;
+    color: #374151;
+}
+
+body.contact-page .user-dropdown-toggle:hover {
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+body.contact-page .user-dropdown-toggle i:first-child {
+    color: #667eea;
+    font-size: 1.125rem;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+body.contact-page .user-dropdown-toggle i:last-child {
+    color: #6b7280;
+    font-size: 0.75rem;
+    transition: transform 0.2s ease;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+body.contact-page .user-dropdown-menu {
+    z-index: 10001;
+}
+
 body.contact-page .header.scrolled {
     background: linear-gradient(135deg, #2F666B 0%, #1A4A4F 100%) !important;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
@@ -7975,6 +8804,55 @@ body.services-page .header {
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
+/* Services Page User Dropdown Fix */
+body.services-page .user-dropdown {
+    position: relative;
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: block !important;
+    z-index: 10001;
+}
+
+body.services-page .user-dropdown-toggle {
+    display: flex !important;
+    align-items: center;
+    gap: 0.5rem;
+    background: white;
+    border: 1px solid #d1d5db;
+    border-radius: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 0.875rem;
+    opacity: 1 !important;
+    visibility: visible !important;
+    color: #374151;
+}
+
+body.services-page .user-dropdown-toggle:hover {
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+body.services-page .user-dropdown-toggle i:first-child {
+    color: #667eea;
+    font-size: 1.125rem;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+body.services-page .user-dropdown-toggle i:last-child {
+    color: #6b7280;
+    font-size: 0.75rem;
+    transition: transform 0.2s ease;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+body.services-page .user-dropdown-menu {
+    z-index: 10001;
+}
+
 body.services-page .header.scrolled {
     background: linear-gradient(135deg, #2F666B 0%, #1A4A4F 100%) !important;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
@@ -7995,6 +8873,55 @@ body.blog-page .header {
     z-index: 1000;
     background: linear-gradient(135deg, #2F666B 0%, #1A4A4F 100%) !important;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Blog Page User Dropdown Fix */
+body.blog-page .user-dropdown {
+    position: relative;
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: block !important;
+    z-index: 10001;
+}
+
+body.blog-page .user-dropdown-toggle {
+    display: flex !important;
+    align-items: center;
+    gap: 0.5rem;
+    background: white;
+    border: 1px solid #d1d5db;
+    border-radius: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 0.875rem;
+    opacity: 1 !important;
+    visibility: visible !important;
+    color: #374151;
+}
+
+body.blog-page .user-dropdown-toggle:hover {
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+body.blog-page .user-dropdown-toggle i:first-child {
+    color: #667eea;
+    font-size: 1.125rem;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+body.blog-page .user-dropdown-toggle i:last-child {
+    color: #6b7280;
+    font-size: 0.75rem;
+    transition: transform 0.2s ease;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+body.blog-page .user-dropdown-menu {
+    z-index: 10001;
 }
 
 body.blog-page .header.scrolled {

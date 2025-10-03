@@ -1,31 +1,46 @@
+<?php
+session_start();
+require_once 'config/database.php';
+require_once 'includes/auth.php';
+require_once 'includes/translations.php';
+
+$auth = new Auth();
+
+$pageTitle = __("home.hero.title") . " - MBC Expert Comptable";
+$pageDescription = __("home.hero.subtitle");
+
+// SEO Meta Tags
+$seoKeywords = "expert comptable, comptabilité, fiscalité, création entreprise, France, Maghreb, digital";
+$ogImage = "https://mbc-expertcomptable.fr/assets/og-image.jpg";
+$twitterImage = "https://mbc-expertcomptable.fr/assets/twitter-image.jpg";
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MBC Expert Comptable - Expertise Comptable Franco-Maghrébine</title>
+    <title><?php echo $pageTitle; ?></title>
     
     <!-- SEO Meta Tags -->
-    <meta name="description" content="MBC Expert Comptable - Votre partenaire comptable pour entrepreneurs franco-maghrébins. Services 100% digitaux, expertise internationale, accompagnement personnalisé.">
-    <meta name="keywords" content="expert comptable, comptabilité, fiscalité, création entreprise, France, Maghreb, digital">
+    <meta name="description" content="<?php echo $pageDescription; ?>">
+    <meta name="keywords" content="<?php echo $seoKeywords; ?>">
     <meta name="author" content="MBC Expert Comptable">
     <meta name="robots" content="index, follow">
     
     <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="MBC Expert Comptable - Expertise Comptable Franco-Maghrébine">
-    <meta property="og:description" content="Votre partenaire comptable pour entrepreneurs franco-maghrébins. Services 100% digitaux, expertise internationale, accompagnement personnalisé.">
+    <meta property="og:title" content="<?php echo $pageTitle; ?>">
+    <meta property="og:description" content="<?php echo $pageDescription; ?>">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://mbc-expertcomptable.fr">
-    <meta property="og:image" content="https://mbc-expertcomptable.fr/assets/og-image.jpg">
+    <meta property="og:image" content="<?php echo $ogImage; ?>">
     
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="MBC Expert Comptable - Expertise Comptable Franco-Maghrébine">
-    <meta name="twitter:description" content="Votre partenaire comptable pour entrepreneurs franco-maghrébins. Services 100% digitaux, expertise internationale, accompagnement personnalisé.">
-    <meta name="twitter:image" content="https://mbc-expertcomptable.fr/assets/twitter-image.jpg">
+    <meta name="twitter:title" content="<?php echo $pageTitle; ?>">
+    <meta name="twitter:description" content="<?php echo $pageDescription; ?>">
+    <meta name="twitter:image" content="<?php echo $twitterImage; ?>">
     
     <!-- Preload Critical Resources -->
-    <link rel="preload" href="styles.css" as="style">
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" as="style">
     
     <!-- DNS Prefetch -->
@@ -54,25 +69,73 @@
                 </div>
 
                 <!-- Navigation -->
-                <nav class="nav" role="navigation" aria-label="Navigation principale">
+                <nav class="nav" role="navigation" aria-label="<?php echo __('nav.main_navigation'); ?>">
                     <ul class="nav-list">
-                        <li><a href="#accueil" class="nav-link active" aria-current="page">Accueil</a></li>
-                        <li><a href="mbc.html" class="nav-link">MBC</a></li>
-                        <li><a href="services.html" class="nav-link">Services</a></li>
-                        <li><a href="#simulators" class="nav-link" onclick="openSimulatorsModal()">Simulateurs</a></li>
-                        <li><a href="blog.html" class="nav-link">Blog</a></li>
-                        <li><a href="contact.html" class="nav-link">Contact</a></li>
+                        <li><a href="#accueil" class="nav-link active" aria-current="page"><?php echo __('nav.home'); ?></a></li>
+                        <li><a href="mbc.php" class="nav-link"><?php echo __('nav.about'); ?></a></li>
+                        <li><a href="services.php" class="nav-link"><?php echo __('nav.services'); ?></a></li>
+                        <li><a href="#simulators" class="nav-link" onclick="openSimulatorsModal()"><?php echo __('nav.simulators'); ?></a></li>
+                        <li><a href="blog-dynamic.php" class="nav-link"><?php echo __('nav.blog'); ?></a></li>
+                        <li><a href="contact-form.php" class="nav-link"><?php echo __('nav.contact'); ?></a></li>
                     </ul>
                 </nav>
 
                 <!-- Header Utils -->
                 <div class="header-utils">
-                    <select class="language-selector" aria-label="Sélectionner la langue">
-                        <option value="fr">FR</option>
-                        <option value="en">EN</option>
-                        <option value="ar">AR</option>
+                    <select class="language-selector" aria-label="<?php echo __('nav.select_language'); ?>" onchange="changeLanguage(this.value)">
+                        <option value="fr" <?php echo getCurrentLanguage() === 'fr' ? 'selected' : ''; ?>>🇫🇷 FR</option>
+                        <option value="en" <?php echo getCurrentLanguage() === 'en' ? 'selected' : ''; ?>>🇬🇧 EN</option>
+                        <option value="zh" <?php echo getCurrentLanguage() === 'zh' ? 'selected' : ''; ?>>🇨🇳 中文</option>
                     </select>
-                    <button class="mobile-menu-toggle" aria-label="Ouvrir le menu mobile">
+                    
+                    <!-- Authentication Section -->
+                    <div class="auth-section">
+                        <?php
+                        if ($auth->isLoggedIn()): 
+                            $currentUser = $auth->getCurrentUser(); ?>
+                            <!-- User is logged in -->
+                            <div class="user-menu">
+                                <span class="user-greeting"><?php echo __('nav.hello'); ?>, <?php echo htmlspecialchars($currentUser['full_name']); ?></span>
+                            </div>
+                            <div class="user-dropdown">
+                                <button class="user-dropdown-toggle" aria-expanded="false">
+                                    <i class="fas fa-user-circle"></i>
+                                    <i class="fas fa-chevron-down"></i>
+                                </button>
+                                <div class="user-dropdown-menu">
+                                    <?php if ($auth->isAdmin()): ?>
+                                        <a href="admin/dashboard.php" class="dropdown-item">
+                                            <i class="fas fa-tachometer-alt"></i> <?php echo __('nav.dashboard'); ?>
+                                        </a>
+                                        <a href="admin/blog.php" class="dropdown-item">
+                                            <i class="fas fa-blog"></i> <?php echo __('nav.manage_blog'); ?>
+                                        </a>
+                                        <a href="admin/contact.php" class="dropdown-item">
+                                            <i class="fas fa-envelope"></i> <?php echo __('nav.messages'); ?>
+                                        </a>
+                                        <a href="admin/users.php" class="dropdown-item">
+                                            <i class="fas fa-users"></i> <?php echo __('nav.users'); ?>
+                                        </a>
+                                        <a href="admin/profile.php" class="dropdown-item">
+                                            <i class="fas fa-user-edit"></i> <?php echo __('nav.my_profile'); ?>
+                                        </a>
+                                    <?php endif; ?>
+                                    <a href="admin/logout.php" class="dropdown-item logout">
+                                        <i class="fas fa-sign-out-alt"></i> <?php echo __('nav.logout'); ?>
+                                    </a>
+                                </div>
+                            </div>
+                        <?php else: ?>
+                            <!-- User is not logged in -->
+                            <div class="auth-buttons">
+                                <a href="admin/login.php" class="btn btn-outline btn-sm">
+                                    <i class="fas fa-sign-in-alt"></i> <?php echo __('btn.login'); ?>
+                                </a>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+                    
+                    <button class="mobile-menu-toggle" aria-label="<?php echo __('btn.open_mobile_menu'); ?>">
                         <i class="fas fa-bars"></i>
                     </button>
                 </div>
@@ -90,11 +153,11 @@
             <div class="hero-content">
                 <div class="hero-text">
                     <h1 class="hero-title">MBC</h1>
-                    <h2 class="hero-subtitle">High Value Business Consulting</h2>
-                    <p class="hero-description">Votre expert-comptable qui comprend les défis des entrepreneurs franco-maghrébins</p>
+                    <h2 class="hero-subtitle"><?php echo __('home.hero.title'); ?></h2>
+                    <p class="hero-description"><?php echo __('home.hero.subtitle'); ?></p>
                     <div class="hero-cta">
-                        <a href="#services" class="btn btn-primary">Nos services</a>
-                        <a href="#devis" class="btn btn-secondary">Obtenir un devis</a>
+                        <a href="#services" class="btn btn-primary"><?php echo __('home.services.title'); ?></a>
+                        <a href="contact-form.php" class="btn btn-secondary"><?php echo __('home.hero.cta'); ?></a>
                     </div>
                 </div>
                 <div class="hero-image">
@@ -112,38 +175,38 @@
                             <div class="card-icon">
                                 <i class="fas fa-mobile-alt" aria-hidden="true"></i>
                             </div>
-                            <h3>Application mobile</h3>
-                            <p>Accédez à vos documents et suivez vos dossiers depuis votre smartphone</p>
+                            <h3><?php echo __('home.digital_ecosystem.feature1'); ?></h3>
+                            <p><?php echo __('home.digital_ecosystem.description'); ?></p>
                         </article>
                         <article class="ecosystem-card">
                             <div class="card-icon">
                                 <i class="fas fa-cloud" aria-hidden="true"></i>
                             </div>
-                            <h3>Stockage cloud sécurisé</h3>
-                            <p>Tous vos documents sont stockés en toute sécurité et accessibles 24/7</p>
+                            <h3><?php echo __('home.digital_ecosystem.feature3'); ?></h3>
+                            <p><?php echo __('home.digital_ecosystem.description'); ?></p>
                         </article>
                         <article class="ecosystem-card">
                             <div class="card-icon">
                                 <i class="fas fa-lock" aria-hidden="true"></i>
                             </div>
-                            <h3>Sécurité renforcée</h3>
-                            <p>Authentification à deux facteurs et chiffrement de bout en bout</p>
+                            <h3><?php echo __('home.digital_ecosystem.feature3'); ?></h3>
+                            <p><?php echo __('home.digital_ecosystem.description'); ?></p>
                         </article>
                         <article class="ecosystem-card">
                             <div class="card-icon">
                                 <i class="fas fa-clock" aria-hidden="true"></i>
                             </div>
-                            <h3>Disponibilité 24/7</h3>
-                            <p>Accédez à vos informations comptables à tout moment, où que vous soyez</p>
+                            <h3><?php echo __('home.digital_ecosystem.feature2'); ?></h3>
+                            <p><?php echo __('home.digital_ecosystem.description'); ?></p>
                         </article>
                     </div>
                     <div class="ecosystem-info">
-                        <h2 id="ecosystem-title">Notre écosystème digital</h2>
-                        <p>MBC utilise les technologies les plus avancées pour vous offrir une expérience comptable moderne, efficace et sécurisée.</p>
+                        <h2 id="ecosystem-title"><?php echo __('home.digital_ecosystem.title'); ?></h2>
+                        <p><?php echo __('home.digital_ecosystem.subtitle'); ?></p>
                         <ul class="ecosystem-features">
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Logiciels comptables connectés à vos outils</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Tableaux de bord personnalisés</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Assistance multicanal 7j/7</li>
+                            <li><i class="fas fa-check" aria-hidden="true"></i> <?php echo __('home.digital_ecosystem.feature1'); ?></li>
+                            <li><i class="fas fa-check" aria-hidden="true"></i> <?php echo __('home.digital_ecosystem.feature2'); ?></li>
+                            <li><i class="fas fa-check" aria-hidden="true"></i> <?php echo __('home.digital_ecosystem.feature3'); ?></li>
                         </ul>
                     </div>
                 </div>
@@ -156,22 +219,22 @@
                 <header class="section-header">
                     <div class="section-badge">
                         <i class="fas fa-star"></i>
-                        <span>Services Premium</span>
+                        <span><?php echo __('home.services_premium.badge'); ?></span>
                     </div>
-                    <h2 id="services-title">Nos Services d'Excellence</h2>
-                    <p class="section-subtitle">Des solutions expertes pour propulser votre entreprise vers le succès</p>
+                    <h2 id="services-title"><?php echo __('home.services.title'); ?></h2>
+                    <p class="section-subtitle"><?php echo __('home.services.subtitle'); ?></p>
                     <div class="services-stats">
                         <div class="stat-item">
-                            <span class="stat-number">500+</span>
-                            <span class="stat-label">Entreprises accompagnées</span>
+                            <span class="stat-number"><?php echo __('home.services_premium.stat1.number'); ?></span>
+                            <span class="stat-label"><?php echo __('home.services_premium.stat1.label'); ?></span>
                         </div>
                         <div class="stat-item">
-                            <span class="stat-number">15+</span>
-                            <span class="stat-label">Années d'expertise</span>
+                            <span class="stat-number"><?php echo __('home.services_premium.stat2.number'); ?></span>
+                            <span class="stat-label"><?php echo __('home.services_premium.stat2.label'); ?></span>
                         </div>
                         <div class="stat-item">
-                            <span class="stat-number">98%</span>
-                            <span class="stat-label">Clients satisfaits</span>
+                            <span class="stat-number"><?php echo __('home.services_premium.stat3.number'); ?></span>
+                            <span class="stat-label"><?php echo __('home.services_premium.stat3.label'); ?></span>
                         </div>
                     </div>
                 </header>
@@ -181,36 +244,36 @@
                         <div class="services-page active" data-page="1">
                             <article class="service-card featured">
                                 <div class="service-badge">
-                                    <span>Le plus populaire</span>
+                                    <span><?php echo __('home.service_expertise.badge'); ?></span>
                                 </div>
                         <div class="service-icon">
                             <i class="fas fa-calculator" aria-hidden="true"></i>
                         </div>
                                 <div class="service-content">
-                        <h3>Expertise Comptable</h3>
-                        <p>Sortez du chaos administratif avec une gestion comptable claire et organisée</p>
+                        <h3><?php echo __('home.expertise.title'); ?></h3>
+                        <p><?php echo __('home.expertise.description'); ?></p>
                                     <div class="service-benefits">
                                         <div class="benefit-item">
                                             <i class="fas fa-check"></i>
-                                            <span>Tenue de comptabilité complète</span>
+                                            <span><?php echo __('home.service_expertise.benefit1'); ?></span>
                                         </div>
                                         <div class="benefit-item">
                                             <i class="fas fa-check"></i>
-                                            <span>Bilans & Liasses fiscales</span>
+                                            <span><?php echo __('home.service_expertise.benefit2'); ?></span>
                                         </div>
                                         <div class="benefit-item">
                                             <i class="fas fa-check"></i>
-                                            <span>Révision comptable mensuelle</span>
+                                            <span><?php echo __('home.service_expertise.benefit3'); ?></span>
                                         </div>
                                         <div class="benefit-item">
                                             <i class="fas fa-check"></i>
-                                            <span>Tableaux de bord personnalisés</span>
+                                            <span><?php echo __('home.service_expertise.benefit4'); ?></span>
                                         </div>
                                     </div>
                                     <div class="service-features">
-                                        <span class="feature-tag">Tenue de comptabilité</span>
-                                        <span class="feature-tag">Bilans & Liasses</span>
-                                        <span class="feature-tag">Suivi mensuel</span>
+                                        <span class="feature-tag"><?php echo __('home.service_expertise.feature1'); ?></span>
+                                        <span class="feature-tag"><?php echo __('home.service_expertise.feature2'); ?></span>
+                                        <span class="feature-tag"><?php echo __('home.service_expertise.feature3'); ?></span>
                                     </div>
                                 </div>
                     </article>
@@ -219,30 +282,30 @@
                             <i class="fas fa-file-invoice" aria-hidden="true"></i>
                         </div>
                                 <div class="service-content">
-                        <h3>Fiscalité</h3>
-                                    <p>Naviguez sereinement dans le labyrinthe fiscal avec nos experts</p>
+                        <h3><?php echo __('home.fiscalite.title'); ?></h3>
+                                    <p><?php echo __('home.fiscalite.description'); ?></p>
                                     <div class="service-benefits">
                                         <div class="benefit-item">
                                             <i class="fas fa-check"></i>
-                                            <span>Déclarations TVA mensuelles</span>
+                                            <span><?php echo __('home.service_fiscalite.benefit1'); ?></span>
                                         </div>
                                         <div class="benefit-item">
                                             <i class="fas fa-check"></i>
-                                            <span>Optimisation fiscale légale</span>
+                                            <span><?php echo __('home.service_fiscalite.benefit2'); ?></span>
                                         </div>
                                         <div class="benefit-item">
                                             <i class="fas fa-check"></i>
-                                            <span>Conseil en défiscalisation</span>
+                                            <span><?php echo __('home.service_fiscalite.benefit3'); ?></span>
                                         </div>
                                         <div class="benefit-item">
                                             <i class="fas fa-check"></i>
-                                            <span>Veille réglementaire</span>
+                                            <span><?php echo __('home.service_fiscalite.benefit4'); ?></span>
                                         </div>
                                     </div>
                                     <div class="service-features">
-                                        <span class="feature-tag">Déclarations TVA</span>
-                                        <span class="feature-tag">Optimisation fiscale</span>
-                                        <span class="feature-tag">Conseil expert</span>
+                                        <span class="feature-tag"><?php echo __('home.service_fiscalite.feature1'); ?></span>
+                                        <span class="feature-tag"><?php echo __('home.service_fiscalite.feature2'); ?></span>
+                                        <span class="feature-tag"><?php echo __('home.service_fiscalite.feature3'); ?></span>
                                     </div>
                                 </div>
                     </article>
@@ -251,30 +314,30 @@
                             <i class="fas fa-users" aria-hidden="true"></i>
                         </div>
                                 <div class="service-content">
-                        <h3>Social & Paie</h3>
-                        <p>Simplifiez la gestion de vos obligations sociales et salariales</p>
+                        <h3><?php echo __('home.social.title'); ?></h3>
+                        <p><?php echo __('home.social.description'); ?></p>
                                     <div class="service-benefits">
                                         <div class="benefit-item">
                                             <i class="fas fa-check"></i>
-                                            <span>Bulletins de paie conformes</span>
+                                            <span><?php echo __('home.service_social.benefit1'); ?></span>
                                         </div>
                                         <div class="benefit-item">
                                             <i class="fas fa-check"></i>
-                                            <span>Déclarations URSSAF</span>
+                                            <span><?php echo __('home.service_social.benefit2'); ?></span>
                                         </div>
                                         <div class="benefit-item">
                                             <i class="fas fa-check"></i>
-                                            <span>Gestion des congés payés</span>
+                                            <span><?php echo __('home.service_social.benefit3'); ?></span>
                                         </div>
                                         <div class="benefit-item">
                                             <i class="fas fa-check"></i>
-                                            <span>Suivi des contrats de travail</span>
+                                            <span><?php echo __('home.service_social.benefit4'); ?></span>
                                         </div>
                                     </div>
                                     <div class="service-features">
-                                        <span class="feature-tag">Bulletins de paie</span>
-                                        <span class="feature-tag">Déclarations sociales</span>
-                                        <span class="feature-tag">Conformité légale</span>
+                                        <span class="feature-tag"><?php echo __('home.service_social.feature1'); ?></span>
+                                        <span class="feature-tag"><?php echo __('home.service_social.feature2'); ?></span>
+                                        <span class="feature-tag"><?php echo __('home.service_social.feature3'); ?></span>
                                     </div>
                                 </div>
                     </article>
@@ -287,30 +350,30 @@
                             <i class="fas fa-chart-line" aria-hidden="true"></i>
                         </div>
                                 <div class="service-content">
-                        <h3>Conseil</h3>
-                        <p>Construisez votre succès avec un accompagnement stratégique personnalisé</p>
+                        <h3><?php echo __('home.conseil.title'); ?></h3>
+                        <p><?php echo __('home.conseil.description'); ?></p>
                                     <div class="service-benefits">
                                         <div class="benefit-item">
                                             <i class="fas fa-check"></i>
-                                            <span>Création d'entreprise clé en main</span>
+                                            <span><?php echo __('home.service_conseil.benefit1'); ?></span>
                                         </div>
                                         <div class="benefit-item">
                                             <i class="fas fa-check"></i>
-                                            <span>Stratégie business personnalisée</span>
+                                            <span><?php echo __('home.service_conseil.benefit2'); ?></span>
                                         </div>
                                         <div class="benefit-item">
                                             <i class="fas fa-check"></i>
-                                            <span>Accompagnement juridique</span>
+                                            <span><?php echo __('home.service_conseil.benefit3'); ?></span>
                                         </div>
                                         <div class="benefit-item">
                                             <i class="fas fa-check"></i>
-                                            <span>Suivi de performance</span>
+                                            <span><?php echo __('home.service_conseil.benefit4'); ?></span>
                                         </div>
                                     </div>
                                     <div class="service-features">
-                                        <span class="feature-tag">Création d'entreprise</span>
-                                        <span class="feature-tag">Stratégie business</span>
-                                        <span class="feature-tag">Accompagnement</span>
+                                        <span class="feature-tag"><?php echo __('home.service_conseil.feature1'); ?></span>
+                                        <span class="feature-tag"><?php echo __('home.service_conseil.feature2'); ?></span>
+                                        <span class="feature-tag"><?php echo __('home.service_conseil.feature3'); ?></span>
                                     </div>
                                 </div>
                     </article>
@@ -319,30 +382,30 @@
                                     <i class="fas fa-building" aria-hidden="true"></i>
                                 </div>
                                 <div class="service-content">
-                                    <h3>Audit & Contrôle</h3>
-                                    <p>Sécurisez vos comptes avec nos audits professionnels et contrôles rigoureux</p>
+                                    <h3><?php echo __('home.service_audit.title'); ?></h3>
+                                    <p><?php echo __('home.service_audit.description'); ?></p>
                                     <div class="service-benefits">
                                         <div class="benefit-item">
                                             <i class="fas fa-check"></i>
-                                            <span>Audit comptable complet</span>
+                                            <span><?php echo __('home.service_audit.benefit1'); ?></span>
                                         </div>
                                         <div class="benefit-item">
                                             <i class="fas fa-check"></i>
-                                            <span>Contrôle de gestion</span>
+                                            <span><?php echo __('home.service_audit.benefit2'); ?></span>
                                         </div>
                                         <div class="benefit-item">
                                             <i class="fas fa-check"></i>
-                                            <span>Analyse des risques</span>
+                                            <span><?php echo __('home.service_audit.benefit3'); ?></span>
                                         </div>
                                         <div class="benefit-item">
                                             <i class="fas fa-check"></i>
-                                            <span>Recommandations d'amélioration</span>
+                                            <span><?php echo __('home.service_audit.benefit4'); ?></span>
                                         </div>
                                     </div>
                                     <div class="service-features">
-                                        <span class="feature-tag">Audit comptable</span>
-                                        <span class="feature-tag">Contrôle qualité</span>
-                                        <span class="feature-tag">Analyse risques</span>
+                                        <span class="feature-tag"><?php echo __('home.service_audit.feature1'); ?></span>
+                                        <span class="feature-tag"><?php echo __('home.service_audit.feature2'); ?></span>
+                                        <span class="feature-tag"><?php echo __('home.service_audit.feature3'); ?></span>
                                     </div>
                                 </div>
                             </article>
@@ -351,30 +414,30 @@
                                     <i class="fas fa-handshake" aria-hidden="true"></i>
                                 </div>
                                 <div class="service-content">
-                                    <h3>Accompagnement Juridique</h3>
-                                    <p>Bénéficiez d'un support juridique expert pour toutes vos démarches d'entreprise</p>
+                                    <h3><?php echo __('home.service_juridique.title'); ?></h3>
+                                    <p><?php echo __('home.service_juridique.description'); ?></p>
                                     <div class="service-benefits">
                                         <div class="benefit-item">
                                             <i class="fas fa-check"></i>
-                                            <span>Rédaction de statuts</span>
+                                            <span><?php echo __('home.service_juridique.benefit1'); ?></span>
                                         </div>
                                         <div class="benefit-item">
                                             <i class="fas fa-check"></i>
-                                            <span>Modifications statutaires</span>
+                                            <span><?php echo __('home.service_juridique.benefit2'); ?></span>
                                         </div>
                                         <div class="benefit-item">
                                             <i class="fas fa-check"></i>
-                                            <span>Conseil en droit des sociétés</span>
+                                            <span><?php echo __('home.service_juridique.benefit3'); ?></span>
                                         </div>
                                         <div class="benefit-item">
                                             <i class="fas fa-check"></i>
-                                            <span>Formalités administratives</span>
+                                            <span><?php echo __('home.service_juridique.benefit4'); ?></span>
                                         </div>
                                     </div>
                                     <div class="service-features">
-                                        <span class="feature-tag">Droit des sociétés</span>
-                                        <span class="feature-tag">Formalités légales</span>
-                                        <span class="feature-tag">Conseil juridique</span>
+                                        <span class="feature-tag"><?php echo __('home.service_juridique.feature1'); ?></span>
+                                        <span class="feature-tag"><?php echo __('home.service_juridique.feature2'); ?></span>
+                                        <span class="feature-tag"><?php echo __('home.service_juridique.feature3'); ?></span>
                                     </div>
                                 </div>
                             </article>
@@ -383,24 +446,24 @@
                     
                     <!-- Navigation Controls -->
                     <div class="services-navigation">
-                        <button class="nav-arrow nav-prev" id="prevServices" aria-label="Services précédents">
+                        <button class="nav-arrow nav-prev" id="prevServices" aria-label="<?php echo __('btn.previous_services'); ?>">
                             <i class="fas fa-chevron-left"></i>
                         </button>
                         <div class="pagination-dots">
                             <span class="dot active" data-page="1"></span>
                             <span class="dot" data-page="2"></span>
                         </div>
-                        <button class="nav-arrow nav-next" id="nextServices" aria-label="Services suivants">
+                        <button class="nav-arrow nav-next" id="nextServices" aria-label="<?php echo __('btn.next_services'); ?>">
                             <i class="fas fa-chevron-right"></i>
                         </button>
                     </div>
                 </div>
                 <div class="services-cta">
                     <div class="cta-content">
-                        <h3>Prêt à faire décoller votre entreprise ?</h3>
-                        <p>Obtenez un devis personnalisé gratuit en moins de 24h</p>
+                        <h3><?php echo __('home.cta_ready.title'); ?></h3>
+                        <p><?php echo __('home.cta_ready.subtitle'); ?></p>
                         <div class="cta-buttons">
-                            <a href="#devis" class="btn btn-primary btn-large">
+                            <a href="contact-form.php" class="btn btn-primary btn-large">
                                 <i class="fas fa-rocket"></i>
                                 Obtenir un devis gratuit
                             </a>
@@ -411,7 +474,7 @@
                         </div>
                         <div class="cta-guarantee">
                             <i class="fas fa-shield-alt"></i>
-                            <span>Satisfaction garantie • Devis gratuit • Réponse sous 24h</span>
+                            <span><?php echo __('home.cta_ready.guarantee'); ?></span>
                         </div>
                     </div>
                 </div>
@@ -426,23 +489,23 @@
                         <div class="card-icon">
                             <i class="fas fa-building" aria-hidden="true"></i>
                         </div>
-                        <h2 id="creation-title">Je crée mon entreprise</h2>
-                        <p>Découvrez la structure juridique idéale pour votre projet grâce à notre guide interactif. Obtenez une recommandation personnalisée en quelques clics.</p>
+                        <h2 id="creation-title"><?php echo __('home.creation.title'); ?></h2>
+                        <p><?php echo __('home.creation.subtitle'); ?></p>
                         <ul class="creation-features">
-                            <li><i class="fas fa-file-alt" aria-hidden="true"></i> Recommandation personnalisée selon votre profil</li>
-                            <li><i class="fas fa-users" aria-hidden="true"></i> Conseils d'experts-comptables spécialisés</li>
-                            <li><i class="fas fa-calendar-check" aria-hidden="true"></i> Accompagnement complet pour vos démarches</li>
+                            <li><i class="fas fa-file-alt" aria-hidden="true"></i> <?php echo __('home.creation.feature1'); ?></li>
+                            <li><i class="fas fa-users" aria-hidden="true"></i> <?php echo __('home.creation.feature2'); ?></li>
+                            <li><i class="fas fa-calendar-check" aria-hidden="true"></i> <?php echo __('home.creation.feature3'); ?></li>
                         </ul>
-                        <a href="https://wa.me/33676570097?text=Bonjour%2C%20je%20souhaite%20d%C3%A9marrer%20mon%20projet%20de%20cr%C3%A9ation%20d%27entreprise.%20Pouvez-vous%20m%27accompagner%20%3F" target="_blank" class="btn btn-white">Démarrer mon projet <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+                        <a href="https://wa.me/33676570097?text=Bonjour%2C%20je%20souhaite%20d%C3%A9marrer%20mon%20projet%20de%20cr%C3%A9ation%20d%27entreprise.%20Pouvez-vous%20m%27accompagner%20%3F" target="_blank" class="btn btn-white"><?php echo __('btn.start_project_whatsapp'); ?> <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
                     </article>
                     <article class="creation-card white-card">
-                        <h3>Pourquoi choisir MBC pour créer votre entreprise ?</h3>
+                        <h3><?php echo __('home.why_choose.title'); ?></h3>
                         <ul class="why-choose">
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Expertise franco-maghrébine - Nous comprenons les spécificités des entrepreneurs entre la France et le Maghreb</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Accompagnement 100% digital - Toutes vos démarches simplifiées et accessibles en ligne</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Suivi personnalisé - Un expert dédié vous accompagne à chaque étape de votre projet</li>
+                            <li><i class="fas fa-check" aria-hidden="true"></i> <?php echo __('home.why_choose.reason1.title'); ?> - <?php echo __('home.why_choose.reason1.description'); ?></li>
+                            <li><i class="fas fa-check" aria-hidden="true"></i> <?php echo __('home.why_choose.reason3.title'); ?> - <?php echo __('home.why_choose.reason3.description'); ?></li>
+                            <li><i class="fas fa-check" aria-hidden="true"></i> <?php echo __('home.why_choose.reason4.title'); ?> - <?php echo __('home.why_choose.reason4.description'); ?></li>
                         </ul>
-                        <a href="https://wa.me/33676570097?text=Bonjour%2C%20je%20souhaite%20prendre%20rendez-vous%20avec%20un%20expert%20pour%20discuter%20de%20mon%20projet%20d%27entreprise." target="_blank" class="btn btn-link">Prendre rendez-vous avec un expert <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+                        <a href="https://wa.me/33676570097?text=Bonjour%2C%20je%20souhaite%20prendre%20rendez-vous%20avec%20un%20expert%20pour%20discuter%20de%20mon%20projet%20d%27entreprise." target="_blank" class="btn btn-link"><?php echo __('btn.book_expert'); ?> <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
                     </article>
                 </div>
             </div>
@@ -457,39 +520,39 @@
                     </div>
                     <div class="rating">
                         <div class="stars" aria-label="5 étoiles">★★★★★</div>
-                        <span>(5 avis)</span>
+                        <span><?php echo __('home.reviews.rating'); ?></span>
                     </div>
-                    <p id="reviews-title">Découvrez ce que nos clients disent de nos services d'expertise comptable et fiscale</p>
+                    <p id="reviews-title"><?php echo __('home.reviews.title'); ?></p>
                 </header>
                 <div class="reviews-grid">
                     <article class="review-card">
                         <header class="review-header">
                             <div class="reviewer-avatar">KB</div>
                             <div class="reviewer-info">
-                                <h4>Karim Benzarti</h4>
-                                <span>20 septembre 2025</span>
+                                <h4><?php echo __('home.reviews.review1.author'); ?></h4>
+                                <span><?php echo __('home.reviews.review1.date'); ?></span>
                             </div>
                         </header>
                         <div class="review-rating" aria-label="5 étoiles">★★★★★</div>
-                        <p class="review-text">Service exceptionnel ! L'équipe MBC a su m'accompagner dans la création de mon entreprise avec une expertise remarquable...</p>
+                        <p class="review-text"><?php echo __('home.reviews.review1.text'); ?></p>
                         <div class="review-actions">
-                            <button class="btn-useful" aria-label="Marquer comme utile"><i class="fas fa-thumbs-up" aria-hidden="true"></i> Utile</button>
-                            <a href="#" class="btn-google">Voir sur Google <i class="fas fa-external-link-alt" aria-hidden="true"></i></a>
+                            <button class="btn-useful" aria-label="Marquer comme utile"><i class="fas fa-thumbs-up" aria-hidden="true"></i> <?php echo __('btn.useful'); ?></button>
+                            <a href="#" class="btn-google"><?php echo __('btn.view_google'); ?> <i class="fas fa-external-link-alt" aria-hidden="true"></i></a>
                         </div>
                     </article>
                     <article class="review-card">
                         <header class="review-header">
                             <div class="reviewer-avatar">LM</div>
                             <div class="reviewer-info">
-                                <h4>Leila Mansouri</h4>
-                                <span>13 septembre 2025</span>
+                                <h4><?php echo __('home.reviews.review2.author'); ?></h4>
+                                <span><?php echo __('home.reviews.review2.date'); ?></span>
                             </div>
                         </header>
                         <div class="review-rating" aria-label="5 étoiles">★★★★★</div>
-                        <p class="review-text">Très professionnel et à l'écoute. La gestion de ma comptabilité n'a jamais été aussi simple...</p>
+                        <p class="review-text"><?php echo __('home.reviews.review2.text'); ?></p>
                         <div class="review-actions">
-                            <button class="btn-useful" aria-label="Marquer comme utile"><i class="fas fa-thumbs-up" aria-hidden="true"></i> Utile</button>
-                            <a href="#" class="btn-google">Voir sur Google <i class="fas fa-external-link-alt" aria-hidden="true"></i></a>
+                            <button class="btn-useful" aria-label="Marquer comme utile"><i class="fas fa-thumbs-up" aria-hidden="true"></i> <?php echo __('btn.useful'); ?></button>
+                            <a href="#" class="btn-google"><?php echo __('btn.view_google'); ?> <i class="fas fa-external-link-alt" aria-hidden="true"></i></a>
                         </div>
                     </article>
                 </div>
@@ -504,8 +567,8 @@
                         <img src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png" alt="Google" loading="lazy">
                         Laisser un avis sur Google
                     </a>
-                    <h2 id="resources-title">Téléchargez nos guides et infographies pour approfondir vos connaissances</h2>
-                    <p>Accédez à nos ressources gratuites pour optimiser votre gestion comptable et fiscale</p>
+                    <h2 id="resources-title"><?php echo __('home.resources.title'); ?></h2>
+                    <p><?php echo __('home.resources.subtitle'); ?></p>
                 </header>
                 <div class="resources-grid">
                     <article class="resource-card">
@@ -514,12 +577,12 @@
                                 <i class="fas fa-file-alt" aria-hidden="true"></i>
                             </div>
                             <div class="resource-content">
-                                <h3>Guide de la création d'entreprise 2025</h3>
-                                <p>Toutes les étapes pour créer votre entreprise avec succès</p>
+                                <h3><?php echo __('home.resources.resource1.title'); ?></h3>
+                                <p><?php echo __('home.resources.resource1.description'); ?></p>
                             </div>
                         </header>
                         <div class="resource-footer">
-                            <span class="resource-meta">PDF • 2.4 MB</span>
+                            <span class="resource-meta"><?php echo __('home.resources.resource1.meta'); ?></span>
                             <button class="btn-download">
                                 <i class="fas fa-download" aria-hidden="true"></i>
                                 Télécharger
@@ -532,12 +595,12 @@
                                 <i class="fas fa-chart-line" aria-hidden="true"></i>
                             </div>
                             <div class="resource-content">
-                                <h3>Les régimes fiscaux expliqués</h3>
-                                <p>Comprendre et choisir le régime fiscal adapté à votre activité</p>
+                                <h3><?php echo __('home.resources.resource2.title'); ?></h3>
+                                <p><?php echo __('home.resources.resource2.description'); ?></p>
                             </div>
                         </header>
                         <div class="resource-footer">
-                            <span class="resource-meta">PDF • 1.8 MB</span>
+                            <span class="resource-meta"><?php echo __('home.resources.resource2.meta'); ?></span>
                             <button class="btn-download">
                                 <i class="fas fa-download" aria-hidden="true"></i>
                                 Télécharger
@@ -551,11 +614,11 @@
         <!-- CTA Section -->
         <section class="cta-section section" aria-labelledby="cta-title">
             <div class="container">
-                <h2 id="cta-title">Prêt à transformer votre gestion comptable ?</h2>
-                <p>Rejoignez des centaines d'entrepreneurs qui font confiance à MBC pour leur expertise comptable</p>
+                <h2 id="cta-title"><?php echo __('home.cta_section.title'); ?></h2>
+                <p><?php echo __('home.cta_section.subtitle'); ?></p>
                 <div class="cta-buttons">
-                    <a href="#contact" class="btn btn-secondary btn-large">Nous contacter</a>
-                    <a href="#devis" class="btn btn-primary btn-large">Obtenir un devis</a>
+                    <a href="contact-form.php" class="btn btn-secondary btn-large"><?php echo __('home.cta_section.button2'); ?></a>
+                    <a href="contact-form.php" class="btn btn-primary btn-large"><?php echo __('home.cta_section.button1'); ?></a>
                 </div>
             </div>
         </section>
@@ -565,8 +628,8 @@
     <div id="simulatorsModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2>Simulateurs en ligne</h2>
-                <p>Utilisez nos outils de simulation pour estimer rapidement vos charges, impôts et aides</p>
+                <h2><?php echo __('modal.simulators.title'); ?></h2>
+                <p><?php echo __('modal.simulators.subtitle'); ?></p>
                 <button class="modal-close" onclick="closeSimulatorsModal()">&times;</button>
             </div>
             
@@ -818,8 +881,8 @@
                     <h3>Besoin d'un calcul plus précis ?</h3>
                     <p>Ces simulateurs donnent des estimations. Pour des calculs précis adaptés à votre situation, prenez rendez-vous avec l'un de nos experts-comptables.</p>
                     <div class="cta-buttons">
-                        <button class="btn btn-primary">Prendre rendez-vous avec un expert</button>
-                        <button class="btn btn-secondary">Demander un devis personnalisé</button>
+                        <button class="btn btn-primary"><?php echo __('btn.book_expert'); ?></button>
+                        <button class="btn btn-secondary"><?php echo __('btn.free_quote'); ?></button>
                     </div>
                 </div>
             </div>
@@ -835,7 +898,7 @@
                         <i class="fas fa-building" aria-hidden="true"></i>
                     </div>
                     <h3>MBC Expert Comptable</h3>
-                    <p>Votre partenaire comptable pour entrepreneurs franco-maghrébins. Expertise, innovation et accompagnement personnalisé.</p>
+                    <p><?php echo __('footer.description'); ?></p>
                     <div class="social-links">
                         <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
                         <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
@@ -844,25 +907,25 @@
                     </div>
                 </div>
                 <div class="footer-section">
-                    <h3>Liens rapides</h3>
+                    <h3><?php echo __('footer.quick_links'); ?></h3>
                     <ul>
-                        <li><a href="#accueil">Accueil</a></li>
-                        <li><a href="#about">À propos</a></li>
-                        <li><a href="#services">Services</a></li>
-                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#accueil"><?php echo __('nav.home'); ?></a></li>
+                        <li><a href="mbc.php"><?php echo __('nav.about'); ?></a></li>
+                        <li><a href="services.php"><?php echo __('nav.services'); ?></a></li>
+                        <li><a href="contact-form.php"><?php echo __('nav.contact'); ?></a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
-                    <h3>Nos services</h3>
+                    <h3><?php echo __('footer.services'); ?></h3>
                     <ul>
-                        <li><a href="#expertise">Expertise Comptable</a></li>
-                        <li><a href="#fiscalite">Fiscalité</a></li>
-                        <li><a href="#social">Social & Paie</a></li>
-                        <li><a href="#conseil">Conseil</a></li>
+                        <li><a href="#expertise"><?php echo __('services.expertise.title'); ?></a></li>
+                        <li><a href="#fiscalite"><?php echo __('services.fiscalite.title'); ?></a></li>
+                        <li><a href="#social"><?php echo __('services.social.title'); ?></a></li>
+                        <li><a href="#conseil"><?php echo __('services.conseil.title'); ?></a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
-                    <h3>Contact</h3>
+                    <h3><?php echo __('footer.contact'); ?></h3>
                     <ul>
                         <li><i class="fas fa-phone" aria-hidden="true"></i> +33 1 23 45 67 89</li>
                         <li><i class="fas fa-envelope" aria-hidden="true"></i> contact@mbc-expertcomptable.fr</li>
@@ -871,11 +934,11 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2024 MBC Expert Comptable. Tous droits réservés.</p>
+                <p>&copy; 2024 <?php echo __('footer.copyright'); ?></p>
                 <div>
-                    <a href="#mentions">Mentions légales</a>
-                    <a href="#confidentialite">Confidentialité</a>
-                    <a href="#cookies">Cookies</a>
+                    <a href="#mentions"><?php echo __('footer.legal'); ?></a>
+                    <a href="#confidentialite"><?php echo __('footer.privacy'); ?></a>
+                    <a href="#cookies"><?php echo __('footer.terms'); ?></a>
                 </div>
             </div>
         </div>
@@ -894,17 +957,39 @@
             const messageText = document.querySelector('.message-text');
             const header = document.querySelector('.header');
 
-            // Business suggestion messages
-            const businessMessages = [
-                "💡 Prêt à créer votre entreprise ? Je peux vous accompagner !",
-                "🚀 Votre idée d'entreprise mérite d'être réalisée ! Parlons-en !",
-                "💼 Créer une entreprise en France ? C'est plus simple avec MBC !",
-                "🌟 Transformez votre projet en succès entrepreneurial !",
-                "📈 Besoin d'aide pour votre création d'entreprise ? Je suis là !",
-                "💡 Votre rêve d'entrepreneur peut devenir réalité !",
-                "🎯 Prêt à lancer votre business ? Commençons ensemble !",
-                "💪 Créer une entreprise franco-maghrébine ? C'est notre spécialité !"
-            ];
+            // Business suggestion messages based on language
+            const businessMessages = {
+                'fr': [
+                    "💡 Prêt à créer votre entreprise ? Je peux vous accompagner !",
+                    "🚀 Votre idée d'entreprise mérite d'être réalisée ! Parlons-en !",
+                    "💼 Créer une entreprise en France ? C'est plus simple avec MBC !",
+                    "🌟 Transformez votre projet en succès entrepreneurial !",
+                    "📈 Besoin d'aide pour votre création d'entreprise ? Je suis là !",
+                    "💡 Votre rêve d'entrepreneur peut devenir réalité !",
+                    "🎯 Prêt à lancer votre business ? Commençons ensemble !",
+                    "💪 Créer une entreprise franco-maghrébine ? C'est notre spécialité !"
+                ],
+                'en': [
+                    "💡 Ready to start your business? I can help you!",
+                    "🚀 Your business idea deserves to come true! Let's talk!",
+                    "💼 Creating a company in France? It's easier with MBC!",
+                    "🌟 Transform your project into entrepreneurial success!",
+                    "📈 Need help with your business creation? I'm here!",
+                    "💡 Your entrepreneur dream can become reality!",
+                    "🎯 Ready to launch your business? Let's start together!",
+                    "💪 Creating a Franco-Maghrebi company? That's our specialty!"
+                ],
+                'zh': [
+                    "💡 准备创建您的企业吗？我可以帮助您！",
+                    "🚀 您的商业想法值得实现！让我们谈谈！",
+                    "💼 在法国创建公司？有了MBC更简单！",
+                    "🌟 将您的项目转化为创业成功！",
+                    "📈 需要帮助创建企业？我在这里！",
+                    "💡 您的创业梦想可以成为现实！",
+                    "🎯 准备启动您的业务？让我们一起开始！",
+                    "💪 创建法马企业？这是我们的专长！"
+                ]
+            };
 
 
             // Header scroll effect
@@ -918,7 +1003,10 @@
 
             // Show random business message
             function showRandomMessage() {
-                const randomMessage = businessMessages[Math.floor(Math.random() * businessMessages.length)];
+                // Get current language from session or default to French
+                const currentLang = '<?php echo getCurrentLanguage(); ?>';
+                const messages = businessMessages[currentLang] || businessMessages['fr'];
+                const randomMessage = messages[Math.floor(Math.random() * messages.length)];
                 messageText.textContent = randomMessage;
                 chatbot.classList.add('active');
                 isChatbotVisible = true;
@@ -1075,6 +1163,7 @@
         // Initialize sliders when DOM is loaded
         document.addEventListener('DOMContentLoaded', function() {
             initializeSliders();
+            initializeUserDropdown();
         });
 
 
@@ -1527,6 +1616,22 @@
                 if (typeof calculateAides === 'function') calculateAides();
             }, 100);
         });
+        
+        // Language change function
+        function changeLanguage(lang) {
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = 'change-language.php';
+            
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = 'lang';
+            input.value = lang;
+            
+            form.appendChild(input);
+            document.body.appendChild(form);
+            form.submit();
+        }
     </script>
     <script src="script.js"></script>
     <script src="chatbot.js"></script>

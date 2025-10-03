@@ -1,9 +1,25 @@
+<?php
+session_start();
+require_once 'config/database.php';
+require_once 'includes/auth.php';
+require_once 'includes/translations.php';
+
+$auth = new Auth();
+
+$pageTitle = __("nav.contact") . " - MBC Expert Comptable";
+$pageDescription = __("contact.subtitle");
+
+// SEO Meta Tags
+$seoKeywords = "contact expert comptable, devis gratuit, conseil entreprise, comptabilité, fiscalité";
+$ogImage = "https://mbc-expertcomptable.fr/assets/contact-og.jpg";
+$twitterImage = "https://mbc-expertcomptable.fr/assets/contact-twitter.jpg";
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact - MBC Expert Comptable</title>
+    <title><?php echo $pageTitle; ?></title>
     <meta name="description" content="Contactez MBC Expert Comptable pour vos besoins en expertise comptable, fiscalité, social & paie. Devis gratuit et conseil personnalisé.">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -26,22 +42,70 @@
                 <!-- Navigation -->
                 <nav class="nav" role="navigation" aria-label="Navigation principale">
                     <ul class="nav-list">
-                        <li><a href="index.html#accueil" class="nav-link">Accueil</a></li>
-                        <li><a href="mbc.html" class="nav-link">MBC</a></li>
-                        <li><a href="services.html" class="nav-link">Services</a></li>
-                        <li><a href="#" class="nav-link simulators-link">Simulateurs</a></li>
-                        <li><a href="blog.html" class="nav-link">Blog</a></li>
-                        <li><a href="contact.html" class="nav-link active" aria-current="page">Contact</a></li>
+                        <li><a href="index.php#accueil" class="nav-link"><?php echo __('nav.home'); ?></a></li>
+                        <li><a href="mbc.php" class="nav-link"><?php echo __('nav.about'); ?></a></li>
+                        <li><a href="services.php" class="nav-link"><?php echo __('nav.services'); ?></a></li>
+                        <li><a href="#" class="nav-link simulators-link"><?php echo __('nav.simulators'); ?></a></li>
+                        <li><a href="blog-dynamic.php" class="nav-link"><?php echo __('nav.blog'); ?></a></li>
+                        <li><a href="contact-form.php" class="nav-link active" aria-current="page"><?php echo __('nav.contact'); ?></a></li>
                     </ul>
                 </nav>
 
                 <!-- Header Utils -->
                 <div class="header-utils">
-                    <select class="language-selector" aria-label="Sélectionner la langue">
-                        <option value="fr">FR</option>
-                        <option value="en">EN</option>
-                        <option value="ar">AR</option>
+                    <select class="language-selector" aria-label="Sélectionner la langue" onchange="changeLanguage(this.value)">
+                        <option value="fr" <?php echo getCurrentLanguage() === 'fr' ? 'selected' : ''; ?>>🇫🇷 FR</option>
+                        <option value="en" <?php echo getCurrentLanguage() === 'en' ? 'selected' : ''; ?>>🇬🇧 EN</option>
+                        <option value="zh" <?php echo getCurrentLanguage() === 'zh' ? 'selected' : ''; ?>>🇨🇳 中文</option>
                     </select>
+                    
+                    <!-- Authentication Section -->
+                    <div class="auth-section">
+                        <?php
+                        if ($auth->isLoggedIn()): 
+                            $currentUser = $auth->getCurrentUser(); ?>
+                            <!-- User is logged in -->
+                            <div class="user-menu">
+                                <span class="user-greeting">Bonjour, <?php echo htmlspecialchars($currentUser['full_name']); ?></span>
+                                <div class="user-dropdown">
+                                    <button class="user-dropdown-toggle" aria-expanded="false">
+                                        <i class="fas fa-user-circle"></i>
+                                        <i class="fas fa-chevron-down"></i>
+                                    </button>
+                                    <div class="user-dropdown-menu">
+                                        <?php if ($auth->isAdmin()): ?>
+                                            <a href="admin/dashboard.php" class="dropdown-item">
+                                                <i class="fas fa-tachometer-alt"></i> Dashboard
+                                            </a>
+                                            <a href="admin/blog.php" class="dropdown-item">
+                                                <i class="fas fa-blog"></i> Gestion Blog
+                                            </a>
+                                            <a href="admin/contact.php" class="dropdown-item">
+                                                <i class="fas fa-envelope"></i> Messages
+                                            </a>
+                                            <a href="admin/users.php" class="dropdown-item">
+                                                <i class="fas fa-users"></i> Utilisateurs
+                                            </a>
+                                            <a href="admin/profile.php" class="dropdown-item">
+                                                <i class="fas fa-user-edit"></i> Profil
+                                            </a>
+                                        <?php endif; ?>
+                                        <a href="admin/logout.php" class="dropdown-item logout">
+                                            <i class="fas fa-sign-out-alt"></i> Déconnexion
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php else: ?>
+                            <!-- User is not logged in -->
+                            <div class="auth-buttons">
+                                <a href="admin/login.php" class="btn btn-outline btn-sm">
+                                    <i class="fas fa-sign-in-alt"></i> Connexion
+                                </a>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+                    
                     <button class="mobile-menu-toggle" aria-label="Ouvrir le menu mobile">
                         <i class="fas fa-bars"></i>
                     </button>
@@ -104,40 +168,40 @@
         <div class="container">
             <div class="form-container">
                 <div class="form-header">
-                    <h2>Formulaire de contact</h2>
-                    <p>Remplissez ce formulaire et nous vous recontacterons dans les 24h</p>
+                    <h2><?php echo __('contact.form.title'); ?></h2>
+                    <p><?php echo __('contact.form.subtitle'); ?></p>
                 </div>
                 
-                <form id="contactForm" class="modern-form">
+                <form id="contactForm" class="modern-form" action="contact-handler.php" method="POST">
                         <div class="form-row">
                         <div class="form-group">
-                            <label for="firstName">Prénom *</label>
+                            <label for="firstName"><?php echo __('contact.firstname'); ?> *</label>
                             <input type="text" id="firstName" name="firstName" required>
                         </div>
                         <div class="form-group">
-                            <label for="lastName">Nom *</label>
+                            <label for="lastName"><?php echo __('contact.lastname'); ?> *</label>
                             <input type="text" id="lastName" name="lastName" required>
                         </div>
                     </div>
                     
                         <div class="form-row">
                         <div class="form-group">
-                            <label for="email">Email *</label>
+                            <label for="email"><?php echo __('contact.email'); ?> *</label>
                             <input type="email" id="email" name="email" required>
                         </div>
                         <div class="form-group">
-                            <label for="phone">Téléphone</label>
+                            <label for="phone"><?php echo __('contact.phone'); ?></label>
                             <input type="tel" id="phone" name="phone">
                         </div>
                     </div>
                     
                     <div class="form-group">
-                        <label for="company">Entreprise</label>
+                        <label for="company"><?php echo __('contact.company'); ?></label>
                         <input type="text" id="company" name="company">
                     </div>
                     
                     <div class="form-group">
-                        <label for="subject">Sujet *</label>
+                        <label for="subject"><?php echo __('contact.subject'); ?> *</label>
                         <select id="subject" name="subject" required>
                             <option value="">Sélectionnez un sujet</option>
                             <option value="expertise-comptable">Expertise Comptable</option>
@@ -151,17 +215,17 @@
                 </div>
                     
                     <div class="form-group">
-                        <label for="message">Message *</label>
+                        <label for="message"><?php echo __('contact.message'); ?> *</label>
                         <textarea id="message" name="message" rows="5" required placeholder="Décrivez votre projet ou votre question..."></textarea>
                     </div>
                     
                     <div class="form-group checkbox-group">
                         <input type="checkbox" id="privacy" required>
-                        <label for="privacy">J'accepte la <a href="#">politique de confidentialité</a> *</label>
+                        <label for="privacy"><?php echo __('contact.privacy'); ?> *</label>
                     </div>
                     
                     <button type="submit" class="submit-btn">
-                        <span>Envoyer le message</span>
+                        <span><?php echo __('contact.submit'); ?></span>
                         <i class="fas fa-paper-plane"></i>
                     </button>
                 </form>
@@ -309,7 +373,6 @@
 
 
 
-    <script src="script.js"></script>
     <script>
         // FAQ Accordion
         document.addEventListener('DOMContentLoaded', function() {
@@ -334,11 +397,86 @@
             });
         });
 
-        // Form submission
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('Merci pour votre message ! Nous vous contacterons bientôt.');
-        });
+        // Contact form submission
+        const contactForm = document.getElementById('contactForm');
+        if (contactForm) {
+            contactForm.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                const submitBtn = this.querySelector('.submit-btn');
+                const originalText = submitBtn.innerHTML;
+                
+                // Show loading state
+                submitBtn.innerHTML = '<span>Envoi en cours...</span><i class="fas fa-spinner fa-spin"></i>';
+                submitBtn.disabled = true;
+                
+                try {
+                    const formData = new FormData(this);
+                    
+                    const response = await fetch('contact-handler.php', {
+                        method: 'POST',
+                        body: formData
+                    });
+                    
+                    const result = await response.json();
+                    
+                    if (result.success) {
+                        // Show success message
+                        showNotification('success', result.message);
+                        this.reset();
+                    } else {
+                        // Show error message
+                        showNotification('error', result.message);
+                        if (result.errors) {
+                            displayFormErrors(result.errors);
+                        }
+                    }
+                } catch (error) {
+                    showNotification('error', 'Une erreur est survenue. Veuillez réessayer.');
+                } finally {
+                    // Reset button
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                }
+            });
+        }
+        
+        function showNotification(type, message) {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.innerHTML = `
+                <div class="notification-content">
+                    <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'}"></i>
+                    <span>${message}</span>
+                    <button onclick="this.parentElement.parentElement.remove()">&times;</button>
+                </div>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Auto remove after 5 seconds
+            setTimeout(() => {
+                if (notification.parentElement) {
+                    notification.remove();
+                }
+            }, 5000);
+        }
+        
+        function displayFormErrors(errors) {
+            // Clear previous errors
+            document.querySelectorAll('.form-error').forEach(error => error.remove());
+            
+            // Display new errors
+            Object.keys(errors).forEach(fieldName => {
+                const field = document.querySelector(`[name="${fieldName}"]`);
+                if (field) {
+                    const errorDiv = document.createElement('div');
+                    errorDiv.className = 'form-error';
+                    errorDiv.textContent = errors[fieldName];
+                    field.parentElement.appendChild(errorDiv);
+                }
+            });
+        }
     </script>
 
     <!-- Simulators Modal -->
@@ -438,9 +576,105 @@
                     openSimulatorsModal();
                 });
             }
+            
+            // Contact form submission
+            const contactForm = document.getElementById('contactForm');
+            if (contactForm) {
+                contactForm.addEventListener('submit', async function(e) {
+                    e.preventDefault();
+                    
+                    const submitBtn = this.querySelector('.submit-btn');
+                    const originalText = submitBtn.innerHTML;
+                    
+                    // Show loading state
+                    submitBtn.innerHTML = '<span>Envoi en cours...</span><i class="fas fa-spinner fa-spin"></i>';
+                    submitBtn.disabled = true;
+                    
+                    try {
+                        const formData = new FormData(this);
+                        
+                        const response = await fetch('contact-handler.php', {
+                            method: 'POST',
+                            body: formData
+                        });
+                        
+                        const result = await response.json();
+                        
+                        if (result.success) {
+                            // Show success message
+                            showNotification('success', '<?php echo __('contact.success'); ?>');
+                            this.reset();
+                        } else {
+                            // Show error message
+                            showNotification('error', result.message || '<?php echo __('contact.error'); ?>');
+                            if (result.errors) {
+                                displayFormErrors(result.errors);
+                            }
+                        }
+                    } catch (error) {
+                        showNotification('error', 'Une erreur est survenue. Veuillez réessayer.');
+                    } finally {
+                        // Reset button
+                        submitBtn.innerHTML = originalText;
+                        submitBtn.disabled = false;
+                    }
+                });
+            }
         });
+        
+        function showNotification(type, message) {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.innerHTML = `
+                <div class="notification-content">
+                    <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'}"></i>
+                    <span>${message}</span>
+                    <button onclick="this.parentElement.parentElement.remove()">&times;</button>
+                </div>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Auto remove after 5 seconds
+            setTimeout(() => {
+                if (notification.parentElement) {
+                    notification.remove();
+                }
+            }, 5000);
+        }
+        
+        function displayFormErrors(errors) {
+            // Clear previous errors
+            document.querySelectorAll('.form-error').forEach(error => error.remove());
+            
+            // Display new errors
+            Object.keys(errors).forEach(fieldName => {
+                const field = document.querySelector(`[name="${fieldName}"]`);
+                if (field) {
+                    const errorDiv = document.createElement('div');
+                    errorDiv.className = 'form-error';
+                    errorDiv.textContent = errors[fieldName];
+                    field.parentElement.appendChild(errorDiv);
+                }
+            });
+        }
+        
+        // Language change function
+        function changeLanguage(lang) {
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = 'change-language.php';
+            
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = 'lang';
+            input.value = lang;
+            
+            form.appendChild(input);
+            document.body.appendChild(form);
+            form.submit();
+        }
     </script>
-    <script src="script.js"></script>
     <script src="chatbot.js"></script>
 </body>
 </html>

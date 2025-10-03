@@ -1,9 +1,25 @@
+<?php
+session_start();
+require_once 'config/database.php';
+require_once 'includes/auth.php';
+require_once 'includes/translations.php';
+
+$auth = new Auth();
+
+$pageTitle = __("services.hero.title") . " - MBC Expert Comptable";
+$pageDescription = __("services.hero.subtitle");
+
+// SEO Meta Tags
+$seoKeywords = "services expert comptable, fiscalité, social paie, conseil entreprise, franco-maghrébin";
+$ogImage = "https://mbc-expertcomptable.fr/assets/services-og.jpg";
+$twitterImage = "https://mbc-expertcomptable.fr/assets/services-twitter.jpg";
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Services - MBC Expert Comptable</title>
+    <title><?php echo $pageTitle; ?></title>
     <meta name="description" content="Découvrez nos services d'expertise comptable, fiscalité, social & paie, et conseil d'entreprise. Solutions sur mesure pour entrepreneurs franco-maghrébins.">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -26,22 +42,70 @@
                 <!-- Navigation -->
                 <nav class="nav" role="navigation" aria-label="Navigation principale">
                     <ul class="nav-list">
-                        <li><a href="index.html#accueil" class="nav-link">Accueil</a></li>
-                        <li><a href="mbc.html" class="nav-link">MBC</a></li>
-                        <li><a href="services.html" class="nav-link active" aria-current="page">Services</a></li>
-                        <li><a href="#" class="nav-link simulators-link">Simulateurs</a></li>
-                        <li><a href="blog.html" class="nav-link">Blog</a></li>
-                        <li><a href="contact.html" class="nav-link">Contact</a></li>
+                        <li><a href="index.php#accueil" class="nav-link"><?php echo __('nav.home'); ?></a></li>
+                        <li><a href="mbc.php" class="nav-link"><?php echo __('nav.about'); ?></a></li>
+                        <li><a href="services.php" class="nav-link active" aria-current="page"><?php echo __('nav.services'); ?></a></li>
+                        <li><a href="#" class="nav-link simulators-link"><?php echo __('nav.simulators'); ?></a></li>
+                        <li><a href="blog-dynamic.php" class="nav-link"><?php echo __('nav.blog'); ?></a></li>
+                        <li><a href="contact-form.php" class="nav-link"><?php echo __('nav.contact'); ?></a></li>
                     </ul>
                 </nav>
 
                 <!-- Header Utils -->
                 <div class="header-utils">
-                    <select class="language-selector" aria-label="Sélectionner la langue">
-                        <option value="fr">FR</option>
-                        <option value="en">EN</option>
-                        <option value="ar">AR</option>
+                    <select class="language-selector" aria-label="Sélectionner la langue" onchange="changeLanguage(this.value)">
+                        <option value="fr" <?php echo getCurrentLanguage() === 'fr' ? 'selected' : ''; ?>>🇫🇷 FR</option>
+                        <option value="en" <?php echo getCurrentLanguage() === 'en' ? 'selected' : ''; ?>>🇬🇧 EN</option>
+                        <option value="zh" <?php echo getCurrentLanguage() === 'zh' ? 'selected' : ''; ?>>🇨🇳 中文</option>
                     </select>
+                    
+                    <!-- Authentication Section -->
+                    <div class="auth-section">
+                        <?php
+                        if ($auth->isLoggedIn()): 
+                            $currentUser = $auth->getCurrentUser(); ?>
+                            <!-- User is logged in -->
+                            <div class="user-menu">
+                                <span class="user-greeting">Bonjour, <?php echo htmlspecialchars($currentUser['full_name']); ?></span>
+                                <div class="user-dropdown">
+                                    <button class="user-dropdown-toggle" aria-expanded="false">
+                                        <i class="fas fa-user-circle"></i>
+                                        <i class="fas fa-chevron-down"></i>
+                                    </button>
+                                    <div class="user-dropdown-menu">
+                                        <?php if ($auth->isAdmin()): ?>
+                                            <a href="admin/dashboard.php" class="dropdown-item">
+                                                <i class="fas fa-tachometer-alt"></i> Dashboard
+                                            </a>
+                                            <a href="admin/blog.php" class="dropdown-item">
+                                                <i class="fas fa-blog"></i> Gestion Blog
+                                            </a>
+                                            <a href="admin/contact.php" class="dropdown-item">
+                                                <i class="fas fa-envelope"></i> Messages
+                                            </a>
+                                            <a href="admin/users.php" class="dropdown-item">
+                                                <i class="fas fa-users"></i> Utilisateurs
+                                            </a>
+                                            <a href="admin/profile.php" class="dropdown-item">
+                                                <i class="fas fa-user-edit"></i> Profil
+                                            </a>
+                                        <?php endif; ?>
+                                        <a href="admin/logout.php" class="dropdown-item logout">
+                                            <i class="fas fa-sign-out-alt"></i> Déconnexion
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php else: ?>
+                            <!-- User is not logged in -->
+                            <div class="auth-buttons">
+                                <a href="admin/login.php" class="btn btn-outline btn-sm">
+                                    <i class="fas fa-sign-in-alt"></i> Connexion
+                                </a>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+                    
                     <button class="mobile-menu-toggle" aria-label="Ouvrir le menu mobile">
                         <i class="fas fa-bars"></i>
                     </button>
@@ -54,13 +118,13 @@
     <div class="mbc-chatbot">
         <div class="chatbot-toggle" onclick="toggleChat()">
             <i class="fas fa-comments"></i>
-            <span>Assistant MBC</span>
+            <span><?php echo __('chatbot.assistant'); ?></span>
         </div>
         <div class="chatbot-window" id="chatbotWindow">
             <div class="chatbot-header">
                 <div class="chatbot-title">
                     <i class="fas fa-robot"></i>
-                    <span>Assistant MBC</span>
+                    <span><?php echo __('chatbot.assistant'); ?></span>
                 </div>
                 <button class="chatbot-close" onclick="toggleChat()">
                     <i class="fas fa-times"></i>
@@ -69,12 +133,12 @@
             <div class="chatbot-messages" id="chatMessages">
                 <div class="message bot-message">
                     <div class="message-content">
-                        Bonjour ! Je suis l'assistant virtuel de MBC. Comment puis-je vous aider avec nos services ?
+                        <?php echo __('chatbot.welcome_message'); ?>
                     </div>
                 </div>
             </div>
             <div class="chatbot-input">
-                <input type="text" id="chatInput" placeholder="Tapez votre message..." onkeypress="handleEnter(event)">
+                <input type="text" id="chatInput" placeholder="<?php echo __('chatbot.placeholder'); ?>" onkeypress="handleEnter(event)">
                 <button onclick="sendMessage()" class="send-btn">
                     <i class="fas fa-paper-plane"></i>
                 </button>
@@ -93,11 +157,11 @@
                     <div class="hero-cta">
                         <a href="https://wa.me/33676570097?text=Bonjour%2C%20je%20souhaite%20découvrir%20vos%20services%20comptables." target="_blank" class="btn btn-primary btn-large">
                             <i class="fab fa-whatsapp"></i>
-                            Découvrir nos services
+                            <?php echo __('btn.discover_services'); ?>
                         </a>
                         <a href="https://wa.me/33676570097?text=Bonjour%2C%20je%20souhaite%20une%20consultation%20gratuite." target="_blank" class="btn btn-secondary btn-large">
                             <i class="fas fa-phone"></i>
-                            Consultation gratuite
+                            <?php echo __('btn.free_consultation'); ?>
                         </a>
                     </div>
                 </div>
@@ -184,7 +248,7 @@
                                 <div class="service-cta">
                                     <a href="https://wa.me/33676570097?text=Bonjour%2C%20je%20souhaite%20en%20savoir%20plus%20sur%20l%27expertise%20comptable." target="_blank" class="btn btn-primary">
                                         <i class="fab fa-whatsapp"></i>
-                                        En savoir plus
+                                        <?php echo __('btn.learn_more'); ?>
                                     </a>
                                 </div>
                             </div>
@@ -222,7 +286,7 @@
                                 <div class="service-cta">
                                     <a href="https://wa.me/33676570097?text=Bonjour%2C%20je%20souhaite%20en%20savoir%20plus%20sur%20la%20fiscalit%C3%A9." target="_blank" class="btn btn-primary">
                                         <i class="fab fa-whatsapp"></i>
-                                        En savoir plus
+                                        <?php echo __('btn.learn_more'); ?>
                                     </a>
                                 </div>
                             </div>
@@ -260,7 +324,7 @@
                                 <div class="service-cta">
                                     <a href="https://wa.me/33676570097?text=Bonjour%2C%20je%20souhaite%20en%20savoir%20plus%20sur%20le%20social%20%26%20paie." target="_blank" class="btn btn-primary">
                                         <i class="fab fa-whatsapp"></i>
-                                        En savoir plus
+                                        <?php echo __('btn.learn_more'); ?>
                                     </a>
                                 </div>
                             </div>
@@ -302,7 +366,7 @@
                                 <div class="service-cta">
                                     <a href="https://wa.me/33676570097?text=Bonjour%2C%20je%20souhaite%20en%20savoir%20plus%20sur%20le%20conseil%20d%27entreprise." target="_blank" class="btn btn-primary">
                                         <i class="fab fa-whatsapp"></i>
-                                        En savoir plus
+                                        <?php echo __('btn.learn_more'); ?>
                                     </a>
                                 </div>
                             </div>
@@ -340,7 +404,7 @@
                                 <div class="service-cta">
                                     <a href="https://wa.me/33676570097?text=Bonjour%2C%20je%20souhaite%20en%20savoir%20plus%20sur%20l%27audit%20%26%20contr%C3%B4le." target="_blank" class="btn btn-primary">
                                         <i class="fab fa-whatsapp"></i>
-                                        En savoir plus
+                                        <?php echo __('btn.learn_more'); ?>
                                     </a>
                                 </div>
                             </div>
@@ -378,7 +442,7 @@
                                 <div class="service-cta">
                                     <a href="https://wa.me/33676570097?text=Bonjour%2C%20je%20souhaite%20en%20savoir%20plus%20sur%20l%27accompagnement%20juridique." target="_blank" class="btn btn-primary">
                                         <i class="fab fa-whatsapp"></i>
-                                        En savoir plus
+                                        <?php echo __('btn.learn_more'); ?>
                                     </a>
                                 </div>
                             </div>
@@ -1379,36 +1443,45 @@
 
         function getBotResponse(message) {
             const lowerMessage = message.toLowerCase();
+            const currentLang = '<?php echo getCurrentLanguage(); ?>';
             
             const responses = {
-                'expertise comptable': 'Notre service d\'expertise comptable comprend la tenue de comptabilité, les bilans, les liasses fiscales et les tableaux de bord personnalisés. Souhaitez-vous plus d\'informations ?',
-                'fiscalité': 'Nous vous accompagnons dans vos déclarations TVA, l\'optimisation fiscale légale et la veille réglementaire. Comment puis-je vous aider ?',
-                'social': 'Notre service social & paie inclut les bulletins de paie, les déclarations URSSAF et la gestion des congés. Avez-vous des questions spécifiques ?',
-                'paie': 'Notre service social & paie inclut les bulletins de paie, les déclarations URSSAF et la gestion des congés. Avez-vous des questions spécifiques ?',
-                'conseil': 'Nous proposons du conseil en création d\'entreprise, stratégie business et accompagnement personnalisé. Quel est votre projet ?',
-                'tarif': 'Nos tarifs sont personnalisés selon vos besoins. Contactez-nous via WhatsApp pour un devis gratuit !',
-                'prix': 'Nos tarifs sont personnalisés selon vos besoins. Contactez-nous via WhatsApp pour un devis gratuit !',
-                'devis': 'Je peux vous mettre en relation avec nos experts pour un devis personnalisé. Cliquez sur le bouton WhatsApp pour nous contacter !',
-                'contact': 'Vous pouvez nous contacter via WhatsApp au 06 76 57 00 97 ou par téléphone. Notre équipe vous répondra rapidement !',
-                'whatsapp': 'Parfait ! Cliquez sur le bouton WhatsApp vert pour nous contacter directement. Nous vous répondrons rapidement !',
-                'bonjour': 'Bonjour ! Je suis ravi de vous aider. Avez-vous des questions sur nos services comptables ?',
-                'salut': 'Salut ! Comment puis-je vous aider avec nos services d\'expertise comptable ?',
-                'merci': 'Je vous en prie ! N\'hésitez pas si vous avez d\'autres questions.',
-                'au revoir': 'Au revoir ! N\'hésitez pas à revenir si vous avez des questions. Bonne journée !',
-                'aide': 'Je peux vous renseigner sur nos services : expertise comptable, fiscalité, social & paie, et conseil. Que souhaitez-vous savoir ?'
+                'fr': {
+                    'expertise comptable': 'Notre service d\'expertise comptable comprend la tenue de comptabilité, les bilans, les liasses fiscales et les tableaux de bord personnalisés. Souhaitez-vous plus d\'informations ?',
+                    'fiscalité': 'Nous vous accompagnons dans l\'optimisation fiscale, la déclaration d\'impôts et le choix du régime fiscal adapté à votre activité.',
+                    'création entreprise': 'MBC vous guide dans toutes les étapes de création d\'entreprise : choix du statut, formalités administratives et accompagnement personnalisé.',
+                    'contact': 'Vous pouvez nous contacter au +33 6 76 57 00 97 ou par email à contact@mbc-expertcomptable.fr',
+                    'prix': 'Nos tarifs sont personnalisés selon vos besoins. Contactez-nous pour un devis gratuit et sans engagement.',
+                    'default': 'Merci pour votre message ! Notre équipe vous répondra dans les plus brefs délais. En attendant, n\'hésitez pas à explorer nos services sur le site.'
+                },
+                'en': {
+                    'accounting expertise': 'Our accounting expertise service includes bookkeeping, balance sheets, tax returns and personalized dashboards. Would you like more information?',
+                    'taxation': 'We support you in tax optimization, tax declaration and choosing the tax regime adapted to your activity.',
+                    'business creation': 'MBC guides you through all business creation steps: status choice, administrative formalities and personalized support.',
+                    'contact': 'You can contact us at +33 6 76 57 00 97 or by email at contact@mbc-expertcomptable.fr',
+                    'price': 'Our rates are personalized according to your needs. Contact us for a free and no-obligation quote.',
+                    'default': 'Thank you for your message! Our team will respond to you as soon as possible. In the meantime, feel free to explore our services on the site.'
+                },
+                'zh': {
+                    '会计专业知识': '我们的会计专业知识服务包括簿记、资产负债表、纳税申报和个性化仪表板。您想要更多信息吗？',
+                    '税务': '我们在税务优化、税务申报和选择适合您活动的税务制度方面为您提供支持。',
+                    '企业创建': 'MBC指导您完成所有企业创建步骤：地位选择、行政手续和个性化支持。',
+                    '联系': '您可以通过+33 6 76 57 00 97或通过电子邮件contact@mbc-expertcomptable.fr联系我们',
+                    '价格': '我们的费率根据您的需求个性化。联系我们获取免费且无义务的报价。',
+                    'default': '感谢您的消息！我们的团队将尽快回复您。同时，请随时探索我们网站上的服务。'
+                }
             };
-
-            for (const [keyword, response] of Object.entries(responses)) {
+            
+            const langResponses = responses[currentLang] || responses['fr'];
+            
+            // Check for specific keywords in the message
+            for (const [keyword, response] of Object.entries(langResponses)) {
                 if (lowerMessage.includes(keyword)) {
                     return response;
                 }
             }
-
-            if (lowerMessage.includes('?')) {
-                return 'Excellente question ! Je peux vous aider avec nos services d\'expertise comptable, fiscalité, social & paie, et conseil. Pouvez-vous être plus spécifique ?';
-            }
-
-            return 'Je comprends que vous cherchez des informations. Je peux vous aider avec :\n\n📊 Expertise comptable\n💰 Fiscalité\n👥 Social & Paie\n💡 Conseil d\'entreprise\n\nQue souhaitez-vous savoir ?';
+            
+            return langResponses['default'];
         }
 
         // Services Pagination Functionality
@@ -1655,6 +1728,22 @@
             calculateEpargne();
             calculateAides();
         });
+        
+        // Language change function
+        function changeLanguage(lang) {
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = 'change-language.php';
+            
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = 'lang';
+            input.value = lang;
+            
+            form.appendChild(input);
+            document.body.appendChild(form);
+            form.submit();
+        }
     </script>
     <script src="script.js"></script>
 </body>

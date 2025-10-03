@@ -1,0 +1,51 @@
+RewriteEngine On
+
+# Redirect HTML pages to PHP equivalents
+RewriteRule ^index\.html$ index.php [R=301,L]
+RewriteRule ^mbc\.html$ mbc.php [R=301,L]
+RewriteRule ^services\.html$ services.php [R=301,L]
+RewriteRule ^contact\.html$ contact-form.php [R=301,L]
+RewriteRule ^blog\.html$ blog-dynamic.php [R=301,L]
+
+# Block direct access to HTML files
+<Files "*.html">
+    Order Allow,Deny
+    Deny from all
+</Files>
+
+# Allow access to specific HTML files if needed (like simulators.html)
+<Files "simulators.html">
+    Order Allow,Deny
+    Allow from all
+</Files>
+
+# Security headers
+Header always set X-Content-Type-Options nosniff
+Header always set X-Frame-Options DENY
+Header always set X-XSS-Protection "1; mode=block"
+Header always set Referrer-Policy "strict-origin-when-cross-origin"
+
+# Cache control for static assets
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+    ExpiresByType image/png "access plus 1 month"
+    ExpiresByType image/jpg "access plus 1 month"
+    ExpiresByType image/jpeg "access plus 1 month"
+    ExpiresByType image/gif "access plus 1 month"
+    ExpiresByType image/svg+xml "access plus 1 month"
+</IfModule>
+
+# Gzip compression
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/plain
+    AddOutputFilterByType DEFLATE text/html
+    AddOutputFilterByType DEFLATE text/xml
+    AddOutputFilterByType DEFLATE text/css
+    AddOutputFilterByType DEFLATE application/xml
+    AddOutputFilterByType DEFLATE application/xhtml+xml
+    AddOutputFilterByType DEFLATE application/rss+xml
+    AddOutputFilterByType DEFLATE application/javascript
+    AddOutputFilterByType DEFLATE application/x-javascript
+</IfModule>
