@@ -150,6 +150,9 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/twitter-image.jpg";
     <!-- Mobile Navigation -->
     <div class="mobile-nav" id="mobileNav">
         <div class="mobile-nav-content">
+            <button class="mobile-nav-close" aria-label="Fermer le menu">
+                <i class="fas fa-times"></i>
+            </button>
             <ul class="mobile-nav-list">
                 <li><a href="#accueil" class="mobile-nav-link"><?php echo __('nav.home'); ?></a></li>
                 <li><a href="mbc.php" class="mobile-nav-link"><?php echo __('nav.about'); ?></a></li>

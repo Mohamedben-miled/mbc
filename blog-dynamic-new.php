@@ -651,15 +651,12 @@ $pageDescription = __("blog.subtitle");
     <!-- Mobile Navigation -->
     <div class="mobile-nav" id="mobileNav">
         <div class="mobile-nav-content">
-            <button class="mobile-nav-close" aria-label="Fermer le menu">
-                <i class="fas fa-times"></i>
-            </button>
             <ul class="mobile-nav-list">
                 <li><a href="index.php#accueil" class="mobile-nav-link"><?php echo __('nav.home'); ?></a></li>
                 <li><a href="mbc.php" class="mobile-nav-link"><?php echo __('nav.about'); ?></a></li>
                 <li><a href="services.php" class="mobile-nav-link"><?php echo __('nav.services'); ?></a></li>
                 <li><a href="#simulators" class="mobile-nav-link"><?php echo __('nav.simulators'); ?></a></li>
-                <li><a href="blog-dynamic.php" class="mobile-nav-link active"><?php echo __('nav.blog'); ?></a></li>
+                <li><a href="blog-dynamic-new.php" class="mobile-nav-link active"><?php echo __('nav.blog'); ?></a></li>
                 <li><a href="contact-form.php" class="mobile-nav-link"><?php echo __('nav.contact'); ?></a></li>
             </ul>
             
@@ -966,7 +963,121 @@ $pageDescription = __("blog.subtitle");
 
     <!-- Scripts -->
     <script src="script.js"></script>
-    <script src="js/mobile-nav.js"></script>
-    <script src="js/main.js"></script>
+    <script>
+        // Language change function
+        function changeLanguage(lang) {
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = 'change-language.php';
+            
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = 'lang';
+            input.value = lang;
+            
+            form.appendChild(input);
+            document.body.appendChild(form);
+            form.submit();
+        }
+        
+        // Mobile navigation functionality - Optimized
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+            const mobileNav = document.querySelector('.mobile-nav');
+            
+            if (mobileMenuToggle && mobileNav) {
+                let isMenuOpen = false;
+                
+                function toggleMobileMenu() {
+                    isMenuOpen = !isMenuOpen;
+                    
+                    if (isMenuOpen) {
+                        mobileNav.classList.add('active');
+                        mobileMenuToggle.setAttribute('aria-expanded', 'true');
+                        document.body.style.overflow = 'hidden';
+                        document.body.style.touchAction = 'none';
+                    } else {
+                        mobileNav.classList.remove('active');
+                        mobileMenuToggle.setAttribute('aria-expanded', 'false');
+                        document.body.style.overflow = '';
+                        document.body.style.touchAction = '';
+                    }
+                }
+                
+                mobileMenuToggle.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    toggleMobileMenu();
+                }, { passive: false });
+                
+                document.addEventListener('click', function(e) {
+                    if (isMenuOpen && !mobileNav.contains(e.target) && !mobileMenuToggle.contains(e.target)) {
+                        isMenuOpen = false;
+                        mobileNav.classList.remove('active');
+                        mobileMenuToggle.setAttribute('aria-expanded', 'false');
+                        document.body.style.overflow = '';
+                        document.body.style.touchAction = '';
+                    }
+                }, { passive: true });
+                
+                const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+                mobileNavLinks.forEach(link => {
+                    link.addEventListener('click', function() {
+                        isMenuOpen = false;
+                        mobileNav.classList.remove('active');
+                        mobileMenuToggle.setAttribute('aria-expanded', 'false');
+                        document.body.style.overflow = '';
+                        document.body.style.touchAction = '';
+                    }, { passive: true });
+                });
+                
+                document.addEventListener('keydown', function(e) {
+                    if (e.key === 'Escape' && isMenuOpen) {
+                        isMenuOpen = false;
+                        mobileNav.classList.remove('active');
+                        mobileMenuToggle.setAttribute('aria-expanded', 'false');
+                        document.body.style.overflow = '';
+                        document.body.style.touchAction = '';
+                    }
+                });
+            }
+            
+            // User dropdown functionality
+            const userDropdownToggle = document.querySelector('.user-dropdown-toggle');
+            const userDropdownMenu = document.querySelector('.user-dropdown-menu');
+            
+            if (userDropdownToggle && userDropdownMenu) {
+                userDropdownToggle.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    const isExpanded = this.getAttribute('aria-expanded') === 'true';
+                    this.setAttribute('aria-expanded', !isExpanded);
+                    
+                    if (!isExpanded) {
+                        userDropdownMenu.style.opacity = '1';
+                        userDropdownMenu.style.visibility = 'visible';
+                        userDropdownMenu.style.transform = 'translateY(0)';
+                        userDropdownMenu.classList.add('show');
+                    } else {
+                        userDropdownMenu.style.opacity = '0';
+                        userDropdownMenu.style.visibility = 'hidden';
+                        userDropdownMenu.style.transform = 'translateY(-10px)';
+                        userDropdownMenu.classList.remove('show');
+                    }
+                });
+                
+                document.addEventListener('click', function(e) {
+                    if (!userDropdownToggle.contains(e.target) && !userDropdownMenu.contains(e.target)) {
+                        userDropdownMenu.style.opacity = '0';
+                        userDropdownMenu.style.visibility = 'hidden';
+                        userDropdownMenu.style.transform = 'translateY(-10px)';
+                        userDropdownMenu.classList.remove('show');
+                        userDropdownToggle.setAttribute('aria-expanded', 'false');
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 </html>
