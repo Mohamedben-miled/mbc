@@ -6,17 +6,37 @@ require_once 'includes/encoding.php';
 require_once 'config/database.php';
 require_once 'includes/auth.php';
 require_once 'includes/translations.php';
+require_once 'includes/blog.php';
 
 $auth = new Auth();
+$blog = new Blog();
+
+// Get search parameters
+$search = isset($_GET['search']) ? trim($_GET['search']) : '';
+$category = isset($_GET['category']) ? intval($_GET['category']) : 0;
+$page = isset($_GET['page']) ? max(1, intval($_GET['page'])) : 1;
+$limit = 9; // 3x3 grid
+
+// Get posts based on search/category
+if (!empty($search)) {
+    $posts = $blog->searchPosts($search, $page, $limit);
+    $totalPosts = $blog->countSearchPosts($search);
+} elseif ($category > 0) {
+    $posts = $blog->getPostsByCategory($category, $page, $limit);
+    $totalPosts = $blog->countPostsByCategory($category);
+} else {
+    $posts = $blog->getPosts($page, $limit);
+    $totalPosts = $blog->countAllPosts();
+}
+
+// Get categories and recent posts
+$categories = $blog->getAllCategories();
+$recentPosts = $blog->getRecentPosts(5);
 
 $pageTitle = __("blog.title") . " - MBC Expert Comptable";
 $pageDescription = __("blog.subtitle");
-
-// SEO Meta Tags
-$seoKeywords = "blog expert comptable, articles comptabilité, fiscalité, création entreprise, conseils";
-$ogImage = "https://mbc-expertcomptable.fr/assets/blog-og.jpg";
-$twitterImage = "https://mbc-expertcomptable.fr/assets/blog-twitter.jpg";
 ?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -28,14 +48,14 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/blog-twitter.jpg";
     <meta name="keywords" content="blog comptable, expertise comptable, création entreprise, fiscalité, conseil gestion, entrepreneur, France">
     
     <!-- Open Graph -->
-    <meta property="og:title" content="Blog - MBC High Value Business Consulting">
+    <meta property="og:title" content="Blog - MBC Expert Comptable">
     <meta property="og:description" content="Articles d'experts sur l'expertise comptable et la création d'entreprise">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://mbc-expertcomptable.fr/blog">
     
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Blog - MBC High Value Business Consulting">
+    <meta name="twitter:title" content="Blog - MBC Expert Comptable">
     <meta name="twitter:description" content="Articles d'experts sur l'expertise comptable et la création d'entreprise">
     
     <!-- Canonical URL -->
@@ -50,6 +70,496 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/blog-twitter.jpg";
     
     <!-- Styles -->
     <link rel="stylesheet" href="styles.css">
+    
+    <style>
+        /* Professional Blog Styles */
+        .blog-hero {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 50%, #475569 100%);
+            position: relative;
+            overflow: hidden;
+            padding: 120px 0 80px;
+        }
+        
+        .blog-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+        
+        .blog-hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            color: white;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .blog-hero-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            line-height: 1.1;
+        }
+        
+        .blog-hero-subtitle {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            line-height: 1.6;
+        }
+        
+        .blog-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+        
+        .stat-item {
+            text-align: center;
+            color: white;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            display: block;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .stat-label {
+            font-size: 1rem;
+            opacity: 0.8;
+            margin-top: 0.5rem;
+            font-weight: 500;
+        }
+        
+        /* Blog Content */
+        .blog-content {
+            padding: 80px 0;
+            background: #f8fafc;
+        }
+        
+        .blog-layout {
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .blog-main {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e2e8f0;
+        }
+        
+        /* Search Form */
+        .blog-search {
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: linear-gradient(135deg, #296871, #2e6a6e);
+            border-radius: 16px;
+            color: white;
+        }
+        
+        .search-form {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .search-input {
+            flex: 1;
+            padding: 1rem 1.5rem;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            background: white;
+            color: #1e293b;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .search-input:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
+        }
+        
+        .search-btn {
+            padding: 1rem 2rem;
+            background: white;
+            color: #296871;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .search-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .search-results {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1rem;
+        }
+        
+        /* Articles Grid */
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .article-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            border: 1px solid #f1f5f9;
+        }
+        
+        .article-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .article-image {
+            height: 200px;
+            width: 100%;
+            object-fit: cover;
+        }
+        
+        .article-content {
+            padding: 2rem;
+        }
+        
+        .article-meta {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            font-size: 0.875rem;
+            color: #64748b;
+        }
+        
+        .article-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .article-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 1rem;
+            color: #1e293b;
+        }
+        
+        .article-excerpt {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #64748b;
+            margin-bottom: 1.5rem;
+        }
+        
+        .article-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #296871;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+        }
+        
+        .article-link:hover {
+            color: #1e40af;
+            transform: translateX(4px);
+        }
+        
+        /* Sidebar */
+        .blog-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+        
+        .sidebar-widget {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border: 1px solid #f1f5f9;
+        }
+        
+        .widget-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: #1e293b;
+            border-bottom: 3px solid #296871;
+            padding-bottom: 0.75rem;
+        }
+        
+        /* Categories */
+        .category-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .category-list li {
+            margin-bottom: 0.75rem;
+        }
+        
+        .category-link {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 1.25rem;
+            background: #f8f9fa;
+            border-radius: 12px;
+            text-decoration: none;
+            color: #374151;
+            transition: all 0.2s ease;
+            font-weight: 500;
+        }
+        
+        .category-link:hover {
+            background: #e9ecef;
+            transform: translateX(4px);
+        }
+        
+        .category-count {
+            background: #296871;
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        
+        /* Recent Articles */
+        .recent-articles {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .recent-article {
+            display: flex;
+            gap: 1rem;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 12px;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.2s ease;
+        }
+        
+        .recent-article:hover {
+            background: #e9ecef;
+            transform: translateY(-2px);
+        }
+        
+        .recent-article-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 8px;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+        
+        .recent-article-content {
+            flex: 1;
+        }
+        
+        .recent-article-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            line-height: 1.3;
+            margin-bottom: 0.5rem;
+            color: #1e293b;
+        }
+        
+        .recent-article-date {
+            font-size: 0.8rem;
+            color: #64748b;
+        }
+        
+        /* Newsletter */
+        .newsletter-widget {
+            background: linear-gradient(135deg, #296871, #2e6a6e);
+            color: white;
+        }
+        
+        .newsletter-text {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+        
+        .newsletter-form {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .newsletter-input {
+            flex: 1;
+            padding: 1rem 1.25rem;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            background: white;
+            color: #1e293b;
+        }
+        
+        .newsletter-btn {
+            padding: 1rem 1.5rem;
+            background: white;
+            color: #296871;
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.2s ease;
+        }
+        
+        .newsletter-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            margin: 3rem 0;
+        }
+        
+        .pagination-btn,
+        .pagination-number {
+            padding: 1rem 1.5rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            text-decoration: none;
+            color: #374151;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            min-width: 50px;
+            text-align: center;
+        }
+        
+        .pagination-btn:hover,
+        .pagination-number:hover {
+            background: #f8f9fa;
+            border-color: #296871;
+            transform: translateY(-2px);
+        }
+        
+        .pagination-number.active {
+            background: #296871;
+            color: white;
+            border-color: #296871;
+        }
+        
+        .pagination-btn.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        /* No Results */
+        .no-results {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: #64748b;
+        }
+        
+        .no-results i {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            color: #cbd5e1;
+        }
+        
+        .no-results h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #374151;
+        }
+        
+        .no-results p {
+            font-size: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .blog-hero {
+                padding: 80px 0 60px;
+            }
+            
+            .blog-hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .blog-hero-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .blog-stats {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+            
+            .blog-layout {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                padding: 0 1rem;
+            }
+            
+            .blog-main {
+                padding: 2rem 1.5rem;
+            }
+            
+            .articles-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .search-form {
+                flex-direction: column;
+            }
+            
+            .blog-sidebar {
+                order: -1;
+            }
+        }
+    </style>
 </head>
 <body class="blog-page">
     <!-- Header -->
@@ -58,7 +568,7 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/blog-twitter.jpg";
             <div class="header-content">
                 <!-- Logo -->
                 <div class="logo">
-                    <a href="index.html#accueil" aria-label="MBC Expert Comptable - Retour à l'accueil">
+                    <a href="index.php#accueil" aria-label="MBC Expert Comptable - Retour à l'accueil">
                         <img src="assets/mbc.png" alt="MBC Expert Comptable" loading="eager" class="logo-img">
                     </a>
                 </div>
@@ -69,8 +579,8 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/blog-twitter.jpg";
                         <li><a href="index.php#accueil" class="nav-link"><?php echo __('nav.home'); ?></a></li>
                         <li><a href="mbc.php" class="nav-link"><?php echo __('nav.about'); ?></a></li>
                         <li><a href="services.php" class="nav-link"><?php echo __('nav.services'); ?></a></li>
-                        <li><a href="#" class="nav-link simulators-link"><?php echo __('nav.simulators'); ?></a></li>
-                        <li><a href="blog-dynamic.php" class="nav-link active" aria-current="page"><?php echo __('nav.blog'); ?></a></li>
+                        <li><a href="#simulators" class="nav-link" onclick="openSimulatorsModal()"><?php echo __('nav.simulators'); ?></a></li>
+                        <li><a href="blog-dynamic-new.php" class="nav-link active"><?php echo __('nav.blog'); ?></a></li>
                         <li><a href="contact-form.php" class="nav-link"><?php echo __('nav.contact'); ?></a></li>
                     </ul>
                 </nav>
@@ -146,7 +656,7 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/blog-twitter.jpg";
                 <li><a href="mbc.php" class="mobile-nav-link"><?php echo __('nav.about'); ?></a></li>
                 <li><a href="services.php" class="mobile-nav-link"><?php echo __('nav.services'); ?></a></li>
                 <li><a href="#simulators" class="mobile-nav-link"><?php echo __('nav.simulators'); ?></a></li>
-                <li><a href="blog-dynamic.php" class="mobile-nav-link active"><?php echo __('nav.blog'); ?></a></li>
+                <li><a href="blog-dynamic-new.php" class="mobile-nav-link active"><?php echo __('nav.blog'); ?></a></li>
                 <li><a href="contact-form.php" class="mobile-nav-link"><?php echo __('nav.contact'); ?></a></li>
             </ul>
             
@@ -169,385 +679,291 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/blog-twitter.jpg";
         </div>
     </div>
 
-    <!-- Blog Content -->
-    <section class="blog-content">
-        <div class="container">
-            <div class="blog-layout">
-                <!-- Main Content -->
-                <main class="blog-main">
-                    <?php
-                    // Include blog functions
-                    require_once 'config/database.php';
-                    require_once 'includes/blog.php';
-                    
-                    // Get page number from URL
-                    $page = isset($_GET['page']) ? max(1, intval($_GET['page'])) : 1;
-                    $limit = 6; // Posts per page
-                    
-                    // Get search query
-                    $search = isset($_GET['search']) ? sanitizeInput($_GET['search']) : '';
-                    
-                    // Get category filter
-                    $category = isset($_GET['category']) ? intval($_GET['category']) : null;
-                    
-                    // Get posts based on filters
-                    if (!empty($search)) {
-                        $posts = $blog->searchPosts($search, $page, $limit);
-                        $totalPosts = $blog->countSearchPosts($search);
-                    } elseif ($category) {
-                        $posts = $blog->getPostsByCategory($category, $page, $limit);
-                        $totalPosts = $blog->countPostsByCategory($category);
-                    } else {
-                        $posts = $blog->getAllPosts($page, $limit);
-                        $totalPosts = $blog->countAllPosts();
-                    }
-                    
-                    $totalPages = ceil($totalPosts / $limit);
-                    
-                    // Featured Article (first post)
-                    if (!empty($posts)) {
-                        $featuredPost = $posts[0];
-                        ?>
-                        <article class="featured-article">
-                            <div class="article-image">
-                                <?php if ($featuredPost['cover_image']): ?>
-                                    <img src="<?php echo htmlspecialchars(UPLOAD_URL . 'images/' . $featuredPost['cover_image']); ?>" alt="<?php echo htmlspecialchars($featuredPost['title']); ?>">
-                                <?php else: ?>
-                                    <img src="assets/hero.jpg" alt="<?php echo htmlspecialchars($featuredPost['title']); ?>">
-                                <?php endif; ?>
-                                <div class="article-category"><?php echo htmlspecialchars($featuredPost['category_name'] ?? 'Article'); ?></div>
-                            </div>
-                            <div class="article-content">
-                                <div class="article-meta">
-                                    <span class="article-date">
-                                        <i class="fas fa-calendar"></i>
-                                        <?php echo formatDate($featuredPost['created_at']); ?>
-                                    </span>
-                                    <span class="article-author">
-                                        <i class="fas fa-user"></i>
-                                        <?php echo htmlspecialchars($featuredPost['author_name']); ?>
-                                    </span>
-                                    <span class="article-read-time">
-                                        <i class="fas fa-clock"></i>
-                                        <?php echo htmlspecialchars($featuredPost['read_time'] ?? 5); ?> min de lecture
-                                    </span>
-                                </div>
-                                <h2 class="article-title"><?php echo htmlspecialchars($featuredPost['title']); ?></h2>
-                                <p class="article-excerpt"><?php echo htmlspecialchars(substr($featuredPost['content'], 0, 150) . '...'); ?></p>
-                                <a href="blog-post.php?id=<?php echo $featuredPost['id']; ?>" class="article-link"><?php echo __('btn.read_article'); ?> <i class="fas fa-arrow-right"></i></a>
-                            </div>
-                        </article>
-                        <?php
-                    }
-                    ?>
-
-                    <!-- Articles Grid -->
-                    <div class="articles-grid">
-                        <?php
-                        // Display remaining posts (skip first one as it's featured)
-                        $remainingPosts = array_slice($posts, 1);
-                        
-                        if (empty($remainingPosts)) {
-                            echo '<p class="no-posts">' . __('blog.no_posts') . '</p>';
-                        } else {
-                            foreach ($remainingPosts as $post) {
-                                ?>
-                                <article class="article-card">
-                                    <div class="article-image">
-                                        <?php if ($post['cover_image']): ?>
-                                            <img src="<?php echo htmlspecialchars(UPLOAD_URL . 'images/' . $post['cover_image']); ?>" alt="<?php echo htmlspecialchars($post['title']); ?>">
-                                        <?php else: ?>
-                                            <img src="assets/hero.jpg" alt="<?php echo htmlspecialchars($post['title']); ?>">
-                                        <?php endif; ?>
-                                        <div class="article-category"><?php echo htmlspecialchars($post['category_name'] ?? 'Article'); ?></div>
-                                    </div>
-                                    <div class="article-content">
-                                        <div class="article-meta">
-                                            <span class="article-date"><?php echo formatDate($post['created_at']); ?></span>
-                                            <span class="article-read-time"><?php echo htmlspecialchars($post['read_time'] ?? 5); ?> min</span>
-                                        </div>
-                                        <h3 class="article-title"><?php echo htmlspecialchars($post['title']); ?></h3>
-                                        <p class="article-excerpt"><?php echo htmlspecialchars(substr($post['content'], 0, 100) . '...'); ?></p>
-                                        <a href="blog-post.php?id=<?php echo $post['id']; ?>" class="article-link"><?php echo __('btn.read'); ?> <i class="fas fa-arrow-right"></i></a>
-                                    </div>
-                                </article>
-                                <?php
-                            }
-                        }
-                        ?>
-                    </div>
-
-                    <!-- Pagination -->
-                    <?php if ($totalPages > 1): ?>
-                    <div class="pagination">
-                        <?php if ($page > 1): ?>
-                            <a href="?page=<?php echo $page - 1; ?><?php echo $search ? '&search=' . urlencode($search) : ''; ?><?php echo $category ? '&category=' . $category : ''; ?>" class="pagination-btn">
-                                <i class="fas fa-chevron-left"></i>
-                                <?php echo __('btn.previous'); ?>
-                            </a>
-                        <?php else: ?>
-                            <span class="pagination-btn disabled">
-                                <i class="fas fa-chevron-left"></i>
-                                <?php echo __('btn.previous'); ?>
-                            </span>
-                        <?php endif; ?>
-                        
-                        <div class="pagination-numbers">
-                            <?php
-                            $startPage = max(1, $page - 2);
-                            $endPage = min($totalPages, $page + 2);
-                            
-                            for ($i = $startPage; $i <= $endPage; $i++):
-                                $activeClass = ($i == $page) ? 'active' : '';
-                                $url = '?page=' . $i;
-                                if ($search) $url .= '&search=' . urlencode($search);
-                                if ($category) $url .= '&category=' . $category;
-                            ?>
-                                <a href="<?php echo $url; ?>" class="pagination-number <?php echo $activeClass; ?>"><?php echo $i; ?></a>
-                            <?php endfor; ?>
-                        </div>
-                        
-                        <?php if ($page < $totalPages): ?>
-                            <a href="?page=<?php echo $page + 1; ?><?php echo $search ? '&search=' . urlencode($search) : ''; ?><?php echo $category ? '&category=' . $category : ''; ?>" class="pagination-btn">
-                                <?php echo __('btn.next'); ?>
-                                <i class="fas fa-chevron-right"></i>
-                            </a>
-                        <?php else: ?>
-                            <span class="pagination-btn disabled">
-                                <?php echo __('btn.next'); ?>
-                                <i class="fas fa-chevron-right"></i>
-                            </span>
-                        <?php endif; ?>
-                    </div>
-                    <?php endif; ?>
-                </main>
-
-                <!-- Sidebar -->
-                <aside class="blog-sidebar">
-                    <!-- Search -->
-                    <div class="sidebar-widget">
-                        <h3 class="widget-title"><?php echo __('blog.search'); ?></h3>
-                        <form class="search-form" method="GET">
-                            <input type="text" name="search" placeholder="<?php echo __('blog.search_placeholder'); ?>" class="search-input" value="<?php echo htmlspecialchars($search); ?>">
-                            <button type="submit" class="search-btn">
-                                <i class="fas fa-search"></i>
-                            </button>
-                        </form>
-                    </div>
-
-                    <!-- Categories -->
-                    <div class="sidebar-widget">
-                        <h3 class="widget-title"><?php echo __('blog.categories'); ?></h3>
-                        <ul class="category-list">
-                            <?php
-                            $categories = $blog->getAllCategories();
-                            foreach ($categories as $cat) {
-                                $count = $blog->countPostsByCategory($cat['id']);
-                                $activeClass = ($category == $cat['id']) ? 'active' : '';
-                                ?>
-                                <li><a href="?category=<?php echo $cat['id']; ?>" class="category-link <?php echo $activeClass; ?>"><?php echo htmlspecialchars($cat['name']); ?> <span class="category-count">(<?php echo $count; ?>)</span></a></li>
-                                <?php
-                            }
-                            ?>
-                        </ul>
-                    </div>
-
-                    <!-- Recent Articles -->
-                    <div class="sidebar-widget">
-                        <h3 class="widget-title"><?php echo __('blog.recent_articles'); ?></h3>
-                        <div class="recent-articles">
-                            <?php
-                            $recentPosts = $blog->getRecentPosts(3);
-                            foreach ($recentPosts as $recentPost) {
-                                ?>
-                                <article class="recent-article">
-                                    <div class="recent-article-image">
-                                        <?php if ($recentPost['cover_image']): ?>
-                                            <img src="<?php echo htmlspecialchars(UPLOAD_URL . 'images/' . $recentPost['cover_image']); ?>" alt="<?php echo htmlspecialchars($recentPost['title']); ?>">
-                                        <?php else: ?>
-                                            <img src="assets/hero.jpg" alt="<?php echo htmlspecialchars($recentPost['title']); ?>">
-                                        <?php endif; ?>
-                                    </div>
-                                    <div class="recent-article-content">
-                                        <h4 class="recent-article-title"><?php echo htmlspecialchars($recentPost['title']); ?></h4>
-                                        <span class="recent-article-date"><?php echo formatDate($recentPost['created_at'], 'd M Y'); ?></span>
-                                    </div>
-                                </article>
-                                <?php
-                            }
-                            ?>
-                        </div>
-                    </div>
-
-                    <!-- Newsletter -->
-                    <div class="sidebar-widget newsletter-widget">
-                        <h3 class="widget-title"><?php echo __('blog.newsletter'); ?></h3>
-                        <p class="newsletter-text"><?php echo __('blog.newsletter_text'); ?></p>
-                        <form class="newsletter-form" action="newsletter-handler.php" method="POST">
-                            <input type="email" name="email" placeholder="<?php echo __('contact.email'); ?>" class="newsletter-input" required>
-                            <button type="submit" class="newsletter-btn"><?php echo __('btn.subscribe'); ?></button>
-                        </form>
-                    </div>
-                </aside>
+    <!-- Blog Hero Section -->
+    <section class="blog-hero">
+        <div class="blog-hero-content">
+            <h1 class="blog-hero-title"><?php echo __('blog.title'); ?></h1>
+            <p class="blog-hero-subtitle"><?php echo __('blog.subtitle'); ?></p>
+            
+            <div class="blog-stats">
+                <div class="stat-item">
+                    <span class="stat-number"><?php echo $totalPosts; ?></span>
+                    <span class="stat-label">Articles</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number"><?php echo count($categories); ?></span>
+                    <span class="stat-label">Catégories</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">5+</span>
+                    <span class="stat-label">Experts</span>
+                </div>
             </div>
         </div>
     </section>
 
+    <!-- Blog Content -->
+    <section class="blog-content">
+        <div class="blog-layout">
+            <!-- Main Content -->
+            <main class="blog-main">
+                <!-- Search Form -->
+                <div class="blog-search">
+                    <form class="search-form" method="GET">
+                        <input type="text" name="search" class="search-input" placeholder="Rechercher un article..." value="<?php echo htmlspecialchars($search); ?>">
+                        <button type="submit" class="search-btn">
+                            <i class="fas fa-search"></i> Rechercher
+                        </button>
+                    </form>
+                    <?php if (!empty($search)): ?>
+                        <div class="search-results">
+                            <i class="fas fa-search"></i> 
+                            <?php echo $totalPosts; ?> résultat(s) pour "<?php echo htmlspecialchars($search); ?>"
+                        </div>
+                    <?php endif; ?>
+                </div>
 
+                <!-- Articles Grid -->
+                <?php if (!empty($posts)): ?>
+                    <div class="articles-grid">
+                        <?php foreach ($posts as $post): ?>
+                            <article class="article-card">
+                                <div class="article-image">
+                                    <?php if (!empty($post['cover_image'])): ?>
+                                        <img src="<?php echo UPLOAD_URL . 'images/' . $post['cover_image']; ?>" alt="<?php echo htmlspecialchars($post['title']); ?>">
+                                    <?php else: ?>
+                                        <img src="assets/blog-placeholder.jpg" alt="<?php echo htmlspecialchars($post['title']); ?>">
+                                    <?php endif; ?>
+                                </div>
+                                <div class="article-content">
+                                    <div class="article-meta">
+                                        <div class="article-meta-item">
+                                            <i class="fas fa-calendar"></i>
+                                            <span><?php echo formatDate($post['created_at']); ?></span>
+                                        </div>
+                                        <div class="article-meta-item">
+                                            <i class="fas fa-user"></i>
+                                            <span><?php echo htmlspecialchars($post['author_name']); ?></span>
+                                        </div>
+                                        <div class="article-meta-item">
+                                            <i class="fas fa-clock"></i>
+                                            <span><?php echo $post['read_time']; ?> min</span>
+                                        </div>
+                                    </div>
+                                    <h3 class="article-title"><?php echo htmlspecialchars($post['title']); ?></h3>
+                                    <p class="article-excerpt"><?php echo htmlspecialchars(substr(strip_tags($post['content']), 0, 150)) . '...'; ?></p>
+                                    <a href="blog-post.php?id=<?php echo $post['id']; ?>" class="article-link">
+                                        Lire l'article <i class="fas fa-arrow-right"></i>
+                                    </a>
+                                </div>
+                            </article>
+                        <?php endforeach; ?>
+                    </div>
+
+                    <!-- Pagination -->
+                    <?php if ($totalPosts > $limit): ?>
+                        <div class="pagination">
+                            <?php
+                            $totalPages = ceil($totalPosts / $limit);
+                            $currentPage = $page;
+                            
+                            // Previous button
+                            if ($currentPage > 1):
+                                $prevPage = $currentPage - 1;
+                                $prevUrl = '?page=' . $prevPage;
+                                if (!empty($search)) $prevUrl .= '&search=' . urlencode($search);
+                                if ($category > 0) $prevUrl .= '&category=' . $category;
+                            ?>
+                                <a href="<?php echo $prevUrl; ?>" class="pagination-btn">
+                                    <i class="fas fa-chevron-left"></i> Précédent
+                                </a>
+                            <?php else: ?>
+                                <span class="pagination-btn disabled">
+                                    <i class="fas fa-chevron-left"></i> Précédent
+                                </span>
+                            <?php endif; ?>
+
+                            <div class="pagination-numbers">
+                                <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                                    <?php
+                                    $pageUrl = '?page=' . $i;
+                                    if (!empty($search)) $pageUrl .= '&search=' . urlencode($search);
+                                    if ($category > 0) $pageUrl .= '&category=' . $category;
+                                    ?>
+                                    <a href="<?php echo $pageUrl; ?>" class="pagination-number <?php echo $i == $currentPage ? 'active' : ''; ?>">
+                                        <?php echo $i; ?>
+                                    </a>
+                                <?php endfor; ?>
+                            </div>
+
+                            <?php
+                            // Next button
+                            if ($currentPage < $totalPages):
+                                $nextPage = $currentPage + 1;
+                                $nextUrl = '?page=' . $nextPage;
+                                if (!empty($search)) $nextUrl .= '&search=' . urlencode($search);
+                                if ($category > 0) $nextUrl .= '&category=' . $category;
+                            ?>
+                                <a href="<?php echo $nextUrl; ?>" class="pagination-btn">
+                                    Suivant <i class="fas fa-chevron-right"></i>
+                                </a>
+                            <?php else: ?>
+                                <span class="pagination-btn disabled">
+                                    Suivant <i class="fas fa-chevron-right"></i>
+                                </span>
+                            <?php endif; ?>
+                        </div>
+                    <?php endif; ?>
+                <?php else: ?>
+                    <div class="no-results">
+                        <i class="fas fa-search"></i>
+                        <h3>Aucun article trouvé</h3>
+                        <p>Essayez avec d'autres mots-clés ou parcourez nos catégories.</p>
+                        <a href="blog-dynamic-new.php" class="btn btn-primary">Voir tous les articles</a>
+                    </div>
+                <?php endif; ?>
+            </main>
+
+            <!-- Sidebar -->
+            <aside class="blog-sidebar">
+                <!-- Categories -->
+                <div class="sidebar-widget">
+                    <h3 class="widget-title">Catégories</h3>
+                    <ul class="category-list">
+                        <li><a href="blog-dynamic-new.php" class="category-link <?php echo $category == 0 ? 'active' : ''; ?>">
+                            Toutes <span class="category-count">(<?php echo $totalPosts; ?>)</span>
+                        </a></li>
+                        <?php foreach ($categories as $cat): ?>
+                            <li><a href="?category=<?php echo $cat['id']; ?>" class="category-link <?php echo $category == $cat['id'] ? 'active' : ''; ?>">
+                                <?php echo htmlspecialchars($cat['name']); ?> 
+                                <span class="category-count">(<?php echo $blog->countPostsByCategory($cat['id']); ?>)</span>
+                            </a></li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+
+                <!-- Recent Articles -->
+                <div class="sidebar-widget">
+                    <h3 class="widget-title">Articles récents</h3>
+                    <div class="recent-articles">
+                        <?php foreach ($recentPosts as $recent): ?>
+                            <a href="blog-post.php?id=<?php echo $recent['id']; ?>" class="recent-article">
+                                <div class="recent-article-image">
+                                    <?php if (!empty($recent['cover_image'])): ?>
+                                        <img src="<?php echo UPLOAD_URL . 'images/' . $recent['cover_image']; ?>" alt="<?php echo htmlspecialchars($recent['title']); ?>">
+                                    <?php else: ?>
+                                        <img src="assets/blog-placeholder.jpg" alt="<?php echo htmlspecialchars($recent['title']); ?>">
+                                    <?php endif; ?>
+                                </div>
+                                <div class="recent-article-content">
+                                    <h4 class="recent-article-title"><?php echo htmlspecialchars($recent['title']); ?></h4>
+                                    <p class="recent-article-date"><?php echo formatDate($recent['created_at']); ?></p>
+                                </div>
+                            </a>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+
+                <!-- Newsletter -->
+                <div class="sidebar-widget newsletter-widget">
+                    <h3 class="widget-title">Newsletter</h3>
+                    <p class="newsletter-text">Recevez nos derniers conseils et actualités fiscales directement dans votre boîte mail.</p>
+                    <form class="newsletter-form" action="newsletter-handler.php" method="POST">
+                        <input type="email" name="email" placeholder="Votre email" class="newsletter-input" required>
+                        <button type="submit" class="newsletter-btn">S'abonner</button>
+                    </form>
+                </div>
+            </aside>
+        </div>
+    </section>
 
     <!-- Footer -->
     <footer class="footer" role="contentinfo">
         <div class="container">
             <div class="footer-content">
+                <!-- Company Info -->
                 <div class="footer-section">
-                    <div class="footer-icon">
-                        <i class="fas fa-building" aria-hidden="true"></i>
+                    <div class="footer-logo">
+                        <img src="assets/mbc.png" alt="MBC Expert Comptable" class="footer-logo-img">
                     </div>
-                    <h3>MBC Expert Comptable</h3>
-                    <p>Votre partenaire comptable pour entrepreneurs franco-maghrébins. Expertise, innovation et accompagnement personnalisé.</p>
+                    <p class="footer-description">
+                        Votre expert-comptable de confiance pour accompagner votre entreprise dans sa croissance.
+                    </p>
                     <div class="social-links">
-                        <a href="#" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                        <a href="#" class="social-link" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
-                        <a href="#" class="social-link" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link" aria-label="Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="LinkedIn">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Twitter">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
                     </div>
                 </div>
+
+                <!-- Quick Links -->
                 <div class="footer-section">
                     <h3>Liens rapides</h3>
                     <ul>
-                        <li><a href="index.html">Accueil</a></li>
-                        <li><a href="mbc.html">À propos</a></li>
-                        <li><a href="services.html">Services</a></li>
-                        <li><a href="blog-dynamic.php">Blog</a></li>
+                        <li><a href="index.php#accueil">Accueil</a></li>
+                        <li><a href="mbc.php">À propos</a></li>
+                        <li><a href="services.php">Services</a></li>
+                        <li><a href="contact-form.php">Contact</a></li>
                     </ul>
                 </div>
+
+                <!-- Services -->
                 <div class="footer-section">
                     <h3>Nos services</h3>
                     <ul>
-                        <li><a href="index.html#expertise">Expertise Comptable</a></li>
-                        <li><a href="index.html#fiscalite">Fiscalité</a></li>
-                        <li><a href="index.html#social">Social & Paie</a></li>
-                        <li><a href="index.html#conseil">Conseil</a></li>
+                        <li><a href="services.php#expertise">Expertise Comptable</a></li>
+                        <li><a href="services.php#fiscalite">Fiscalité</a></li>
+                        <li><a href="services.php#social">Social & Paie</a></li>
+                        <li><a href="services.php#conseil">Conseil</a></li>
                     </ul>
                 </div>
+
+                <!-- Contact Info -->
                 <div class="footer-section">
                     <h3>Contact</h3>
-                    <ul>
-                        <li><i class="fas fa-phone" aria-hidden="true"></i> +33 1 23 45 67 89</li>
-                        <li><i class="fas fa-envelope" aria-hidden="true"></i> contact@mbc-expertcomptable.fr</li>
-                        <li><i class="fas fa-map-marker-alt" aria-hidden="true"></i> Paris, France</li>
-                    </ul>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>123 Rue de la Comptabilité<br>75001 Paris, France</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <a href="tel:+33676570097">+33 6 76 57 00 97</a>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <a href="mailto:contact@mbc-expertcomptable.fr">contact@mbc-expertcomptable.fr</a>
+                        </div>
+                    </div>
                 </div>
             </div>
+
+            <!-- Footer Bottom -->
             <div class="footer-bottom">
-                <p>&copy; 2024 MBC Expert Comptable. Tous droits réservés.</p>
-                <div>
-                    <a href="#mentions">Mentions légales</a>
-                    <a href="#confidentialite">Confidentialité</a>
-                    <a href="#cookies">Cookies</a>
+                <div class="footer-bottom-content">
+                    <p>&copy; 2025 MBC Expert Comptable. Tous droits réservés.</p>
+                    <div class="footer-links">
+                        <a href="#">Mentions légales</a>
+                        <a href="#">Politique de confidentialité</a>
+                        <a href="#">CGV</a>
+                    </div>
                 </div>
             </div>
         </div>
     </footer>
 
-    <!-- Simulators Modal -->
-    <div id="simulatorsModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>Simulateurs en ligne</h2>
-                <p>Utilisez nos outils de simulation pour estimer rapidement vos charges, impôts et aides</p>
-                <button class="modal-close" onclick="closeSimulatorsModal()">&times;</button>
-            </div>
-            
-            <div class="modal-body">
-                <!-- Navigation Tabs -->
-                <div class="simulators-nav">
-                    <button class="nav-tab active" data-tab="fiscalite">Fiscalité</button>
-                    <button class="nav-tab" data-tab="charges">Charges sociales</button>
-                    <button class="nav-tab" data-tab="epargne">Épargne & Retraite</button>
-                    <button class="nav-tab" data-tab="aides">Aides</button>
-                </div>
-                
-                <div class="simulators-content">
-                    <div class="simulators-main">
-                        <!-- Fiscalité Tab -->
-                        <div class="tab-content active" id="fiscalite">
-                            <div class="simulator-card">
-                                <h3>Calculateur de TVA</h3>
-                                <div class="simulator-form">
-                                    <div class="form-group">
-                                        <label for="tva-ht">Montant HT</label>
-                                        <input type="number" id="tva-ht" placeholder="0.00" step="0.01">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="tva-rate">Taux de TVA</label>
-                                        <select id="tva-rate">
-                                            <option value="20">20%</option>
-                                            <option value="10">10%</option>
-                                            <option value="5.5">5.5%</option>
-                                            <option value="2.1">2.1%</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="tva-amount">Montant TVA</label>
-                                        <input type="text" id="tva-amount" readonly>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="tva-ttc">Montant TTC</label>
-                                        <input type="text" id="tva-ttc" readonly>
-                                    </div>
-                                    <div class="simulator-actions">
-                                        <button class="btn btn-secondary">
-                                            <i class="fas fa-save"></i> Sauvegarder / Charger
-                                        </button>
-                                        <button class="btn btn-primary">
-                                            <i class="fas fa-file-pdf"></i> Exporter en PDF
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Other tabs -->
-                        <div class="tab-content" id="charges">
-                            <div class="simulator-card">
-                                <h3>Simulateur de charges sociales</h3>
-                                <p>Fonctionnalité en cours de développement...</p>
-                            </div>
-                        </div>
-                        
-                        <div class="tab-content" id="epargne">
-                            <div class="simulator-card">
-                                <h3>Simulateur d'épargne & retraite</h3>
-                                <p>Fonctionnalité en cours de développement...</p>
-                            </div>
-                        </div>
-                        
-                        <div class="tab-content" id="aides">
-                            <div class="simulator-card">
-                                <h3>Simulateur d'aides</h3>
-                                <p>Fonctionnalité en cours de développement...</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!-- Scripts -->
     <script src="script.js"></script>
     <script>
-        // Add event listener for simulators link
-        document.addEventListener('DOMContentLoaded', function() {
-            const simulatorsLink = document.querySelector('.simulators-link');
-            if (simulatorsLink) {
-                simulatorsLink.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    openSimulatorsModal();
-                });
-            }
-        });
-        
         // Language change function
         function changeLanguage(lang) {
             const form = document.createElement('form');
@@ -563,8 +979,105 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/blog-twitter.jpg";
             document.body.appendChild(form);
             form.submit();
         }
+        
+        // Mobile navigation functionality - Optimized
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+            const mobileNav = document.querySelector('.mobile-nav');
+            
+            if (mobileMenuToggle && mobileNav) {
+                let isMenuOpen = false;
+                
+                function toggleMobileMenu() {
+                    isMenuOpen = !isMenuOpen;
+                    
+                    if (isMenuOpen) {
+                        mobileNav.classList.add('active');
+                        mobileMenuToggle.setAttribute('aria-expanded', 'true');
+                        document.body.style.overflow = 'hidden';
+                        document.body.style.touchAction = 'none';
+                    } else {
+                        mobileNav.classList.remove('active');
+                        mobileMenuToggle.setAttribute('aria-expanded', 'false');
+                        document.body.style.overflow = '';
+                        document.body.style.touchAction = '';
+                    }
+                }
+                
+                mobileMenuToggle.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    toggleMobileMenu();
+                }, { passive: false });
+                
+                document.addEventListener('click', function(e) {
+                    if (isMenuOpen && !mobileNav.contains(e.target) && !mobileMenuToggle.contains(e.target)) {
+                        isMenuOpen = false;
+                        mobileNav.classList.remove('active');
+                        mobileMenuToggle.setAttribute('aria-expanded', 'false');
+                        document.body.style.overflow = '';
+                        document.body.style.touchAction = '';
+                    }
+                }, { passive: true });
+                
+                const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+                mobileNavLinks.forEach(link => {
+                    link.addEventListener('click', function() {
+                        isMenuOpen = false;
+                        mobileNav.classList.remove('active');
+                        mobileMenuToggle.setAttribute('aria-expanded', 'false');
+                        document.body.style.overflow = '';
+                        document.body.style.touchAction = '';
+                    }, { passive: true });
+                });
+                
+                document.addEventListener('keydown', function(e) {
+                    if (e.key === 'Escape' && isMenuOpen) {
+                        isMenuOpen = false;
+                        mobileNav.classList.remove('active');
+                        mobileMenuToggle.setAttribute('aria-expanded', 'false');
+                        document.body.style.overflow = '';
+                        document.body.style.touchAction = '';
+                    }
+                });
+            }
+            
+            // User dropdown functionality
+            const userDropdownToggle = document.querySelector('.user-dropdown-toggle');
+            const userDropdownMenu = document.querySelector('.user-dropdown-menu');
+            
+            if (userDropdownToggle && userDropdownMenu) {
+                userDropdownToggle.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    const isExpanded = this.getAttribute('aria-expanded') === 'true';
+                    this.setAttribute('aria-expanded', !isExpanded);
+                    
+                    if (!isExpanded) {
+                        userDropdownMenu.style.opacity = '1';
+                        userDropdownMenu.style.visibility = 'visible';
+                        userDropdownMenu.style.transform = 'translateY(0)';
+                        userDropdownMenu.classList.add('show');
+                    } else {
+                        userDropdownMenu.style.opacity = '0';
+                        userDropdownMenu.style.visibility = 'hidden';
+                        userDropdownMenu.style.transform = 'translateY(-10px)';
+                        userDropdownMenu.classList.remove('show');
+                    }
+                });
+                
+                document.addEventListener('click', function(e) {
+                    if (!userDropdownToggle.contains(e.target) && !userDropdownMenu.contains(e.target)) {
+                        userDropdownMenu.style.opacity = '0';
+                        userDropdownMenu.style.visibility = 'hidden';
+                        userDropdownMenu.style.transform = 'translateY(-10px)';
+                        userDropdownMenu.classList.remove('show');
+                        userDropdownToggle.setAttribute('aria-expanded', 'false');
+                    }
+                });
+            }
+        });
     </script>
-    <script src="script.js"></script>
-    <script src="chatbot.js"></script>
 </body>
 </html>
