@@ -58,6 +58,8 @@ $translations = [
         'blog.newsletter' => 'Newsletter',
         'blog.newsletter_text' => 'Recevez nos derniers conseils et actualités fiscales directement dans votre boîte mail.',
         'blog.subscribe' => 'S\'abonner',
+        'blog.search_placeholder' => 'Rechercher un article...',
+        'blog.no_posts' => 'Aucun article trouvé.',
         
         // Common
         'common.required' => 'requis',
@@ -644,6 +646,8 @@ $translations = [
         'btn.messages' => 'Messages',
         'btn.users' => 'Utilisateurs',
         'btn.my_profile' => 'Mon Profil',
+        'btn.previous' => 'Précédent',
+        'btn.next' => 'Suivant',
         
         // Page specific buttons
         'home.hero.cta_button' => 'Demander un devis gratuit',

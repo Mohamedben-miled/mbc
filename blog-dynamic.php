@@ -217,7 +217,7 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/blog-twitter.jpg";
                         $remainingPosts = array_slice($posts, 1);
                         
                         if (empty($remainingPosts)) {
-                            echo '<p class="no-posts">Aucun article trouvé.</p>';
+                            echo '<p class="no-posts">' . __('blog.no_posts') . '</p>';
                         } else {
                             foreach ($remainingPosts as $post) {
                                 ?>
@@ -237,7 +237,7 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/blog-twitter.jpg";
                                         </div>
                                         <h3 class="article-title"><?php echo htmlspecialchars($post['title']); ?></h3>
                                         <p class="article-excerpt"><?php echo htmlspecialchars(substr($post['content'], 0, 100) . '...'); ?></p>
-                                        <a href="blog-post.php?id=<?php echo $post['id']; ?>" class="article-link">Lire <i class="fas fa-arrow-right"></i></a>
+                                        <a href="blog-post.php?id=<?php echo $post['id']; ?>" class="article-link"><?php echo __('btn.read'); ?> <i class="fas fa-arrow-right"></i></a>
                                     </div>
                                 </article>
                                 <?php
@@ -252,12 +252,12 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/blog-twitter.jpg";
                         <?php if ($page > 1): ?>
                             <a href="?page=<?php echo $page - 1; ?><?php echo $search ? '&search=' . urlencode($search) : ''; ?><?php echo $category ? '&category=' . $category : ''; ?>" class="pagination-btn">
                                 <i class="fas fa-chevron-left"></i>
-                                Précédent
+                                <?php echo __('btn.previous'); ?>
                             </a>
                         <?php else: ?>
                             <span class="pagination-btn disabled">
                                 <i class="fas fa-chevron-left"></i>
-                                Précédent
+                                <?php echo __('btn.previous'); ?>
                             </span>
                         <?php endif; ?>
                         
@@ -278,12 +278,12 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/blog-twitter.jpg";
                         
                         <?php if ($page < $totalPages): ?>
                             <a href="?page=<?php echo $page + 1; ?><?php echo $search ? '&search=' . urlencode($search) : ''; ?><?php echo $category ? '&category=' . $category : ''; ?>" class="pagination-btn">
-                                Suivant
+                                <?php echo __('btn.next'); ?>
                                 <i class="fas fa-chevron-right"></i>
                             </a>
                         <?php else: ?>
                             <span class="pagination-btn disabled">
-                                Suivant
+                                <?php echo __('btn.next'); ?>
                                 <i class="fas fa-chevron-right"></i>
                             </span>
                         <?php endif; ?>
@@ -295,9 +295,9 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/blog-twitter.jpg";
                 <aside class="blog-sidebar">
                     <!-- Search -->
                     <div class="sidebar-widget">
-                        <h3 class="widget-title"><?php echo __('common.search'); ?></h3>
+                        <h3 class="widget-title"><?php echo __('blog.search'); ?></h3>
                         <form class="search-form" method="GET">
-                            <input type="text" name="search" placeholder="Rechercher un article..." class="search-input" value="<?php echo htmlspecialchars($search); ?>">
+                            <input type="text" name="search" placeholder="<?php echo __('blog.search_placeholder'); ?>" class="search-input" value="<?php echo htmlspecialchars($search); ?>">
                             <button type="submit" class="search-btn">
                                 <i class="fas fa-search"></i>
                             </button>
@@ -306,7 +306,7 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/blog-twitter.jpg";
 
                     <!-- Categories -->
                     <div class="sidebar-widget">
-                        <h3 class="widget-title">Catégories</h3>
+                        <h3 class="widget-title"><?php echo __('blog.categories'); ?></h3>
                         <ul class="category-list">
                             <?php
                             $categories = $blog->getAllCategories();
@@ -323,7 +323,7 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/blog-twitter.jpg";
 
                     <!-- Recent Articles -->
                     <div class="sidebar-widget">
-                        <h3 class="widget-title">Articles récents</h3>
+                        <h3 class="widget-title"><?php echo __('blog.recent_articles'); ?></h3>
                         <div class="recent-articles">
                             <?php
                             $recentPosts = $blog->getRecentPosts(3);
@@ -350,10 +350,10 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/blog-twitter.jpg";
 
                     <!-- Newsletter -->
                     <div class="sidebar-widget newsletter-widget">
-                        <h3 class="widget-title">Newsletter</h3>
-                        <p class="newsletter-text">Recevez nos derniers conseils et actualités fiscales directement dans votre boîte mail.</p>
+                        <h3 class="widget-title"><?php echo __('blog.newsletter'); ?></h3>
+                        <p class="newsletter-text"><?php echo __('blog.newsletter_text'); ?></p>
                         <form class="newsletter-form" action="newsletter-handler.php" method="POST">
-                            <input type="email" name="email" placeholder="Votre adresse email" class="newsletter-input" required>
+                            <input type="email" name="email" placeholder="<?php echo __('contact.email'); ?>" class="newsletter-input" required>
                             <button type="submit" class="newsletter-btn"><?php echo __('btn.subscribe'); ?></button>
                         </form>
                     </div>

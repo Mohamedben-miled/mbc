@@ -7241,16 +7241,19 @@ body.blog-page .mobile-menu-toggle {
     /* Blog Hero Section */
     .blog-hero {
         padding: 100px 0 60px;
+        background-attachment: scroll; /* Fix parallax on mobile */
     }
     
     .blog-hero-title {
         font-size: 2.5rem;
         margin-bottom: 0.75rem;
+        line-height: 1.2;
     }
     
     .blog-hero-subtitle {
         font-size: 1.1rem;
         margin-bottom: 1.5rem;
+        line-height: 1.4;
     }
     
     .blog-stats {
@@ -7280,6 +7283,38 @@ body.blog-page .mobile-menu-toggle {
     .blog-main {
         padding: 1.5rem;
         border-radius: 15px;
+    }
+    
+    /* Mobile Navigation Improvements */
+    .header-utils {
+        gap: 0.5rem;
+    }
+    
+    .auth-section {
+        flex-direction: column;
+        gap: 0.5rem;
+        align-items: flex-end;
+    }
+    
+    .user-menu {
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 0.25rem;
+    }
+    
+    .user-greeting {
+        font-size: 0.8rem;
+        text-align: right;
+    }
+    
+    .user-dropdown {
+        align-self: flex-end;
+    }
+    
+    .user-dropdown-menu {
+        right: 0;
+        left: auto;
+        min-width: 180px;
     }
     
     /* Featured Article */
@@ -7601,6 +7636,7 @@ body.blog-page .mobile-menu-toggle {
     /* Hero Section */
     .blog-hero {
         padding: 80px 0 50px;
+        background-attachment: scroll;
     }
     
     .blog-hero-title {
@@ -7610,6 +7646,7 @@ body.blog-page .mobile-menu-toggle {
     
     .blog-hero-subtitle {
         font-size: 1rem;
+        line-height: 1.4;
     }
     
     /* Content Layout */
@@ -7624,6 +7661,43 @@ body.blog-page .mobile-menu-toggle {
     .blog-main {
         padding: 1rem;
         border-radius: 12px;
+    }
+    
+    /* Extra Small Mobile Navigation */
+    .header-utils {
+        flex-wrap: wrap;
+        gap: 0.25rem;
+    }
+    
+    .language-selector {
+        font-size: 0.8rem;
+        padding: 0.4rem 0.6rem;
+    }
+    
+    .auth-section {
+        flex-direction: column;
+        gap: 0.25rem;
+        align-items: center;
+    }
+    
+    .user-greeting {
+        font-size: 0.75rem;
+        text-align: center;
+    }
+    
+    .user-dropdown-toggle {
+        padding: 0.4rem;
+        font-size: 0.8rem;
+    }
+    
+    .user-dropdown-menu {
+        min-width: 160px;
+        font-size: 0.85rem;
+    }
+    
+    .btn {
+        font-size: 0.8rem;
+        padding: 0.5rem 0.75rem;
     }
     
     /* Featured Article */
