@@ -20,6 +20,7 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/contact-twitter.jpg";
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $pageTitle; ?></title>
     <meta name="description" content="Contactez MBC Expert Comptable pour vos besoins en expertise comptable, fiscalité, social & paie. Devis gratuit et conseil personnalisé.">
@@ -55,7 +56,7 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/contact-twitter.jpg";
 
                 <!-- Header Utils -->
                 <div class="header-utils">
-                    <select class="language-selector" aria-label="Sélectionner la langue" onchange="changeLanguage(this.value)">
+                    <select class="language-selector" aria-label="<?php echo __('nav.select_language'); ?>" onchange="changeLanguage(this.value)">
                         <option value="fr" <?php echo getCurrentLanguage() === 'fr' ? 'selected' : ''; ?>>🇫🇷 FR</option>
                         <option value="en" <?php echo getCurrentLanguage() === 'en' ? 'selected' : ''; ?>>🇬🇧 EN</option>
                         <option value="zh" <?php echo getCurrentLanguage() === 'zh' ? 'selected' : ''; ?>>🇨🇳 中文</option>
@@ -68,47 +69,47 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/contact-twitter.jpg";
                             $currentUser = $auth->getCurrentUser(); ?>
                             <!-- User is logged in -->
                             <div class="user-menu">
-                                <span class="user-greeting">Bonjour, <?php echo htmlspecialchars($currentUser['full_name']); ?></span>
-                                <div class="user-dropdown">
-                                    <button class="user-dropdown-toggle" aria-expanded="false">
-                                        <i class="fas fa-user-circle"></i>
-                                        <i class="fas fa-chevron-down"></i>
-                                    </button>
-                                    <div class="user-dropdown-menu">
-                                        <?php if ($auth->isAdmin()): ?>
-                                            <a href="admin/dashboard.php" class="dropdown-item">
-                                                <i class="fas fa-tachometer-alt"></i> Dashboard
-                                            </a>
-                                            <a href="admin/blog.php" class="dropdown-item">
-                                                <i class="fas fa-blog"></i> Gestion Blog
-                                            </a>
-                                            <a href="admin/contact.php" class="dropdown-item">
-                                                <i class="fas fa-envelope"></i> Messages
-                                            </a>
-                                            <a href="admin/users.php" class="dropdown-item">
-                                                <i class="fas fa-users"></i> Utilisateurs
-                                            </a>
-                                            <a href="admin/profile.php" class="dropdown-item">
-                                                <i class="fas fa-user-edit"></i> Profil
-                                            </a>
-                                        <?php endif; ?>
-                                        <a href="admin/logout.php" class="dropdown-item logout">
-                                            <i class="fas fa-sign-out-alt"></i> Déconnexion
+                                <span class="user-greeting"><?php echo __('nav.hello'); ?>, <?php echo htmlspecialchars($currentUser['full_name']); ?></span>
+                            </div>
+                            <div class="user-dropdown">
+                                <button class="user-dropdown-toggle" aria-expanded="false">
+                                    <i class="fas fa-user-circle"></i>
+                                    <i class="fas fa-chevron-down"></i>
+                                </button>
+                                <div class="user-dropdown-menu">
+                                    <?php if ($auth->isAdmin()): ?>
+                                        <a href="admin/dashboard.php" class="dropdown-item">
+                                            <i class="fas fa-tachometer-alt"></i> <?php echo __('nav.dashboard'); ?>
                                         </a>
-                                    </div>
+                                        <a href="admin/blog.php" class="dropdown-item">
+                                            <i class="fas fa-blog"></i> <?php echo __('nav.manage_blog'); ?>
+                                        </a>
+                                        <a href="admin/contact.php" class="dropdown-item">
+                                            <i class="fas fa-envelope"></i> <?php echo __('nav.messages'); ?>
+                                        </a>
+                                        <a href="admin/users.php" class="dropdown-item">
+                                            <i class="fas fa-users"></i> <?php echo __('nav.users'); ?>
+                                        </a>
+                                        <a href="admin/profile.php" class="dropdown-item">
+                                            <i class="fas fa-user-edit"></i> <?php echo __('nav.my_profile'); ?>
+                                        </a>
+                                    <?php endif; ?>
+                                    <a href="admin/logout.php" class="dropdown-item logout">
+                                        <i class="fas fa-sign-out-alt"></i> <?php echo __('nav.logout'); ?>
+                                    </a>
                                 </div>
                             </div>
                         <?php else: ?>
                             <!-- User is not logged in -->
                             <div class="auth-buttons">
                                 <a href="admin/login.php" class="btn btn-outline btn-sm">
-                                    <i class="fas fa-sign-in-alt"></i> Connexion
+                                    <i class="fas fa-sign-in-alt"></i> <?php echo __('btn.login'); ?>
                                 </a>
                             </div>
                         <?php endif; ?>
                     </div>
                     
-                    <button class="mobile-menu-toggle" aria-label="Ouvrir le menu mobile">
+                    <button class="mobile-menu-toggle" aria-label="<?php echo __('btn.open_mobile_menu'); ?>">
                         <i class="fas fa-bars"></i>
                     </button>
                 </div>

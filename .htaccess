@@ -1,23 +1,11 @@
+# MBC Website .htaccess Configuration
+# This file handles URL rewriting, security, and encoding
+
+# Enable rewrite engine
 RewriteEngine On
 
-# Redirect HTML pages to PHP equivalents
-RewriteRule ^index\.html$ index.php [R=301,L]
-RewriteRule ^mbc\.html$ mbc.php [R=301,L]
-RewriteRule ^services\.html$ services.php [R=301,L]
-RewriteRule ^contact\.html$ contact-form.php [R=301,L]
-RewriteRule ^blog\.html$ blog-dynamic.php [R=301,L]
-
-# Block direct access to HTML files
-<Files "*.html">
-    Order Allow,Deny
-    Deny from all
-</Files>
-
-# Allow access to specific HTML files if needed (like simulators.html)
-<Files "simulators.html">
-    Order Allow,Deny
-    Allow from all
-</Files>
+# Force UTF-8 encoding
+AddDefaultCharset UTF-8
 
 # Security headers
 Header always set X-Content-Type-Options nosniff
@@ -25,7 +13,48 @@ Header always set X-Frame-Options DENY
 Header always set X-XSS-Protection "1; mode=block"
 Header always set Referrer-Policy "strict-origin-when-cross-origin"
 
-# Cache control for static assets
+# Force HTTPS (uncomment when SSL is configured)
+# RewriteCond %{HTTPS} off
+# RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Hide sensitive files
+<Files "database.php">
+    Order Allow,Deny
+    Deny from all
+</Files>
+
+<Files "database.production.php">
+    Order Allow,Deny
+    Deny from all
+</Files>
+
+<Files "*.sql">
+    Order Allow,Deny
+    Deny from all
+</Files>
+
+<Files "*.log">
+    Order Allow,Deny
+    Deny from all
+</Files>
+
+# Protect config directory
+<Directory "config">
+    Order Allow,Deny
+    Deny from all
+</Directory>
+
+# Protect includes directory
+<Directory "includes">
+    Order Allow,Deny
+    Deny from all
+</Directory>
+
+# Custom error pages
+ErrorDocument 404 /404.php
+ErrorDocument 500 /404.php
+
+# Cache static files
 <IfModule mod_expires.c>
     ExpiresActive On
     ExpiresByType text/css "access plus 1 month"
@@ -34,10 +63,11 @@ Header always set Referrer-Policy "strict-origin-when-cross-origin"
     ExpiresByType image/jpg "access plus 1 month"
     ExpiresByType image/jpeg "access plus 1 month"
     ExpiresByType image/gif "access plus 1 month"
-    ExpiresByType image/svg+xml "access plus 1 month"
+    ExpiresByType image/webp "access plus 1 month"
+    ExpiresByType application/pdf "access plus 1 month"
 </IfModule>
 
-# Gzip compression
+# Compression
 <IfModule mod_deflate.c>
     AddOutputFilterByType DEFLATE text/plain
     AddOutputFilterByType DEFLATE text/html
@@ -49,3 +79,31 @@ Header always set Referrer-Policy "strict-origin-when-cross-origin"
     AddOutputFilterByType DEFLATE application/javascript
     AddOutputFilterByType DEFLATE application/x-javascript
 </IfModule>
+
+# Prevent access to backup files
+<FilesMatch "\.(bak|backup|old|tmp)$">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
+
+# Prevent access to version control files
+<FilesMatch "\.(git|svn)">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
+
+# PHP settings
+php_value upload_max_filesize 10M
+php_value post_max_size 10M
+php_value max_execution_time 300
+php_value memory_limit 256M
+
+# Session security
+php_value session.cookie_httponly 1
+php_value session.cookie_secure 1
+php_value session.use_strict_mode 1
+
+# UTF-8 encoding for all text files
+<FilesMatch "\.(php|html|htm|css|js)$">
+    ForceType text/html; charset=UTF-8
+</FilesMatch>
