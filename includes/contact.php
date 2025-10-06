@@ -4,12 +4,15 @@
  */
 
 require_once __DIR__ . '/../config/database.php';
+require_once __DIR__ . '/encoding.php';
 
 class Contact {
     private $db;
 
     public function __construct() {
         $this->db = Database::getInstance();
+        // Ensure UTF-8 encoding for database connection
+        ensureUtf8Encoding($this->db->getConnection());
     }
 
     /**

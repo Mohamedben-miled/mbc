@@ -38,6 +38,11 @@ class Database {
                 PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
                 PDO::ATTR_EMULATE_PREPARES => false,
             ]);
+            
+            // Set UTF-8 encoding for the connection
+            $this->connection->exec("SET NAMES utf8mb4 COLLATE utf8mb4_unicode_ci");
+            $this->connection->exec("SET CHARACTER SET utf8mb4");
+            
         } catch (PDOException $e) {
             die("Database connection failed: " . $e->getMessage());
         }

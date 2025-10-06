@@ -6,6 +6,7 @@ RewriteEngine On
 
 # Force UTF-8 encoding
 AddDefaultCharset UTF-8
+AddCharset UTF-8 .php .html .htm .css .js .json .xml .txt
 
 # Security headers
 Header always set X-Content-Type-Options nosniff
@@ -106,4 +107,9 @@ php_value session.use_strict_mode 1
 # UTF-8 encoding for all text files
 <FilesMatch "\.(php|html|htm)$">
     ForceType text/html
+</FilesMatch>
+
+# Force UTF-8 for PHP files
+<FilesMatch "\.php$">
+    Header set Content-Type "text/html; charset=UTF-8"
 </FilesMatch>
