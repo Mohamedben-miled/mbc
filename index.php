@@ -1665,42 +1665,71 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/twitter-image.jpg";
             form.submit();
         }
         
-        // Mobile navigation functionality
+        // Mobile navigation functionality - Optimized
         document.addEventListener('DOMContentLoaded', function() {
             const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
             const mobileNav = document.querySelector('.mobile-nav');
             
             if (mobileMenuToggle && mobileNav) {
-                mobileMenuToggle.addEventListener('click', function() {
-                    mobileNav.classList.toggle('active');
-                    const isExpanded = mobileNav.classList.contains('active');
-                    this.setAttribute('aria-expanded', isExpanded);
-                    
-                    // Prevent body scroll when menu is open
-                    if (isExpanded) {
-                        document.body.style.overflow = 'hidden';
-                    } else {
-                        document.body.style.overflow = '';
-                    }
-                });
+                let isMenuOpen = false;
                 
-                // Close mobile menu when clicking outside
-                mobileNav.addEventListener('click', function(e) {
-                    if (e.target === mobileNav) {
+                // Optimized toggle function
+                function toggleMobileMenu() {
+                    isMenuOpen = !isMenuOpen;
+                    
+                    if (isMenuOpen) {
+                        mobileNav.classList.add('active');
+                        mobileMenuToggle.setAttribute('aria-expanded', 'true');
+                        document.body.style.overflow = 'hidden';
+                        // Add touch-action to prevent scrolling
+                        document.body.style.touchAction = 'none';
+                    } else {
                         mobileNav.classList.remove('active');
                         mobileMenuToggle.setAttribute('aria-expanded', 'false');
                         document.body.style.overflow = '';
+                        document.body.style.touchAction = '';
                     }
-                });
+                }
                 
-                // Close mobile menu when clicking on links
+                // Use passive event listeners for better performance
+                mobileMenuToggle.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    toggleMobileMenu();
+                }, { passive: false });
+                
+                // Close mobile menu when clicking outside - Optimized
+                document.addEventListener('click', function(e) {
+                    if (isMenuOpen && !mobileNav.contains(e.target) && !mobileMenuToggle.contains(e.target)) {
+                        isMenuOpen = false;
+                        mobileNav.classList.remove('active');
+                        mobileMenuToggle.setAttribute('aria-expanded', 'false');
+                        document.body.style.overflow = '';
+                        document.body.style.touchAction = '';
+                    }
+                }, { passive: true);
+                
+                // Close mobile menu when clicking on links - Optimized
                 const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
                 mobileNavLinks.forEach(link => {
                     link.addEventListener('click', function() {
+                        isMenuOpen = false;
                         mobileNav.classList.remove('active');
                         mobileMenuToggle.setAttribute('aria-expanded', 'false');
                         document.body.style.overflow = '';
-                    });
+                        document.body.style.touchAction = '';
+                    }, { passive: true });
+                });
+                
+                // Handle escape key
+                document.addEventListener('keydown', function(e) {
+                    if (e.key === 'Escape' && isMenuOpen) {
+                        isMenuOpen = false;
+                        mobileNav.classList.remove('active');
+                        mobileMenuToggle.setAttribute('aria-expanded', 'false');
+                        document.body.style.overflow = '';
+                        document.body.style.touchAction = '';
+                    }
                 });
             }
             
