@@ -5,6 +5,9 @@
  */
 
 // Get current language from session or default to French
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 $current_lang = $_SESSION['language'] ?? $_SESSION['lang'] ?? 'fr';
 
 // Translation arrays

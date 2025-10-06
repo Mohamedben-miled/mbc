@@ -21,10 +21,9 @@ class Blog {
             $whereClause = $status ? "WHERE status = ?" : "";
             $params = $status ? [$status] : [];
             
-            $sql = "SELECT bp.*, u.full_name as author_name, bc.name as category_name 
+            $sql = "SELECT bp.*, u.full_name as author_name 
                     FROM blog_posts bp 
                     JOIN users u ON bp.author_id = u.id 
-                    LEFT JOIN blog_categories bc ON bp.category_id = bc.id 
                     $whereClause 
                     ORDER BY bp.created_at DESC 
                     LIMIT ? OFFSET ?";
@@ -184,11 +183,11 @@ class Blog {
         try {
             $offset = ($page - 1) * $limit;
             $stmt = $this->db->prepare("
-                SELECT bp.*, u.full_name as author_name, bc.name as category_name 
+                SELECT bp.*, u.full_name as author_name 
                 FROM blog_posts bp 
                 JOIN users u ON bp.author_id = u.id 
-                LEFT JOIN blog_categories bc ON bp.category_id = bc.id 
-                WHERE bp.category_id = ? AND bp.status = 'published'
+                JOIN blog_post_categories bpc ON bp.id = bpc.post_id
+                WHERE bpc.category_id = ? AND bp.status = 'published'
                 ORDER BY bp.created_at DESC 
                 LIMIT ? OFFSET ?
             ");
@@ -265,10 +264,9 @@ class Blog {
             $offset = ($page - 1) * $limit;
             $searchTerm = "%$search%";
             
-            $sql = "SELECT bp.*, u.full_name as author_name, bc.name as category_name 
+            $sql = "SELECT bp.*, u.full_name as author_name 
                     FROM blog_posts bp 
                     JOIN users u ON bp.author_id = u.id 
-                    LEFT JOIN blog_categories bc ON bp.category_id = bc.id 
                     WHERE bp.status = 'published' 
                     AND (bp.title LIKE ? OR bp.content LIKE ?)
                     ORDER BY bp.created_at DESC 
@@ -308,10 +306,9 @@ class Blog {
      */
     public function getRecentPosts($limit = 5) {
         try {
-            $sql = "SELECT bp.*, u.full_name as author_name, bc.name as category_name 
+            $sql = "SELECT bp.*, u.full_name as author_name 
                     FROM blog_posts bp 
                     JOIN users u ON bp.author_id = u.id 
-                    LEFT JOIN blog_categories bc ON bp.category_id = bc.id 
                     WHERE bp.status = 'published'
                     ORDER BY bp.created_at DESC 
                     LIMIT ?";
@@ -365,8 +362,9 @@ class Blog {
             $stmt = $this->db->prepare("
                 SELECT COUNT(*) 
                 FROM blog_posts bp 
+                JOIN blog_post_categories bpc ON bp.id = bpc.post_id
                 WHERE bp.status = 'published' 
-                AND bp.category_id = ?
+                AND bpc.category_id = ?
             ");
             $stmt->execute([$categoryId]);
             return $stmt->fetchColumn();

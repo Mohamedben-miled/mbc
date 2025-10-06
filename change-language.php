@@ -2,7 +2,9 @@
 /**
  * Language Change Handler
  */
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 require_once __DIR__ . '/includes/translations.php';
 
 // Check if language is provided
