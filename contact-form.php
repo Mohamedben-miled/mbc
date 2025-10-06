@@ -224,7 +224,7 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/contact-twitter.jpg";
                     </div>
                     
                     <div class="form-group checkbox-group">
-                        <input type="checkbox" id="privacy" required>
+                        <input type="checkbox" id="privacy" name="privacy" required>
                         <label for="privacy"><?php echo __('contact.privacy'); ?> *</label>
                     </div>
                     
@@ -678,6 +678,48 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/contact-twitter.jpg";
             document.body.appendChild(form);
             form.submit();
         }
+        
+        // Mobile checkbox enhancements
+        document.addEventListener('DOMContentLoaded', function() {
+            // Enhance checkbox interactions for mobile
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            
+            checkboxes.forEach(checkbox => {
+                const label = document.querySelector(`label[for="${checkbox.id}"]`);
+                const container = checkbox.closest('.checkbox, .checkbox-group');
+                
+                if (container && label) {
+                    // Make the entire container clickable
+                    container.addEventListener('click', function(e) {
+                        if (e.target !== checkbox) {
+                            e.preventDefault();
+                            checkbox.checked = !checkbox.checked;
+                            checkbox.dispatchEvent(new Event('change', { bubbles: true }));
+                        }
+                    });
+                    
+                    // Add visual feedback
+                    container.addEventListener('touchstart', function() {
+                        this.style.transform = 'scale(0.98)';
+                    });
+                    
+                    container.addEventListener('touchend', function() {
+                        this.style.transform = '';
+                    });
+                    
+                    // Handle checkbox state changes
+                    checkbox.addEventListener('change', function() {
+                        if (this.checked) {
+                            container.style.background = '#e9ecef';
+                            container.style.borderColor = '#296871';
+                        } else {
+                            container.style.background = '#f8f9fa';
+                            container.style.borderColor = 'transparent';
+                        }
+                    });
+                }
+            });
+        });
     </script>
     <script src="chatbot.js"></script>
 </body>

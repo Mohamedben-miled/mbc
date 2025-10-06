@@ -1061,6 +1061,275 @@ header, .header, .header-content {
         opacity: 0.5;
         cursor: not-allowed;
     }
+    
+    /* Mobile Checkbox Enhancements */
+    .checkbox {
+        padding: 1rem;
+        margin: 1rem 0;
+        background: #f8f9fa;
+        border-radius: 12px;
+        border: 2px solid transparent;
+        transition: all 0.2s ease;
+        min-height: 60px;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+    
+    .checkbox:hover,
+    .checkbox:focus-within {
+        background: #e9ecef;
+        border-color: #296871;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+    
+    .checkbox input[type="checkbox"] {
+        width: 24px;
+        height: 24px;
+        min-width: 24px;
+        min-height: 24px;
+        margin: 0;
+        cursor: pointer;
+        accent-color: #296871;
+        border-radius: 6px;
+        flex-shrink: 0;
+    }
+    
+    .checkbox label {
+        font-size: 1rem;
+        color: #374151;
+        line-height: 1.4;
+        cursor: pointer;
+        flex: 1;
+        user-select: none;
+        font-weight: 500;
+    }
+    
+    .modern-form .checkbox-group {
+        padding: 1.5rem;
+        margin: 1.5rem 0;
+        background: #f8f9fa;
+        border-radius: 16px;
+        border: 2px solid transparent;
+        min-height: 80px;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+    
+    .modern-form .checkbox-group:hover,
+    .modern-form .checkbox-group:focus-within {
+        background: #e9ecef;
+        border-color: #296871;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    }
+    
+    .modern-form .checkbox-group input[type="checkbox"] {
+        width: 24px;
+        height: 24px;
+        min-width: 24px;
+        min-height: 24px;
+        margin: 0;
+        cursor: pointer;
+        accent-color: #296871;
+        border-radius: 6px;
+        flex-shrink: 0;
+    }
+    
+    .modern-form .checkbox-group label {
+        font-size: 1rem;
+        color: #374151;
+        line-height: 1.4;
+        cursor: pointer;
+        flex: 1;
+        user-select: none;
+        font-weight: 500;
+    }
+    
+    /* Mobile Blog Enhancements */
+    .blog-hero {
+        padding: 60px 0 40px;
+        background: linear-gradient(135deg, #296871 0%, #2e6a6e 100%);
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .blog-hero::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+        opacity: 0.3;
+    }
+    
+    .blog-hero-content {
+        position: relative;
+        z-index: 2;
+        text-align: center;
+        color: white;
+    }
+    
+    .blog-hero-title {
+        font-size: 2.5rem;
+        font-weight: 800;
+        margin-bottom: 1rem;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+    
+    .blog-hero-subtitle {
+        font-size: 1.2rem;
+        margin-bottom: 2rem;
+        opacity: 0.9;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    }
+    
+    .blog-stats {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        margin-top: 2rem;
+    }
+    
+    .stat-item {
+        text-align: center;
+        color: white;
+    }
+    
+    .stat-number {
+        font-size: 2rem;
+        font-weight: 700;
+        display: block;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+    
+    .stat-label {
+        font-size: 0.9rem;
+        opacity: 0.8;
+        margin-top: 0.25rem;
+    }
+    
+    /* Mobile Article Cards Enhanced */
+    .article-card {
+        background: white;
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        margin-bottom: 1.5rem;
+    }
+    
+    .article-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+    }
+    
+    .article-card .article-image {
+        height: 220px;
+        object-fit: cover;
+        width: 100%;
+    }
+    
+    .article-card .article-content {
+        padding: 1.5rem;
+    }
+    
+    .article-card .article-title {
+        font-size: 1.25rem;
+        font-weight: 700;
+        line-height: 1.3;
+        margin-bottom: 0.75rem;
+        color: #1e293b;
+    }
+    
+    .article-card .article-excerpt {
+        font-size: 1rem;
+        line-height: 1.5;
+        color: #64748b;
+        margin-bottom: 1rem;
+    }
+    
+    .article-card .article-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: #296871;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 0.9rem;
+        transition: all 0.2s ease;
+    }
+    
+    .article-card .article-link:hover {
+        color: #1e40af;
+        transform: translateX(4px);
+    }
+    
+    /* Mobile Sidebar Enhanced */
+    .blog-sidebar {
+        order: -1;
+        margin: 0 0.5rem 2rem 0.5rem;
+    }
+    
+    .sidebar-widget {
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+        border-radius: 16px;
+        background: white;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        border: 1px solid #f1f5f9;
+    }
+    
+    .widget-title {
+        font-size: 1.25rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        color: #1e293b;
+        border-bottom: 2px solid #296871;
+        padding-bottom: 0.5rem;
+    }
+    
+    /* Mobile Search Enhanced */
+    .search-form {
+        display: flex;
+        gap: 0.75rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .search-input {
+        flex: 1;
+        padding: 1rem;
+        border: 2px solid #e2e8f0;
+        border-radius: 12px;
+        font-size: 1rem;
+        transition: all 0.2s ease;
+    }
+    
+    .search-input:focus {
+        border-color: #296871;
+        box-shadow: 0 0 0 3px rgba(41, 104, 113, 0.1);
+    }
+    
+    .search-btn {
+        padding: 1rem 1.5rem;
+        background: #296871;
+        color: white;
+        border: none;
+        border-radius: 12px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: all 0.2s ease;
+        min-width: 60px;
+    }
+    
+    .search-btn:hover {
+        background: #1e40af;
+        transform: translateY(-2px);
+    }
 }
 
 @media (min-width: 769px) {
@@ -8837,18 +9106,34 @@ body.blog-page .mobile-menu-toggle {
 .checkbox {
     display: flex;
     align-items: flex-start;
-    gap: 0.5rem;
-    margin: 0.5rem 0;
+    gap: 0.75rem;
+    margin: 1rem 0;
+    padding: 0.5rem;
+    border-radius: 8px;
+    transition: background-color 0.2s ease;
+}
+
+.checkbox:hover {
+    background-color: #f8f9fa;
 }
 
 .checkbox input {
     margin-top: 0.25rem;
+    width: 18px;
+    height: 18px;
+    min-width: 18px;
+    min-height: 18px;
+    cursor: pointer;
+    accent-color: #296871;
 }
 
 .checkbox label {
     font-size: 0.9rem;
     color: #64748b;
     line-height: 1.4;
+    cursor: pointer;
+    flex: 1;
+    user-select: none;
 }
 
 .checkbox a {
@@ -9683,12 +9968,28 @@ body.blog-page {
     align-items: flex-start;
     gap: 0.75rem;
     margin: 2rem 0;
+    padding: 1rem;
+    border-radius: 12px;
+    background: #f8f9fa;
+    transition: all 0.2s ease;
+}
+
+.modern-form .checkbox-group:hover {
+    background: #e9ecef;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .modern-form .checkbox-group input[type="checkbox"] {
-    width: auto;
+    width: 20px;
+    height: 20px;
+    min-width: 20px;
+    min-height: 20px;
     margin: 0;
     margin-top: 0.25rem;
+    cursor: pointer;
+    accent-color: #296871;
+    border-radius: 4px;
 }
 
 .modern-form .checkbox-group label {
@@ -9697,6 +9998,9 @@ body.blog-page {
     line-height: 1.5;
     text-transform: none;
     letter-spacing: normal;
+    cursor: pointer;
+    flex: 1;
+    user-select: none;
 }
 
 .modern-form .checkbox-group a {
