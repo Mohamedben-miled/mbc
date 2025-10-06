@@ -7169,7 +7169,6 @@ input:checked + .slider:before {
         -webkit-overflow-scrolling: touch;
         overscroll-behavior-x: contain;
     }
-}
     
     .cta-buttons {
         flex-direction: column;

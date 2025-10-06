@@ -39,16 +39,16 @@ Header always set Referrer-Policy "strict-origin-when-cross-origin"
 </Files>
 
 # Protect config directory
-<Directory "config">
+<FilesMatch "^config/">
     Order Allow,Deny
     Deny from all
-</Directory>
+</FilesMatch>
 
 # Protect includes directory
-<Directory "includes">
+<FilesMatch "^includes/">
     Order Allow,Deny
     Deny from all
-</Directory>
+</FilesMatch>
 
 # Custom error pages
 ErrorDocument 404 /404.php
@@ -104,6 +104,6 @@ php_value session.cookie_secure 1
 php_value session.use_strict_mode 1
 
 # UTF-8 encoding for all text files
-<FilesMatch "\.(php|html|htm|css|js)$">
-    ForceType text/html; charset=UTF-8
+<FilesMatch "\.(php|html|htm)$">
+    ForceType text/html
 </FilesMatch>
