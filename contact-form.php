@@ -570,6 +570,8 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/contact-twitter.jpg";
 
     <!-- Scripts -->
     <script src="script.js"></script>
+    <script src="js/mobile-nav.js"></script>
+    <script src="js/main.js"></script>
     <script>
         // Add event listener for simulators link
         document.addEventListener('DOMContentLoaded', function() {
@@ -679,46 +681,91 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/contact-twitter.jpg";
             form.submit();
         }
         
-        // Mobile checkbox enhancements
+        // Enhanced mobile checkbox functionality
         document.addEventListener('DOMContentLoaded', function() {
-            // Enhance checkbox interactions for mobile
-            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            console.log('Initializing checkbox enhancements...');
             
-            checkboxes.forEach(checkbox => {
-                const label = document.querySelector(`label[for="${checkbox.id}"]`);
-                const container = checkbox.closest('.checkbox, .checkbox-group');
+            // Function to enhance checkbox interactions
+            function enhanceCheckboxes() {
+                const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+                console.log('Found checkboxes:', checkboxes.length);
                 
-                if (container && label) {
-                    // Make the entire container clickable
-                    container.addEventListener('click', function(e) {
-                        if (e.target !== checkbox) {
+                checkboxes.forEach((checkbox, index) => {
+                    console.log(`Processing checkbox ${index + 1}:`, checkbox.id);
+                    
+                    const label = document.querySelector(`label[for="${checkbox.id}"]`);
+                    const container = checkbox.closest('.checkbox, .checkbox-group');
+                    
+                    if (container && label) {
+                        console.log('Enhancing checkbox container:', container);
+                        
+                        // Remove any existing event listeners to prevent duplicates
+                        container.removeEventListener('click', handleContainerClick);
+                        container.removeEventListener('touchstart', handleTouchStart);
+                        container.removeEventListener('touchend', handleTouchEnd);
+                        checkbox.removeEventListener('change', handleCheckboxChange);
+                        
+                        // Make the entire container clickable
+                        function handleContainerClick(e) {
+                            console.log('Container clicked');
+                            if (e.target !== checkbox && e.target !== label) {
+                                e.preventDefault();
+                                e.stopPropagation();
+                                checkbox.checked = !checkbox.checked;
+                                checkbox.dispatchEvent(new Event('change', { bubbles: true }));
+                            }
+                        }
+                        
+                        // Add visual feedback
+                        function handleTouchStart(e) {
+                            this.style.transform = 'scale(0.98)';
+                            this.style.transition = 'transform 0.1s ease';
+                        }
+                        
+                        function handleTouchEnd(e) {
+                            this.style.transform = '';
+                        }
+                        
+                        // Handle checkbox state changes
+                        function handleCheckboxChange(e) {
+                            console.log('Checkbox changed:', this.checked);
+                            if (this.checked) {
+                                container.style.background = '#e9ecef';
+                                container.style.borderColor = '#296871';
+                            } else {
+                                container.style.background = '#f8f9fa';
+                                container.style.borderColor = 'transparent';
+                            }
+                        }
+                        
+                        // Add event listeners
+                        container.addEventListener('click', handleContainerClick, { passive: false });
+                        container.addEventListener('touchstart', handleTouchStart, { passive: true });
+                        container.addEventListener('touchend', handleTouchEnd, { passive: true });
+                        checkbox.addEventListener('change', handleCheckboxChange, { passive: true });
+                        
+                        // Also make the label clickable
+                        label.addEventListener('click', function(e) {
                             e.preventDefault();
                             checkbox.checked = !checkbox.checked;
                             checkbox.dispatchEvent(new Event('change', { bubbles: true }));
-                        }
-                    });
-                    
-                    // Add visual feedback
-                    container.addEventListener('touchstart', function() {
-                        this.style.transform = 'scale(0.98)';
-                    });
-                    
-                    container.addEventListener('touchend', function() {
-                        this.style.transform = '';
-                    });
-                    
-                    // Handle checkbox state changes
-                    checkbox.addEventListener('change', function() {
-                        if (this.checked) {
-                            container.style.background = '#e9ecef';
-                            container.style.borderColor = '#296871';
-                        } else {
-                            container.style.background = '#f8f9fa';
-                            container.style.borderColor = 'transparent';
-                        }
-                    });
-                }
-            });
+                        }, { passive: false });
+                        
+                        console.log('Checkbox enhanced successfully');
+                    } else {
+                        console.log('No container or label found for checkbox');
+                    }
+                });
+            }
+            
+            // Initialize immediately
+            enhanceCheckboxes();
+            
+            // Re-initialize after a short delay to catch any dynamically loaded content
+            setTimeout(enhanceCheckboxes, 100);
+            
+            // Also initialize when the page is fully loaded
+            window.addEventListener('load', enhanceCheckboxes);
         });
     </script>
     <script src="chatbot.js"></script>

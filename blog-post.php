@@ -573,6 +573,8 @@ $categories = $blog->getCategories();
 
     <!-- Scripts -->
     <script src="script.js"></script>
+    <script src="js/mobile-nav.js"></script>
+    <script src="js/main.js"></script>
     <script>
         // Language change function
         function changeLanguage(lang) {
