@@ -146,8 +146,36 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/twitter-image.jpg";
         </div>
     </header>
 
-
-
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav" id="mobileNav">
+        <div class="mobile-nav-content">
+            <ul class="mobile-nav-list">
+                <li><a href="#accueil" class="mobile-nav-link"><?php echo __('nav.home'); ?></a></li>
+                <li><a href="mbc.php" class="mobile-nav-link"><?php echo __('nav.about'); ?></a></li>
+                <li><a href="services.php" class="mobile-nav-link"><?php echo __('nav.services'); ?></a></li>
+                <li><a href="#simulators" class="mobile-nav-link"><?php echo __('nav.simulators'); ?></a></li>
+                <li><a href="blog-dynamic.php" class="mobile-nav-link"><?php echo __('nav.blog'); ?></a></li>
+                <li><a href="contact-form.php" class="mobile-nav-link"><?php echo __('nav.contact'); ?></a></li>
+            </ul>
+            
+            <!-- Mobile Auth Section -->
+            <div class="mobile-auth">
+                <?php if ($auth->isLoggedIn()): ?>
+                    <div class="mobile-user-info">
+                        <p><?php echo __('nav.hello'); ?>, <?php echo htmlspecialchars($currentUser['full_name']); ?></p>
+                        <?php if ($auth->isAdmin()): ?>
+                            <a href="admin/dashboard.php" class="btn btn-primary btn-sm"><?php echo __('nav.dashboard'); ?></a>
+                        <?php endif; ?>
+                        <a href="admin/logout.php" class="btn btn-outline btn-sm"><?php echo __('nav.logout'); ?></a>
+                    </div>
+                <?php else: ?>
+                    <a href="admin/login.php" class="btn btn-primary btn-sm">
+                        <i class="fas fa-sign-in-alt"></i> <?php echo __('btn.login'); ?>
+                    </a>
+                <?php endif; ?>
+            </div>
+        </div>
+    </div>
 
     <!-- Main Content -->
     <main role="main">
@@ -1635,6 +1663,83 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/twitter-image.jpg";
             document.body.appendChild(form);
             form.submit();
         }
+        
+        // Mobile navigation functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+            const mobileNav = document.querySelector('.mobile-nav');
+            
+            if (mobileMenuToggle && mobileNav) {
+                mobileMenuToggle.addEventListener('click', function() {
+                    mobileNav.classList.toggle('active');
+                    const isExpanded = mobileNav.classList.contains('active');
+                    this.setAttribute('aria-expanded', isExpanded);
+                    
+                    // Prevent body scroll when menu is open
+                    if (isExpanded) {
+                        document.body.style.overflow = 'hidden';
+                    } else {
+                        document.body.style.overflow = '';
+                    }
+                });
+                
+                // Close mobile menu when clicking outside
+                mobileNav.addEventListener('click', function(e) {
+                    if (e.target === mobileNav) {
+                        mobileNav.classList.remove('active');
+                        mobileMenuToggle.setAttribute('aria-expanded', 'false');
+                        document.body.style.overflow = '';
+                    }
+                });
+                
+                // Close mobile menu when clicking on links
+                const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+                mobileNavLinks.forEach(link => {
+                    link.addEventListener('click', function() {
+                        mobileNav.classList.remove('active');
+                        mobileMenuToggle.setAttribute('aria-expanded', 'false');
+                        document.body.style.overflow = '';
+                    });
+                });
+            }
+            
+            // User dropdown functionality
+            const userDropdownToggle = document.querySelector('.user-dropdown-toggle');
+            const userDropdownMenu = document.querySelector('.user-dropdown-menu');
+            
+            if (userDropdownToggle && userDropdownMenu) {
+                userDropdownToggle.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    const isExpanded = this.getAttribute('aria-expanded') === 'true';
+                    this.setAttribute('aria-expanded', !isExpanded);
+                    
+                    if (!isExpanded) {
+                        userDropdownMenu.style.opacity = '1';
+                        userDropdownMenu.style.visibility = 'visible';
+                        userDropdownMenu.style.transform = 'translateY(0)';
+                        userDropdownMenu.classList.add('show');
+                    } else {
+                        userDropdownMenu.style.opacity = '0';
+                        userDropdownMenu.style.visibility = 'hidden';
+                        userDropdownMenu.style.transform = 'translateY(-10px)';
+                        userDropdownMenu.classList.remove('show');
+                    }
+                });
+                
+                // Close dropdown when clicking outside
+                document.addEventListener('click', function(e) {
+                    if (!userDropdownToggle.contains(e.target) && !userDropdownMenu.contains(e.target)) {
+                        userDropdownMenu.style.opacity = '0';
+                        userDropdownMenu.style.visibility = 'hidden';
+                        userDropdownMenu.style.transform = 'translateY(-10px)';
+                        userDropdownMenu.classList.remove('show');
+                        userDropdownToggle.setAttribute('aria-expanded', 'false');
+                    }
+                });
+            }
+        });
     </script>
     <script src="script.js"></script>
     <script src="chatbot.js"></script>

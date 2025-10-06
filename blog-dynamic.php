@@ -137,6 +137,36 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/blog-twitter.jpg";
         </div>
     </header>
 
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav" id="mobileNav">
+        <div class="mobile-nav-content">
+            <ul class="mobile-nav-list">
+                <li><a href="index.php#accueil" class="mobile-nav-link"><?php echo __('nav.home'); ?></a></li>
+                <li><a href="mbc.php" class="mobile-nav-link"><?php echo __('nav.about'); ?></a></li>
+                <li><a href="services.php" class="mobile-nav-link"><?php echo __('nav.services'); ?></a></li>
+                <li><a href="#simulators" class="mobile-nav-link"><?php echo __('nav.simulators'); ?></a></li>
+                <li><a href="blog-dynamic.php" class="mobile-nav-link active"><?php echo __('nav.blog'); ?></a></li>
+                <li><a href="contact-form.php" class="mobile-nav-link"><?php echo __('nav.contact'); ?></a></li>
+            </ul>
+            
+            <!-- Mobile Auth Section -->
+            <div class="mobile-auth">
+                <?php if ($auth->isLoggedIn()): ?>
+                    <div class="mobile-user-info">
+                        <p><?php echo __('nav.hello'); ?>, <?php echo htmlspecialchars($currentUser['full_name']); ?></p>
+                        <?php if ($auth->isAdmin()): ?>
+                            <a href="admin/dashboard.php" class="btn btn-primary btn-sm"><?php echo __('nav.dashboard'); ?></a>
+                        <?php endif; ?>
+                        <a href="admin/logout.php" class="btn btn-outline btn-sm"><?php echo __('nav.logout'); ?></a>
+                    </div>
+                <?php else: ?>
+                    <a href="admin/login.php" class="btn btn-primary btn-sm">
+                        <i class="fas fa-sign-in-alt"></i> <?php echo __('btn.login'); ?>
+                    </a>
+                <?php endif; ?>
+            </div>
+        </div>
+    </div>
 
     <!-- Blog Content -->
     <section class="blog-content">
