@@ -695,7 +695,7 @@ $pageDescription = __("blog.subtitle");
                 </div>
                 <div class="stat-item">
                     <span class="stat-number"><?php echo count($categories); ?></span>
-                    <span class="stat-label">Catégories</span>
+                    <span class="stat-label"><?php echo __('blog.categories_title'); ?></span>
                 </div>
                 <div class="stat-item">
                     <span class="stat-number">5+</span>
@@ -713,9 +713,9 @@ $pageDescription = __("blog.subtitle");
                 <!-- Search Form -->
                 <div class="blog-search">
                     <form class="search-form" method="GET">
-                        <input type="text" name="search" class="search-input" placeholder="Rechercher un article..." value="<?php echo htmlspecialchars($search); ?>">
+                        <input type="text" name="search" class="search-input" placeholder="<?php echo __('blog.search_placeholder'); ?>" value="<?php echo htmlspecialchars($search); ?>">
                         <button type="submit" class="search-btn">
-                            <i class="fas fa-search"></i> Rechercher
+                            <i class="fas fa-search"></i> <?php echo __('common.search'); ?>
                         </button>
                     </form>
                     <?php if (!empty($search)): ?>
@@ -831,7 +831,7 @@ $pageDescription = __("blog.subtitle");
             <aside class="blog-sidebar">
                 <!-- Categories -->
                 <div class="sidebar-widget">
-                    <h3 class="widget-title">Catégories</h3>
+                    <h3 class="widget-title"><?php echo __('blog.categories_title'); ?></h3>
                     <ul class="category-list">
                         <li><a href="blog-dynamic-new.php" class="category-link <?php echo $category == 0 ? 'active' : ''; ?>">
                             Toutes <span class="category-count">(<?php echo $totalPosts; ?>)</span>
@@ -847,7 +847,7 @@ $pageDescription = __("blog.subtitle");
 
                 <!-- Recent Articles -->
                 <div class="sidebar-widget">
-                    <h3 class="widget-title">Articles récents</h3>
+                    <h3 class="widget-title"><?php echo __('blog.recent_title'); ?></h3>
                     <div class="recent-articles">
                         <?php foreach ($recentPosts as $recent): ?>
                             <a href="blog-post.php?id=<?php echo $recent['id']; ?>" class="recent-article">
@@ -869,11 +869,11 @@ $pageDescription = __("blog.subtitle");
 
                 <!-- Newsletter -->
                 <div class="sidebar-widget newsletter-widget">
-                    <h3 class="widget-title">Newsletter</h3>
-                    <p class="newsletter-text">Recevez nos derniers conseils et actualités fiscales directement dans votre boîte mail.</p>
+                    <h3 class="widget-title"><?php echo __('blog.newsletter_title'); ?></h3>
+                    <p class="newsletter-text"><?php echo __('blog.newsletter_subtitle'); ?></p>
                     <form class="newsletter-form" action="newsletter-handler.php" method="POST">
-                        <input type="email" name="email" placeholder="Votre email" class="newsletter-input" required>
-                        <button type="submit" class="newsletter-btn">S'abonner</button>
+                        <input type="email" name="email" placeholder="<?php echo __('blog.newsletter_placeholder'); ?>" class="newsletter-input" required>
+                        <button type="submit" class="newsletter-btn"><?php echo __('btn.subscribe'); ?></button>
                     </form>
                 </div>
             </aside>

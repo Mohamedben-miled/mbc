@@ -44,7 +44,7 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/contact-twitter.jpg";
                 </div>
 
                 <!-- Navigation -->
-                <nav class="nav" role="navigation" aria-label="Navigation principale">
+                <nav class="nav" role="navigation" aria-label="<?php echo __('nav.main_navigation'); ?>">
                     <ul class="nav-list">
                         <li><a href="index.php#accueil" class="nav-link"><?php echo __('nav.home'); ?></a></li>
                         <li><a href="mbc.php" class="nav-link"><?php echo __('nav.about'); ?></a></li>
@@ -331,10 +331,10 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/contact-twitter.jpg";
                     <h3>MBC Expert Comptable</h3>
                     <p>Votre partenaire comptable pour entrepreneurs franco-maghrébins. Expertise, innovation et accompagnement personnalisé.</p>
                     <div class="social-links">
-                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
-                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
-                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter" aria-hidden="true"></i></a>
-                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+                        <a href="#" aria-label="<?php echo __('social.facebook'); ?>"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
+                        <a href="#" aria-label="<?php echo __('social.linkedin'); ?>"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
+                        <a href="#" aria-label="<?php echo __('social.twitter'); ?>"><i class="fab fa-twitter" aria-hidden="true"></i></a>
+                        <a href="#" aria-label="<?php echo __('social.instagram'); ?>"><i class="fab fa-instagram" aria-hidden="true"></i></a>
                     </div>
                 </div>
                 <div class="footer-section">
