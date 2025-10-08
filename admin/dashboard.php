@@ -48,6 +48,47 @@ $recentSubmissions = $contact->getSubmissions(1, 5);
         .sidebar {
             width: 280px;
             background: white;
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            z-index: 1000;
+            transition: transform 0.3s ease;
+        }
+
+        .sidebar.mobile-hidden {
+            transform: translateX(-100%);
+        }
+
+        .mobile-sidebar-toggle {
+            display: none;
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1001;
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .mobile-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+        .mobile-overlay.active {
+            display: block;
+        }
             box-shadow: 0 0 20px rgba(0,0,0,0.1);
             position: fixed;
             height: 100vh;
@@ -324,7 +365,11 @@ $recentSubmissions = $contact->getSubmissions(1, 5);
 </head>
 <body>
     <div class="dashboard">
-        <div class="sidebar">
+        <button class="mobile-sidebar-toggle" onclick="toggleSidebar()">
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="mobile-overlay" onclick="closeSidebar()"></div>
+        <div class="sidebar" id="sidebar">
             <div class="sidebar-header">
                 <img src="../assets/mbc.png" alt="MBC Expert Comptable">
             </div>
@@ -482,5 +527,54 @@ $recentSubmissions = $contact->getSubmissions(1, 5);
             </div>
         </div>
     </div>
+
+    <script>
+        // Auto-refresh stats every 30 seconds
+        setInterval(function() {
+            location.reload();
+        }, 30000);
+
+        // Mobile sidebar functions
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.querySelector('.mobile-overlay');
+            
+            sidebar.classList.toggle('mobile-visible');
+            overlay.classList.toggle('active');
+        }
+
+        function closeSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.querySelector('.mobile-overlay');
+            
+            sidebar.classList.remove('mobile-visible');
+            overlay.classList.remove('active');
+        }
+
+        // Close sidebar when clicking outside on mobile
+        document.addEventListener('click', function(event) {
+            const sidebar = document.getElementById('sidebar');
+            const toggle = document.querySelector('.mobile-sidebar-toggle');
+            const overlay = document.querySelector('.mobile-overlay');
+            
+            if (window.innerWidth <= 768) {
+                if (!sidebar.contains(event.target) && !toggle.contains(event.target)) {
+                    sidebar.classList.remove('mobile-visible');
+                    overlay.classList.remove('active');
+                }
+            }
+        });
+
+        // Handle window resize
+        window.addEventListener('resize', function() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.querySelector('.mobile-overlay');
+            
+            if (window.innerWidth > 768) {
+                sidebar.classList.remove('mobile-visible');
+                overlay.classList.remove('active');
+            }
+        });
+    </script>
 </body>
 </html>
