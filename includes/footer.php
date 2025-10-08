@@ -201,44 +201,7 @@
             form.submit();
         }
 
-        // Mobile navigation functionality
-        document.addEventListener('DOMContentLoaded', function() {
-            const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
-            const mobileNav = document.querySelector('.mobile-nav');
-            
-            if (mobileMenuToggle && mobileNav) {
-                mobileMenuToggle.addEventListener('click', function() {
-                    mobileNav.classList.toggle('active');
-                    const isExpanded = mobileNav.classList.contains('active');
-                    this.setAttribute('aria-expanded', isExpanded);
-                    
-                    // Prevent body scroll when menu is open
-                    if (isExpanded) {
-                        document.body.style.overflow = 'hidden';
-                    } else {
-                        document.body.style.overflow = '';
-                    }
-                });
-                
-                // Close mobile menu when clicking outside
-                mobileNav.addEventListener('click', function(e) {
-                    if (e.target === mobileNav) {
-                        mobileNav.classList.remove('active');
-                        mobileMenuToggle.setAttribute('aria-expanded', 'false');
-                        document.body.style.overflow = '';
-                    }
-                });
-                
-                // Close mobile menu when clicking on links
-                const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
-                mobileNavLinks.forEach(link => {
-                    link.addEventListener('click', function() {
-                        mobileNav.classList.remove('active');
-                        mobileMenuToggle.setAttribute('aria-expanded', 'false');
-                        document.body.style.overflow = '';
-                    });
-                });
-            }
+        // Mobile navigation functionality is handled by js/mobile-nav.js
             
             // User dropdown functionality
             const userDropdownToggle = document.querySelector('.user-dropdown-toggle');
