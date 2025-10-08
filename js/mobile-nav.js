@@ -46,6 +46,8 @@
         e.preventDefault();
         e.stopPropagation();
         
+        console.log('Menu toggle clicked, current state:', isMenuOpen);
+        
         if (isMenuOpen) {
             closeMobileMenu();
         } else {
@@ -93,6 +95,12 @@
         mobileNav = document.querySelector('.mobile-nav');
         mobileNavClose = document.querySelector('.mobile-nav-close');
         
+        console.log('Mobile nav elements found:', {
+            toggle: !!mobileMenuToggle,
+            nav: !!mobileNav,
+            close: !!mobileNavClose
+        });
+        
         if (!mobileMenuToggle || !mobileNav) {
             console.warn('Mobile navigation elements not found');
             return;
@@ -103,6 +111,18 @@
         
         // Add event listeners with optimized options
         mobileMenuToggle.addEventListener('click', handleMenuToggle, { passive: false });
+        
+        // Add fallback event listener with different approach
+        mobileMenuToggle.addEventListener('touchstart', function(e) {
+            e.preventDefault();
+            handleMenuToggle(e);
+        }, { passive: false });
+        
+        // Add mousedown as backup
+        mobileMenuToggle.addEventListener('mousedown', function(e) {
+            e.preventDefault();
+            handleMenuToggle(e);
+        }, { passive: false });
         
         if (mobileNavClose) {
             mobileNavClose.addEventListener('click', handleCloseButton, { passive: false });

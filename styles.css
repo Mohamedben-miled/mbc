@@ -738,13 +738,24 @@ header, .header, .header-content {
     font-size: 1.5rem;
     color: #1f2937;
     cursor: pointer;
-    padding: 0.5rem;
+    padding: 0.75rem;
     border-radius: 0.375rem;
-    transition: background-color 0.3s ease;
+    transition: all 0.3s ease;
+    z-index: 1001;
+    position: relative;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    min-width: 44px;
+    min-height: 44px;
 }
 
 .mobile-menu-toggle:hover {
     background-color: #f3f4f6;
+}
+
+.mobile-menu-toggle:focus {
+    outline: 2px solid #2e6a6e;
+    outline-offset: 2px;
 }
 
 /* Responsive Auth Styles */
@@ -1517,21 +1528,17 @@ header, .header, .header-content {
     
     /* Fix mobile navbar button hitbox */
     .mobile-menu-toggle {
+        display: block !important;
         padding: 0.75rem;
         background: none;
         border: none;
         cursor: pointer;
-        display: flex;
-        flex-direction: column;
-        gap: 0.25rem;
         z-index: 1001;
-    }
-    
-    .mobile-menu-toggle span {
-        width: 25px;
-        height: 3px;
-        background: #333;
-        transition: all 0.3s ease;
+        position: relative;
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: transparent;
+        min-width: 44px;
+        min-height: 44px;
     }
     
     .mobile-nav-close {
@@ -1926,25 +1933,7 @@ a:hover {
 
 
 
-.mobile-menu-toggle {
-    display: none;
-    background: none;
-    border: none;
-    color: white;
-    font-size: 1.5rem;
-    cursor: pointer;
-    padding: 0.5rem;
-    border-radius: 6px;
-    transition: all 0.3s ease;
-}
-
-.mobile-menu-toggle:hover {
-    background: rgba(255, 255, 255, 0.2);
-}
-
-.header.scrolled .mobile-menu-toggle {
-    color: white;
-}
+/* Removed duplicate mobile-menu-toggle styles */
 
 /* ========================================
    6. HERO SECTION
@@ -5384,13 +5373,9 @@ input:checked + .slider:before {
     }
     
     .mobile-menu-toggle {
-        display: block;
+        display: block !important;
         position: relative;
-        z-index: 10000;
-    }
-    
-    .mobile-menu-toggle.active {
-        color: white;
+        z-index: 1001;
     }
     
     /* Prevent body scroll when mobile menu is open */
@@ -5403,13 +5388,16 @@ input:checked + .slider:before {
     
     /* Ensure mobile menu toggle is always visible and clickable */
     .mobile-menu-toggle {
+        display: block !important;
         position: relative;
-        z-index: 10001;
+        z-index: 1001;
         background: none !important;
         border: none !important;
         cursor: pointer;
         touch-action: manipulation;
         -webkit-tap-highlight-color: transparent;
+        min-width: 44px;
+        min-height: 44px;
     }
     
     /* Improve mobile menu visibility */
