@@ -54,10 +54,15 @@ $recentSubmissions = $contact->getSubmissions(1, 5);
             height: 100vh;
             z-index: 1000;
             transition: transform 0.3s ease;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
         }
 
         .sidebar.mobile-hidden {
             transform: translateX(-100%);
+        }
+        
+        .sidebar.mobile-visible {
+            transform: translateX(0);
         }
 
         .mobile-sidebar-toggle {
@@ -344,7 +349,7 @@ $recentSubmissions = $contact->getSubmissions(1, 5);
                 transition: transform 0.3s ease;
             }
 
-            .sidebar.open {
+            .sidebar.mobile-visible {
                 transform: translateX(0);
             }
 

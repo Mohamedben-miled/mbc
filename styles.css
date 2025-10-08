@@ -602,6 +602,29 @@ header, .header, .header-content {
     font-size: 0.875rem;
 }
 
+/* Language Flags */
+.language-selector {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.875rem;
+    color: #333;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.language-selector:hover {
+    border-color: #2e6a6e;
+    box-shadow: 0 2px 4px rgba(46, 106, 110, 0.1);
+}
+
+.language-selector:focus {
+    outline: none;
+    border-color: #2e6a6e;
+    box-shadow: 0 0 0 3px rgba(46, 106, 110, 0.1);
+}
+
 /* Mobile Navigation Styles */
 .mobile-nav {
     display: none;
@@ -611,7 +634,7 @@ header, .header, .header-content {
     width: 100%;
     height: 100vh;
     background: rgba(0, 0, 0, 0.8);
-    z-index: 9999;
+    z-index: 1000;
     opacity: 0;
     visibility: hidden;
     transition: all 0.3s ease;
@@ -1407,10 +1430,128 @@ header, .header, .header-content {
     .mobile-nav {
         display: none !important;
     }
-    
-    .mobile-menu-toggle {
-        display: none !important;
+}
+
+/* Fix blog responsive issues */
+@media (max-width: 768px) {
+    .blog-container {
+        padding: 1rem;
+        margin: 0;
+        max-width: 100%;
+        overflow-x: hidden;
     }
+    
+    .blog-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .blog-card {
+        margin: 0;
+        padding: 1rem;
+    }
+    
+    /* Fix footer responsive issues */
+    .footer {
+        padding: 2rem 1rem;
+    }
+    
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        text-align: center;
+    }
+    
+    .footer-section {
+        margin-bottom: 1.5rem;
+    }
+    
+    .footer-section h3 {
+        margin-bottom: 1rem;
+        font-size: 1.1rem;
+    }
+    
+    .footer-section ul {
+        list-style: none;
+        padding: 0;
+    }
+    
+    .footer-section ul li {
+        margin-bottom: 0.5rem;
+    }
+    
+    .footer-section ul li a {
+        color: #ccc;
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+    
+    .footer-section ul li a:hover {
+        color: #2e6a6e;
+    }
+    
+    .social-links {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        margin-top: 1rem;
+    }
+    
+    .social-links a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        color: white;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+    
+    .social-links a:hover {
+        background: #2e6a6e;
+        transform: translateY(-2px);
+    }
+    
+    /* Fix mobile navbar button hitbox */
+    .mobile-menu-toggle {
+        padding: 0.75rem;
+        background: none;
+        border: none;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+        z-index: 1001;
+    }
+    
+    .mobile-menu-toggle span {
+        width: 25px;
+        height: 3px;
+        background: #333;
+        transition: all 0.3s ease;
+    }
+    
+    .mobile-nav-close {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        background: none;
+        border: none;
+        color: white;
+        font-size: 1.5rem;
+        cursor: pointer;
+        padding: 0.75rem;
+        z-index: 1002;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 44px;
+        min-height: 44px;
+    }
+}
     
     /* Ensure navigation stays on one line on desktop */
     .nav-list {
