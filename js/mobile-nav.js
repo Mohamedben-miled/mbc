@@ -1,82 +1,139 @@
 /**
- * Mobile Navigation Handler
+ * Mobile Navigation Handler - Optimized
  * Handles mobile menu toggle, close button, and overlay interactions
  */
 
-document.addEventListener('DOMContentLoaded', function() {
-    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
-    const mobileNav = document.querySelector('.mobile-nav');
-    const mobileNavClose = document.querySelector('.mobile-nav-close');
+(function() {
+    'use strict';
     
-    if (mobileMenuToggle && mobileNav) {
-        let isMenuOpen = false;
+    let isMenuOpen = false;
+    let mobileMenuToggle, mobileNav, mobileNavClose;
+    let mobileNavLinks = [];
+    
+    // Optimized functions
+    function openMobileMenu() {
+        if (isMenuOpen) return;
         
-        function openMobileMenu() {
-            isMenuOpen = true;
-            mobileNav.classList.add('active');
-            mobileMenuToggle.setAttribute('aria-expanded', 'true');
-            document.body.style.overflow = 'hidden';
-            document.body.style.touchAction = 'none';
-        }
+        isMenuOpen = true;
+        mobileNav.classList.add('active');
+        mobileMenuToggle.setAttribute('aria-expanded', 'true');
+        document.body.style.overflow = 'hidden';
+        document.body.style.touchAction = 'none';
         
-        function closeMobileMenu() {
-            isMenuOpen = false;
-            mobileNav.classList.remove('active');
-            mobileMenuToggle.setAttribute('aria-expanded', 'false');
-            document.body.style.overflow = '';
-            document.body.style.touchAction = '';
-        }
-        
-        // Open menu with hamburger button
-        mobileMenuToggle.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            openMobileMenu();
-        }, { passive: false });
-        
-        // Close menu with close button
-        if (mobileNavClose) {
-            mobileNavClose.addEventListener('click', function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                closeMobileMenu();
-            }, { passive: false });
-        }
-        
-        // Close menu when clicking outside
-        document.addEventListener('click', function(e) {
-            if (isMenuOpen && !mobileNav.contains(e.target) && !mobileMenuToggle.contains(e.target)) {
-                closeMobileMenu();
-            }
-        }, { passive: true });
-        
-        // Close menu when clicking on navigation links
-        const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
-        mobileNavLinks.forEach(link => {
-            link.addEventListener('click', function() {
-                closeMobileMenu();
-            }, { passive: true });
-        });
-        
-        // Close menu with Escape key
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape' && isMenuOpen) {
-                closeMobileMenu();
-            }
-        });
-        
-        // Close menu when clicking on overlay
-        mobileNav.addEventListener('click', function(e) {
-            if (e.target === mobileNav) {
-                closeMobileMenu();
-            }
-        }, { passive: true });
-        
-        // Handle window resize
-        window.addEventListener('resize', function() {
-            if (window.innerWidth > 768 && isMenuOpen) {
-                closeMobileMenu();
-            }
+        // Add smooth transition
+        requestAnimationFrame(() => {
+            mobileNav.style.transform = 'translateX(0)';
         });
     }
-});
+    
+    function closeMobileMenu() {
+        if (!isMenuOpen) return;
+        
+        isMenuOpen = false;
+        mobileNav.classList.remove('active');
+        mobileMenuToggle.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+        document.body.style.touchAction = '';
+        
+        // Add smooth transition
+        requestAnimationFrame(() => {
+            mobileNav.style.transform = 'translateX(-100%)';
+        });
+    }
+    
+    // Event handlers
+    function handleMenuToggle(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        if (isMenuOpen) {
+            closeMobileMenu();
+        } else {
+            openMobileMenu();
+        }
+    }
+    
+    function handleCloseButton(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        closeMobileMenu();
+    }
+    
+    function handleOutsideClick(e) {
+        if (isMenuOpen && !mobileNav.contains(e.target) && !mobileMenuToggle.contains(e.target)) {
+            closeMobileMenu();
+        }
+    }
+    
+    function handleOverlayClick(e) {
+        if (e.target === mobileNav) {
+            closeMobileMenu();
+        }
+    }
+    
+    function handleLinkClick() {
+        closeMobileMenu();
+    }
+    
+    function handleEscapeKey(e) {
+        if (e.key === 'Escape' && isMenuOpen) {
+            closeMobileMenu();
+        }
+    }
+    
+    function handleResize() {
+        if (window.innerWidth > 768 && isMenuOpen) {
+            closeMobileMenu();
+        }
+    }
+    
+    // Initialize
+    function init() {
+        mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+        mobileNav = document.querySelector('.mobile-nav');
+        mobileNavClose = document.querySelector('.mobile-nav-close');
+        
+        if (!mobileMenuToggle || !mobileNav) {
+            console.warn('Mobile navigation elements not found');
+            return;
+        }
+        
+        // Get navigation links
+        mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+        
+        // Add event listeners with optimized options
+        mobileMenuToggle.addEventListener('click', handleMenuToggle, { passive: false });
+        
+        if (mobileNavClose) {
+            mobileNavClose.addEventListener('click', handleCloseButton, { passive: false });
+        }
+        
+        // Use event delegation for better performance
+        document.addEventListener('click', handleOutsideClick, { passive: true });
+        mobileNav.addEventListener('click', handleOverlayClick, { passive: true });
+        document.addEventListener('keydown', handleEscapeKey, { passive: true });
+        window.addEventListener('resize', handleResize, { passive: true });
+        
+        // Add event listeners to navigation links
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', handleLinkClick, { passive: true });
+        });
+        
+        console.log('Mobile navigation initialized');
+    }
+    
+    // Initialize when DOM is ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
+    }
+    
+    // Expose functions globally for debugging
+    window.mobileNav = {
+        open: openMobileMenu,
+        close: closeMobileMenu,
+        isOpen: () => isMenuOpen
+    };
+})();
+

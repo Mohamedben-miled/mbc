@@ -984,6 +984,7 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/twitter-image.jpg";
     <script src="script.js"></script>
     <script src="js/mobile-nav.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/modal.js"></script>
     <script>
         // Business Suggestion Chatbot
         document.addEventListener('DOMContentLoaded', function() {
@@ -1779,6 +1780,7 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/twitter-image.jpg";
     <script src="script.js"></script>
     <script src="js/mobile-nav.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/modal.js"></script>
     <script src="chatbot.js"></script>
 </body>
 </html>

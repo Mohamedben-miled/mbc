@@ -1751,5 +1751,6 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/services-twitter.jpg";
     <script src="script.js"></script>
     <script src="js/mobile-nav.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/modal.js"></script>
 </body>
 </html>
