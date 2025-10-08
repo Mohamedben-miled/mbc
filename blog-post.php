@@ -281,7 +281,7 @@ $categories = $blog->getCategories();
                 </div>
                 
                 <!-- Navigation -->
-                <nav class="nav" role="navigation" aria-label="Navigation principale">
+                <nav class="nav" role="navigation" aria-label="<?php echo __('common.main_navigation'); ?>">
                     <ul class="nav-list">
                         <li><a href="index.php#accueil" class="nav-link">Accueil</a></li>
                         <li><a href="mbc.php" class="nav-link">MBC</a></li>
@@ -358,7 +358,7 @@ $categories = $blog->getCategories();
                     </div>
                     
                     <!-- Mobile Menu Toggle -->
-                    <button class="mobile-menu-toggle" aria-label="Ouvrir le menu mobile" aria-expanded="false">
+                    <button class="mobile-menu-toggle" aria-label="<?php echo __('common.open_mobile_menu'); ?>" aria-expanded="false">
                         <i class="fas fa-bars"></i>
                     </button>
                 </div>
@@ -460,25 +460,25 @@ $categories = $blog->getCategories();
                         <a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo urlencode('https://mbc-expertcomptable.fr/blog-post.php?id=' . $post['id']); ?>" 
                            class="share-btn share-facebook" 
                            target="_blank" 
-                           title="Partager sur Facebook">
+                           title="<?php echo __('common.share_facebook'); ?>">
                             <i class="fab fa-facebook-f"></i>
                         </a>
                         <a href="https://twitter.com/intent/tweet?url=<?php echo urlencode('https://mbc-expertcomptable.fr/blog-post.php?id=' . $post['id']); ?>&text=<?php echo urlencode($post['title']); ?>" 
                            class="share-btn share-twitter" 
                            target="_blank" 
-                           title="Partager sur Twitter">
+                           title="<?php echo __('common.share_twitter'); ?>">
                             <i class="fab fa-twitter"></i>
                         </a>
                         <a href="https://www.linkedin.com/sharing/share-offsite/?url=<?php echo urlencode('https://mbc-expertcomptable.fr/blog-post.php?id=' . $post['id']); ?>" 
                            class="share-btn share-linkedin" 
                            target="_blank" 
-                           title="Partager sur LinkedIn">
+                           title="<?php echo __('common.share_linkedin'); ?>">
                             <i class="fab fa-linkedin-in"></i>
                         </a>
                         <a href="https://wa.me/?text=<?php echo urlencode($post['title'] . ' - ' . 'https://mbc-expertcomptable.fr/blog-post.php?id=' . $post['id']); ?>" 
                            class="share-btn share-whatsapp" 
                            target="_blank" 
-                           title="Partager sur WhatsApp">
+                           title="<?php echo __('common.share_whatsapp'); ?>">
                             <i class="fab fa-whatsapp"></i>
                         </a>
                     </div>
@@ -500,16 +500,16 @@ $categories = $blog->getCategories();
                         Votre expert-comptable de confiance pour accompagner votre entreprise dans sa croissance.
                     </p>
                     <div class="social-links">
-                        <a href="#" class="social-link" aria-label="Facebook">
+                        <a href="#" class="social-link" aria-label="<?php echo __('common.share_facebook'); ?>">
                             <i class="fab fa-facebook-f"></i>
                         </a>
-                        <a href="#" class="social-link" aria-label="LinkedIn">
+                        <a href="#" class="social-link" aria-label="<?php echo __('common.share_linkedin'); ?>">
                             <i class="fab fa-linkedin-in"></i>
                         </a>
-                        <a href="#" class="social-link" aria-label="Twitter">
+                        <a href="#" class="social-link" aria-label="<?php echo __('common.share_twitter'); ?>">
                             <i class="fab fa-twitter"></i>
                         </a>
-                        <a href="#" class="social-link" aria-label="Instagram">
+                        <a href="#" class="social-link" aria-label="<?php echo __('common.share_whatsapp'); ?>">
                             <i class="fab fa-instagram"></i>
                         </a>
                     </div>

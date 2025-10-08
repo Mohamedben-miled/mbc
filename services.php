@@ -660,7 +660,7 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/services-twitter.jpg";
                     </div>
                     <div class="review-author">
                         <div class="reviewer-avatar">
-                            <img src="assets/Majdi.png" alt="Ahmed Benali" class="avatar-img">
+                            <img src="assets/Majdi.png" alt="<?php echo __('common.ahmed_benali'); ?>" class="avatar-img">
                         </div>
                         <div class="reviewer-info">
                             <h4>Ahmed Benali</h4>
@@ -691,7 +691,7 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/services-twitter.jpg";
                     </div>
                     <div class="review-author">
                         <div class="reviewer-avatar">
-                            <img src="assets/conseille.png" alt="Fatima Alami" class="avatar-img">
+                            <img src="assets/conseille.png" alt="<?php echo __('common.fatima_alami'); ?>" class="avatar-img">
                         </div>
                         <div class="reviewer-info">
                             <h4>Fatima Alami</h4>
@@ -722,7 +722,7 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/services-twitter.jpg";
                     </div>
                     <div class="review-author">
                         <div class="reviewer-avatar">
-                            <img src="assets/expert.jpg" alt="Youssef Kaddouri" class="avatar-img">
+                            <img src="assets/expert.jpg" alt="<?php echo __('common.youssef_kaddouri'); ?>" class="avatar-img">
                         </div>
                         <div class="reviewer-info">
                             <h4>Youssef Kaddouri</h4>

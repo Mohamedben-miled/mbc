@@ -28,15 +28,15 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/blog-twitter.jpg";
     <meta name="keywords" content="blog comptable, expertise comptable, création entreprise, fiscalité, conseil gestion, entrepreneur, France">
     
     <!-- Open Graph -->
-    <meta property="og:title" content="Blog - MBC High Value Business Consulting">
-    <meta property="og:description" content="Articles d'experts sur l'expertise comptable et la création d'entreprise">
+    <meta property="og:title" content="<?php echo __('common.blog_meta_title_old'); ?>">
+    <meta property="og:description" content="<?php echo __('common.blog_meta_description'); ?>">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://mbc-expertcomptable.fr/blog">
     
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Blog - MBC High Value Business Consulting">
-    <meta name="twitter:description" content="Articles d'experts sur l'expertise comptable et la création d'entreprise">
+    <meta name="twitter:title" content="<?php echo __('common.blog_meta_title_old'); ?>">
+    <meta name="twitter:description" content="<?php echo __('common.blog_meta_description'); ?>">
     
     <!-- Canonical URL -->
     <link rel="canonical" href="https://mbc-expertcomptable.fr/blog">
@@ -406,9 +406,9 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/blog-twitter.jpg";
                     <h3>MBC Expert Comptable</h3>
                     <p>Votre partenaire comptable pour entrepreneurs franco-maghrébins. Expertise, innovation et accompagnement personnalisé.</p>
                     <div class="social-links">
-                        <a href="#" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                        <a href="#" class="social-link" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
-                        <a href="#" class="social-link" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link" aria-label="<?php echo __('common.share_linkedin'); ?>"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" class="social-link" aria-label="<?php echo __('common.share_facebook'); ?>"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="social-link" aria-label="<?php echo __('common.share_twitter'); ?>"><i class="fab fa-twitter"></i></a>
                     </div>
                 </div>
                 <div class="footer-section">

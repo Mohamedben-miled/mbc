@@ -295,17 +295,17 @@ try {
         <form method="POST">
             <div class="form-group">
                 <label for="username">Nom d'utilisateur ou Email</label>
-                <input type="text" id="username" name="username" value="<?php echo htmlspecialchars($_POST['username'] ?? ''); ?>" required placeholder="Entrez le nom d'utilisateur ou l'email">
+                <input type="text" id="username" name="username" value="<?php echo htmlspecialchars($_POST['username'] ?? ''); ?>" required placeholder="<?php echo __('common.enter_username'); ?>">
             </div>
 
             <div class="form-group">
                 <label for="new_password">Nouveau mot de passe</label>
-                <input type="password" id="new_password" name="new_password" required placeholder="Nouveau mot de passe">
+                <input type="password" id="new_password" name="new_password" required placeholder="<?php echo __('common.new_password'); ?>">
             </div>
 
             <div class="form-group">
                 <label for="confirm_password">Confirmer le mot de passe</label>
-                <input type="password" id="confirm_password" name="confirm_password" required placeholder="Confirmer le nouveau mot de passe">
+                <input type="password" id="confirm_password" name="confirm_password" required placeholder="<?php echo __('common.confirm_password'); ?>">
             </div>
 
             <button type="submit" class="btn">Modifier le mot de passe</button>

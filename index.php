@@ -551,7 +551,7 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/twitter-image.jpg";
             <div class="container">
                 <header class="reviews-header">
                     <div class="google-logo">
-                        <img src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png" alt="Google" loading="lazy" width="92" height="30">
+                        <img src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png" alt="<?php echo __('common.google'); ?>" loading="lazy" width="92" height="30">
                     </div>
                     <div class="rating">
                         <div class="stars" aria-label="5 étoiles">★★★★★</div>
@@ -599,7 +599,7 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/twitter-image.jpg";
             <div class="container">
                 <header class="resources-header">
                     <a href="#" class="google-review-btn">
-                        <img src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png" alt="Google" loading="lazy">
+                        <img src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png" alt="<?php echo __('common.google'); ?>" loading="lazy">
                         <?php echo __('btn.google_review'); ?>
                     </a>
                     <h2 id="resources-title"><?php echo __('home.resources.title'); ?></h2>

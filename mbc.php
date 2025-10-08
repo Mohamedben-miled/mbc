@@ -164,7 +164,7 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/Majdi.png";
                         </div>
                     </div>
                     <div class="mbc-hero-image">
-                        <img src="assets/Majdi.png" alt="Majdi Besbes, Expert-Comptable" loading="eager" class="majdi-hero-photo">
+                        <img src="assets/Majdi.png" alt="<?php echo __('common.majdi_besbes'); ?>" loading="eager" class="majdi-hero-photo">
                     </div>
                 </div>
             </div>
@@ -443,7 +443,7 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/Majdi.png";
                                 <div class="simulator-form">
                                     <div class="form-group">
                                         <label for="per-age">Âge</label>
-                                        <input type="number" id="per-age" placeholder="Votre âge">
+                                        <input type="number" id="per-age" placeholder="<?php echo __('common.your_age'); ?>">
                                     </div>
                                     <div class="form-group">
                                         <label for="per-montant">Montant du rachat</label>
@@ -540,7 +540,7 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/Majdi.png";
                             <h4>Historique des simulations</h4>
                             <div class="history-content">
                                 <i class="fas fa-file-alt"></i>
-                                <p>Vous n'avez pas encore de simulations sauvegardées. Utilisez le bouton "Sauvegarder" dans les simulateurs pour conserver vos calculs.</p>
+                                <p><?php echo __('simulators.no_saved'); ?></p>
                             </div>
                         </div>
                     </div>
@@ -570,9 +570,9 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/Majdi.png";
                     <h3>MBC Expert Comptable</h3>
                     <p>Votre partenaire comptable pour entrepreneurs franco-maghrébins. Expertise, innovation et accompagnement personnalisé.</p>
                     <div class="social-links">
-                        <a href="https://www.linkedin.com/in/majdi-besbes-12bb8a1b/?originalSubdomain=fr" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
-                        <a href="#" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
-                        <a href="#" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
+                        <a href="https://www.linkedin.com/in/majdi-besbes-12bb8a1b/?originalSubdomain=fr" target="_blank" rel="noopener" aria-label="<?php echo __('common.share_linkedin'); ?>"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
+                        <a href="#" target="_blank" rel="noopener" aria-label="<?php echo __('common.share_whatsapp'); ?>"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+                        <a href="#" target="_blank" rel="noopener" aria-label="<?php echo __('common.share_facebook'); ?>"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
                     </div>
                 </div>
                 <div class="footer-section">

@@ -48,15 +48,15 @@ $pageDescription = __("blog.subtitle");
     <meta name="keywords" content="blog comptable, expertise comptable, création entreprise, fiscalité, conseil gestion, entrepreneur, France">
     
     <!-- Open Graph -->
-    <meta property="og:title" content="Blog - MBC Expert Comptable">
-    <meta property="og:description" content="Articles d'experts sur l'expertise comptable et la création d'entreprise">
+    <meta property="og:title" content="<?php echo __('common.blog_meta_title'); ?>">
+    <meta property="og:description" content="<?php echo __('common.blog_meta_description'); ?>">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://mbc-expertcomptable.fr/blog">
     
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Blog - MBC Expert Comptable">
-    <meta name="twitter:description" content="Articles d'experts sur l'expertise comptable et la création d'entreprise">
+    <meta name="twitter:title" content="<?php echo __('common.blog_meta_title'); ?>">
+    <meta name="twitter:description" content="<?php echo __('common.blog_meta_description'); ?>">
     
     <!-- Canonical URL -->
     <link rel="canonical" href="https://mbc-expertcomptable.fr/blog">
@@ -869,7 +869,7 @@ $pageDescription = __("blog.subtitle");
                     <h3 class="widget-title">Newsletter</h3>
                     <p class="newsletter-text">Recevez nos derniers conseils et actualités fiscales directement dans votre boîte mail.</p>
                     <form class="newsletter-form" action="newsletter-handler.php" method="POST">
-                        <input type="email" name="email" placeholder="Votre email" class="newsletter-input" required>
+                        <input type="email" name="email" placeholder="<?php echo __('common.your_email'); ?>" class="newsletter-input" required>
                         <button type="submit" class="newsletter-btn">S'abonner</button>
                     </form>
                 </div>
@@ -890,16 +890,16 @@ $pageDescription = __("blog.subtitle");
                         Votre expert-comptable de confiance pour accompagner votre entreprise dans sa croissance.
                     </p>
                     <div class="social-links">
-                        <a href="#" class="social-link" aria-label="Facebook">
+                        <a href="#" class="social-link" aria-label="<?php echo __('common.share_facebook'); ?>">
                             <i class="fab fa-facebook-f"></i>
                         </a>
-                        <a href="#" class="social-link" aria-label="LinkedIn">
+                        <a href="#" class="social-link" aria-label="<?php echo __('common.share_linkedin'); ?>">
                             <i class="fab fa-linkedin-in"></i>
                         </a>
-                        <a href="#" class="social-link" aria-label="Twitter">
+                        <a href="#" class="social-link" aria-label="<?php echo __('common.share_twitter'); ?>">
                             <i class="fab fa-twitter"></i>
                         </a>
-                        <a href="#" class="social-link" aria-label="Instagram">
+                        <a href="#" class="social-link" aria-label="<?php echo __('common.share_whatsapp'); ?>">
                             <i class="fab fa-instagram"></i>
                         </a>
                     </div>
