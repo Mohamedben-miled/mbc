@@ -43,7 +43,7 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/services-twitter.jpg";
                 </div>
 
                 <!-- Navigation -->
-                <nav class="nav" role="navigation" aria-label="Navigation principale">
+                <nav class="nav" role="navigation" aria-label="<?php echo __('nav.main_navigation'); ?>">
                     <ul class="nav-list">
                         <li><a href="index.php#accueil" class="nav-link"><?php echo __('nav.home'); ?></a></li>
                         <li><a href="mbc.php" class="nav-link"><?php echo __('nav.about'); ?></a></li>
@@ -455,14 +455,14 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/services-twitter.jpg";
                 
                 <!-- Navigation Controls -->
                 <div class="services-navigation">
-                    <button class="nav-arrow nav-prev" id="prevServices" aria-label="Services précédents">
+                    <button class="nav-arrow nav-prev" id="prevServices" aria-label="<?php echo __('btn.previous_services'); ?>">
                         <i class="fas fa-chevron-left"></i>
                     </button>
                     <div class="pagination-dots">
                         <span class="dot active" data-page="1"></span>
                         <span class="dot" data-page="2"></span>
                     </div>
-                    <button class="nav-arrow nav-next" id="nextServices" aria-label="Services suivants">
+                    <button class="nav-arrow nav-next" id="nextServices" aria-label="<?php echo __('btn.next_services'); ?>">
                         <i class="fas fa-chevron-right"></i>
                     </button>
                 </div>
@@ -671,7 +671,7 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/services-twitter.jpg";
                             </div>
                         </div>
                         <div class="review-actions">
-                            <button class="btn-useful" aria-label="Marquer comme utile">
+                            <button class="btn-useful" aria-label="<?php echo __('btn.mark_useful'); ?>">
                                 <i class="fas fa-thumbs-up"></i> Utile (12)
                             </button>
                         </div>
@@ -687,7 +687,7 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/services-twitter.jpg";
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
                         </div>
-                        <blockquote>"Création d'entreprise en 10 jours chrono ! L'équipe MBC m'a accompagnée de A à Z. Leur plateforme digitale est très intuitive et le support WhatsApp est génial."</blockquote>
+                        <blockquote>"<?php echo __('testimonial.ahmed'); ?>"</blockquote>
                     </div>
                     <div class="review-author">
                         <div class="reviewer-avatar">
@@ -702,7 +702,7 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/services-twitter.jpg";
                             </div>
                         </div>
                         <div class="review-actions">
-                            <button class="btn-useful" aria-label="Marquer comme utile">
+                            <button class="btn-useful" aria-label="<?php echo __('btn.mark_useful'); ?>">
                                 <i class="fas fa-thumbs-up"></i> Utile (8)
                             </button>
                         </div>
@@ -733,7 +733,7 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/services-twitter.jpg";
                             </div>
                         </div>
                         <div class="review-actions">
-                            <button class="btn-useful" aria-label="Marquer comme utile">
+                            <button class="btn-useful" aria-label="<?php echo __('btn.mark_useful'); ?>">
                                 <i class="fas fa-thumbs-up"></i> Utile (15)
                             </button>
                         </div>
@@ -749,7 +749,7 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/services-twitter.jpg";
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
                         </div>
-                        <blockquote>"Tarifs transparents, pas de mauvaises surprises. L'équipe est très professionnelle et disponible. Parfait pour les entrepreneurs qui veulent se concentrer sur leur business."</blockquote>
+                        <blockquote>"<?php echo __('testimonial.fatima'); ?>"</blockquote>
                     </div>
                     <div class="review-author">
                         <div class="reviewer-avatar">
@@ -764,7 +764,7 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/services-twitter.jpg";
                             </div>
                         </div>
                         <div class="review-actions">
-                            <button class="btn-useful" aria-label="Marquer comme utile">
+                            <button class="btn-useful" aria-label="<?php echo __('btn.mark_useful'); ?>">
                                 <i class="fas fa-thumbs-up"></i> Utile (6)
                             </button>
                         </div>
@@ -780,7 +780,7 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/services-twitter.jpg";
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
                         </div>
-                        <blockquote>"Excellent accompagnement pour l'optimisation fiscale. J'ai économisé plus de 3000€ la première année grâce à leurs conseils. Bravo à toute l'équipe !"</blockquote>
+                        <blockquote>"<?php echo __('testimonial.youssef'); ?>"</blockquote>
                     </div>
                     <div class="review-author">
                         <div class="reviewer-avatar">
@@ -795,7 +795,7 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/services-twitter.jpg";
                             </div>
                         </div>
                         <div class="review-actions">
-                            <button class="btn-useful" aria-label="Marquer comme utile">
+                            <button class="btn-useful" aria-label="<?php echo __('btn.mark_useful'); ?>">
                                 <i class="fas fa-thumbs-up"></i> Utile (9)
                             </button>
                         </div>
@@ -811,7 +811,7 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/services-twitter.jpg";
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
                         </div>
-                        <blockquote>"Interface digitale très bien conçue, je peux suivre ma comptabilité en temps réel. Le chatbot répond instantanément à mes questions. Innovation au top !"</blockquote>
+                        <blockquote>"<?php echo __('testimonial.omar'); ?>"</blockquote>
                     </div>
                     <div class="review-author">
                         <div class="reviewer-avatar">
@@ -826,7 +826,7 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/services-twitter.jpg";
                             </div>
                         </div>
                         <div class="review-actions">
-                            <button class="btn-useful" aria-label="Marquer comme utile">
+                            <button class="btn-useful" aria-label="<?php echo __('btn.mark_useful'); ?>">
                                 <i class="fas fa-thumbs-up"></i> Utile (11)
                             </button>
                         </div>
@@ -1122,10 +1122,10 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/services-twitter.jpg";
                     <h3>MBC Expert Comptable</h3>
                     <p>Votre partenaire comptable pour entrepreneurs franco-maghrébins. Expertise, innovation et accompagnement personnalisé.</p>
                     <div class="social-links">
-                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
-                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
-                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter" aria-hidden="true"></i></a>
-                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+                        <a href="#" aria-label="<?php echo __('social.facebook'); ?>"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
+                        <a href="#" aria-label="<?php echo __('social.linkedin'); ?>"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
+                        <a href="#" aria-label="<?php echo __('social.twitter'); ?>"><i class="fab fa-twitter" aria-hidden="true"></i></a>
+                        <a href="#" aria-label="<?php echo __('social.instagram'); ?>"><i class="fab fa-instagram" aria-hidden="true"></i></a>
                     </div>
                 </div>
                 <div class="footer-section">
@@ -1375,7 +1375,7 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/services-twitter.jpg";
                             <h4>Historique des simulations</h4>
                             <div class="history-content">
                                 <i class="fas fa-file-alt"></i>
-                                <p>Vous n'avez pas encore de simulations sauvegardées. Utilisez le bouton "Sauvegarder" dans les simulateurs pour conserver vos calculs.</p>
+                                <p><?php echo __('simulators.no_saved'); ?></p>
                             </div>
                         </div>
                         

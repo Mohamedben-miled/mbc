@@ -641,6 +641,9 @@ $translations = [
         'btn.subscribe' => 'S\'abonner',
         'btn.close_menu' => 'Fermer le menu',
         'btn.useful' => 'Utile',
+        'btn.mark_useful' => 'Marquer comme utile',
+        'btn.previous_services' => 'Services précédents',
+        'btn.next_services' => 'Services suivants',
         'btn.login' => 'Connexion',
         'btn.logout' => 'Déconnexion',
         'btn.dashboard' => 'Dashboard',
@@ -707,6 +710,18 @@ $translations = [
         'modal.simulators.title' => 'Simulateurs en ligne',
         'modal.simulators.content' => 'Contenu des simulateurs...',
         'simulators.no_saved' => 'Vous n\'avez pas encore de simulations sauvegardées. Utilisez le bouton "Sauvegarder" dans les simulateurs pour conserver vos calculs.',
+        
+        // Testimonials
+        'testimonial.ahmed' => 'Création d\'entreprise en 10 jours chrono ! L\'équipe MBC m\'a accompagnée de A à Z. Leur plateforme digitale est très intuitive et le support WhatsApp est génial.',
+        'testimonial.fatima' => 'Tarifs transparents, pas de mauvaises surprises. L\'équipe est très professionnelle et disponible. Parfait pour les entrepreneurs qui veulent se concentrer sur leur business.',
+        'testimonial.youssef' => 'Excellent accompagnement pour l\'optimisation fiscale. J\'ai économisé plus de 3000€ la première année grâce à leurs conseils. Bravo à toute l\'équipe !',
+        'testimonial.omar' => 'Interface digitale très bien conçue, je peux suivre ma comptabilité en temps réel. Le chatbot répond instantanément à mes questions. Innovation au top !',
+        
+        // Social Media
+        'social.facebook' => 'Facebook',
+        'social.linkedin' => 'LinkedIn',
+        'social.twitter' => 'Twitter',
+        'social.instagram' => 'Instagram',
         
         // Chatbot elements
         'chatbot.close' => 'Fermer le chat',
@@ -1431,6 +1446,9 @@ $translations = [
         'btn.subscribe' => 'Subscribe',
         'btn.close_menu' => 'Close menu',
         'btn.useful' => 'Useful',
+        'btn.mark_useful' => 'Mark as useful',
+        'btn.previous_services' => 'Previous services',
+        'btn.next_services' => 'Next services',
         'btn.login' => 'Login',
         'btn.logout' => 'Logout',
         'btn.dashboard' => 'Dashboard',
@@ -1495,6 +1513,18 @@ $translations = [
         'modal.simulators.title' => 'Online Simulators',
         'modal.simulators.content' => 'Simulators content...',
         'simulators.no_saved' => 'You don\'t have any saved simulations yet. Use the "Save" button in the simulators to keep your calculations.',
+        
+        // Testimonials
+        'testimonial.ahmed' => 'Business creation in 10 days! The MBC team accompanied me from A to Z. Their digital platform is very intuitive and WhatsApp support is great.',
+        'testimonial.fatima' => 'Transparent pricing, no bad surprises. The team is very professional and available. Perfect for entrepreneurs who want to focus on their business.',
+        'testimonial.youssef' => 'Excellent support for tax optimization. I saved more than €3000 in the first year thanks to their advice. Bravo to the whole team!',
+        'testimonial.omar' => 'Very well-designed digital interface, I can follow my accounting in real time. The chatbot responds instantly to my questions. Innovation at its best!',
+        
+        // Social Media
+        'social.facebook' => 'Facebook',
+        'social.linkedin' => 'LinkedIn',
+        'social.twitter' => 'Twitter',
+        'social.instagram' => 'Instagram',
         
         // Chatbot elements
         'chatbot.close' => 'Close chat',
@@ -2219,6 +2249,9 @@ $translations = [
         'btn.subscribe' => '订阅',
         'btn.close_menu' => '关闭菜单',
         'btn.useful' => '有用',
+        'btn.mark_useful' => '标记为有用',
+        'btn.previous_services' => '上一个服务',
+        'btn.next_services' => '下一个服务',
         'btn.login' => '登录',
         'btn.logout' => '退出',
         'btn.dashboard' => '仪表板',
@@ -2283,6 +2316,18 @@ $translations = [
         'modal.simulators.title' => '在线计算器',
         'modal.simulators.content' => '计算器内容...',
         'simulators.no_saved' => '您还没有保存的模拟。使用计算器中的"保存"按钮来保存您的计算。',
+        
+        // Testimonials
+        'testimonial.ahmed' => '10天内完成企业创建！MBC团队从头到尾陪伴我。他们的数字平台非常直观，WhatsApp支持很棒。',
+        'testimonial.fatima' => '透明的价格，没有意外。团队非常专业且随时可用。非常适合想要专注于业务的创业者。',
+        'testimonial.youssef' => '税务优化的出色支持。多亏了他们的建议，我在第一年节省了超过3000欧元。为整个团队喝彩！',
+        'testimonial.omar' => '设计精良的数字界面，我可以实时跟踪我的会计。聊天机器人即时回答我的问题。创新至上！',
+        
+        // Social Media
+        'social.facebook' => 'Facebook',
+        'social.linkedin' => 'LinkedIn',
+        'social.twitter' => 'Twitter',
+        'social.instagram' => 'Instagram',
         
         // Chatbot elements
         'chatbot.close' => '关闭聊天',

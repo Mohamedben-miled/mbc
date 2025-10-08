@@ -571,7 +571,7 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/twitter-image.jpg";
                         <div class="review-rating" aria-label="5 étoiles">★★★★★</div>
                         <p class="review-text"><?php echo __('home.reviews.review1.text'); ?></p>
                         <div class="review-actions">
-                            <button class="btn-useful" aria-label="Marquer comme utile"><i class="fas fa-thumbs-up" aria-hidden="true"></i> <?php echo __('btn.useful'); ?></button>
+                            <button class="btn-useful" aria-label="<?php echo __('btn.mark_useful'); ?>"><i class="fas fa-thumbs-up" aria-hidden="true"></i> <?php echo __('btn.useful'); ?></button>
                             <a href="#" class="btn-google"><?php echo __('btn.view_google'); ?> <i class="fas fa-external-link-alt" aria-hidden="true"></i></a>
                         </div>
                     </article>
@@ -586,7 +586,7 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/twitter-image.jpg";
                         <div class="review-rating" aria-label="5 étoiles">★★★★★</div>
                         <p class="review-text"><?php echo __('home.reviews.review2.text'); ?></p>
                         <div class="review-actions">
-                            <button class="btn-useful" aria-label="Marquer comme utile"><i class="fas fa-thumbs-up" aria-hidden="true"></i> <?php echo __('btn.useful'); ?></button>
+                            <button class="btn-useful" aria-label="<?php echo __('btn.mark_useful'); ?>"><i class="fas fa-thumbs-up" aria-hidden="true"></i> <?php echo __('btn.useful'); ?></button>
                             <a href="#" class="btn-google"><?php echo __('btn.view_google'); ?> <i class="fas fa-external-link-alt" aria-hidden="true"></i></a>
                         </div>
                     </article>
@@ -935,10 +935,10 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/twitter-image.jpg";
                     <h3>MBC Expert Comptable</h3>
                     <p><?php echo __('footer.description'); ?></p>
                     <div class="social-links">
-                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
-                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
-                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter" aria-hidden="true"></i></a>
-                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+                        <a href="#" aria-label="<?php echo __('social.facebook'); ?>"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
+                        <a href="#" aria-label="<?php echo __('social.linkedin'); ?>"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
+                        <a href="#" aria-label="<?php echo __('social.twitter'); ?>"><i class="fab fa-twitter" aria-hidden="true"></i></a>
+                        <a href="#" aria-label="<?php echo __('social.instagram'); ?>"><i class="fab fa-instagram" aria-hidden="true"></i></a>
                     </div>
                 </div>
                 <div class="footer-section">
