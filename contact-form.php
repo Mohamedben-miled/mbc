@@ -38,7 +38,7 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/contact-twitter.jpg";
             <div class="header-content">
                 <!-- Logo -->
                 <div class="logo">
-                    <a href="index.html#accueil" aria-label="MBC Expert Comptable - Retour à l'accueil">
+                    <a href="index.php#accueil" aria-label="MBC Expert Comptable - Retour à l'accueil">
                         <img src="assets/mbc.png" alt="MBC Expert Comptable" loading="eager" class="logo-img">
                     </a>
                 </div>
@@ -340,19 +340,19 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/contact-twitter.jpg";
                 <div class="footer-section">
                     <h3>Liens rapides</h3>
                     <ul>
-                        <li><a href="index.html">Accueil</a></li>
-                        <li><a href="mbc.html">À propos</a></li>
-                        <li><a href="index.html#services">Services</a></li>
-                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="index.php">Accueil</a></li>
+                        <li><a href="mbc.php">À propos</a></li>
+                        <li><a href="services.php">Services</a></li>
+                        <li><a href="contact-form.php">Contact</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
                     <h3>Nos services</h3>
                     <ul>
-                        <li><a href="index.html#expertise">Expertise Comptable</a></li>
-                        <li><a href="index.html#fiscalite">Fiscalité</a></li>
-                        <li><a href="index.html#social">Social & Paie</a></li>
-                        <li><a href="index.html#conseil">Conseil</a></li>
+                        <li><a href="services.php#expertise">Expertise Comptable</a></li>
+                        <li><a href="services.php#fiscalite">Fiscalité</a></li>
+                        <li><a href="services.php#social">Social & Paie</a></li>
+                        <li><a href="services.php#conseil">Conseil</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">

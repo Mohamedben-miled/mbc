@@ -639,6 +639,8 @@ $translations = [
         'btn.close' => 'Fermer',
         'btn.send' => 'Envoyer',
         'btn.subscribe' => 'S\'abonner',
+        'btn.close_menu' => 'Fermer le menu',
+        'btn.useful' => 'Utile',
         'btn.login' => 'Connexion',
         'btn.logout' => 'Déconnexion',
         'btn.dashboard' => 'Dashboard',
@@ -704,6 +706,7 @@ $translations = [
         'modal.close' => 'Fermer',
         'modal.simulators.title' => 'Simulateurs en ligne',
         'modal.simulators.content' => 'Contenu des simulateurs...',
+        'simulators.no_saved' => 'Vous n\'avez pas encore de simulations sauvegardées. Utilisez le bouton "Sauvegarder" dans les simulateurs pour conserver vos calculs.',
         
         // Chatbot elements
         'chatbot.close' => 'Fermer le chat',
@@ -1426,6 +1429,8 @@ $translations = [
         'btn.close' => 'Close',
         'btn.send' => 'Send',
         'btn.subscribe' => 'Subscribe',
+        'btn.close_menu' => 'Close menu',
+        'btn.useful' => 'Useful',
         'btn.login' => 'Login',
         'btn.logout' => 'Logout',
         'btn.dashboard' => 'Dashboard',
@@ -1489,6 +1494,7 @@ $translations = [
         'modal.close' => 'Close',
         'modal.simulators.title' => 'Online Simulators',
         'modal.simulators.content' => 'Simulators content...',
+        'simulators.no_saved' => 'You don\'t have any saved simulations yet. Use the "Save" button in the simulators to keep your calculations.',
         
         // Chatbot elements
         'chatbot.close' => 'Close chat',
@@ -2211,6 +2217,8 @@ $translations = [
         'btn.close' => '关闭',
         'btn.send' => '发送',
         'btn.subscribe' => '订阅',
+        'btn.close_menu' => '关闭菜单',
+        'btn.useful' => '有用',
         'btn.login' => '登录',
         'btn.logout' => '退出',
         'btn.dashboard' => '仪表板',
@@ -2274,6 +2282,7 @@ $translations = [
         'modal.close' => '关闭',
         'modal.simulators.title' => '在线计算器',
         'modal.simulators.content' => '计算器内容...',
+        'simulators.no_saved' => '您还没有保存的模拟。使用计算器中的"保存"按钮来保存您的计算。',
         
         // Chatbot elements
         'chatbot.close' => '关闭聊天',

@@ -34,7 +34,7 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/Majdi.png";
     <meta property="og:title" content="MBC - À propos de Majdi Besbes | Expert-Comptable">
     <meta property="og:description" content="Découvrez Majdi Besbes, expert-comptable inscrit au tableau de l'OEC Île-de-France. Spécialisé dans l'accompagnement des entrepreneurs franco-maghrébins.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://mbc-expertcomptable.fr/mbc.html">
+    <meta property="og:url" content="https://mbc-expertcomptable.fr/mbc.php">
     <meta property="og:image" content="https://mbc-expertcomptable.fr/assets/Majdi.png">
     
     <!-- Twitter Card Meta Tags -->
@@ -65,7 +65,7 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/Majdi.png";
             <div class="header-content">
                 <!-- Logo -->
                 <div class="logo">
-                    <a href="index.html#accueil" aria-label="MBC Expert Comptable - Retour à l'accueil">
+                    <a href="index.php#accueil" aria-label="MBC Expert Comptable - Retour à l'accueil">
                         <img src="assets/mbc.png" alt="MBC Expert Comptable" loading="eager" class="logo-img">
                     </a>
                 </div>
@@ -578,19 +578,19 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/Majdi.png";
                 <div class="footer-section">
                     <h4><?php echo __('footer.quick_links'); ?></h4>
                     <ul>
-                        <li><a href="index.html">Accueil</a></li>
-                        <li><a href="mbc.html">À propos</a></li>
-                        <li><a href="index.html#services">Services</a></li>
-                        <li><a href="index.html#contact">Contact</a></li>
+                        <li><a href="index.php">Accueil</a></li>
+                        <li><a href="mbc.php">À propos</a></li>
+                        <li><a href="services.php">Services</a></li>
+                        <li><a href="contact-form.php">Contact</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
                     <h4><?php echo __('footer.services'); ?></h4>
                     <ul>
-                        <li><a href="index.html#services"><?php echo __('home.expertise.title'); ?></a></li>
-                        <li><a href="index.html#services"><?php echo __('home.fiscalite.title'); ?></a></li>
-                        <li><a href="index.html#services"><?php echo __('home.service_conseil.feature1'); ?></a></li>
-                        <li><a href="index.html#services"><?php echo __('home.conseil.title'); ?></a></li>
+                        <li><a href="services.php#expertise"><?php echo __('home.expertise.title'); ?></a></li>
+                        <li><a href="services.php#fiscalite"><?php echo __('home.fiscalite.title'); ?></a></li>
+                        <li><a href="services.php#social"><?php echo __('home.service_conseil.feature1'); ?></a></li>
+                        <li><a href="services.php#conseil"><?php echo __('home.conseil.title'); ?></a></li>
                     </ul>
                 </div>
                 <div class="footer-section">

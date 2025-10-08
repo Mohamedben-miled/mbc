@@ -150,7 +150,7 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/twitter-image.jpg";
     <!-- Mobile Navigation -->
     <div class="mobile-nav" id="mobileNav">
         <div class="mobile-nav-content">
-            <button class="mobile-nav-close" aria-label="Fermer le menu">
+            <button class="mobile-nav-close" aria-label="<?php echo __('btn.close_menu'); ?>">
                 <i class="fas fa-times"></i>
             </button>
             <ul class="mobile-nav-list">
@@ -905,7 +905,7 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/twitter-image.jpg";
                             <h4>Historique des simulations</h4>
                             <div class="history-content">
                                 <i class="fas fa-file-alt"></i>
-                                <p>Vous n'avez pas encore de simulations sauvegardées. Utilisez le bouton "Sauvegarder" dans les simulateurs pour conserver vos calculs.</p>
+                                <p><?php echo __('simulators.no_saved'); ?></p>
                             </div>
                         </div>
                     </div>
