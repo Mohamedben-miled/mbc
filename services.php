@@ -23,7 +23,7 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/services-twitter.jpg";
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $pageTitle; ?></title>
-    <meta name="description" content="Découvrez nos services d'expertise comptable, fiscalité, social & paie, et conseil d'entreprise. Solutions sur mesure pour entrepreneurs franco-maghrébins.">
+    <meta name="description" content="<?php echo __('services.hero_description'); ?>">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -37,7 +37,7 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/services-twitter.jpg";
             <div class="header-content">
                 <!-- Logo -->
                 <div class="logo">
-                    <a href="index.php#accueil" aria-label="MBC Expert Comptable - Retour à l'accueil">
+                    <a href="index.php#accueil" aria-label="<?php echo __('nav.home_aria'); ?>">
                         <img src="assets/mbc.png" alt="MBC Expert Comptable" loading="eager" class="logo-img">
                     </a>
                 </div>
@@ -154,9 +154,9 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/services-twitter.jpg";
         <div class="container">
             <div class="hero-content">
                 <div class="hero-text">
-                    <h1 class="hero-title">Excellence Comptable</h1>
-                    <h2 class="hero-subtitle">pour Entrepreneurs Visionnaires</h2>
-                    <p class="hero-description">Des solutions expertes pour transformer vos défis comptables en opportunités de croissance</p>
+                    <h1 class="hero-title"><?php echo __('services.hero_title'); ?></h1>
+                    <h2 class="hero-subtitle"><?php echo __('services.hero_subtitle'); ?></h2>
+                    <p class="hero-description"><?php echo __('services.hero_description'); ?></p>
                     <div class="hero-cta">
                         <a href="https://wa.me/33676570097?text=Bonjour%2C%20je%20souhaite%20découvrir%20vos%20services%20comptables." target="_blank" class="btn btn-primary btn-large">
                             <i class="fab fa-whatsapp"></i>
@@ -205,10 +205,10 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/services-twitter.jpg";
             <header class="section-header">
                 <div class="section-badge">
                     <i class="fas fa-star"></i>
-                    <span>Services Premium</span>
+                    <span><?php echo __('services.premium_title'); ?></span>
                 </div>
-                <h2>Nos Services d'Excellence</h2>
-                <p class="section-subtitle">Des solutions expertes pour propulser votre entreprise vers le succès</p>
+                <h2><?php echo __('services.premium_subtitle'); ?></h2>
+                <p class="section-subtitle"><?php echo __('services.premium_description'); ?></p>
             </header>
             
             <div class="services-carousel">
@@ -217,36 +217,36 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/services-twitter.jpg";
                     <div class="services-page active" data-page="1">
                         <article class="service-card featured">
                             <div class="service-badge">
-                                <span>Le plus populaire</span>
+                                <span><?php echo __('services.most_popular'); ?></span>
                             </div>
                             <div class="service-icon">
                                 <i class="fas fa-calculator" aria-hidden="true"></i>
                             </div>
                             <div class="service-content">
-                                <h3>Expertise Comptable</h3>
-                                <p>Sortez du chaos administratif avec une gestion comptable claire et organisée</p>
+                                <h3><?php echo __('services.expertise_title'); ?></h3>
+                                <p><?php echo __('services.expertise_description'); ?></p>
                                 <div class="service-benefits">
                                     <div class="benefit-item">
                                         <i class="fas fa-check"></i>
-                                        <span>Tenue de comptabilité complète</span>
+                                        <span><?php echo __('services.expertise_feature1'); ?></span>
                                     </div>
                                     <div class="benefit-item">
                                         <i class="fas fa-check"></i>
-                                        <span>Bilans & Liasses fiscales</span>
+                                        <span><?php echo __('services.expertise_feature2'); ?></span>
                                     </div>
                                     <div class="benefit-item">
                                         <i class="fas fa-check"></i>
-                                        <span>Révision comptable mensuelle</span>
+                                        <span><?php echo __('services.expertise_feature3'); ?></span>
                                     </div>
                                     <div class="benefit-item">
                                         <i class="fas fa-check"></i>
-                                        <span>Tableaux de bord personnalisés</span>
+                                        <span><?php echo __('services.expertise_feature4'); ?></span>
                                     </div>
                                 </div>
                                 <div class="service-features">
-                                    <span class="feature-tag">Tenue de comptabilité</span>
-                                    <span class="feature-tag">Bilans & Liasses</span>
-                                    <span class="feature-tag">Suivi mensuel</span>
+                                    <span class="feature-tag"><?php echo __('services.expertise_feature1'); ?></span>
+                                    <span class="feature-tag"><?php echo __('services.expertise_feature2'); ?></span>
+                                    <span class="feature-tag"><?php echo __('services.expertise_feature3'); ?></span>
                                 </div>
                                 <div class="service-cta">
                                     <a href="https://wa.me/33676570097?text=Bonjour%2C%20je%20souhaite%20en%20savoir%20plus%20sur%20l%27expertise%20comptable." target="_blank" class="btn btn-primary">
@@ -261,30 +261,30 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/services-twitter.jpg";
                                 <i class="fas fa-file-invoice" aria-hidden="true"></i>
                             </div>
                             <div class="service-content">
-                                <h3>Fiscalité</h3>
-                                <p>Naviguez sereinement dans le labyrinthe fiscal avec nos experts</p>
+                                <h3><?php echo __('services.fiscalite_title'); ?></h3>
+                                <p><?php echo __('services.fiscalite_description'); ?></p>
                                 <div class="service-benefits">
                                     <div class="benefit-item">
                                         <i class="fas fa-check"></i>
-                                        <span>Déclarations TVA mensuelles</span>
+                                        <span><?php echo __('services.fiscalite_feature1'); ?></span>
                                     </div>
                                     <div class="benefit-item">
                                         <i class="fas fa-check"></i>
-                                        <span>Optimisation fiscale légale</span>
+                                        <span><?php echo __('services.fiscalite_feature2'); ?></span>
                                     </div>
                                     <div class="benefit-item">
                                         <i class="fas fa-check"></i>
-                                        <span>Conseil en défiscalisation</span>
+                                        <span><?php echo __('services.fiscalite_feature3'); ?></span>
                                     </div>
                                     <div class="benefit-item">
                                         <i class="fas fa-check"></i>
-                                        <span>Veille réglementaire</span>
+                                        <span><?php echo __('services.fiscalite_feature4'); ?></span>
                                     </div>
                                 </div>
                                 <div class="service-features">
-                                    <span class="feature-tag">Déclarations TVA</span>
-                                    <span class="feature-tag">Optimisation fiscale</span>
-                                    <span class="feature-tag">Conseil expert</span>
+                                    <span class="feature-tag"><?php echo __('services.fiscalite_feature1'); ?></span>
+                                    <span class="feature-tag"><?php echo __('services.fiscalite_feature2'); ?></span>
+                                    <span class="feature-tag"><?php echo __('services.fiscalite_feature3'); ?></span>
                                 </div>
                                 <div class="service-cta">
                                     <a href="https://wa.me/33676570097?text=Bonjour%2C%20je%20souhaite%20en%20savoir%20plus%20sur%20la%20fiscalit%C3%A9." target="_blank" class="btn btn-primary">
@@ -299,8 +299,8 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/services-twitter.jpg";
                                 <i class="fas fa-users" aria-hidden="true"></i>
                             </div>
                             <div class="service-content">
-                                <h3>Social & Paie</h3>
-                                <p>Simplifiez la gestion de vos obligations sociales et salariales</p>
+                                <h3><?php echo __('services.social_title'); ?></h3>
+                                <p><?php echo __('services.social_description'); ?></p>
                                 <div class="service-benefits">
                                     <div class="benefit-item">
                                         <i class="fas fa-check"></i>
@@ -474,8 +474,8 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/services-twitter.jpg";
     <section class="comparison-section section">
         <div class="container">
             <div class="section-header">
-                <h2>Pourquoi Choisir MBC ?</h2>
-                <p>Découvrez ce qui nous différencie de la concurrence</p>
+                <h2><?php echo __('services.why_choose_title'); ?></h2>
+                <p><?php echo __('services.why_choose_subtitle'); ?></p>
             </div>
             
             <div class="comparison-table">
@@ -484,86 +484,86 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/services-twitter.jpg";
                     <div class="comparison-cell our-service">
                         <div class="service-logo">
                             <img src="assets/mbc.png" alt="MBC" class="logo-small">
-                            <span>MBC</span>
+                            <span><?php echo __('services.comparison_mbc'); ?></span>
                         </div>
                     </div>
                     <div class="comparison-cell competitor">
-                        <span>Autres cabinets</span>
+                        <span><?php echo __('services.comparison_others'); ?></span>
                     </div>
                 </div>
                 
                 <div class="comparison-row">
                     <div class="comparison-cell feature">
                         <i class="fas fa-clock"></i>
-                        <span>Délai de réponse</span>
+                        <span><?php echo __('services.response_time'); ?></span>
                     </div>
                     <div class="comparison-cell our-service">
                         <i class="fas fa-check-circle"></i>
-                        <span>24h maximum</span>
+                        <span><?php echo __('services.response_mbc'); ?></span>
                     </div>
                     <div class="comparison-cell competitor">
                         <i class="fas fa-times-circle"></i>
-                        <span>3-5 jours</span>
+                        <span><?php echo __('services.response_others'); ?></span>
                     </div>
                 </div>
                 
                 <div class="comparison-row">
                     <div class="comparison-cell feature">
                         <i class="fas fa-globe"></i>
-                        <span>Expertise franco-maghrébine</span>
+                        <span><?php echo __('services.expertise_franco'); ?></span>
                     </div>
                     <div class="comparison-cell our-service">
                         <i class="fas fa-check-circle"></i>
-                        <span>Spécialisé</span>
+                        <span><?php echo __('services.expertise_specialized'); ?></span>
                     </div>
                     <div class="comparison-cell competitor">
                         <i class="fas fa-times-circle"></i>
-                        <span>Généraliste</span>
+                        <span><?php echo __('services.expertise_general'); ?></span>
                     </div>
                 </div>
                 
                 <div class="comparison-row">
                     <div class="comparison-cell feature">
                         <i class="fas fa-laptop"></i>
-                        <span>Plateforme digitale</span>
+                        <span><?php echo __('services.digital_platform'); ?></span>
                     </div>
                     <div class="comparison-cell our-service">
                         <i class="fas fa-check-circle"></i>
-                        <span>100% en ligne</span>
+                        <span><?php echo __('services.digital_online'); ?></span>
                     </div>
                     <div class="comparison-cell competitor">
                         <i class="fas fa-times-circle"></i>
-                        <span>Partiellement</span>
+                        <span><?php echo __('services.digital_partial'); ?></span>
                     </div>
                 </div>
                 
                 <div class="comparison-row">
                     <div class="comparison-cell feature">
                         <i class="fas fa-phone"></i>
-                        <span>Support WhatsApp</span>
+                        <span><?php echo __('services.whatsapp_support'); ?></span>
                     </div>
                     <div class="comparison-cell our-service">
                         <i class="fas fa-check-circle"></i>
-                        <span>Disponible 7j/7</span>
+                        <span><?php echo __('services.whatsapp_available'); ?></span>
                     </div>
                     <div class="comparison-cell competitor">
                         <i class="fas fa-times-circle"></i>
-                        <span>Email uniquement</span>
+                        <span><?php echo __('services.whatsapp_email'); ?></span>
                     </div>
                 </div>
                 
                 <div class="comparison-row">
                     <div class="comparison-cell feature">
                         <i class="fas fa-euro-sign"></i>
-                        <span>Tarifs transparents</span>
+                        <span><?php echo __('services.transparent_pricing'); ?></span>
                     </div>
                     <div class="comparison-cell our-service">
                         <i class="fas fa-check-circle"></i>
-                        <span>Devis gratuit</span>
+                        <span><?php echo __('services.pricing_free'); ?></span>
                     </div>
                     <div class="comparison-cell competitor">
                         <i class="fas fa-times-circle"></i>
-                        <span>Tarifs cachés</span>
+                        <span><?php echo __('services.pricing_hidden'); ?></span>
                     </div>
                 </div>
                 
@@ -585,33 +585,33 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/services-twitter.jpg";
     <section class="section">
         <div class="container">
             <div class="section-header">
-                <h2>Notre Méthode de Travail</h2>
-                <p>Un processus structuré pour garantir la qualité de nos services</p>
+                <h2><?php echo __('services.work_method_title'); ?></h2>
+                <p><?php echo __('services.work_method_subtitle'); ?></p>
             </div>
             
             <div class="process-steps">
                 <div class="process-step">
                     <div class="process-number">1</div>
-                    <h3>Analyse de vos besoins</h3>
-                    <p>Nous étudions votre situation et identifions vos besoins spécifiques</p>
+                    <h3><?php echo __('services.step1_title'); ?></h3>
+                    <p><?php echo __('services.step1_description'); ?></p>
                 </div>
                 
                 <div class="process-step">
                     <div class="process-number">2</div>
-                    <h3>Proposition personnalisée</h3>
-                    <p>Nous vous proposons une solution adaptée avec un devis détaillé</p>
+                    <h3><?php echo __('services.step2_title'); ?></h3>
+                    <p><?php echo __('services.step2_description'); ?></p>
                 </div>
                 
                 <div class="process-step">
                     <div class="process-number">3</div>
-                    <h3>Mise en place</h3>
-                    <p>Nous configurons vos outils et procédures comptables</p>
+                    <h3><?php echo __('services.step3_title'); ?></h3>
+                    <p><?php echo __('services.step3_description'); ?></p>
                 </div>
                 
                 <div class="process-step">
                     <div class="process-number">4</div>
-                    <h3>Suivi régulier</h3>
-                    <p>Nous assurons un suivi continu et des rapports périodiques</p>
+                    <h3><?php echo __('services.step4_title'); ?></h3>
+                    <p><?php echo __('services.step4_description'); ?></p>
                 </div>
             </div>
         </div>
@@ -628,15 +628,15 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/services-twitter.jpg";
                     <div class="stars" aria-label="5 étoiles">★★★★★</div>
                     <span>(5 avis)</span>
                 </div>
-                <h2>Ce que disent nos clients</h2>
-                <p>Découvrez les témoignages authentiques de nos clients satisfaits</p>
+                <h2><?php echo __('services.testimonials_title'); ?></h2>
+                <p><?php echo __('services.testimonials_subtitle'); ?></p>
             </div>
             
             <div class="reviews-grid">
                 <div class="review-card featured">
                     <div class="review-badge">
                         <i class="fas fa-crown"></i>
-                        <span>Client VIP</span>
+                        <span><?php echo __('services.vip_client'); ?></span>
                     </div>
                     <div class="review-content">
                         <div class="stars">
@@ -646,15 +646,15 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/services-twitter.jpg";
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
                         </div>
-                        <blockquote>"MBC a transformé notre gestion comptable. En 6 mois, nous avons économisé 15h/mois et optimisé nos charges de 20%. Leur expertise franco-maghrébine est un vrai plus !"</blockquote>
+                        <blockquote>"<?php echo __('services.testimonial_ahmed'); ?>"</blockquote>
                         <div class="review-metrics">
                             <div class="metric">
                                 <span class="metric-value">20%</span>
-                                <span class="metric-label">Économies</span>
+                                <span class="metric-label"><?php echo __('services.savings'); ?></span>
                             </div>
                             <div class="metric">
                                 <span class="metric-value">15h</span>
-                                <span class="metric-label">Temps gagné</span>
+                                <span class="metric-label"><?php echo __('services.time_saved'); ?></span>
                             </div>
                         </div>
                     </div>
@@ -849,48 +849,48 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/services-twitter.jpg";
     <section class="section">
         <div class="container">
             <div class="section-header">
-                <h2>Questions Fréquentes</h2>
-                <p>Retrouvez les réponses aux questions les plus courantes sur nos services</p>
+                <h2><?php echo __('services.faq_title'); ?></h2>
+                <p><?php echo __('services.faq_subtitle'); ?></p>
             </div>
             
             <div class="faq-container">
                 <div class="faq-item">
                     <div class="faq-question">
-                        <h3>Quels sont vos services principaux ?</h3>
+                        <h3><?php echo __('services.faq1_question'); ?></h3>
                         <i class="fas fa-chevron-down"></i>
                     </div>
                     <div class="faq-answer">
-                        <p>Nous proposons quatre services principaux : l'expertise comptable (tenue de comptabilité, bilans), la fiscalité (déclarations TVA, optimisation), le social & paie (bulletins, URSSAF), et le conseil d'entreprise (création, stratégie).</p>
+                        <p><?php echo __('services.faq1_answer'); ?></p>
                     </div>
                 </div>
                 
                 <div class="faq-item">
                     <div class="faq-question">
-                        <h3>Combien de temps faut-il pour créer une entreprise ?</h3>
+                        <h3><?php echo __('services.faq2_question'); ?></h3>
                         <i class="fas fa-chevron-down"></i>
                     </div>
                     <div class="faq-answer">
-                        <p>Le délai de création dépend du statut choisi : 1-2 semaines pour l'auto-entrepreneur, 2-4 semaines pour une SARL/SAS. Nous nous chargeons de toutes les formalités pour vous faire gagner du temps.</p>
+                        <p><?php echo __('services.faq2_answer'); ?></p>
                     </div>
                 </div>
                 
                 <div class="faq-item">
                     <div class="faq-question">
-                        <h3>Proposez-vous des services en ligne ?</h3>
+                        <h3><?php echo __('services.faq3_question'); ?></h3>
                         <i class="fas fa-chevron-down"></i>
                     </div>
                     <div class="faq-answer">
-                        <p>Oui, nous proposons une plateforme en ligne sécurisée pour le dépôt de vos documents, le suivi de votre comptabilité et la consultation de vos tableaux de bord en temps réel.</p>
+                        <p><?php echo __('services.faq3_answer'); ?></p>
                     </div>
                 </div>
                 
                 <div class="faq-item">
                     <div class="faq-question">
-                        <h3>Êtes-vous spécialisés dans les entreprises franco-maghrébines ?</h3>
+                        <h3><?php echo __('services.faq4_question'); ?></h3>
                         <i class="fas fa-chevron-down"></i>
                     </div>
                     <div class="faq-answer">
-                        <p>Absolument ! Notre équipe comprend parfaitement les enjeux spécifiques des entrepreneurs franco-maghrébins, notamment en matière de fiscalité internationale et de double imposition.</p>
+                        <p><?php echo __('services.faq4_answer'); ?></p>
                     </div>
                 </div>
             </div>
@@ -901,31 +901,31 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/services-twitter.jpg";
     <section class="pricing-section section">
         <div class="container">
             <div class="section-header">
-                <h2>Tarifs Transparents</h2>
-                <p>Choisissez la formule qui correspond à vos besoins</p>
+                <h2><?php echo __('services.pricing_title'); ?></h2>
+                <p><?php echo __('services.pricing_subtitle'); ?></p>
                 <div class="pricing-toggle">
-                    <span class="toggle-label">Mensuel</span>
+                    <span class="toggle-label"><?php echo __('services.monthly'); ?></span>
                     <label class="toggle-switch">
                         <input type="checkbox" id="pricingToggle">
                         <span class="slider"></span>
                     </label>
-                    <span class="toggle-label">Annuel <span class="discount">-20%</span></span>
+                    <span class="toggle-label"><?php echo __('services.annual'); ?></span>
                 </div>
             </div>
             
             <div class="pricing-grid">
                 <div class="pricing-card starter">
                     <div class="pricing-header">
-                        <h3>Starter</h3>
-                        <p>Parfait pour débuter</p>
+                        <h3><?php echo __('services.starter_title'); ?></h3>
+                        <p><?php echo __('services.starter_subtitle'); ?></p>
                         <div class="pricing-badge">
                             <i class="fas fa-seedling"></i>
-                            <span>Idéal TPE</span>
+                            <span><?php echo __('services.starter_ideal'); ?></span>
                         </div>
                     </div>
                     <div class="pricing-price">
                         <span class="currency">€</span>
-                        <span class="amount monthly">89</span>
+                        <span class="amount monthly"><?php echo __('services.starter_price'); ?></span>
                         <span class="amount yearly" style="display: none;">71</span>
                         <span class="period">/mois</span>
                     </div>
@@ -948,12 +948,12 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/services-twitter.jpg";
                         </div>
                         <div class="feature-item disabled">
                             <i class="fas fa-times"></i>
-                            <span>Support WhatsApp</span>
+                            <span><?php echo __('services.whatsapp_support'); ?></span>
                         </div>
                     </div>
                     <div class="pricing-cta">
                         <a href="https://wa.me/33676570097?text=Bonjour%2C%20je%20souhaite%20souscrire%20à%20la%20formule%20Starter." target="_blank" class="btn btn-outline">
-                            Choisir Starter
+                            <?php echo __('services.choose_starter'); ?>
                         </a>
                     </div>
                 </div>
@@ -964,16 +964,16 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/services-twitter.jpg";
                         <span>Le plus populaire</span>
                     </div>
                     <div class="pricing-header">
-                        <h3>Professional</h3>
-                        <p>Notre formule recommandée</p>
+                        <h3><?php echo __('services.professional_title'); ?></h3>
+                        <p><?php echo __('services.professional_subtitle'); ?></p>
                         <div class="pricing-badge">
                             <i class="fas fa-rocket"></i>
-                            <span>Idéal PME</span>
+                            <span><?php echo __('services.professional_ideal'); ?></span>
                         </div>
                     </div>
                     <div class="pricing-price">
                         <span class="currency">€</span>
-                        <span class="amount monthly">149</span>
+                        <span class="amount monthly"><?php echo __('services.professional_price'); ?></span>
                         <span class="amount yearly" style="display: none;">119</span>
                         <span class="period">/mois</span>
                     </div>
@@ -1005,23 +1005,23 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/services-twitter.jpg";
                     </div>
                     <div class="pricing-cta">
                         <a href="https://wa.me/33676570097?text=Bonjour%2C%20je%20souhaite%20souscrire%20à%20la%20formule%20Professional." target="_blank" class="btn btn-primary">
-                            Choisir Professional
+                            <?php echo __('services.choose_professional'); ?>
                         </a>
                     </div>
                 </div>
                 
                 <div class="pricing-card enterprise">
                     <div class="pricing-header">
-                        <h3>Enterprise</h3>
-                        <p>Pour les grandes ambitions</p>
+                        <h3><?php echo __('services.enterprise_title'); ?></h3>
+                        <p><?php echo __('services.enterprise_subtitle'); ?></p>
                         <div class="pricing-badge">
                             <i class="fas fa-building"></i>
-                            <span>Sur mesure</span>
+                            <span><?php echo __('services.enterprise_ideal'); ?></span>
                         </div>
                     </div>
                     <div class="pricing-price">
                         <span class="currency">€</span>
-                        <span class="amount monthly">249</span>
+                        <span class="amount monthly"><?php echo __('services.enterprise_price'); ?></span>
                         <span class="amount yearly" style="display: none;">199</span>
                         <span class="period">/mois</span>
                     </div>
@@ -1053,7 +1053,7 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/services-twitter.jpg";
                     </div>
                     <div class="pricing-cta">
                         <a href="https://wa.me/33676570097?text=Bonjour%2C%20je%20souhaite%20souscrire%20à%20la%20formule%20Enterprise." target="_blank" class="btn btn-outline">
-                            Choisir Enterprise
+                            <?php echo __('services.choose_enterprise'); ?>
                         </a>
                     </div>
                 </div>
@@ -1065,22 +1065,22 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/services-twitter.jpg";
                         <i class="fas fa-shield-check"></i>
                     </div>
                     <div class="guarantee-text">
-                        <h4>Garantie Satisfaction 30 jours</h4>
-                        <p>Pas satisfait ? Nous vous remboursons intégralement</p>
+                        <h4><?php echo __('services.guarantee_title'); ?></h4>
+                        <p><?php echo __('services.guarantee_subtitle'); ?></p>
                     </div>
                 </div>
                 <div class="guarantee-features">
                     <div class="guarantee-feature">
                         <i class="fas fa-gift"></i>
-                        <span>1er mois offert</span>
+                        <span><?php echo __('services.guarantee_feature1'); ?></span>
                     </div>
                     <div class="guarantee-feature">
                         <i class="fas fa-handshake"></i>
-                        <span>Sans engagement</span>
+                        <span><?php echo __('services.guarantee_feature2'); ?></span>
                     </div>
                     <div class="guarantee-feature">
                         <i class="fas fa-clock"></i>
-                        <span>Activation immédiate</span>
+                        <span><?php echo __('services.guarantee_feature3'); ?></span>
                     </div>
                 </div>
             </div>
@@ -1091,21 +1091,21 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/services-twitter.jpg";
     <section class="services-cta">
         <div class="container">
             <div class="cta-content">
-                <h3>Prêt à faire décoller votre entreprise ?</h3>
-                <p>Obtenez un devis personnalisé gratuit en moins de 24h</p>
+                <h3><?php echo __('services.cta_title'); ?></h3>
+                <p><?php echo __('services.cta_subtitle'); ?></p>
                 <div class="cta-buttons">
                     <a href="https://wa.me/33676570097?text=Bonjour%2C%20je%20souhaite%20obtenir%20un%20devis%20gratuit%20pour%20vos%20services%20comptables." target="_blank" class="btn btn-primary btn-large">
                         <i class="fab fa-whatsapp"></i>
-                        Obtenir un devis gratuit
+                        <?php echo __('btn.get_quote'); ?>
                     </a>
                     <a href="tel:+33676570097" class="btn btn-outline btn-large">
                         <i class="fas fa-phone"></i>
-                        Appeler maintenant
+                        <?php echo __('btn.call_now'); ?>
                     </a>
                 </div>
                 <div class="cta-guarantee">
                     <i class="fas fa-shield-alt"></i>
-                    <span>Satisfaction garantie • Devis gratuit • Réponse sous 24h</span>
+                    <span><?php echo __('services.cta_guarantee'); ?></span>
                 </div>
             </div>
         </div>
@@ -1140,10 +1140,10 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/services-twitter.jpg";
                 <div class="footer-section">
                     <h3>Nos services</h3>
                     <ul>
-                        <li><a href="services.php#services">Expertise Comptable</a></li>
-                        <li><a href="services.php#services">Fiscalité</a></li>
-                        <li><a href="services.php#services">Social & Paie</a></li>
-                        <li><a href="services.php#services">Conseil</a></li>
+                        <li><a href="services.php#services"><?php echo __('services.expertise_title'); ?></a></li>
+                        <li><a href="services.php#services"><?php echo __('services.fiscalite_title'); ?></a></li>
+                        <li><a href="services.php#services"><?php echo __('services.social_title'); ?></a></li>
+                        <li><a href="services.php#services"><?php echo __('nav.consulting'); ?></a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
