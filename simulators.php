@@ -148,6 +148,55 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/simulators-twitter.jpg";
         </div>
     </header>
 
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav" id="mobileNav">
+        <div class="mobile-nav-content">
+            <button class="mobile-nav-close" aria-label="<?php echo __('common.close_menu'); ?>">
+                <i class="fas fa-times"></i>
+            </button>
+            <ul class="mobile-nav-list">
+                <li><a href="index.php" class="mobile-nav-link"><?php echo __('nav.home'); ?></a></li>
+                <li><a href="mbc.php" class="mobile-nav-link"><?php echo __('nav.about'); ?></a></li>
+                <li><a href="services.php" class="mobile-nav-link"><?php echo __('nav.services'); ?></a></li>
+                <li><a href="#simulators" class="mobile-nav-link"><?php echo __('nav.simulators'); ?></a></li>
+                <li><a href="blog-dynamic.php" class="mobile-nav-link"><?php echo __('nav.blog'); ?></a></li>
+                <li><a href="contact-form.php" class="mobile-nav-link"><?php echo __('nav.contact'); ?></a></li>
+            </ul>
+            
+            <!-- Mobile Auth Section -->
+            <div class="mobile-auth">
+                <?php if ($auth->isLoggedIn()): ?>
+                    <div class="mobile-user-info">
+                        <p><?php echo __('nav.hello'); ?>, <?php echo htmlspecialchars($currentUser['full_name']); ?></p>
+                    </div>
+                    <div class="mobile-user-actions">
+                        <a href="admin/dashboard.php" class="mobile-nav-link">
+                            <i class="fas fa-tachometer-alt"></i> <?php echo __('nav.dashboard'); ?>
+                        </a>
+                        <a href="admin/blog.php" class="mobile-nav-link">
+                            <i class="fas fa-blog"></i> <?php echo __('nav.blog_management'); ?>
+                        </a>
+                        <a href="admin/contact.php" class="mobile-nav-link">
+                            <i class="fas fa-envelope"></i> <?php echo __('nav.messages'); ?>
+                        </a>
+                        <a href="admin/profile.php" class="mobile-nav-link">
+                            <i class="fas fa-user-edit"></i> <?php echo __('nav.my_profile'); ?>
+                        </a>
+                        <a href="admin/logout.php" class="mobile-nav-link logout">
+                            <i class="fas fa-sign-out-alt"></i> <?php echo __('nav.logout'); ?>
+                        </a>
+                    </div>
+                <?php else: ?>
+                    <div class="mobile-auth-buttons">
+                        <a href="admin/login.php" class="btn btn-primary btn-sm">
+                            <i class="fas fa-sign-in-alt"></i> <?php echo __('nav.login'); ?>
+                        </a>
+                    </div>
+                <?php endif; ?>
+            </div>
+        </div>
+    </div>
+
     <!-- Hero Section -->
     <section class="simulators-hero">
         <div class="container">
