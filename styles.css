@@ -5381,31 +5381,7 @@ input:checked + .slider:before {
         transition: all 0.3s ease;
     }
     
-    .nav-list.mobile-open {
-        display: flex;
-        opacity: 1;
-        visibility: visible;
-    }
-    
-.nav-list li {
-    margin: 0;
-    transform: translateY(30px);
-    opacity: 0;
-    transition: all 0.3s ease;
-    flex-shrink: 0;
-}
-    
-    .nav-list.mobile-open li {
-        transform: translateY(0);
-        opacity: 1;
-    }
-    
-    .nav-list.mobile-open li:nth-child(1) { transition-delay: 0.1s; }
-    .nav-list.mobile-open li:nth-child(2) { transition-delay: 0.2s; }
-    .nav-list.mobile-open li:nth-child(3) { transition-delay: 0.3s; }
-    .nav-list.mobile-open li:nth-child(4) { transition-delay: 0.4s; }
-    .nav-list.mobile-open li:nth-child(5) { transition-delay: 0.5s; }
-    .nav-list.mobile-open li:nth-child(6) { transition-delay: 0.6s; }
+    /* Mobile navigation is handled by js/mobile-nav.js with dedicated mobile-nav structure */
     
     .nav-link {
         font-size: 1.5rem;

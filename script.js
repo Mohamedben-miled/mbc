@@ -244,97 +244,7 @@ class HeaderScrollEffect {
 // ========================================
 // 3. MOBILE MENU FUNCTIONALITY
 // ========================================
-
-class MobileMenu {
-    constructor() {
-        this.menuToggle = null;
-        this.navList = null;
-        this.isOpen = false;
-        this.init();
-    }
-
-    init() {
-        // Create mobile menu toggle if it doesn't exist
-        this.createMobileMenuToggle();
-        this.bindEvents();
-    }
-
-    createMobileMenuToggle() {
-        // Use existing mobile menu toggle button
-        this.menuToggle = document.querySelector('.mobile-menu-toggle');
-        this.navList = document.querySelector('.nav-list');
-        
-        if (this.menuToggle) {
-            // Ensure proper initial state
-            this.menuToggle.setAttribute('aria-expanded', 'false');
-            this.menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
-        }
-    }
-
-    bindEvents() {
-        if (!this.menuToggle) return;
-
-        this.menuToggle.addEventListener('click', () => this.toggle());
-        
-        // Close menu when clicking outside
-        document.addEventListener('click', (e) => {
-            if (this.isOpen && !e.target.closest('.header-content')) {
-                this.close();
-            }
-        });
-
-        // Close menu on escape key
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && this.isOpen) {
-                this.close();
-            }
-        });
-        
-        // Close menu when clicking on navigation links
-        if (this.navList) {
-            const navLinks = this.navList.querySelectorAll('.nav-link');
-            navLinks.forEach(link => {
-                link.addEventListener('click', () => {
-                    this.close();
-                });
-            });
-        }
-    }
-
-    toggle() {
-        this.isOpen ? this.close() : this.open();
-    }
-
-    open() {
-        this.isOpen = true;
-        this.menuToggle.setAttribute('aria-expanded', 'true');
-        this.menuToggle.setAttribute('aria-label', 'Fermer le menu');
-        this.menuToggle.innerHTML = '<i class="fas fa-times"></i>';
-        this.menuToggle.classList.add('active');
-        
-        if (this.navList) {
-            this.navList.classList.add('mobile-open');
-        }
-        
-        // Prevent body scroll
-        document.body.classList.add('mobile-menu-open');
-    }
-
-    close() {
-        this.isOpen = false;
-        this.menuToggle.setAttribute('aria-expanded', 'false');
-        this.menuToggle.setAttribute('aria-label', 'Ouvrir le menu');
-        this.menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
-        this.menuToggle.classList.remove('active');
-        
-        if (this.navList) {
-            this.navList.classList.remove('mobile-open');
-        }
-        
-        // Restore body scroll
-        document.body.classList.remove('mobile-menu-open');
-    }
-}
+// Mobile menu functionality is handled by js/mobile-nav.js
 
 // ========================================
 // 3. SMOOTH SCROLLING
@@ -629,7 +539,7 @@ class App {
         try {
             // Initialize all components
             new HeaderScrollEffect();
-            new MobileMenu();
+            // MobileMenu is handled by js/mobile-nav.js
             new SmoothScroll();
             new ScrollAnimations();
             new ServiceCards();
