@@ -500,11 +500,11 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/twitter-image.jpg";
                         <div class="cta-buttons">
                             <a href="contact-form.php" class="btn btn-primary btn-large">
                                 <i class="fas fa-rocket"></i>
-                                Obtenir un devis gratuit
+                                <?php echo __('btn.get_quote'); ?>
                             </a>
                             <a href="tel:+33676570097" class="btn btn-outline btn-large">
                                 <i class="fas fa-phone"></i>
-                                Appeler maintenant
+                                <?php echo __('btn.call_now'); ?>
                             </a>
                         </div>
                         <div class="cta-guarantee">
@@ -600,7 +600,7 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/twitter-image.jpg";
                 <header class="resources-header">
                     <a href="#" class="google-review-btn">
                         <img src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png" alt="Google" loading="lazy">
-                        Laisser un avis sur Google
+                        <?php echo __('btn.google_review'); ?>
                     </a>
                     <h2 id="resources-title"><?php echo __('home.resources.title'); ?></h2>
                     <p><?php echo __('home.resources.subtitle'); ?></p>
@@ -964,7 +964,7 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/twitter-image.jpg";
                     <ul>
                         <li><i class="fas fa-phone" aria-hidden="true"></i> +33 1 23 45 67 89</li>
                         <li><i class="fas fa-envelope" aria-hidden="true"></i> contact@mbc-expertcomptable.fr</li>
-                        <li><i class="fas fa-map-marker-alt" aria-hidden="true"></i> Paris, France</li>
+                        <li><i class="fas fa-map-marker-alt" aria-hidden="true"></i> <?php echo __('location.paris'); ?></li>
                     </ul>
                 </div>
             </div>

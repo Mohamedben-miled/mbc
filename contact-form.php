@@ -487,8 +487,8 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/contact-twitter.jpg";
     <div id="simulatorsModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2>Simulateurs en ligne</h2>
-                <p>Utilisez nos outils de simulation pour estimer rapidement vos charges, impôts et aides</p>
+                <h2><?php echo __('modal.simulators.title'); ?></h2>
+                <p><?php echo __('modal.simulators.subtitle'); ?></p>
                 <button class="modal-close" onclick="closeSimulatorsModal()">&times;</button>
             </div>
             

@@ -177,11 +177,11 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/Majdi.png";
                     <div class="mbc-about-text">
                         <h2 id="about-title"><?php echo __('about.expertise.title'); ?></h2>
                         <div class="mbc-description">
-                            <p>MBC High Value Business Consulting est votre partenaire de confiance pour tous vos besoins comptables et fiscaux. Dirigé par Majdi Besbes, expert-comptable inscrit au tableau de l'Ordre des Experts-Comptables d'Île-de-France, nous offrons une expertise comptable de haut niveau adaptée aux entrepreneurs franco-maghrébins.</p>
+                            <p><?php echo __('mbc.intro'); ?></p>
                             
-                            <p>Notre approche unique combine la rigueur de la comptabilité française avec une compréhension approfondie des enjeux culturels et économiques du Maghreb, vous offrant un accompagnement personnalisé et efficace.</p>
+                            <p><?php echo __('mbc.approach'); ?></p>
                             
-                            <p>Fort de plusieurs années d'expérience, Majdi Besbes a développé une expertise particulière dans l'accompagnement des entrepreneurs qui évoluent entre la France et le Maghreb, comprenant les défis spécifiques de cette double culture entrepreneuriale.</p>
+                            <p><?php echo __('mbc.experience'); ?></p>
                         </div>
                         
                         <div class="mbc-cta">
@@ -194,16 +194,16 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/Majdi.png";
                             <div class="credential-icon">
                                 <i class="fas fa-certificate" aria-hidden="true"></i>
                             </div>
-                            <h3>Expert-comptable OEC</h3>
-                            <p>Inscrit au tableau de l'Ordre des Experts-Comptables d'Île-de-France sous le n° 140002898701</p>
+                            <h3><?php echo __('mbc.expert_title'); ?></h3>
+                            <p><?php echo __('mbc.registration'); ?></p>
                         </div>
                         
                         <div class="credential-card">
                             <div class="credential-icon">
                                 <i class="fas fa-star" aria-hidden="true"></i>
                             </div>
-                            <h3>Page Jaune</h3>
-                            <p>Entreprise certifiée et recommandée par nos clients</p>
+                            <h3><?php echo __('mbc.page_jaune'); ?></h3>
+                            <p><?php echo __('mbc.certified'); ?></p>
                         </div>
                         
                         <div class="credential-card">
@@ -221,38 +221,38 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/Majdi.png";
         <!-- Values Section -->
         <section class="mbc-values section" aria-labelledby="values-title">
             <div class="container">
-                <h2 id="values-title">Nos valeurs</h2>
+                <h2 id="values-title"><?php echo __('mbc.values_title'); ?></h2>
                 <div class="values-grid">
                     <div class="value-card">
                         <div class="value-icon">
                             <i class="fas fa-handshake" aria-hidden="true"></i>
                         </div>
-                        <h3>Confiance</h3>
-                        <p>Nous construisons des relations durables basées sur la transparence et la confiance mutuelle.</p>
+                        <h3><?php echo __('mbc.value_trust'); ?></h3>
+                        <p><?php echo __('mbc.value_trust_desc'); ?></p>
                     </div>
                     
                     <div class="value-card">
                         <div class="value-icon">
                             <i class="fas fa-lightbulb" aria-hidden="true"></i>
                         </div>
-                        <h3>Innovation</h3>
-                        <p>Nous utilisons les technologies les plus avancées pour optimiser votre gestion comptable.</p>
+                        <h3><?php echo __('mbc.value_innovation'); ?></h3>
+                        <p><?php echo __('mbc.value_innovation_desc'); ?></p>
                     </div>
                     
                     <div class="value-card">
                         <div class="value-icon">
                             <i class="fas fa-users" aria-hidden="true"></i>
                         </div>
-                        <h3>Accompagnement</h3>
-                        <p>Un suivi personnalisé et un accompagnement adapté à vos besoins spécifiques.</p>
+                        <h3><?php echo __('mbc.value_support'); ?></h3>
+                        <p><?php echo __('mbc.value_support_desc'); ?></p>
                     </div>
                     
                     <div class="value-card">
                         <div class="value-icon">
                             <i class="fas fa-chart-line" aria-hidden="true"></i>
                         </div>
-                        <h3>Excellence</h3>
-                        <p>Nous nous engageons à fournir des services de la plus haute qualité.</p>
+                        <h3><?php echo __('mbc.value_excellence'); ?></h3>
+                        <p><?php echo __('mbc.value_excellence_desc'); ?></p>
                     </div>
                 </div>
             </div>
@@ -263,8 +263,8 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/Majdi.png";
             <div class="container">
                 <div class="social-content">
                     <div class="social-text">
-                        <h2 id="social-title">Restez connecté</h2>
-                        <p>Suivez nos actualités et conseils comptables sur nos réseaux sociaux</p>
+                        <h2 id="social-title"><?php echo __('mbc.stay_connected'); ?></h2>
+                        <p><?php echo __('mbc.social_desc'); ?></p>
                         <div class="social-links">
                             <a href="https://www.linkedin.com/in/majdi-besbes-12bb8a1b/?originalSubdomain=fr" target="_blank" rel="noopener" class="social-link linkedin">
                                 <i class="fab fa-linkedin-in" aria-hidden="true"></i>
@@ -281,8 +281,8 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/Majdi.png";
                         </div>
                     </div>
                     <div class="social-cta">
-                        <h3>Prêt à nous rejoindre ?</h3>
-                        <p>Découvrez comment nous pouvons vous accompagner dans votre projet entrepreneurial</p>
+                        <h3><?php echo __('mbc.ready_to_join'); ?></h3>
+                        <p><?php echo __('mbc.discover'); ?></p>
                         <a href="#contact" class="btn btn-primary btn-large"><?php echo __('btn.contact_us'); ?></a>
                     </div>
                 </div>
@@ -308,7 +308,7 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/Majdi.png";
     <div id="simulatorsModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2>Simulateurs en ligne</h2>
+                <h2><?php echo __('modal.simulators.title'); ?></h2>
                 <p>Utilisez nos outils de simulation pour estimer rapidement vos charges, impôts et aides</p>
                 <button class="modal-close" onclick="closeSimulatorsModal()">&times;</button>
             </div>
@@ -1256,7 +1256,7 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/Majdi.png";
     <div id="simulatorsModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2>Simulateurs en ligne</h2>
+                <h2><?php echo __('modal.simulators.title'); ?></h2>
                 <p>Utilisez nos outils de simulation pour estimer rapidement vos charges, impôts et aides</p>
                 <button class="modal-close" onclick="closeSimulatorsModal()">&times;</button>
             </div>

@@ -181,19 +181,19 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/services-twitter.jpg";
             <div class="stats-grid">
                 <div class="stat-card">
                     <div class="stat-number">500+</div>
-                    <div class="stat-label">Entreprises accompagnées</div>
+                    <div class="stat-label"><?php echo __('stats.companies'); ?></div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-number">15+</div>
-                    <div class="stat-label">Années d'expertise</div>
+                    <div class="stat-label"><?php echo __('stats.years'); ?></div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-number">98%</div>
-                    <div class="stat-label">Clients satisfaits</div>
+                    <div class="stat-label"><?php echo __('stats.satisfied'); ?></div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-number">24h</div>
-                    <div class="stat-label">Délai de réponse</div>
+                    <div class="stat-label"><?php echo __('stats.response'); ?></div>
                 </div>
             </div>
         </div>
@@ -1170,8 +1170,8 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/services-twitter.jpg";
     <div id="simulatorsModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2>Simulateurs en ligne</h2>
-                <p>Utilisez nos outils de simulation pour estimer rapidement vos charges, impôts et aides</p>
+                <h2><?php echo __('modal.simulators.title'); ?></h2>
+                <p><?php echo __('modal.simulators.subtitle'); ?></p>
                 <button class="modal-close" onclick="closeSimulatorsModal()">&times;</button>
             </div>
             
