@@ -18,7 +18,7 @@ $ogImage = "https://mbc-expertcomptable.fr/assets/contact-og.jpg";
 $twitterImage = "https://mbc-expertcomptable.fr/assets/contact-twitter.jpg";
 ?>
 <!DOCTYPE html>
-<html lang="fr">
+    <html lang="<?php echo getCurrentLanguage(); ?>">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -123,8 +123,8 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/contact-twitter.jpg";
     <section class="contact-methods">
         <div class="container">
             <div class="section-header">
-                <h2>Choisissez votre mode de contact</h2>
-                <p>Nous adaptons notre approche à vos préférences</p>
+                <h2><?php echo __('contact.methods_title'); ?></h2>
+                <p><?php echo __('contact.methods_subtitle'); ?></p>
             </div>
 
             <div class="methods-grid">
@@ -132,8 +132,8 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/contact-twitter.jpg";
                     <div class="method-icon">
                         <i class="fas fa-phone"></i>
                     </div>
-                    <h3>Appel direct</h3>
-                    <p>Parlez directement avec un expert</p>
+                    <h3><?php echo __('contact.direct_call_title'); ?></h3>
+                    <p><?php echo __('contact.direct_call_desc'); ?></p>
                     <a href="tel:+33123456789" class="method-btn">
                         <i class="fas fa-phone"></i>
                         +33 1 23 45 67 89
@@ -144,11 +144,11 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/contact-twitter.jpg";
                     <div class="method-icon">
                         <i class="fab fa-whatsapp"></i>
                     </div>
-                    <h3>WhatsApp</h3>
-                    <p>Échangez en temps réel</p>
+                    <h3><?php echo __('contact.whatsapp_title'); ?></h3>
+                    <p><?php echo __('contact.whatsapp_desc'); ?></p>
                     <a href="https://wa.me/33676570097" target="_blank" class="method-btn">
                         <i class="fab fa-whatsapp"></i>
-                        Démarrer la conversation
+                        <?php echo __('contact.start_conversation'); ?>
                     </a>
                 </div>
                 
@@ -156,8 +156,8 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/contact-twitter.jpg";
                     <div class="method-icon">
                         <i class="fas fa-envelope"></i>
                     </div>
-                    <h3>Email</h3>
-                    <p>Détaillez votre projet par écrit</p>
+                    <h3><?php echo __('contact.email_title'); ?></h3>
+                    <p><?php echo __('contact.email_desc'); ?></p>
                     <a href="mailto:contact@mbc-expertcomptable.fr" class="method-btn">
                         <i class="fas fa-envelope"></i>
                         contact@mbc-expertcomptable.fr
@@ -207,20 +207,20 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/contact-twitter.jpg";
                     <div class="form-group">
                         <label for="subject"><?php echo __('contact.subject'); ?> *</label>
                         <select id="subject" name="subject" required>
-                            <option value="">Sélectionnez un sujet</option>
-                            <option value="expertise-comptable">Expertise Comptable</option>
-                            <option value="fiscalite">Fiscalité</option>
-                            <option value="social-paie">Social & Paie</option>
-                            <option value="conseil">Conseil</option>
-                            <option value="creation-entreprise">Création d'entreprise</option>
-                            <option value="devis">Demande de devis</option>
-                            <option value="autre">Autre</option>
+                            <option value=""><?php echo __('contact.select_subject'); ?></option>
+                            <option value="expertise-comptable"><?php echo __('contact.subject_expertise'); ?></option>
+                            <option value="fiscalite"><?php echo __('contact.subject_fiscalite'); ?></option>
+                            <option value="social-paie"><?php echo __('contact.subject_social'); ?></option>
+                            <option value="conseil"><?php echo __('contact.subject_conseil'); ?></option>
+                            <option value="creation-entreprise"><?php echo __('contact.subject_creation'); ?></option>
+                            <option value="devis"><?php echo __('contact.subject_devis'); ?></option>
+                            <option value="autre"><?php echo __('contact.subject_autre'); ?></option>
                         </select>
                 </div>
                     
                     <div class="form-group">
                         <label for="message"><?php echo __('contact.message'); ?> *</label>
-                        <textarea id="message" name="message" rows="5" required placeholder="Décrivez votre projet ou votre question..."></textarea>
+                        <textarea id="message" name="message" rows="5" required placeholder="<?php echo __('contact.message_placeholder'); ?>"></textarea>
                     </div>
                     
                     <div class="form-group checkbox-group">
@@ -245,24 +245,24 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/contact-twitter.jpg";
                     <div class="info-icon">
                         <i class="fas fa-map-marker-alt"></i>
                     </div>
-                    <h3>Notre bureau</h3>
-                    <p>123 Avenue des Champs-Élysées<br>75008 Paris, France</p>
+                    <h3><?php echo __('contact.our_office_title'); ?></h3>
+                    <p><?php echo __('contact.office_address'); ?><br><?php echo __('contact.office_city'); ?></p>
                     </div>
                     
                 <div class="info-card">
                     <div class="info-icon">
                         <i class="fas fa-clock"></i>
                     </div>
-                    <h3>Horaires d'ouverture</h3>
-                            <p>Lundi - Vendredi : 9h00 - 18h00<br>Samedi : 9h00 - 12h00</p>
+                    <h3><?php echo __('contact.opening_hours_title'); ?></h3>
+                            <p><?php echo __('contact.weekdays_hours'); ?><br><?php echo __('contact.saturday_hours'); ?></p>
                     </div>
 
                 <div class="info-card">
                     <div class="info-icon">
                         <i class="fas fa-headset"></i>
                     </div>
-                    <h3>Support client</h3>
-                    <p>Disponible du lundi au vendredi<br>de 9h00 à 18h00</p>
+                    <h3><?php echo __('contact.customer_support_title'); ?></h3>
+                    <p><?php echo __('contact.customer_support_desc'); ?></p>
                 </div>
             </div>
         </div>
@@ -272,48 +272,48 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/contact-twitter.jpg";
     <section class="faq-section">
         <div class="container">
             <div class="section-header">
-                <h2>Questions fréquentes</h2>
-                <p>Retrouvez les réponses aux questions les plus courantes</p>
+                <h2><?php echo __('contact.faq_title'); ?></h2>
+                <p><?php echo __('contact.faq_subtitle'); ?></p>
             </div>
             
             <div class="faq-grid">
                 <div class="faq-item">
                     <div class="faq-question">
-                        <h3>Comment puis-je obtenir un devis ?</h3>
+                        <h3><?php echo __('contact.faq1_question'); ?></h3>
                         <i class="fas fa-chevron-down"></i>
                     </div>
                     <div class="faq-answer">
-                        <p>Vous pouvez demander un devis gratuit en remplissant notre formulaire de contact ou en nous appelant directement. Nous vous répondrons dans les 24h.</p>
+                        <p><?php echo __('contact.faq1_answer'); ?></p>
                     </div>
                 </div>
                 
                 <div class="faq-item">
                     <div class="faq-question">
-                        <h3>Quels sont vos tarifs ?</h3>
+                        <h3><?php echo __('contact.faq2_question'); ?></h3>
                         <i class="fas fa-chevron-down"></i>
                     </div>
                     <div class="faq-answer">
-                        <p>Nos tarifs varient selon la taille de votre entreprise et les services requis. Contactez-nous pour un devis personnalisé adapté à vos besoins.</p>
+                        <p><?php echo __('contact.faq2_answer'); ?></p>
                     </div>
                 </div>
                 
                 <div class="faq-item">
                     <div class="faq-question">
-                        <h3>Travaillez-vous à distance ?</h3>
+                        <h3><?php echo __('contact.faq3_question'); ?></h3>
                         <i class="fas fa-chevron-down"></i>
                     </div>
                     <div class="faq-answer">
-                        <p>Oui, nous proposons des services à distance avec des rendez-vous en visioconférence et un espace client sécurisé pour l'échange de documents.</p>
+                        <p><?php echo __('contact.faq3_answer'); ?></p>
                     </div>
                 </div>
                 
                 <div class="faq-item">
                     <div class="faq-question">
-                        <h3>Quels documents dois-je fournir ?</h3>
+                        <h3><?php echo __('contact.faq4_question'); ?></h3>
                         <i class="fas fa-chevron-down"></i>
                     </div>
                     <div class="faq-answer">
-                        <p>Cela dépend de vos besoins. Nous vous fournirons une liste personnalisée lors de notre premier échange, adaptée à votre situation.</p>
+                        <p><?php echo __('contact.faq4_answer'); ?></p>
                     </div>
                 </div>
             </div>
@@ -329,7 +329,7 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/contact-twitter.jpg";
                         <i class="fas fa-building" aria-hidden="true"></i>
                     </div>
                     <h3>MBC Expert Comptable</h3>
-                    <p>Votre partenaire comptable pour entrepreneurs franco-maghrébins. Expertise, innovation et accompagnement personnalisé.</p>
+                    <p><?php echo __('contact.footer_description'); ?></p>
                     <div class="social-links">
                         <a href="#" aria-label="<?php echo __('social.facebook'); ?>"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
                         <a href="#" aria-label="<?php echo __('social.linkedin'); ?>"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
@@ -338,38 +338,38 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/contact-twitter.jpg";
                     </div>
                 </div>
                 <div class="footer-section">
-                    <h3>Liens rapides</h3>
+                    <h3><?php echo __('contact.quick_links_title'); ?></h3>
                     <ul>
-                        <li><a href="index.php">Accueil</a></li>
-                        <li><a href="mbc.php">À propos</a></li>
-                        <li><a href="services.php">Services</a></li>
-                        <li><a href="contact-form.php">Contact</a></li>
+                        <li><a href="index.php"><?php echo __('nav.home'); ?></a></li>
+                        <li><a href="mbc.php"><?php echo __('nav.about'); ?></a></li>
+                        <li><a href="services.php"><?php echo __('nav.services'); ?></a></li>
+                        <li><a href="contact-form.php"><?php echo __('nav.contact'); ?></a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
-                    <h3>Nos services</h3>
+                    <h3><?php echo __('contact.our_services_title'); ?></h3>
                     <ul>
-                        <li><a href="services.php#expertise">Expertise Comptable</a></li>
-                        <li><a href="services.php#fiscalite">Fiscalité</a></li>
-                        <li><a href="services.php#social">Social & Paie</a></li>
-                        <li><a href="services.php#conseil">Conseil</a></li>
+                        <li><a href="services.php#expertise"><?php echo __('services.expertise_title'); ?></a></li>
+                        <li><a href="services.php#fiscalite"><?php echo __('services.fiscalite_title'); ?></a></li>
+                        <li><a href="services.php#social"><?php echo __('services.social_title'); ?></a></li>
+                        <li><a href="services.php#conseil"><?php echo __('nav.consulting'); ?></a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
-                    <h3>Contact</h3>
+                    <h3><?php echo __('contact.contact_title'); ?></h3>
                     <ul>
                         <li><i class="fas fa-phone" aria-hidden="true"></i> +33 1 23 45 67 89</li>
                         <li><i class="fas fa-envelope" aria-hidden="true"></i> contact@mbc-expertcomptable.fr</li>
-                        <li><i class="fas fa-map-marker-alt" aria-hidden="true"></i> Paris, France</li>
+                        <li><i class="fas fa-map-marker-alt" aria-hidden="true"></i> <?php echo __('location.paris'); ?></li>
                     </ul>
                 </div>
             </div>
             <div class="footer-bottom">
-                    <p>&copy; 2024 MBC Expert Comptable. Tous droits réservés.</p>
+                    <p>&copy; 2024 MBC Expert Comptable. <?php echo __('contact.all_rights_reserved'); ?></p>
                 <div>
-                    <a href="#mentions">Mentions légales</a>
-                    <a href="#confidentialite">Confidentialité</a>
-                    <a href="#cookies">Cookies</a>
+                    <a href="#mentions"><?php echo __('contact.legal_mentions'); ?></a>
+                    <a href="#confidentialite"><?php echo __('contact.privacy_policy'); ?></a>
+                    <a href="#cookies"><?php echo __('contact.cookies'); ?></a>
                 </div>
             </div>
         </div>
@@ -411,7 +411,7 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/contact-twitter.jpg";
                 const originalText = submitBtn.innerHTML;
                 
                 // Show loading state
-                submitBtn.innerHTML = '<span>Envoi en cours...</span><i class="fas fa-spinner fa-spin"></i>';
+                submitBtn.innerHTML = '<span><?php echo __("contact.sending"); ?></span><i class="fas fa-spinner fa-spin"></i>';
                 submitBtn.disabled = true;
                 
                 try {
@@ -436,7 +436,7 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/contact-twitter.jpg";
                         }
                     }
                 } catch (error) {
-                    showNotification('error', 'Une erreur est survenue. Veuillez réessayer.');
+                    showNotification('error', '<?php echo __("contact.error_occurred"); ?>');
                 } finally {
                     // Reset button
                     submitBtn.innerHTML = originalText;
@@ -495,10 +495,10 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/contact-twitter.jpg";
             <div class="modal-body">
                 <!-- Navigation Tabs -->
                 <div class="simulators-nav">
-                    <button class="nav-tab active" data-tab="fiscalite">Fiscalité</button>
-                    <button class="nav-tab" data-tab="charges">Charges sociales</button>
-                    <button class="nav-tab" data-tab="epargne">Épargne & Retraite</button>
-                    <button class="nav-tab" data-tab="aides">Aides</button>
+                    <button class="nav-tab active" data-tab="fiscalite"><?php echo __('contact.simulators_fiscalite'); ?></button>
+                    <button class="nav-tab" data-tab="charges"><?php echo __('contact.simulators_charges'); ?></button>
+                    <button class="nav-tab" data-tab="epargne"><?php echo __('contact.simulators_epargne'); ?></button>
+                    <button class="nav-tab" data-tab="aides"><?php echo __('contact.simulators_aides'); ?></button>
                 </div>
                 
                 <div class="simulators-content">
@@ -506,14 +506,14 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/contact-twitter.jpg";
                         <!-- Fiscalité Tab -->
                         <div class="tab-content active" id="fiscalite">
                             <div class="simulator-card">
-                                <h3>Calculateur de TVA</h3>
+                                <h3><?php echo __('contact.simulator_tva_title'); ?></h3>
                                 <div class="simulator-form">
                                     <div class="form-group">
-                                        <label for="tva-ht">Montant HT</label>
+                                        <label for="tva-ht"><?php echo __('contact.simulator_tva_ht'); ?></label>
                                         <input type="number" id="tva-ht" placeholder="0.00" step="0.01">
                                     </div>
                                     <div class="form-group">
-                                        <label for="tva-rate">Taux de TVA</label>
+                                        <label for="tva-rate"><?php echo __('contact.simulator_tva_rate'); ?></label>
                                         <select id="tva-rate">
                                             <option value="20">20%</option>
                                             <option value="10">10%</option>
@@ -522,19 +522,19 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/contact-twitter.jpg";
                                         </select>
                                     </div>
                                     <div class="form-group">
-                                        <label for="tva-amount">Montant TVA</label>
+                                        <label for="tva-amount"><?php echo __('contact.simulator_tva_amount'); ?></label>
                                         <input type="text" id="tva-amount" readonly>
                                     </div>
                                     <div class="form-group">
-                                        <label for="tva-ttc">Montant TTC</label>
+                                        <label for="tva-ttc"><?php echo __('contact.simulator_tva_ttc'); ?></label>
                                         <input type="text" id="tva-ttc" readonly>
                                     </div>
                                     <div class="simulator-actions">
                                         <button class="btn btn-secondary">
-                                            <i class="fas fa-save"></i> Sauvegarder / Charger
+                                            <i class="fas fa-save"></i> <?php echo __('contact.simulator_save'); ?>
                                         </button>
                                         <button class="btn btn-primary">
-                                            <i class="fas fa-file-pdf"></i> Exporter en PDF
+                                            <i class="fas fa-file-pdf"></i> <?php echo __('contact.simulator_export'); ?>
                                         </button>
                                     </div>
                                 </div>
@@ -544,22 +544,22 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/contact-twitter.jpg";
                         <!-- Other tabs -->
                         <div class="tab-content" id="charges">
                             <div class="simulator-card">
-                                <h3>Simulateur de charges sociales</h3>
-                                <p>Fonctionnalité en cours de développement...</p>
+                                <h3><?php echo __('contact.simulator_charges_title'); ?></h3>
+                                <p><?php echo __('contact.simulator_charges_dev'); ?></p>
                             </div>
                         </div>
                         
                         <div class="tab-content" id="epargne">
                             <div class="simulator-card">
-                                <h3>Simulateur d'épargne & retraite</h3>
-                                <p>Fonctionnalité en cours de développement...</p>
+                                <h3><?php echo __('contact.simulator_epargne_title'); ?></h3>
+                                <p><?php echo __('contact.simulator_charges_dev'); ?></p>
                             </div>
                         </div>
                         
                         <div class="tab-content" id="aides">
                             <div class="simulator-card">
-                                <h3>Simulateur d'aides</h3>
-                                <p>Fonctionnalité en cours de développement...</p>
+                                <h3><?php echo __('contact.simulator_aides_title'); ?></h3>
+                                <p><?php echo __('contact.simulator_charges_dev'); ?></p>
                             </div>
                         </div>
                     </div>
@@ -594,7 +594,7 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/contact-twitter.jpg";
                     const originalText = submitBtn.innerHTML;
                     
                     // Show loading state
-                    submitBtn.innerHTML = '<span>Envoi en cours...</span><i class="fas fa-spinner fa-spin"></i>';
+                    submitBtn.innerHTML = '<span><?php echo __("contact.sending"); ?></span><i class="fas fa-spinner fa-spin"></i>';
                     submitBtn.disabled = true;
                     
                     try {
@@ -619,7 +619,7 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/contact-twitter.jpg";
                             }
                         }
                     } catch (error) {
-                        showNotification('error', 'Une erreur est survenue. Veuillez réessayer.');
+                        showNotification('error', '<?php echo __("contact.error_occurred"); ?>');
                     } finally {
                         // Reset button
                         submitBtn.innerHTML = originalText;
