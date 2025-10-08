@@ -157,11 +157,7 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/contact-twitter.jpg";
                         </a>
                     </div>
                 <?php else: ?>
-                    <div class="mobile-auth-buttons">
-                        <a href="admin/login.php" class="btn btn-primary btn-sm">
-                            <i class="fas fa-sign-in-alt"></i> <?php echo __('nav.login'); ?>
-                        </a>
-                    </div>
+                    <!-- Login button removed from mobile navbar - available in sidebar only -->
                 <?php endif; ?>
             </div>
         </div>

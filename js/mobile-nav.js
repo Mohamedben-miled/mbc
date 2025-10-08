@@ -43,7 +43,6 @@
     
     // Event handlers
     function handleMenuToggle(e) {
-        e.preventDefault();
         e.stopPropagation();
         
         console.log('Menu toggle clicked, current state:', isMenuOpen);
@@ -109,20 +108,8 @@
         // Get navigation links
         mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
         
-        // Add event listeners with optimized options
+        // Add event listener for menu toggle
         mobileMenuToggle.addEventListener('click', handleMenuToggle, { passive: false });
-        
-        // Add fallback event listener with different approach
-        mobileMenuToggle.addEventListener('touchstart', function(e) {
-            e.preventDefault();
-            handleMenuToggle(e);
-        }, { passive: false });
-        
-        // Add mousedown as backup
-        mobileMenuToggle.addEventListener('mousedown', function(e) {
-            e.preventDefault();
-            handleMenuToggle(e);
-        }, { passive: false });
         
         if (mobileNavClose) {
             mobileNavClose.addEventListener('click', handleCloseButton, { passive: false });
