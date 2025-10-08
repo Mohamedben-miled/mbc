@@ -365,10 +365,159 @@ $recentSubmissions = $contact->getSubmissions(1, 5);
             .stats-grid {
                 grid-template-columns: 1fr;
             }
+            
+            /* Mobile navbar styles for dashboard */
+            .mobile-nav {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100vh;
+                background: rgba(0, 0, 0, 0.8);
+                z-index: 9999;
+                display: none;
+                backdrop-filter: blur(5px);
+            }
+            
+            .mobile-nav.active {
+                display: block;
+            }
+            
+            .mobile-nav-content {
+                position: absolute;
+                top: 0;
+                right: 0;
+                width: 80%;
+                max-width: 300px;
+                height: 100%;
+                background: white;
+                padding: 2rem 1.5rem;
+                overflow-y: auto;
+                transform: translateX(100%);
+                transition: transform 0.3s ease;
+            }
+            
+            .mobile-nav.active .mobile-nav-content {
+                transform: translateX(0);
+            }
+            
+            .mobile-nav-close {
+                position: absolute;
+                top: 1rem;
+                right: 1rem;
+                background: none;
+                border: none;
+                font-size: 1.5rem;
+                cursor: pointer;
+                color: #666;
+                z-index: 10000;
+            }
+            
+            .mobile-nav-list {
+                list-style: none;
+                margin: 2rem 0;
+                padding: 0;
+            }
+            
+            .mobile-nav-link {
+                display: block;
+                padding: 1rem 0;
+                color: #333;
+                text-decoration: none;
+                border-bottom: 1px solid #eee;
+                font-weight: 500;
+                transition: color 0.3s ease;
+            }
+            
+            .mobile-nav-link:hover {
+                color: #2e6a6e;
+            }
+            
+            .mobile-menu-toggle {
+                display: block !important;
+                position: fixed;
+                top: 1rem;
+                left: 1rem;
+                background: #2e6a6e;
+                color: white;
+                border: none;
+                padding: 0.75rem;
+                border-radius: 8px;
+                cursor: pointer;
+                font-size: 18px;
+                z-index: 10001;
+            }
+            
+            .mobile-auth {
+                margin-top: 2rem;
+                padding-top: 2rem;
+                border-top: 1px solid #eee;
+            }
+            
+            .mobile-user-info p {
+                color: #666;
+                margin-bottom: 1rem;
+            }
+            
+            .mobile-user-actions .mobile-nav-link {
+                border-bottom: none;
+                padding: 0.5rem 0;
+                font-size: 0.9rem;
+            }
+            
+            .mobile-user-actions .mobile-nav-link.logout {
+                color: #dc3545;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav" id="mobileNav">
+        <div class="mobile-nav-content">
+            <button class="mobile-nav-close" aria-label="Fermer le menu">
+                <i class="fas fa-times"></i>
+            </button>
+            <ul class="mobile-nav-list">
+                <li><a href="../index.php" class="mobile-nav-link">Accueil</a></li>
+                <li><a href="../mbc.php" class="mobile-nav-link">MBC</a></li>
+                <li><a href="../services.php" class="mobile-nav-link">Services</a></li>
+                <li><a href="#simulators" class="mobile-nav-link">Simulateurs</a></li>
+                <li><a href="../blog-dynamic.php" class="mobile-nav-link">Blog</a></li>
+                <li><a href="../contact-form.php" class="mobile-nav-link">Contact</a></li>
+            </ul>
+            
+            <!-- Mobile Auth Section -->
+            <div class="mobile-auth">
+                <div class="mobile-user-info">
+                    <p>Bonjour, <?php echo htmlspecialchars($user['full_name']); ?></p>
+                </div>
+                <div class="mobile-user-actions">
+                    <a href="dashboard.php" class="mobile-nav-link">
+                        <i class="fas fa-tachometer-alt"></i> Dashboard
+                    </a>
+                    <a href="blog.php" class="mobile-nav-link">
+                        <i class="fas fa-blog"></i> Gestion Blog
+                    </a>
+                    <a href="contact.php" class="mobile-nav-link">
+                        <i class="fas fa-envelope"></i> Messages
+                    </a>
+                    <a href="profile.php" class="mobile-nav-link">
+                        <i class="fas fa-user-edit"></i> Mon Profil
+                    </a>
+                    <a href="logout.php" class="mobile-nav-link logout">
+                        <i class="fas fa-sign-out-alt"></i> Déconnexion
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Menu Toggle for Navbar -->
+    <button class="mobile-menu-toggle" aria-label="Ouvrir le menu mobile" style="display: none;">
+        <i class="fas fa-bars"></i>
+    </button>
+
     <div class="dashboard">
         <button class="mobile-sidebar-toggle" onclick="toggleSidebar()">
             <i class="fas fa-bars"></i>
@@ -556,6 +705,47 @@ $recentSubmissions = $contact->getSubmissions(1, 5);
             overlay.classList.remove('active');
         }
 
+        // Mobile navbar functions
+        function toggleMobileNav() {
+            const mobileNav = document.getElementById('mobileNav');
+            mobileNav.classList.toggle('active');
+        }
+
+        function closeMobileNav() {
+            const mobileNav = document.getElementById('mobileNav');
+            mobileNav.classList.remove('active');
+        }
+
+        // Initialize mobile navbar functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+            const mobileNavClose = document.querySelector('.mobile-nav-close');
+            const mobileNav = document.getElementById('mobileNav');
+            
+            if (mobileMenuToggle && mobileNav) {
+                mobileMenuToggle.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    toggleMobileNav();
+                });
+            }
+            
+            if (mobileNavClose && mobileNav) {
+                mobileNavClose.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    closeMobileNav();
+                });
+            }
+            
+            // Close mobile nav when clicking outside
+            if (mobileNav) {
+                mobileNav.addEventListener('click', function(e) {
+                    if (e.target === mobileNav) {
+                        closeMobileNav();
+                    }
+                });
+            }
+        });
+
         // Close sidebar when clicking outside on mobile
         document.addEventListener('click', function(event) {
             const sidebar = document.getElementById('sidebar');
@@ -574,10 +764,12 @@ $recentSubmissions = $contact->getSubmissions(1, 5);
         window.addEventListener('resize', function() {
             const sidebar = document.getElementById('sidebar');
             const overlay = document.querySelector('.mobile-overlay');
+            const mobileNav = document.getElementById('mobileNav');
             
             if (window.innerWidth > 768) {
                 sidebar.classList.remove('mobile-visible');
                 overlay.classList.remove('active');
+                if (mobileNav) mobileNav.classList.remove('active');
             }
         });
     </script>
