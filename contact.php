@@ -365,6 +365,7 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/contact-twitter.jpg";
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="js/main.js"></script>
     <script src="js/mobile-nav.js"></script>
+    <script src="js/chatbot-multilingual.js"></script>
     <script>
         // Initialize AOS
         AOS.init({

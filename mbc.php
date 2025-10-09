@@ -660,6 +660,7 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/Majdi.png";
     <script src="js/mobile-nav.js"></script>
     <script src="js/main.js"></script>
     <script src="js/modal.js"></script>
+    <script src="js/chatbot-multilingual.js"></script>
     <script>
 
         // Chat functions
@@ -1384,6 +1385,7 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/Majdi.png";
     <script src="js/mobile-nav.js"></script>
     <script src="js/main.js"></script>
     <script src="js/modal.js"></script>
+    <script src="js/chatbot-multilingual.js"></script>
     <script>
         // Add event listener for simulators link
         document.addEventListener('DOMContentLoaded', function() {
@@ -1393,6 +1395,22 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/Majdi.png";
                     e.preventDefault();
                     openSimulatorsModal();
                 });
+            }
+        });
+
+        // Check for #simulators anchor on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            if (window.location.hash === '#simulators') {
+                openSimulatorsModal();
+            }
+        });
+        
+        // Listen for hash changes
+        window.addEventListener('hashchange', function() {
+            if (window.location.hash === '#simulators') {
+                openSimulatorsModal();
+            } else {
+                closeSimulatorsModal();
             }
         });
         

@@ -596,6 +596,7 @@ $categories = $blog->getCategories();
     <script src="js/mobile-nav.js"></script>
     <script src="js/main.js"></script>
     <script src="js/modal.js"></script>
+    <script src="js/chatbot-multilingual.js"></script>
     <script>
         // Language change function
         function changeLanguage(lang) {

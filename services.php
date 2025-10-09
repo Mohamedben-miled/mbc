@@ -1588,6 +1588,11 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/services-twitter.jpg";
 
         // Initialize everything when DOM is loaded
         document.addEventListener('DOMContentLoaded', function() {
+            // Check for #simulators anchor on page load
+            if (window.location.hash === '#simulators') {
+                openSimulatorsModal();
+            }
+            
             // Initialize pagination
             const prevBtn = document.getElementById('prevServices');
             if (prevBtn) {
@@ -1792,10 +1797,20 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/services-twitter.jpg";
             document.body.appendChild(form);
             form.submit();
         }
+        
+        // Listen for hash changes
+        window.addEventListener('hashchange', function() {
+            if (window.location.hash === '#simulators') {
+                openSimulatorsModal();
+            } else {
+                closeSimulatorsModal();
+            }
+        });
     </script>
     <script src="script.js"></script>
     <script src="js/mobile-nav.js"></script>
     <script src="js/main.js"></script>
     <script src="js/modal.js"></script>
+    <script src="js/chatbot-multilingual.js"></script>
 </body>
 </html>
