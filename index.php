@@ -1373,5 +1373,8 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/twitter-image.jpg";
             }
         });
     </script>
+
+    <?php include 'includes/simulators-modal.php'; ?>
+    <?php include 'includes/footer.php'; ?>
 </body>
 </html>

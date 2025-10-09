@@ -650,5 +650,8 @@ $categories = $blog->getCategories();
         });
     </script>
     <script src="chatbot.js"></script>
+
+    <?php include 'includes/simulators-modal.php'; ?>
+    <?php include 'includes/footer.php'; ?>
 </body>
 </html>
