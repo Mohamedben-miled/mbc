@@ -417,9 +417,14 @@ $categories = $blog->getCategories();
                             <option value="zh" <?php echo getCurrentLanguage() === 'zh' ? 'selected' : ''; ?>>中文</option>
                         </select>
                     </div>
-                    <a href="contact-form.php" class="mobile-nav-link login-btn">
-                        <i class="fas fa-sign-in-alt"></i> <?php echo __('nav.login'); ?>
-                    </a>
+                    
+                    <!-- Mobile Login Button -->
+                    <div class="mobile-login-section">
+                        <a href="admin/login.php" class="btn btn-primary btn-mobile">
+                            <i class="fas fa-sign-in-alt"></i>
+                            <?php echo __('btn.login'); ?>
+                        </a>
+                    </div>
                 <?php endif; ?>
             </div>
         </div>
@@ -560,45 +565,6 @@ $categories = $blog->getCategories();
             }
         }
 
-        // Mobile navigation functionality
-        document.addEventListener('DOMContentLoaded', function() {
-            const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
-            const mobileNav = document.querySelector('.mobile-nav');
-            
-            if (mobileMenuToggle && mobileNav) {
-                mobileMenuToggle.addEventListener('click', function() {
-                    mobileNav.classList.toggle('active');
-                    const isExpanded = mobileNav.classList.contains('active');
-                    this.setAttribute('aria-expanded', isExpanded);
-                    
-                    // Prevent body scroll when menu is open
-                    if (isExpanded) {
-                        document.body.style.overflow = 'hidden';
-                    } else {
-                        document.body.style.overflow = '';
-                    }
-                });
-                
-                // Close mobile menu when clicking outside
-                mobileNav.addEventListener('click', function(e) {
-                    if (e.target === mobileNav) {
-                        mobileNav.classList.remove('active');
-                        mobileMenuToggle.setAttribute('aria-expanded', 'false');
-                        document.body.style.overflow = '';
-                    }
-                });
-                
-                // Close mobile menu when clicking on links
-                const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
-                mobileNavLinks.forEach(link => {
-                    link.addEventListener('click', function() {
-                        mobileNav.classList.remove('active');
-                        mobileMenuToggle.setAttribute('aria-expanded', 'false');
-                        document.body.style.overflow = '';
-                    });
-                });
-            }
-            
             // User dropdown functionality
             const userDropdownToggle = document.querySelector('.user-dropdown-toggle');
             const userDropdownMenu = document.querySelector('.user-dropdown-menu');
@@ -629,6 +595,85 @@ $categories = $blog->getCategories();
                         userDropdownMenu.style.opacity = '0';
                         userDropdownMenu.style.visibility = 'hidden';
                         userDropdownMenu.style.transform = 'translateY(-10px)';
+                    }
+                });
+            }
+
+            // Mobile navigation functionality
+            const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+            const mobileNav = document.querySelector('.mobile-nav');
+            const mobileNavClose = document.querySelector('.mobile-nav-close');
+            
+            if (mobileMenuToggle && mobileNav) {
+                let isMenuOpen = false;
+                
+                // Toggle mobile menu
+                function toggleMobileMenu() {
+                    isMenuOpen = !isMenuOpen;
+                    
+                    if (isMenuOpen) {
+                        mobileNav.classList.add('active');
+                        mobileMenuToggle.setAttribute('aria-expanded', 'true');
+                        document.body.style.overflow = 'hidden';
+                        document.body.style.touchAction = 'none';
+                    } else {
+                        mobileNav.classList.remove('active');
+                        mobileMenuToggle.setAttribute('aria-expanded', 'false');
+                        document.body.style.overflow = '';
+                        document.body.style.touchAction = '';
+                    }
+                }
+                
+                // Open mobile menu
+                mobileMenuToggle.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    toggleMobileMenu();
+                });
+                
+                // Close mobile menu
+                if (mobileNavClose) {
+                    mobileNavClose.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        isMenuOpen = false;
+                        mobileNav.classList.remove('active');
+                        mobileMenuToggle.setAttribute('aria-expanded', 'false');
+                        document.body.style.overflow = '';
+                        document.body.style.touchAction = '';
+                    });
+                }
+                
+                // Close mobile menu when clicking on links
+                const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+                mobileNavLinks.forEach(link => {
+                    link.addEventListener('click', function() {
+                        isMenuOpen = false;
+                        mobileNav.classList.remove('active');
+                        mobileMenuToggle.setAttribute('aria-expanded', 'false');
+                        document.body.style.overflow = '';
+                        document.body.style.touchAction = '';
+                    });
+                });
+                
+                // Close mobile menu when clicking outside
+                document.addEventListener('click', function(e) {
+                    if (isMenuOpen && !mobileNav.contains(e.target) && !mobileMenuToggle.contains(e.target)) {
+                        isMenuOpen = false;
+                        mobileNav.classList.remove('active');
+                        mobileMenuToggle.setAttribute('aria-expanded', 'false');
+                        document.body.style.overflow = '';
+                        document.body.style.touchAction = '';
+                    }
+                });
+                
+                // Handle escape key
+                document.addEventListener('keydown', function(e) {
+                    if (e.key === 'Escape' && isMenuOpen) {
+                        isMenuOpen = false;
+                        mobileNav.classList.remove('active');
+                        mobileMenuToggle.setAttribute('aria-expanded', 'false');
+                        document.body.style.overflow = '';
+                        document.body.style.touchAction = '';
                     }
                 });
             }
