@@ -56,7 +56,7 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/Majdi.png";
     <link rel="stylesheet" href="styles.css">
     
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    <link rel="icon" type="image/png" href="assets/mbc.png">
 </head>
 <body class="mbc-page">
     <!-- Header -->
