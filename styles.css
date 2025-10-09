@@ -74,7 +74,7 @@ header, .header, .header-content {
     border-radius: 0.5rem;
     box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15);
     min-width: 200px;
-    z-index: 9999;
+    z-index: 10003 !important;
     opacity: 0;
     visibility: hidden;
     transform: translateY(-10px);
@@ -134,7 +134,7 @@ header, .header, .header-content {
     border-radius: 0.5rem;
     box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15);
     min-width: 200px;
-    z-index: 9999;
+    z-index: 10003;
     opacity: 0;
     visibility: hidden;
     transform: translateY(-10px);
@@ -5459,7 +5459,7 @@ input:checked + .slider:before {
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        z-index: 9999;
+        z-index: 10003;
         opacity: 0;
         visibility: hidden;
         transition: all 0.3s ease;
@@ -9901,7 +9901,7 @@ body.contact-page .user-dropdown-toggle i:last-child {
 }
 
 body.contact-page .user-dropdown-menu {
-    z-index: 10002;
+    z-index: 10003;
 }
 
 body.contact-page .header.scrolled {
@@ -9972,7 +9972,7 @@ body.services-page .user-dropdown-toggle i:last-child {
 }
 
 body.services-page .user-dropdown-menu {
-    z-index: 10002;
+    z-index: 10003;
 }
 
 body.services-page .header.scrolled {
@@ -10043,7 +10043,7 @@ body.blog-page .user-dropdown-toggle i:last-child {
 }
 
 body.blog-page .user-dropdown-menu {
-    z-index: 10002;
+    z-index: 10003;
 }
 
 body.blog-page .header.scrolled {
