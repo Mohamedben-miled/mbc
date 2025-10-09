@@ -346,8 +346,7 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/Majdi.png";
         </section>
     </main>
 
-    <!-- Simulators Modal -->
-    <div id="simulatorsModal" class="modal">
+    <?php include 'includes/simulators-modal.php'; ?>
         <div class="modal-content">
             <div class="modal-header">
                 <h2><?php echo __('modal.simulators.title'); ?></h2>
@@ -1295,8 +1294,7 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/Majdi.png";
         }
     </script>
 
-    <!-- Simulators Modal -->
-    <div id="simulatorsModal" class="modal">
+    <?php include 'includes/simulators-modal.php'; ?>
         <div class="modal-content">
             <div class="modal-header">
                 <h2><?php echo __('modal.simulators.title'); ?></h2>

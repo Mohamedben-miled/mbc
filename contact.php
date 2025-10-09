@@ -361,6 +361,8 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/contact-twitter.jpg";
         </div>
     </footer>
 
+    <?php include 'includes/simulators-modal.php'; ?>
+
     <!-- Scripts -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="js/main.js"></script>

@@ -1211,21 +1211,9 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/services-twitter.jpg";
         </div>
     </footer>
 
-    <!-- Simulators Modal -->
-    <div id="simulatorsModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2><?php echo __('modal.simulators.title'); ?></h2>
-                <p><?php echo __('modal.simulators.subtitle'); ?></p>
-                <button class="modal-close" onclick="closeSimulatorsModal()">&times;</button>
-            </div>
-            
-            <div class="modal-body">
-                <!-- Navigation Tabs -->
-                <div class="simulators-nav">
-                    <button class="nav-tab active" data-tab="fiscalite">Fiscalité</button>
-                    <button class="nav-tab" data-tab="charges">Charges sociales</button>
-                    <button class="nav-tab" data-tab="epargne">Épargne & Retraite</button>
+    <?php include 'includes/simulators-modal.php'; ?>
+
+    <!-- Scripts -->
                     <button class="nav-tab" data-tab="aides">Aides</button>
                 </div>
                 

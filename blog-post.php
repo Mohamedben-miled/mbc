@@ -591,6 +591,8 @@ $categories = $blog->getCategories();
         </div>
     </footer>
 
+    <?php include 'includes/simulators-modal.php'; ?>
+
     <!-- Scripts -->
     <script src="script.js"></script>
     <script src="js/mobile-nav.js"></script>

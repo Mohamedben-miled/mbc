@@ -937,95 +937,9 @@ $pageDescription = __("blog.subtitle");
         </div>
     </footer>
 
-    <!-- Simulators Modal -->
-    <div id="simulatorsModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2><?php echo __('modal.simulators.title'); ?></h2>
-                <p><?php echo __('modal.simulators.subtitle'); ?></p>
-                <button class="modal-close" onclick="closeSimulatorsModal()">&times;</button>
-            </div>
-            
-            <div class="modal-body">
-                <!-- Navigation Tabs -->
-                <div class="simulators-nav">
-                    <button class="nav-tab active" data-tab="fiscalite"><?php echo __('contact.simulators_fiscalite'); ?></button>
-                    <button class="nav-tab" data-tab="charges"><?php echo __('contact.simulators_charges'); ?></button>
-                    <button class="nav-tab" data-tab="epargne"><?php echo __('contact.simulators_epargne'); ?></button>
-                    <button class="nav-tab" data-tab="aides"><?php echo __('contact.simulators_aides'); ?></button>
-                </div>
-                
-                <div class="simulators-content">
-                    <div class="simulators-main">
-                        <!-- Fiscalité Tab -->
-                        <div class="tab-content active" id="fiscalite">
-                            <div class="simulator-card">
-                                <h3><?php echo __('contact.simulator_tva_title'); ?></h3>
-                                <div class="simulator-form">
-                                    <div class="form-group">
-                                        <label for="tva-ht"><?php echo __('contact.simulator_tva_ht'); ?></label>
-                                        <input type="number" id="tva-ht" placeholder="10000" step="0.01" value="10000" onchange="calculateTVA()" oninput="calculateTVA()">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="tva-rate"><?php echo __('contact.simulator_tva_rate'); ?></label>
-                                        <select id="tva-rate" onchange="calculateTVA()">
-                                            <option value="20">20% - <?php echo __('contact.simulator_tva_normal'); ?></option>
-                                            <option value="10">10% - <?php echo __('contact.simulator_tva_intermediate'); ?></option>
-                                            <option value="5.5">5,5% - <?php echo __('contact.simulator_tva_reduced'); ?></option>
-                                            <option value="2.1">2,1% - <?php echo __('contact.simulator_tva_super_reduced'); ?></option>
-                                            <option value="0">0% - <?php echo __('contact.simulator_tva_exempt'); ?></option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="tva-amount"><?php echo __('contact.simulator_tva_amount'); ?></label>
-                                        <input type="text" id="tva-amount" readonly>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="tva-ttc"><?php echo __('contact.simulator_tva_ttc'); ?></label>
-                                        <input type="text" id="tva-ttc" readonly>
-                                    </div>
-                                    <div class="simulator-actions">
-                                        <button class="btn btn-secondary">
-                                            <i class="fas fa-save"></i> <?php echo __('contact.simulator_save'); ?>
-                                        </button>
-                                        <button class="btn btn-primary">
-                                            <i class="fas fa-download"></i> <?php echo __('contact.simulator_export'); ?>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Charges Tab -->
-                        <div class="tab-content" id="charges">
-                            <div class="simulator-card">
-                                <h3><?php echo __('contact.simulator_charges_title'); ?></h3>
-                                <p><?php echo __('contact.simulator_charges_dev'); ?></p>
-                            </div>
-                        </div>
-                        
-                        <!-- Épargne Tab -->
-                        <div class="tab-content" id="epargne">
-                            <div class="simulator-card">
-                                <h3><?php echo __('contact.simulator_epargne_title'); ?></h3>
-                                <p><?php echo __('contact.simulator_charges_dev'); ?></p>
-                            </div>
-                        </div>
-                        
-                        <!-- Aides Tab -->
-                        <div class="tab-content" id="aides">
-                            <div class="simulator-card">
-                                <h3><?php echo __('contact.simulator_aides_title'); ?></h3>
-                                <p><?php echo __('contact.simulator_charges_dev'); ?></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+        <?php include 'includes/simulators-modal.php'; ?>
 
-    <!-- Scripts -->
+<!-- Scripts -->
     <script src="script.js"></script>
     <script src="js/mobile-nav.js"></script>
     <script src="js/main.js"></script>
