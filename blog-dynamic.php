@@ -882,81 +882,56 @@ $pageDescription = __("blog.subtitle");
     <footer class="footer" role="contentinfo">
         <div class="container">
             <div class="footer-content">
-                <!-- Company Info -->
                 <div class="footer-section">
-                    <div class="footer-logo">
-                        <img src="assets/mbc.png" alt="MBC Expert Comptable" class="footer-logo-img">
+                    <div class="footer-icon">
+                        <i class="fas fa-building" aria-hidden="true"></i>
                     </div>
-                    <p class="footer-description">
-                        Votre expert-comptable de confiance pour accompagner votre entreprise dans sa croissance.
-                    </p>
+                    <h3>MBC Expert Comptable</h3>
+                    <p><?php echo __('footer.description'); ?></p>
                     <div class="social-links">
-                        <a href="#" class="social-link" aria-label="<?php echo __('common.share_facebook'); ?>">
-                            <i class="fab fa-facebook-f"></i>
-                        </a>
-                        <a href="#" class="social-link" aria-label="<?php echo __('common.share_linkedin'); ?>">
-                            <i class="fab fa-linkedin-in"></i>
-                        </a>
-                        <a href="#" class="social-link" aria-label="<?php echo __('common.share_twitter'); ?>">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                        <a href="#" class="social-link" aria-label="<?php echo __('common.share_whatsapp'); ?>">
-                            <i class="fab fa-instagram"></i>
-                        </a>
+                        <a href="#" aria-label="<?php echo __('social.facebook'); ?>"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
+                        <a href="#" aria-label="<?php echo __('social.linkedin'); ?>"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
+                        <a href="#" aria-label="<?php echo __('social.twitter'); ?>"><i class="fab fa-twitter" aria-hidden="true"></i></a>
+                        <a href="#" aria-label="<?php echo __('social.instagram'); ?>"><i class="fab fa-instagram" aria-hidden="true"></i></a>
                     </div>
                 </div>
 
-                <!-- Quick Links -->
                 <div class="footer-section">
-                    <h3>Liens rapides</h3>
+                    <h3><?php echo __('footer.quick_links'); ?></h3>
                     <ul>
-                        <li><a href="index.php#accueil">Accueil</a></li>
-                        <li><a href="mbc.php">À propos</a></li>
-                        <li><a href="services.php">Services</a></li>
-                        <li><a href="contact-form.php">Contact</a></li>
+                        <li><a href="#accueil"><?php echo __('nav.home'); ?></a></li>
+                        <li><a href="mbc.php"><?php echo __('nav.about'); ?></a></li>
+                        <li><a href="services.php"><?php echo __('nav.services'); ?></a></li>
+                        <li><a href="contact-form.php"><?php echo __('nav.contact'); ?></a></li>
                     </ul>
                 </div>
 
-                <!-- Services -->
                 <div class="footer-section">
-                    <h3>Nos services</h3>
+                    <h3><?php echo __('footer.services'); ?></h3>
                     <ul>
-                        <li><a href="services.php#expertise">Expertise Comptable</a></li>
-                        <li><a href="services.php#fiscalite">Fiscalité</a></li>
-                        <li><a href="services.php#social">Social & Paie</a></li>
-                        <li><a href="services.php#conseil">Conseil</a></li>
+                        <li><a href="#expertise"><?php echo __('services.expertise.title'); ?></a></li>
+                        <li><a href="#fiscalite"><?php echo __('services.fiscalite.title'); ?></a></li>
+                        <li><a href="#social"><?php echo __('services.social.title'); ?></a></li>
+                        <li><a href="#conseil"><?php echo __('services.conseil.title'); ?></a></li>
                     </ul>
                 </div>
 
-                <!-- Contact Info -->
                 <div class="footer-section">
-                    <h3>Contact</h3>
-                    <div class="contact-info">
-                        <div class="contact-item">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span>123 Rue de la Comptabilité<br>75001 Paris, France</span>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fas fa-phone"></i>
-                            <a href="tel:+33676570097">+33 6 76 57 00 97</a>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fas fa-envelope"></i>
-                            <a href="mailto:contact@mbc-expertcomptable.fr">contact@mbc-expertcomptable.fr</a>
-                        </div>
-                    </div>
+                    <h3><?php echo __('footer.contact'); ?></h3>
+                    <ul>
+                        <li><i class="fas fa-phone" aria-hidden="true"></i> +33 1 23 45 67 89</li>
+                        <li><i class="fas fa-envelope" aria-hidden="true"></i> contact@mbc-expertcomptable.fr</li>
+                        <li><i class="fas fa-map-marker-alt" aria-hidden="true"></i> <?php echo __('location.paris'); ?></li>
+                    </ul>
                 </div>
             </div>
 
-            <!-- Footer Bottom -->
             <div class="footer-bottom">
-                <div class="footer-bottom-content">
-                    <p>&copy; 2025 MBC Expert Comptable. Tous droits réservés.</p>
-                    <div class="footer-links">
-                        <a href="#">Mentions légales</a>
-                        <a href="#">Politique de confidentialité</a>
-                        <a href="#">CGV</a>
-                    </div>
+                <p>&copy; 2024 <?php echo __('footer.copyright'); ?></p>
+                <div>
+                    <a href="#mentions"><?php echo __('footer.legal'); ?></a>
+                    <a href="#confidentialite"><?php echo __('footer.privacy'); ?></a>
+                    <a href="#cookies"><?php echo __('footer.terms'); ?></a>
                 </div>
             </div>
         </div>
