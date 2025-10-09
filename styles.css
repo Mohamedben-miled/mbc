@@ -552,7 +552,7 @@ header, .header, .header-content {
 
 /* Enhanced Language Selector Styles */
 .language-selector {
-    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+    background: #ffffff;
     border: 2px solid #296871;
     border-radius: 12px;
     padding: 0.75rem 2.5rem 0.75rem 1rem;
@@ -585,10 +585,11 @@ header, .header, .header-content {
 
 .language-selector:hover {
     border-color: #1e4a52;
-    background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
+    background-color: #f8fafc;
     color: #1e4a52;
     transform: translateY(-2px);
     box-shadow: 0 4px 15px rgba(41, 104, 113, 0.2);
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231e4a52' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
 }
 
 .language-selector:hover::before {
@@ -621,11 +622,42 @@ header, .header, .header-content {
     color: #1e4a52;
 }
 
-/* Custom dropdown arrow for language selector */
-
-.language-selector:hover {
-    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231e4a52' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+/* Mobile Language Selector Styles */
+.mobile-language-section {
+    margin-bottom: 1rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
+
+.mobile-language-selector {
+    width: 100%;
+    max-width: 200px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.9) !important;
+    border: 2px solid #296871 !important;
+    color: #296871 !important;
+    border-radius: 8px;
+    padding: 0.75rem 2.5rem 0.75rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(41, 104, 113, 0.2);
+}
+
+.mobile-language-selector:hover {
+    background: #f8fafc !important;
+    border-color: #1e4a52 !important;
+    color: #1e4a52 !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px rgba(41, 104, 113, 0.3);
+}
+
+.mobile-language-selector:focus {
+    outline: none;
+    border-color: #1e4a52 !important;
+    box-shadow: 0 0 0 3px rgba(41, 104, 113, 0.15);
+}
+
+/* Custom dropdown arrow for language selector */
 
 /* Button Visibility Fixes */
 .btn {

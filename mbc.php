@@ -162,6 +162,15 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/Majdi.png";
             
             <!-- Mobile Auth Section -->
             <div class="mobile-auth">
+                <!-- Mobile Language Selector -->
+                <div class="mobile-language-section">
+                    <select class="language-selector mobile-language-selector" aria-label="<?php echo __('nav.select_language'); ?>" onchange="changeLanguage(this.value)">
+                        <option value="fr" <?php echo getCurrentLanguage() === 'fr' ? 'selected' : ''; ?>>🇫🇷 FR</option>
+                        <option value="en" <?php echo getCurrentLanguage() === 'en' ? 'selected' : ''; ?>>🇬🇧 EN</option>
+                        <option value="zh" <?php echo getCurrentLanguage() === 'zh' ? 'selected' : ''; ?>>🇨🇳 中文</option>
+                    </select>
+                </div>
+                
                 <?php if ($auth->isLoggedIn()): ?>
                     <div class="mobile-user-info">
                         <p><?php echo __('nav.hello'); ?>, <?php echo htmlspecialchars($currentUser['full_name']); ?></p>
