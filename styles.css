@@ -6818,6 +6818,7 @@ input:checked + .slider:before {
         display: block !important;
         visibility: visible !important;
         opacity: 1 !important;
+        pointer-events: auto !important;
     }
     
     .chatbot-window {
@@ -6828,35 +6829,46 @@ input:checked + .slider:before {
     }
     
     .chatbot-toggle {
-        padding: 14px 18px !important;
+        padding: 16px 20px !important;
         font-size: 1rem !important;
-        min-width: 60px !important;
-        min-height: 60px !important;
+        min-width: 70px !important;
+        min-height: 70px !important;
         border-radius: 50px !important;
-        box-shadow: 0 4px 20px rgba(41, 104, 113, 0.4) !important;
+        box-shadow: 0 6px 25px rgba(41, 104, 113, 0.5) !important;
         display: flex !important;
         align-items: center !important;
         justify-content: center !important;
         gap: 8px !important;
         background: linear-gradient(135deg, #296871 0%, #1e4a52 100%) !important;
         color: white !important;
-        border: none !important;
+        border: 2px solid rgba(255, 255, 255, 0.2) !important;
         cursor: pointer !important;
         position: relative !important;
         visibility: visible !important;
         opacity: 1 !important;
+        pointer-events: auto !important;
+        transform: none !important;
+        transition: all 0.3s ease !important;
+    }
+    
+    .chatbot-toggle:hover {
+        transform: translateY(-3px) !important;
+        box-shadow: 0 8px 30px rgba(41, 104, 113, 0.6) !important;
+        background: linear-gradient(135deg, #1e4a52 0%, #296871 100%) !important;
     }
     
     .chatbot-toggle span {
         display: inline !important;
-        font-size: 0.85rem !important;
-        font-weight: 600 !important;
+        font-size: 0.9rem !important;
+        font-weight: 700 !important;
         color: white !important;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
     }
     
     .chatbot-toggle i {
-        font-size: 1.2rem !important;
+        font-size: 1.3rem !important;
         color: white !important;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
     }
     
     /* Ensure chatbot is always visible on mobile */
@@ -6868,6 +6880,23 @@ input:checked + .slider:before {
         bottom: 15px !important;
         right: 15px !important;
         z-index: 1001 !important;
+        animation: chatbotPulse 2s ease-in-out infinite !important;
+    }
+    
+    /* Add pulsing animation to draw attention */
+    @keyframes chatbotPulse {
+        0% {
+            transform: scale(1);
+            box-shadow: 0 6px 25px rgba(41, 104, 113, 0.5);
+        }
+        50% {
+            transform: scale(1.05);
+            box-shadow: 0 8px 30px rgba(41, 104, 113, 0.7);
+        }
+        100% {
+            transform: scale(1);
+            box-shadow: 0 6px 25px rgba(41, 104, 113, 0.5);
+        }
     }
 }
 

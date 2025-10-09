@@ -62,6 +62,52 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/services-twitter.jpg";
                         <option value="zh" <?php echo getCurrentLanguage() === 'zh' ? 'selected' : ''; ?>>中文</option>
                     </select>
                     
+                    <!-- Authentication Section -->
+                    <div class="auth-section">
+                        <?php
+                        if ($auth->isLoggedIn()): 
+                            $currentUser = $auth->getCurrentUser(); ?>
+                            <!-- User is logged in -->
+                            <div class="user-menu">
+                                <span class="user-greeting"><?php echo __('nav.hello'); ?>, <?php echo htmlspecialchars($currentUser['full_name']); ?></span>
+                            </div>
+                            <div class="user-dropdown">
+                                <button class="user-dropdown-toggle" aria-expanded="false">
+                                    <i class="fas fa-user-circle"></i>
+                                    <i class="fas fa-chevron-down"></i>
+                                </button>
+                                <div class="user-dropdown-menu">
+                                    <?php if ($auth->isAdmin()): ?>
+                                        <a href="admin/dashboard.php" class="dropdown-item">
+                                            <i class="fas fa-tachometer-alt"></i> <?php echo __('nav.dashboard'); ?>
+                                        </a>
+                                        <a href="admin/blog.php" class="dropdown-item">
+                                            <i class="fas fa-blog"></i> <?php echo __('nav.manage_blog'); ?>
+                                        </a>
+                                        <a href="admin/contact.php" class="dropdown-item">
+                                            <i class="fas fa-envelope"></i> <?php echo __('nav.messages'); ?>
+                                        </a>
+                                        <a href="admin/users.php" class="dropdown-item">
+                                            <i class="fas fa-users"></i> <?php echo __('nav.users'); ?>
+                                        </a>
+                                        <a href="admin/profile.php" class="dropdown-item">
+                                            <i class="fas fa-user-edit"></i> <?php echo __('nav.my_profile'); ?>
+                                        </a>
+                                    <?php endif; ?>
+                                    <a href="admin/logout.php" class="dropdown-item logout">
+                                        <i class="fas fa-sign-out-alt"></i> <?php echo __('nav.logout'); ?>
+                                    </a>
+                                </div>
+                            </div>
+                        <?php else: ?>
+                            <!-- User is not logged in -->
+                            <div class="auth-buttons">
+                                <a href="admin/login.php" class="btn btn-connection">
+                                    <i class="fas fa-sign-in-alt"></i> <?php echo __('btn.login'); ?>
+                                </a>
+                            </div>
+                        <?php endif; ?>
+                    </div>
                     
                     <button class="mobile-menu-toggle" aria-label="<?php echo __('btn.open_mobile_menu'); ?>">
                         <i class="fas fa-bars"></i>
