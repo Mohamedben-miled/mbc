@@ -1166,5 +1166,33 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/services-twitter.jpg";
     <script src="js/main.js"></script>
     <script src="js/modal.js"></script>
     <script src="js/chatbot-multilingual-db.js"></script>
+    <script>
+        // Add event listener for simulators link
+        document.addEventListener('DOMContentLoaded', function() {
+            const simulatorsLink = document.querySelector('.simulators-link');
+            if (simulatorsLink) {
+                simulatorsLink.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    openSimulatorsModal();
+                });
+            }
+        });
+
+        // Check for #simulators anchor on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            if (window.location.hash === '#simulators') {
+                openSimulatorsModal();
+            }
+        });
+        
+        // Listen for hash changes
+        window.addEventListener('hashchange', function() {
+            if (window.location.hash === '#simulators') {
+                openSimulatorsModal();
+            } else {
+                closeModal();
+            }
+        });
+    </script>
 </body>
 </html>
