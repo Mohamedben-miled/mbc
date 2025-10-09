@@ -1,5 +1,20 @@
 <!-- Simulators Modal -->
-<div id="simulatorsModal" class="modal">
+<style>
+/* Hide modal content by default */
+#simulatorsModal .simulators-content,
+#simulatorsModal .simulators-nav,
+#simulatorsModal .simulators-main {
+    display: none !important;
+}
+
+/* Show modal content only when modal is open */
+#simulatorsModal.show .simulators-content,
+#simulatorsModal.show .simulators-nav,
+#simulatorsModal.show .simulators-main {
+    display: block !important;
+}
+</style>
+<div id="simulatorsModal" class="modal" style="display: none;">
     <div class="modal-content">
         <div class="modal-header">
             <h2><?php echo __('modal.simulators.title'); ?></h2>

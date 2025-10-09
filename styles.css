@@ -6199,18 +6199,18 @@ input:checked + .slider:before {
     animation: fadeIn 0.3s ease;
 }
 
-/* Ensure modal content is hidden by default */
+/* Hide modal content by default */
 .modal .simulators-content,
 .modal .simulators-nav,
 .modal .simulators-main {
-    display: none;
+    display: none !important;
 }
 
-/* Show modal content only when modal is open */
+/* Show modal content only when modal is open and visible */
 .modal.show .simulators-content,
 .modal.show .simulators-nav,
 .modal.show .simulators-main {
-    display: block;
+    display: block !important;
 }
 
 .modal.show {
