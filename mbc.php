@@ -346,6 +346,8 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/Majdi.png";
         </section>
     </main>
 
+    <?php include 'includes/footer.php'; ?>
+
     <!-- Scripts -->
     <script src="script.js"></script>
     <script src="js/mobile-nav.js"></script>
