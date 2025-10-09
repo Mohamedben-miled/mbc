@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot Test</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+        }
+        
+        .test-info {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .mbc-chatbot {
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            position: fixed !important;
+            bottom: 15px !important;
+            right: 15px !important;
+            z-index: 9999 !important;
+        }
+        
+        .chatbot-toggle {
+            display: flex !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            background: rgba(255, 255, 255, 0.95) !important;
+            border: 2px solid #296871 !important;
+            color: #296871 !important;
+            padding: 8px 12px !important;
+            border-radius: 50px !important;
+            cursor: pointer !important;
+            align-items: center !important;
+            gap: 4px !important;
+            font-size: 0.8rem !important;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
+        }
+        
+        .chatbot-toggle:hover {
+            background: rgba(41, 104, 113, 0.1) !important;
+            transform: translateY(-2px) !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-info">
+        <h1>Chatbot Visibility Test</h1>
+        <p>This is a test page to check if the chatbot is visible.</p>
+        <p>You should see a chatbot button in the bottom-right corner.</p>
+        <p>If you can see it, the issue is with the main pages. If not, there's a deeper issue.</p>
+    </div>
+    
+    <!-- Chatbot -->
+    <div class="mbc-chatbot">
+        <div class="chatbot-toggle" onclick="alert('Chatbot clicked!')">
+            <i class="fas fa-comments"></i>
+            <span>Test Chatbot</span>
+        </div>
+    </div>
+    
+    <script>
+        console.log('Test page loaded');
+        console.log('Chatbot element:', document.querySelector('.mbc-chatbot'));
+        console.log('Chatbot toggle element:', document.querySelector('.chatbot-toggle'));
+        
+        // Check if elements are visible
+        const chatbot = document.querySelector('.mbc-chatbot');
+        const toggle = document.querySelector('.chatbot-toggle');
+        
+        if (chatbot) {
+            console.log('Chatbot computed style:', window.getComputedStyle(chatbot));
+            console.log('Chatbot display:', window.getComputedStyle(chatbot).display);
+            console.log('Chatbot visibility:', window.getComputedStyle(chatbot).visibility);
+            console.log('Chatbot opacity:', window.getComputedStyle(chatbot).opacity);
+        }
+        
+        if (toggle) {
+            console.log('Toggle computed style:', window.getComputedStyle(toggle));
+            console.log('Toggle display:', window.getComputedStyle(toggle).display);
+            console.log('Toggle visibility:', window.getComputedStyle(toggle).visibility);
+            console.log('Toggle opacity:', window.getComputedStyle(toggle).opacity);
+        }
+    </script>
+</body>
+</html>
