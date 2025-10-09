@@ -184,6 +184,11 @@ class MultilingualChatbotDB {
      * Initialize chatbot UI
      */
     initializeChatbotUI() {
+        // Check if chatbot already exists to prevent duplicates
+        if (document.getElementById('mbc-chatbot')) {
+            return;
+        }
+        
         const chatbotHTML = `
             <div id="mbc-chatbot" class="mbc-chatbot">
                 <div class="chatbot-toggle" onclick="window.multilingualChatbotDB.toggleChatbot()">

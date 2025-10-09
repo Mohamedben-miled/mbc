@@ -100,36 +100,9 @@
         </div>
     </div>
 
-    <!-- Chatbot -->
-    <div id="chatbot" class="chatbot">
-        <div class="chatbot-toggle" id="chatbotToggle">
-            <i class="fas fa-comments"></i>
-            <span><?php echo __('chatbot.assistant'); ?></span>
-        </div>
-        <div class="chatbot-window" id="chatbotWindow">
-            <div class="chatbot-header">
-                <h3><?php echo __('chatbot.assistant'); ?></h3>
-                <button class="chatbot-close" id="chatbotClose">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            <div class="chatbot-messages" id="chatbotMessages">
-                <div class="chatbot-message bot">
-                    <p><?php echo __('chatbot.welcome_message'); ?></p>
-                </div>
-            </div>
-            <div class="chatbot-input">
-                <input type="text" id="chatbotInput" placeholder="<?php echo __('chatbot.placeholder'); ?>">
-                <button id="chatbotSend">
-                    <i class="fas fa-paper-plane"></i>
-                </button>
-            </div>
-        </div>
-    </div>
 
     <!-- Scripts -->
     <script src="script.js"></script>
-    <script src="js/chatbot-multilingual.js"></script>
 
     <!-- Additional scripts if needed -->
     <?php if (isset($additionalScripts)): ?>

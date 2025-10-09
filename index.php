@@ -666,113 +666,29 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/twitter-image.jpg";
     <script src="js/modal.js"></script>
     <script src="js/chatbot-multilingual-db.js"></script>
     <script>
-        // Business Suggestion Chatbot
+        // Initialize chatbot
         document.addEventListener('DOMContentLoaded', function() {
-            const chatbot = document.getElementById('businessChatbot');
-            const closeBtn = document.querySelector('.chatbot-close');
-            const discoverBtn = document.querySelector('.btn-primary');
-            const laterBtn = document.querySelector('.btn-secondary');
-            const messageText = document.querySelector('.message-text');
-            const header = document.querySelector('.header');
-
-            // Business suggestion messages based on language
-            const businessMessages = {
-                'fr': [
-                    "💡 Prêt à créer votre entreprise ? Je peux vous accompagner !",
-                    "🚀 Votre idée d'entreprise mérite d'être réalisée ! Parlons-en !",
-                    "💼 Créer une entreprise en France ? C'est plus simple avec MBC !",
-                    "🌟 Transformez votre projet en succès entrepreneurial !",
-                    "📈 Besoin d'aide pour votre création d'entreprise ? Je suis là !",
-                    "💡 Votre rêve d'entrepreneur peut devenir réalité !",
-                    "🎯 Prêt à lancer votre business ? Commençons ensemble !",
-                    "💪 Créer une entreprise franco-maghrébine ? C'est notre spécialité !"
-                ],
-                'en': [
-                    "💡 Ready to start your business? I can help you!",
-                    "🚀 Your business idea deserves to come true! Let's talk!",
-                    "💼 Creating a company in France? It's easier with MBC!",
-                    "🌟 Transform your project into entrepreneurial success!",
-                    "📈 Need help with your business creation? I'm here!",
-                    "💡 Your entrepreneur dream can become reality!",
-                    "🎯 Ready to launch your business? Let's start together!",
-                    "💪 Creating a Franco-Maghrebi company? That's our specialty!"
-                ],
-                'zh': [
-                    "💡 准备创建您的企业吗？我可以帮助您！",
-                    "🚀 您的商业想法值得实现！让我们谈谈！",
-                    "💼 在法国创建公司？有了MBC更简单！",
-                    "🌟 将您的项目转化为创业成功！",
-                    "📈 需要帮助创建企业？我在这里！",
-                    "💡 您的创业梦想可以成为现实！",
-                    "🎯 准备启动您的业务？让我们一起开始！",
-                    "💪 创建法马企业？这是我们的专长！"
-                ]
-            };
-
+            // Initialize the multilingual chatbot
+            if (typeof window.multilingualChatbotDB !== 'undefined') {
+                window.multilingualChatbotDB.init();
+            }
 
             // Header scroll effect
-            function handleScroll() {
-                if (window.scrollY > 100) {
-                    header.classList.add('scrolled');
-                } else {
-                    header.classList.remove('scrolled');
-                }
-            }
-
-            // Show random business message
-            function showRandomMessage() {
-                // Get current language from session or default to French
-                const currentLang = '<?php echo getCurrentLanguage(); ?>';
-                const messages = businessMessages[currentLang] || businessMessages['fr'];
-                const randomMessage = messages[Math.floor(Math.random() * messages.length)];
-                messageText.textContent = randomMessage;
-                chatbot.classList.add('active');
-                isChatbotVisible = true;
-
-                // Auto-hide after 8 seconds if not interacted with
-                setTimeout(() => {
-                    if (isChatbotVisible) {
-                        hideChatbot();
+            const header = document.querySelector('.header');
+            if (header) {
+                function handleScroll() {
+                    if (window.scrollY > 100) {
+                        header.classList.add('scrolled');
+                    } else {
+                        header.classList.remove('scrolled');
                     }
-                }, 8000);
-            }
-
-            // Hide chatbot
-            function hideChatbot() {
-                chatbot.classList.remove('active');
-                isChatbotVisible = false;
-            }
-
-            // Close chatbot
-            closeBtn.addEventListener('click', hideChatbot);
-
-            // Discover button
-            discoverBtn.addEventListener('click', function() {
-                hideChatbot();
-                // Redirect to services or contact
-                window.location.href = '#services';
-            });
-
-            // Later button
-            laterBtn.addEventListener('click', function() {
-                hideChatbot();
-            });
-
-            // Close on outside click
-            document.addEventListener('click', function(e) {
-                if (!chatbot.contains(e.target) && isChatbotVisible) {
-                    hideChatbot();
                 }
-            });
+                window.addEventListener('scroll', handleScroll);
+            }
 
-            // Add scroll listener
-            window.addEventListener('scroll', handleScroll);
+
 
         });
-
-        // Slider functionality for simulators
-        function initializeSliders() {
-            // TVA HT Slider (0 to 100,000)
             initializeSlider('tva-ht', 0, 100000, 10000, (value) => {
                 return value.toLocaleString('fr-FR');
             });
