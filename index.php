@@ -1423,9 +1423,16 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/twitter-image.jpg";
 
     <?php include 'includes/simulators-modal.php'; ?>
 
-    <!-- Chatbot -->
-    <div class="mbc-chatbot" id="test-chatbot" style="display: block !important; visibility: visible !important; opacity: 1 !important; position: fixed !important; bottom: 15px !important; right: 15px !important; z-index: 9999 !important;">
-        <div class="chatbot-toggle" onclick="alert('Chatbot clicked! This proves it is visible and working.'); window.multilingualChatbotDB && window.multilingualChatbotDB.toggleChatbot()" style="display: flex !important; visibility: visible !important; opacity: 1 !important; background: rgba(255, 255, 255, 0.95) !important; border: 2px solid #296871 !important; color: #296871 !important; padding: 8px 12px !important; border-radius: 50px !important; cursor: pointer !important;">
+    <!-- EMERGENCY VISIBLE CHATBOT -->
+    <div style="position: fixed !important; bottom: 20px !important; right: 20px !important; z-index: 99999 !important; display: block !important; visibility: visible !important; opacity: 1 !important;" onclick="alert('EMERGENCY CHATBOT WORKS!')">
+        <div style="background: #ff0000 !important; color: white !important; border: 3px solid #000 !important; padding: 15px 20px !important; border-radius: 10px !important; cursor: pointer !important; font-weight: bold !important; font-size: 16px !important; display: block !important; visibility: visible !important; opacity: 1 !important; text-align: center !important; box-shadow: 0 4px 20px rgba(0,0,0,0.5) !important;">
+            🚨 EMERGENCY CHATBOT 🚨
+        </div>
+    </div>
+    
+    <!-- Original Chatbot -->
+    <div class="mbc-chatbot" id="test-chatbot" style="display: block !important; visibility: visible !important; opacity: 1 !important; position: fixed !important; bottom: 80px !important; right: 15px !important; z-index: 9999 !important;">
+        <div class="chatbot-toggle" onclick="alert('Original Chatbot clicked! This proves it is visible and working.'); window.multilingualChatbotDB && window.multilingualChatbotDB.toggleChatbot()" style="display: flex !important; visibility: visible !important; opacity: 1 !important; background: rgba(255, 255, 255, 0.95) !important; border: 2px solid #296871 !important; color: #296871 !important; padding: 8px 12px !important; border-radius: 50px !important; cursor: pointer !important;">
             <i class="fas fa-comments"></i>
             <span><?php echo __('chatbot.assistant'); ?></span>
         </div>
