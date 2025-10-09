@@ -59,46 +59,7 @@
         </div>
     </footer>
 
-    <!-- Simulators Modal -->
-    <div id="simulatorsModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2><?php echo __('modal.simulators.title'); ?></h2>
-                <p><?php echo __('modal.simulators.subtitle'); ?></p>
-                <button class="modal-close" onclick="closeSimulatorsModal()" aria-label="<?php echo __('modal.close'); ?>">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="simulators-grid">
-                    <div class="simulator-card">
-                        <div class="simulator-icon">
-                            <i class="fas fa-calculator"></i>
-                        </div>
-                        <h3><?php echo __('contact.simulator_charges_title'); ?></h3>
-                        <p><?php echo __('contact.simulator_charges_desc'); ?></p>
-                        <button class="btn btn-primary" onclick="window.location.href='simulators.php#charges'"><?php echo __('contact.simulator_charges_use'); ?></button>
-                    </div>
-                    <div class="simulator-card">
-                        <div class="simulator-icon">
-                            <i class="fas fa-chart-line"></i>
-                        </div>
-                        <h3><?php echo __('contact.simulator_tva_title'); ?></h3>
-                        <p><?php echo __('contact.simulator_tva_desc'); ?></p>
-                        <button class="btn btn-primary" onclick="window.location.href='simulators.php#tva'"><?php echo __('contact.simulator_tva_use'); ?></button>
-                    </div>
-                    <div class="simulator-card">
-                        <div class="simulator-icon">
-                            <i class="fas fa-building"></i>
-                        </div>
-                        <h3><?php echo __('contact.simulator_creation_title'); ?></h3>
-                        <p><?php echo __('contact.simulator_creation_desc'); ?></p>
-                        <button class="btn btn-primary" onclick="window.location.href='simulators.php#creation'"><?php echo __('contact.simulator_creation_use'); ?></button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <!-- Simulators Modal is included separately -->
 
 
     <!-- Scripts -->
@@ -150,30 +111,7 @@
             form.submit();
         }
 
-        // Simulators Modal Functions
-        function openSimulatorsModal() {
-            const modal = document.getElementById('simulatorsModal');
-            if (modal) {
-                modal.style.display = 'block';
-                document.body.style.overflow = 'hidden';
-            }
-        }
-
-        function closeSimulatorsModal() {
-            const modal = document.getElementById('simulatorsModal');
-            if (modal) {
-                modal.style.display = 'none';
-                document.body.style.overflow = 'auto';
-            }
-        }
-
-        // Close modal when clicking outside
-        window.addEventListener('click', function(event) {
-            const modal = document.getElementById('simulatorsModal');
-            if (modal && event.target === modal) {
-                closeSimulatorsModal();
-            }
-        });
+        // Modal functions are handled by modal.js
 
         // Mobile navigation functionality is handled by js/mobile-nav.js
             
