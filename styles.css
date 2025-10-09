@@ -6332,6 +6332,31 @@ input:checked + .slider:before {
     font-size: 1.1rem;
 }
 
+.chatbot-language-selector {
+    margin: 0 10px;
+}
+
+.chatbot-language-selector select {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 20px;
+    padding: 5px 10px;
+    font-size: 12px;
+    outline: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.chatbot-language-selector select:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.chatbot-language-selector select option {
+    background: #296871;
+    color: white;
+}
+
 .chatbot-close {
     background: rgba(255, 255, 255, 0.2);
     border: none;

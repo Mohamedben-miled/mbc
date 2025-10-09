@@ -154,7 +154,7 @@
 
     <!-- Scripts -->
     <script src="script.js"></script>
-    <script src="chatbot.js"></script>
+    <script src="js/chatbot-multilingual.js"></script>
 
     <!-- Additional scripts if needed -->
     <?php if (isset($additionalScripts)): ?>
