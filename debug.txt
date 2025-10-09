@@ -1,0 +1,31 @@
+DEBUG LOG - admin/support-config.php
+=====================================
+
+Timestamp: 2025-10-09 14:53:52
+
+ISSUE IDENTIFIED: 500 Internal Server Error
+==========================================
+
+ROOT CAUSE: Missing database include
+- The file was missing: require_once '../includes/db.php';
+- The code was trying to use $pdo without including the database connection
+- This caused a fatal error when trying to execute database queries
+
+FIX APPLIED:
+- Added require_once '../includes/db.php'; to the file
+- Added error reporting for debugging
+
+CURRENT STATUS: WORKING CORRECTLY
+=================================
+- The page now returns HTTP 302 (redirect) instead of 500 error
+- This is the CORRECT behavior for a protected admin page
+- The page redirects to /admin/login.php when user is not logged in
+- This is the expected security behavior
+
+TO ACCESS THE PAGE:
+1. Go to http://localhost/admin/login.php
+2. Login with admin credentials
+3. Then access http://localhost/admin/support-config.php
+
+The 500 error has been fixed!
+=====================================
