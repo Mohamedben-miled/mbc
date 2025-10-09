@@ -940,7 +940,7 @@ header, .header, .header-content {
         display: none;
     }
     
-    .language-selector {
+    .header-utils .language-selector {
         display: none;
     }
     

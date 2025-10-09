@@ -1202,6 +1202,71 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/services-twitter.jpg";
                 closeModal();
             }
         });
+
+        // Services Navigation Controls
+        let currentPage = 1;
+        const totalPages = 2;
+
+        function showPage(pageNumber) {
+            const servicesContainer = document.querySelector('.services-grid');
+            if (!servicesContainer) return;
+
+            // Update grid layout based on page
+            if (pageNumber === 1) {
+                servicesContainer.style.transform = 'translateX(0)';
+            } else if (pageNumber === 2) {
+                servicesContainer.style.transform = 'translateX(-50%)';
+            }
+
+            // Update active dot
+            document.querySelectorAll('.dot').forEach(dot => {
+                dot.classList.remove('active');
+            });
+            const activeDot = document.querySelector(`.dot[data-page="${pageNumber}"]`);
+            if (activeDot) {
+                activeDot.classList.add('active');
+            }
+            
+            // Update navigation buttons
+            const prevBtn = document.getElementById('prevServices');
+            const nextBtn = document.getElementById('nextServices');
+            
+            if (prevBtn) prevBtn.disabled = pageNumber === 1;
+            if (nextBtn) nextBtn.disabled = pageNumber === totalPages;
+            
+            currentPage = pageNumber;
+        }
+
+        // Initialize pagination when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Previous button
+            const prevBtn = document.getElementById('prevServices');
+            if (prevBtn) {
+                prevBtn.addEventListener('click', function() {
+                    if (currentPage > 1) {
+                        showPage(currentPage - 1);
+                    }
+                });
+            }
+            
+            // Next button
+            const nextBtn = document.getElementById('nextServices');
+            if (nextBtn) {
+                nextBtn.addEventListener('click', function() {
+                    if (currentPage < totalPages) {
+                        showPage(currentPage + 1);
+                    }
+                });
+            }
+            
+            // Dot navigation
+            document.querySelectorAll('.dot').forEach(dot => {
+                dot.addEventListener('click', function() {
+                    const pageNumber = parseInt(this.getAttribute('data-page'));
+                    showPage(pageNumber);
+                });
+            });
+        });
     </script>
 </body>
 </html>
