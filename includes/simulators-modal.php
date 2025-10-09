@@ -19,7 +19,7 @@
         <div class="modal-header">
             <h2><?php echo __('modal.simulators.title'); ?></h2>
             <p><?php echo __('modal.simulators.subtitle'); ?></p>
-            <button class="modal-close" onclick="closeSimulatorsModal()">&times;</button>
+            <button class="modal-close" onclick="closeModal()">&times;</button>
         </div>
         
         <div class="modal-body">
@@ -102,24 +102,7 @@
 </div>
 
 <script>
-// Simulators Modal Functions
-function openSimulatorsModal() {
-    const modal = document.getElementById('simulatorsModal');
-    if (modal) {
-        modal.style.display = 'flex';
-        modal.classList.add('show');
-        document.body.style.overflow = 'hidden';
-    }
-}
-
-function closeSimulatorsModal() {
-    const modal = document.getElementById('simulatorsModal');
-    if (modal) {
-        modal.classList.remove('show');
-        modal.style.display = 'none';
-        document.body.style.overflow = 'auto';
-    }
-}
+// Modal functions are handled by modal.js
 
 // TVA Calculator
 function calculateTVA() {
@@ -183,7 +166,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (window.location.hash === '#simulators') {
             openSimulatorsModal();
         } else {
-            closeSimulatorsModal();
+            closeModal();
         }
     });
 });

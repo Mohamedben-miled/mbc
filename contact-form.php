@@ -506,7 +506,7 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/contact-twitter.jpg";
             if (window.location.hash === '#simulators') {
                 openSimulatorsModal();
             } else {
-                closeSimulatorsModal();
+                closeModal();
             }
         });
             
