@@ -364,60 +364,7 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/contact-twitter.jpg";
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="footer" role="contentinfo">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <div class="footer-icon">
-                        <i class="fas fa-building" aria-hidden="true"></i>
-                    </div>
-                    <h3>MBC Expert Comptable</h3>
-                    <p><?php echo __('contact.footer_description'); ?></p>
-                    <div class="social-links">
-                        <a href="#" aria-label="<?php echo __('social.facebook'); ?>"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
-                        <a href="#" aria-label="<?php echo __('social.linkedin'); ?>"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
-                        <a href="#" aria-label="<?php echo __('social.twitter'); ?>"><i class="fab fa-twitter" aria-hidden="true"></i></a>
-                        <a href="#" aria-label="<?php echo __('social.instagram'); ?>"><i class="fab fa-instagram" aria-hidden="true"></i></a>
-                    </div>
-                </div>
-                <div class="footer-section">
-                    <h3><?php echo __('contact.quick_links_title'); ?></h3>
-                    <ul>
-                        <li><a href="index.php"><?php echo __('nav.home'); ?></a></li>
-                        <li><a href="mbc.php"><?php echo __('nav.about'); ?></a></li>
-                        <li><a href="services.php"><?php echo __('nav.services'); ?></a></li>
-                        <li><a href="contact-form.php"><?php echo __('nav.contact'); ?></a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h3><?php echo __('contact.our_services_title'); ?></h3>
-                    <ul>
-                        <li><a href="services.php#expertise"><?php echo __('services.expertise_title'); ?></a></li>
-                        <li><a href="services.php#fiscalite"><?php echo __('services.fiscalite_title'); ?></a></li>
-                        <li><a href="services.php#social"><?php echo __('services.social_title'); ?></a></li>
-                        <li><a href="services.php#conseil"><?php echo __('nav.consulting'); ?></a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h3><?php echo __('contact.contact_title'); ?></h3>
-                    <ul>
-                        <li><i class="fas fa-phone" aria-hidden="true"></i> +33 1 23 45 67 89</li>
-                        <li><i class="fas fa-envelope" aria-hidden="true"></i> contact@mbc-expertcomptable.fr</li>
-                        <li><i class="fas fa-map-marker-alt" aria-hidden="true"></i> <?php echo __('location.paris'); ?></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                    <p>&copy; 2024 MBC Expert Comptable. <?php echo __('contact.all_rights_reserved'); ?></p>
-                <div>
-                    <a href="#mentions"><?php echo __('contact.legal_mentions'); ?></a>
-                    <a href="#confidentialite"><?php echo __('contact.privacy_policy'); ?></a>
-                    <a href="#cookies"><?php echo __('contact.cookies'); ?></a>
-                </div>
-            </div>
-        </div>
-    </footer>
+    <?php include 'includes/footer.php'; ?>
 
 
 

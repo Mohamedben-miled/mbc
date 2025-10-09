@@ -878,64 +878,7 @@ $pageDescription = __("blog.subtitle");
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="footer" role="contentinfo">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <div class="footer-icon">
-                        <i class="fas fa-building" aria-hidden="true"></i>
-                    </div>
-                    <h3>MBC Expert Comptable</h3>
-                    <p><?php echo __('footer.description'); ?></p>
-                    <div class="social-links">
-                        <a href="#" aria-label="<?php echo __('social.facebook'); ?>"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
-                        <a href="#" aria-label="<?php echo __('social.linkedin'); ?>"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
-                        <a href="#" aria-label="<?php echo __('social.twitter'); ?>"><i class="fab fa-twitter" aria-hidden="true"></i></a>
-                        <a href="#" aria-label="<?php echo __('social.instagram'); ?>"><i class="fab fa-instagram" aria-hidden="true"></i></a>
-                    </div>
-                </div>
-
-                <div class="footer-section">
-                    <h3><?php echo __('footer.quick_links'); ?></h3>
-                    <ul>
-                        <li><a href="#accueil"><?php echo __('nav.home'); ?></a></li>
-                        <li><a href="mbc.php"><?php echo __('nav.about'); ?></a></li>
-                        <li><a href="services.php"><?php echo __('nav.services'); ?></a></li>
-                        <li><a href="contact-form.php"><?php echo __('nav.contact'); ?></a></li>
-                    </ul>
-                </div>
-
-                <div class="footer-section">
-                    <h3><?php echo __('footer.services'); ?></h3>
-                    <ul>
-                        <li><a href="#expertise"><?php echo __('services.expertise.title'); ?></a></li>
-                        <li><a href="#fiscalite"><?php echo __('services.fiscalite.title'); ?></a></li>
-                        <li><a href="#social"><?php echo __('services.social.title'); ?></a></li>
-                        <li><a href="#conseil"><?php echo __('services.conseil.title'); ?></a></li>
-                    </ul>
-                </div>
-
-                <div class="footer-section">
-                    <h3><?php echo __('footer.contact'); ?></h3>
-                    <ul>
-                        <li><i class="fas fa-phone" aria-hidden="true"></i> +33 1 23 45 67 89</li>
-                        <li><i class="fas fa-envelope" aria-hidden="true"></i> contact@mbc-expertcomptable.fr</li>
-                        <li><i class="fas fa-map-marker-alt" aria-hidden="true"></i> <?php echo __('location.paris'); ?></li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="footer-bottom">
-                <p>&copy; 2024 <?php echo __('footer.copyright'); ?></p>
-                <div>
-                    <a href="#mentions"><?php echo __('footer.legal'); ?></a>
-                    <a href="#confidentialite"><?php echo __('footer.privacy'); ?></a>
-                    <a href="#cookies"><?php echo __('footer.terms'); ?></a>
-                </div>
-            </div>
-        </div>
-    </footer>
+    <?php include 'includes/footer.php'; ?>
 
         <?php include 'includes/simulators-modal.php'; ?>
 
