@@ -6805,6 +6805,11 @@ input:checked + .slider:before {
 
 /* Mobile responsive */
 @media (max-width: 768px) {
+    /* Hide auth-section on mobile */
+    .auth-section {
+        display: none !important;
+    }
+    
     .mbc-chatbot {
         bottom: 15px !important;
         right: 15px !important;
