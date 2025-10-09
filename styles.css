@@ -125,30 +125,7 @@ header, .header, .header-content {
     transform: rotate(180deg);
 }
 
-.user-dropdown-menu {
-    position: absolute;
-    top: calc(100% + 8px);
-    right: 0;
-    background: white;
-    border: 1px solid #e5e7eb;
-    border-radius: 0.5rem;
-    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15);
-    min-width: 200px;
-    z-index: 10003;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-10px);
-    transition: all 0.2s ease;
-    /* Force hidden state on page load */
-    display: none;
-}
-
-.user-dropdown-menu.show {
-    display: block;
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-}
+/* Duplicate rule removed - handled by first .user-dropdown-menu rule */
 
 .dropdown-item {
     display: flex;
