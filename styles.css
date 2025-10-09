@@ -1847,13 +1847,14 @@ a:hover {
 }
 
 .btn-secondary {
-    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
-    color: #2F666B;
-    border: 2px solid #2F666B;
-    box-shadow: 0 4px 15px rgba(47, 102, 107, 0.2);
-    font-weight: 600;
-    position: relative;
-    overflow: hidden;
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%) !important;
+    color: #2F666B !important;
+    border: 2px solid #2F666B !important;
+    box-shadow: 0 4px 15px rgba(47, 102, 107, 0.2) !important;
+    font-weight: 600 !important;
+    position: relative !important;
+    overflow: hidden !important;
+    text-shadow: none !important;
 }
 
 .btn-secondary::before {
@@ -1872,11 +1873,12 @@ a:hover {
 }
 
 .btn-secondary:hover {
-    background: linear-gradient(135deg, #2F666B 0%, #1A4A4F 100%);
-    color: white;
-    border-color: #2F666B;
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(47, 102, 107, 0.4);
+    background: linear-gradient(135deg, #2F666B 0%, #1A4A4F 100%) !important;
+    color: white !important;
+    border-color: #2F666B !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 25px rgba(47, 102, 107, 0.4) !important;
+    text-shadow: none !important;
 }
 
 .btn-large {
@@ -7090,13 +7092,14 @@ input:checked + .slider:before {
 }
 
 .cta-buttons .btn-secondary {
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.95) 100%);
-    color: #2F666B;
-    border: 2px solid rgba(255, 255, 255, 0.9);
-    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
-    font-weight: 600;
-    position: relative;
-    overflow: hidden;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.95) 100%) !important;
+    color: #2F666B !important;
+    border: 2px solid rgba(255, 255, 255, 0.9) !important;
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2) !important;
+    font-weight: 600 !important;
+    position: relative !important;
+    overflow: hidden !important;
+    text-shadow: none !important;
 }
 
 .cta-buttons .btn-secondary::before {
@@ -7115,11 +7118,12 @@ input:checked + .slider:before {
 }
 
 .cta-buttons .btn-secondary:hover {
-    background: linear-gradient(135deg, #2F666B 0%, #1A4A4F 100%);
-    color: white;
-    border-color: #2F666B;
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(47, 102, 107, 0.4);
+    background: linear-gradient(135deg, #2F666B 0%, #1A4A4F 100%) !important;
+    color: white !important;
+    border-color: #2F666B !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 25px rgba(47, 102, 107, 0.4) !important;
+    text-shadow: none !important;
 }
 
 .cta-trust {
@@ -10133,6 +10137,25 @@ body.mbc-page .user-dropdown-menu {
 
 body.mbc-page {
     padding-top: 80px;
+}
+
+/* Fix btn-secondary text visibility in hero sections */
+.hero-cta .btn-secondary {
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%) !important;
+    color: #2F666B !important;
+    border: 2px solid #2F666B !important;
+    box-shadow: 0 4px 15px rgba(47, 102, 107, 0.2) !important;
+    font-weight: 600 !important;
+    text-shadow: none !important;
+}
+
+.hero-cta .btn-secondary:hover {
+    background: linear-gradient(135deg, #2F666B 0%, #1A4A4F 100%) !important;
+    color: white !important;
+    border-color: #2F666B !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 25px rgba(47, 102, 107, 0.4) !important;
+    text-shadow: none !important;
 }
 
 /* Enhanced CTA Buttons - Main Action Buttons */
