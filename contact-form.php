@@ -49,7 +49,7 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/contact-twitter.jpg";
                         <li><a href="index.php#accueil" class="nav-link"><?php echo __('nav.home'); ?></a></li>
                         <li><a href="mbc.php" class="nav-link"><?php echo __('nav.about'); ?></a></li>
                         <li><a href="services.php" class="nav-link"><?php echo __('nav.services'); ?></a></li>
-                        <li><a href="#" class="nav-link simulators-link"><?php echo __('nav.simulators'); ?></a></li>
+                        <li><a href="#simulators" class="nav-link" onclick="openSimulatorsModal()"><?php echo __('nav.simulators'); ?></a></li>
                         <li><a href="blog-dynamic.php" class="nav-link"><?php echo __('nav.blog'); ?></a></li>
                         <li><a href="contact-form.php" class="nav-link active" aria-current="page"><?php echo __('nav.contact'); ?></a></li>
                     </ul>
@@ -483,16 +483,7 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/contact-twitter.jpg";
     <script src="js/modal.js"></script>
     <script src="js/chatbot-multilingual-db.js"></script>
     <script>
-        // Add event listener for simulators link
-        document.addEventListener('DOMContentLoaded', function() {
-            const simulatorsLink = document.querySelector('.simulators-link');
-            if (simulatorsLink) {
-                simulatorsLink.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    openSimulatorsModal();
-                });
-            }
-        });
+        // Simulators link now uses onclick attribute
 
         // Check for #simulators anchor on page load
         document.addEventListener('DOMContentLoaded', function() {
