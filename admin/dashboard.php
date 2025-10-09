@@ -505,6 +505,9 @@ $recentSubmissions = $contact->getSubmissions(1, 5);
                     <a href="profile.php" class="mobile-nav-link">
                         <i class="fas fa-user-edit"></i> Mon Profil
                     </a>
+                    <a href="support-config.php" class="mobile-nav-link">
+                        <i class="fas fa-robot"></i> Configuration Support
+                    </a>
                     <a href="logout.php" class="mobile-nav-link logout">
                         <i class="fas fa-sign-out-alt"></i> Déconnexion
                     </a>
@@ -552,6 +555,10 @@ $recentSubmissions = $contact->getSubmissions(1, 5);
                 <a href="profile.php" class="nav-item">
                     <i class="fas fa-user"></i>
                     Mon profil
+                </a>
+                <a href="support-config.php" class="nav-item">
+                    <i class="fas fa-robot"></i>
+                    Configuration Support
                 </a>
             </nav>
 

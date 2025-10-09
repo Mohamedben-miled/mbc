@@ -617,7 +617,7 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/contact-twitter.jpg";
     <script src="js/mobile-nav.js"></script>
     <script src="js/main.js"></script>
     <script src="js/modal.js"></script>
-    <script src="js/chatbot-multilingual.js"></script>
+    <script src="js/chatbot-multilingual-db.js"></script>
     <script>
         // Add event listener for simulators link
         document.addEventListener('DOMContentLoaded', function() {

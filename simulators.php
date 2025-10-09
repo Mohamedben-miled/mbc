@@ -449,7 +449,7 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/simulators-twitter.jpg";
     <script src="js/main.js"></script>
     <script src="js/mobile-nav.js"></script>
     <script src="js/simulators.js"></script>
-    <script src="js/chatbot-multilingual.js"></script>
+    <script src="js/chatbot-multilingual-db.js"></script>
     <script>
         // Initialize AOS
         AOS.init({
