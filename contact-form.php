@@ -704,5 +704,44 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/contact-twitter.jpg";
         });
     </script>
     <script src="chatbot.js"></script>
+
+    <!-- Chatbot -->
+    <div class="mbc-chatbot">
+        <div class="chatbot-toggle" onclick="window.multilingualChatbotDB.toggleChatbot()">
+            <i class="fas fa-comments"></i>
+            <span><?php echo __('chatbot.assistant'); ?></span>
+        </div>
+        <div class="chatbot-window" id="chatbotWindow">
+            <div class="chatbot-header">
+                <div class="chatbot-title">
+                    <i class="fas fa-robot"></i>
+                    <span><?php echo __('chatbot.assistant'); ?></span>
+                </div>
+                <div class="chatbot-language-selector">
+                    <select id="chatbotLanguage" onchange="window.multilingualChatbotDB.changeLanguage(this.value)">
+                        <option value="fr" <?php echo getCurrentLanguage() === 'fr' ? 'selected' : ''; ?>>FR</option>
+                        <option value="en" <?php echo getCurrentLanguage() === 'en' ? 'selected' : ''; ?>>EN</option>
+                        <option value="zh" <?php echo getCurrentLanguage() === 'zh' ? 'selected' : ''; ?>>中文</option>
+                    </select>
+                </div>
+                <button class="chatbot-close" onclick="window.multilingualChatbotDB.toggleChatbot()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="chatbot-messages" id="chatbotMessages">
+                <div class="message bot-message">
+                    <div class="message-content">
+                        <?php echo __('chatbot.welcome_message'); ?>
+                    </div>
+                </div>
+            </div>
+            <div class="chatbot-input">
+                <input type="text" id="chatbotInput" placeholder="<?php echo __('chatbot.placeholder'); ?>" onkeypress="window.multilingualChatbotDB.handleKeypress(event)">
+                <button onclick="window.multilingualChatbotDB.sendMessage()">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
