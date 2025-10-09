@@ -10149,6 +10149,33 @@ body.mbc-page {
     text-shadow: none !important;
 }
 
+/* New connection button styling */
+.btn-connection {
+    background: transparent !important;
+    color: white !important;
+    border: none !important;
+    padding: 8px 16px !important;
+    font-size: 0.9rem !important;
+    font-weight: 500 !important;
+    text-decoration: none !important;
+    border-radius: 6px !important;
+    transition: all 0.3s ease !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+}
+
+.btn-connection:hover {
+    background: rgba(255, 255, 255, 0.1) !important;
+    color: white !important;
+    transform: translateY(-1px) !important;
+    text-decoration: none !important;
+}
+
+.btn-connection i {
+    font-size: 0.8rem !important;
+}
+
 .hero-cta .btn-secondary:hover {
     background: linear-gradient(135deg, #2F666B 0%, #1A4A4F 100%) !important;
     color: white !important;

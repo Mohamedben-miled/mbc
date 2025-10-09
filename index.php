@@ -132,7 +132,7 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/twitter-image.jpg";
                         <?php else: ?>
                             <!-- User is not logged in -->
                             <div class="auth-buttons">
-                                <a href="admin/login.php" class="btn btn-outline btn-sm">
+                                <a href="admin/login.php" class="btn btn-connection">
                                     <i class="fas fa-sign-in-alt"></i> <?php echo __('btn.login'); ?>
                                 </a>
                             </div>

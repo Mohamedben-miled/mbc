@@ -76,7 +76,7 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/Majdi.png";
                         <li><a href="index.php#accueil" class="nav-link"><?php echo __('nav.home'); ?></a></li>
                         <li><a href="mbc.php" class="nav-link active" aria-current="page"><?php echo __('nav.about'); ?></a></li>
                         <li><a href="services.php" class="nav-link"><?php echo __('nav.services'); ?></a></li>
-                        <li><a href="#" class="nav-link simulators-link"><?php echo __('nav.simulators'); ?></a></li>
+                        <li><a href="#simulators" class="nav-link" onclick="openSimulatorsModal()"><?php echo __('nav.simulators'); ?></a></li>
                         <li><a href="blog-dynamic.php" class="nav-link"><?php echo __('nav.blog'); ?></a></li>
                         <li><a href="contact-form.php" class="nav-link"><?php echo __('nav.contact'); ?></a></li>
                     </ul>
@@ -130,7 +130,7 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/Majdi.png";
                         <?php else: ?>
                             <!-- User is not logged in -->
                             <div class="auth-buttons">
-                                <a href="admin/login.php" class="btn btn-outline btn-sm">
+                                <a href="admin/login.php" class="btn btn-connection">
                                     <i class="fas fa-sign-in-alt"></i> <?php echo __('btn.login'); ?>
                                 </a>
                             </div>
@@ -1293,90 +1293,6 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/Majdi.png";
             }
         }
     </script>
-
-    <?php include 'includes/simulators-modal.php'; ?>
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2><?php echo __('modal.simulators.title'); ?></h2>
-                <p>Utilisez nos outils de simulation pour estimer rapidement vos charges, impôts et aides</p>
-                <button class="modal-close" onclick="closeSimulatorsModal()">&times;</button>
-            </div>
-            
-            <div class="modal-body">
-                <!-- Navigation Tabs -->
-                <div class="simulators-nav">
-                    <button class="nav-tab active" data-tab="fiscalite">Fiscalité</button>
-                    <button class="nav-tab" data-tab="charges">Charges sociales</button>
-                    <button class="nav-tab" data-tab="epargne">Épargne & Retraite</button>
-                    <button class="nav-tab" data-tab="aides">Aides</button>
-                </div>
-                
-                <div class="simulators-content">
-                    <div class="simulators-main">
-                        <!-- Fiscalité Tab -->
-                        <div class="tab-content active" id="fiscalite">
-                            <div class="simulator-card">
-                                <h3>Calculateur de TVA</h3>
-                                <div class="simulator-form">
-                                    <div class="form-group">
-                                        <label for="tva-ht">Montant HT</label>
-                                        <input type="number" id="tva-ht" placeholder="0.00" step="0.01">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="tva-rate">Taux de TVA</label>
-                                        <select id="tva-rate">
-                                            <option value="20">20%</option>
-                                            <option value="10">10%</option>
-                                            <option value="5.5">5.5%</option>
-                                            <option value="2.1">2.1%</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="tva-amount">Montant TVA</label>
-                                        <input type="text" id="tva-amount" readonly>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="tva-ttc">Montant TTC</label>
-                                        <input type="text" id="tva-ttc" readonly>
-                                    </div>
-                                    <div class="simulator-actions">
-                                        <button class="btn btn-secondary">
-                                            <i class="fas fa-save"></i> Sauvegarder / Charger
-                                        </button>
-                                        <button class="btn btn-primary">
-                                            <i class="fas fa-file-pdf"></i> Exporter en PDF
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Other tabs -->
-                        <div class="tab-content" id="charges">
-                            <div class="simulator-card">
-                                <h3>Simulateur de charges sociales</h3>
-                                <p>Fonctionnalité en cours de développement...</p>
-                            </div>
-                        </div>
-                        
-                        <div class="tab-content" id="epargne">
-                            <div class="simulator-card">
-                                <h3>Simulateur d'épargne & retraite</h3>
-                                <p>Fonctionnalité en cours de développement...</p>
-                            </div>
-                        </div>
-                        
-                        <div class="tab-content" id="aides">
-                            <div class="simulator-card">
-                                <h3>Simulateur d'aides</h3>
-                                <p>Fonctionnalité en cours de développement...</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <!-- Duplicate scripts removed - handled by first script section -->
 </body>
