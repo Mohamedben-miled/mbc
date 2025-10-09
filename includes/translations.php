@@ -1116,6 +1116,17 @@ $translations = [
         'admin.support.category_technical' => 'Technique',
         'admin.support.category_contact' => 'Contact',
         
+        // Login page translations
+        'login.title' => 'Connexion Admin',
+        'login.subtitle' => 'Accédez à votre tableau de bord',
+        'login.username' => 'Nom d\'utilisateur',
+        'login.password' => 'Mot de passe',
+        'login.submit' => 'Se connecter',
+        'login.error_empty' => 'Veuillez remplir tous les champs.',
+        'login.error_invalid' => 'Nom d\'utilisateur ou mot de passe incorrect.',
+        'login.remember' => 'Se souvenir de moi',
+        'login.forgot' => 'Mot de passe oublié ?',
+        
         // Additional Missing Translations
         'common.close_menu' => 'Fermer le menu',
         'common.open_mobile_menu' => 'Ouvrir le menu mobile',
@@ -2365,6 +2376,17 @@ $translations = [
         'admin.support.category_technical' => 'Technical',
         'admin.support.category_contact' => 'Contact',
         
+        // Login page translations
+        'login.title' => 'Admin Login',
+        'login.subtitle' => 'Access your dashboard',
+        'login.username' => 'Username',
+        'login.password' => 'Password',
+        'login.submit' => 'Login',
+        'login.error_empty' => 'Please fill in all fields.',
+        'login.error_invalid' => 'Invalid username or password.',
+        'login.remember' => 'Remember me',
+        'login.forgot' => 'Forgot password?',
+        
         // Additional Missing Translations
         'common.close_menu' => 'Close menu',
         'common.open_mobile_menu' => 'Open mobile menu',
@@ -3613,6 +3635,17 @@ $translations = [
         'admin.support.category_pricing' => '定价',
         'admin.support.category_technical' => '技术',
         'admin.support.category_contact' => '联系',
+        
+        // Login page translations
+        'login.title' => '管理员登录',
+        'login.subtitle' => '访问您的仪表板',
+        'login.username' => '用户名',
+        'login.password' => '密码',
+        'login.submit' => '登录',
+        'login.error_empty' => '请填写所有字段。',
+        'login.error_invalid' => '用户名或密码错误。',
+        'login.remember' => '记住我',
+        'login.forgot' => '忘记密码？',
         
         // Additional Missing Translations
         'common.close_menu' => '关闭菜单',

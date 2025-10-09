@@ -625,6 +625,90 @@ header, .header, .header-content {
     box-shadow: 0 0 0 3px rgba(46, 106, 110, 0.1);
 }
 
+/* Button Visibility Fixes */
+.btn {
+    color: white !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    font-weight: 600;
+}
+
+.btn-outline {
+    color: #2e6a6e !important;
+    border: 2px solid #2e6a6e;
+    background: transparent;
+    text-shadow: none;
+}
+
+.btn-outline:hover {
+    background: #2e6a6e;
+    color: white !important;
+}
+
+.newsletter-input {
+    color: #333 !important;
+    background: white !important;
+    border: 1px solid #ddd !important;
+}
+
+.newsletter-input::placeholder {
+    color: #666 !important;
+    opacity: 1;
+}
+
+/* Checkbox Mobile Fixes */
+.checkbox-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background: #f9f9f9;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-height: 44px; /* Minimum touch target size */
+}
+
+.checkbox-group:hover {
+    background: #e9ecef;
+    border-color: #2e6a6e;
+}
+
+.checkbox-group input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    margin: 0;
+    cursor: pointer;
+    accent-color: #2e6a6e;
+}
+
+.checkbox-group label {
+    cursor: pointer;
+    margin: 0;
+    flex: 1;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.checkbox-group input[type="checkbox"]:checked + label {
+    color: #2e6a6e;
+    font-weight: 500;
+}
+
+/* Mobile specific checkbox improvements */
+@media (max-width: 768px) {
+    .checkbox-group {
+        padding: 15px;
+        min-height: 50px;
+        font-size: 16px; /* Prevent zoom on iOS */
+    }
+    
+    .checkbox-group input[type="checkbox"] {
+        width: 20px;
+        height: 20px;
+    }
+}
+
 /* Mobile Navigation Styles */
 .mobile-nav {
     display: none;
