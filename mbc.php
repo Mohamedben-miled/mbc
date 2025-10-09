@@ -550,6 +550,5 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/Majdi.png";
     </script>
 
     <?php include 'includes/simulators-modal.php'; ?>
-    <?php include 'includes/footer.php'; ?>
 </body>
 </html>
