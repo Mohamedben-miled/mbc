@@ -6590,6 +6590,9 @@ input:checked + .slider:before {
     right: 20px;
     z-index: 1000;
     font-family: 'Inter', sans-serif;
+    display: block;
+    visibility: visible;
+    opacity: 1;
 }
 
 .chatbot-toggle {
@@ -6604,6 +6607,9 @@ input:checked + .slider:before {
     box-shadow: 0 4px 20px rgba(41, 104, 113, 0.3);
     transition: all 0.3s ease;
     font-weight: 600;
+    border: none;
+    visibility: visible;
+    opacity: 1;
 }
 
 .chatbot-toggle:hover {
@@ -6800,38 +6806,63 @@ input:checked + .slider:before {
 /* Mobile responsive */
 @media (max-width: 768px) {
     .mbc-chatbot {
-        bottom: 15px;
-        right: 15px;
+        bottom: 15px !important;
+        right: 15px !important;
         z-index: 1001 !important;
+        position: fixed !important;
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
     }
     
     .chatbot-window {
         width: calc(100vw - 30px);
         height: 400px;
         right: -15px;
+        bottom: 80px;
     }
     
     .chatbot-toggle {
-        padding: 14px 18px;
-        font-size: 1rem;
-        min-width: 60px;
-        min-height: 60px;
-        border-radius: 50px;
-        box-shadow: 0 4px 20px rgba(41, 104, 113, 0.4);
+        padding: 14px 18px !important;
+        font-size: 1rem !important;
+        min-width: 60px !important;
+        min-height: 60px !important;
+        border-radius: 50px !important;
+        box-shadow: 0 4px 20px rgba(41, 104, 113, 0.4) !important;
         display: flex !important;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 8px !important;
+        background: linear-gradient(135deg, #296871 0%, #1e4a52 100%) !important;
+        color: white !important;
+        border: none !important;
+        cursor: pointer !important;
+        position: relative !important;
+        visibility: visible !important;
+        opacity: 1 !important;
     }
     
     .chatbot-toggle span {
         display: inline !important;
-        font-size: 0.85rem;
-        font-weight: 600;
+        font-size: 0.85rem !important;
+        font-weight: 600 !important;
+        color: white !important;
     }
     
     .chatbot-toggle i {
-        font-size: 1.2rem;
+        font-size: 1.2rem !important;
+        color: white !important;
+    }
+    
+    /* Ensure chatbot is always visible on mobile */
+    #mbc-chatbot {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        position: fixed !important;
+        bottom: 15px !important;
+        right: 15px !important;
+        z-index: 1001 !important;
     }
 }
 
