@@ -409,7 +409,17 @@ $categories = $blog->getCategories();
                         </a>
                     </div>
                 <?php else: ?>
-                    <!-- Login button removed from mobile navbar - available in sidebar only -->
+                    <!-- Mobile Language Selector -->
+                    <div class="mobile-language-section">
+                        <select class="language-selector mobile-language-selector" aria-label="<?php echo __('nav.select_language'); ?>" onchange="changeLanguage(this.value)">
+                            <option value="fr" <?php echo getCurrentLanguage() === 'fr' ? 'selected' : ''; ?>>🇫🇷 FR</option>
+                            <option value="en" <?php echo getCurrentLanguage() === 'en' ? 'selected' : ''; ?>>🇬🇧 EN</option>
+                            <option value="zh" <?php echo getCurrentLanguage() === 'zh' ? 'selected' : ''; ?>>🇨🇳 中文</option>
+                        </select>
+                    </div>
+                    <a href="contact-form.php" class="mobile-nav-link login-btn">
+                        <i class="fas fa-sign-in-alt"></i> <?php echo __('nav.login'); ?>
+                    </a>
                 <?php endif; ?>
             </div>
         </div>
@@ -651,7 +661,14 @@ $categories = $blog->getCategories();
     </script>
     <script src="chatbot.js"></script>
 
-    <?php include 'includes/simulators-modal.php'; ?>
-    <?php include 'includes/footer.php'; ?>
+    <!-- Initialize chatbot -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize the multilingual chatbot
+            if (typeof window.multilingualChatbotDB !== 'undefined') {
+                window.multilingualChatbotDB.init();
+            }
+        });
+    </script>
 </body>
 </html>

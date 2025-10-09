@@ -1135,14 +1135,10 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/twitter-image.jpg";
 
         // Initialize pagination when DOM is loaded
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('DOM loaded, initializing navigation controls');
-            
             // Previous button
             const prevBtn = document.getElementById('prevServices');
-            console.log('Previous button found:', prevBtn);
             if (prevBtn) {
                 prevBtn.addEventListener('click', function() {
-                    console.log('Previous button clicked, current page:', currentPage);
                     if (currentPage > 1) {
                         showPage(currentPage - 1);
                     }
@@ -1151,10 +1147,8 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/twitter-image.jpg";
             
             // Next button
             const nextBtn = document.getElementById('nextServices');
-            console.log('Next button found:', nextBtn);
             if (nextBtn) {
                 nextBtn.addEventListener('click', function() {
-                    console.log('Next button clicked, current page:', currentPage);
                     if (currentPage < totalPages) {
                         showPage(currentPage + 1);
                     }
@@ -1162,18 +1156,14 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/twitter-image.jpg";
             }
             
             // Dot navigation
-            const dots = document.querySelectorAll('.dot');
-            console.log('Dots found:', dots.length);
-            dots.forEach(dot => {
+            document.querySelectorAll('.dot').forEach(dot => {
                 dot.addEventListener('click', function() {
                     const pageNumber = parseInt(this.getAttribute('data-page'));
-                    console.log('Dot clicked, page:', pageNumber);
                     showPage(pageNumber);
                 });
             });
             
             // Initialize first page
-            console.log('Initializing first page');
             showPage(1);
         });
 

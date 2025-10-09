@@ -3285,29 +3285,68 @@ a:hover {
 .services-stats {
     display: flex;
     justify-content: center;
-    gap: 3rem;
-    margin-top: 2rem;
+    gap: 2rem;
+    margin-top: 3rem;
     flex-wrap: wrap;
+    padding: 2rem 0;
 }
 
 .stat-item {
     text-align: center;
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+    border: 2px solid #e2e8f0;
+    border-radius: 20px;
+    padding: 2rem 1.5rem;
+    min-width: 180px;
+    box-shadow: 0 4px 20px rgba(41, 104, 113, 0.08);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.stat-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #296871 0%, #10b981 100%);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.stat-item:hover {
+    transform: translateY(-8px);
+    border-color: #296871;
+    box-shadow: 0 12px 40px rgba(41, 104, 113, 0.15);
+}
+
+.stat-item:hover::before {
+    transform: scaleX(1);
 }
 
 .stat-number {
     display: block;
-    font-size: 2.5rem;
-    font-weight: 800;
-    color: #296871;
+    font-size: 3rem;
+    font-weight: 900;
+    background: linear-gradient(135deg, #296871 0%, #10b981 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
     line-height: 1;
+    margin-bottom: 0.5rem;
+    text-shadow: none;
 }
 
 .stat-label {
     display: block;
-    font-size: 0.875rem;
+    font-size: 0.9rem;
     color: #64748b;
     margin-top: 0.5rem;
-    font-weight: 500;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .service-card.featured {
@@ -5631,11 +5670,21 @@ input:checked + .slider:before {
     
     /* Enhanced Services Mobile Styles */
     .services-stats {
-        gap: 2rem;
+        gap: 1.5rem;
+        padding: 1.5rem 0;
+    }
+    
+    .stat-item {
+        padding: 1.5rem 1rem;
+        min-width: 150px;
     }
     
     .stat-number {
-        font-size: 2rem;
+        font-size: 2.5rem;
+    }
+    
+    .stat-label {
+        font-size: 0.8rem;
     }
     
     .service-card.featured {
