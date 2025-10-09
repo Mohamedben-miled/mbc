@@ -657,7 +657,6 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/twitter-image.jpg";
         </section>
     </main>
 
-    <?php include 'includes/simulators-modal.php'; ?>
 
     <!-- Scripts -->
                 <p><?php echo __('modal.simulators.subtitle'); ?></p>

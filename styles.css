@@ -6199,6 +6199,20 @@ input:checked + .slider:before {
     animation: fadeIn 0.3s ease;
 }
 
+/* Ensure modal content is hidden by default */
+.modal .simulators-content,
+.modal .simulators-nav,
+.modal .simulators-main {
+    display: none;
+}
+
+/* Show modal content only when modal is open */
+.modal.show .simulators-content,
+.modal.show .simulators-nav,
+.modal.show .simulators-main {
+    display: block;
+}
+
 .modal.show {
     display: flex;
     align-items: center;
