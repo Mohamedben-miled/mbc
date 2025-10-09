@@ -469,6 +469,13 @@ $recentSubmissions = $contact->getSubmissions(1, 5);
                 color: #dc3545;
             }
         }
+        
+        /* Hide mobile user actions on desktop */
+        @media (min-width: 769px) {
+            .mobile-user-actions {
+                display: none !important;
+            }
+        }
     </style>
 </head>
 <body>
