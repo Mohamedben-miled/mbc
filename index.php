@@ -182,7 +182,13 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/twitter-image.jpg";
                         <a href="admin/logout.php" class="btn btn-outline btn-sm"><?php echo __('nav.logout'); ?></a>
                     </div>
                 <?php else: ?>
-                    <!-- Login button removed from mobile navbar - available in sidebar only -->
+                    <!-- Mobile Login Button -->
+                    <div class="mobile-login-section">
+                        <a href="admin/login.php" class="btn btn-primary btn-mobile">
+                            <i class="fas fa-sign-in-alt"></i>
+                            <?php echo __('btn.login'); ?>
+                        </a>
+                    </div>
                 <?php endif; ?>
             </div>
         </div>
