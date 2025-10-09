@@ -706,8 +706,8 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/contact-twitter.jpg";
     <script src="chatbot.js"></script>
 
     <!-- Chatbot -->
-    <div class="mbc-chatbot">
-        <div class="chatbot-toggle" onclick="window.multilingualChatbotDB.toggleChatbot()">
+    <div class="mbc-chatbot" style="display: block !important; visibility: visible !important; opacity: 1 !important; position: fixed !important; bottom: 15px !important; right: 15px !important; z-index: 9999 !important;">
+        <div class="chatbot-toggle" onclick="window.multilingualChatbotDB.toggleChatbot()" style="display: flex !important; visibility: visible !important; opacity: 1 !important; background: rgba(255, 255, 255, 0.95) !important; border: 2px solid #296871 !important; color: #296871 !important; padding: 8px 12px !important; border-radius: 50px !important; cursor: pointer !important;">
             <i class="fas fa-comments"></i>
             <span><?php echo __('chatbot.assistant'); ?></span>
         </div>

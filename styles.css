@@ -6839,7 +6839,7 @@ input:checked + .slider:before {
         align-items: center !important;
         justify-content: center !important;
         gap: 4px !important;
-        background: transparent !important;
+        background: rgba(255, 255, 255, 0.95) !important;
         color: #296871 !important;
         border: 2px solid #296871 !important;
         cursor: pointer !important;
@@ -6849,6 +6849,7 @@ input:checked + .slider:before {
         pointer-events: auto !important;
         transform: none !important;
         transition: all 0.3s ease !important;
+        backdrop-filter: blur(10px) !important;
     }
     
     .chatbot-toggle:hover {
@@ -6874,7 +6875,8 @@ input:checked + .slider:before {
     }
     
     /* Ensure chatbot is always visible on mobile */
-    #mbc-chatbot {
+    #mbc-chatbot,
+    .mbc-chatbot {
         display: block !important;
         visibility: visible !important;
         opacity: 1 !important;
@@ -6883,6 +6885,24 @@ input:checked + .slider:before {
         right: 15px !important;
         z-index: 1001 !important;
         animation: chatbotPulse 2s ease-in-out infinite !important;
+        width: auto !important;
+        height: auto !important;
+        background: transparent !important;
+    }
+    
+    /* Force chatbot visibility - fallback rules */
+    div.mbc-chatbot,
+    div[id="mbc-chatbot"],
+    .mbc-chatbot,
+    #mbc-chatbot {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        position: fixed !important;
+        bottom: 15px !important;
+        right: 15px !important;
+        z-index: 9999 !important;
+        pointer-events: auto !important;
     }
     
     /* Add very subtle pulsing animation */
