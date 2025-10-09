@@ -492,6 +492,14 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/contact-twitter.jpg";
     <script src="js/modal.js"></script>
     <script src="js/chatbot-multilingual-db.js"></script>
     <script>
+        // Initialize chatbot
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize the multilingual chatbot
+            if (typeof window.multilingualChatbotDB !== 'undefined') {
+                window.multilingualChatbotDB.init();
+            }
+        });
+
         // Simulators link now uses onclick attribute
 
         // Check for #simulators anchor on page load

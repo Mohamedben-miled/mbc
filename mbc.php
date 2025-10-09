@@ -539,6 +539,14 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/Majdi.png";
                 aideZoneSelect.addEventListener('change', calculateHousingAid);
             }
         }
+
+        // Initialize chatbot
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize the multilingual chatbot
+            if (typeof window.multilingualChatbotDB !== 'undefined') {
+                window.multilingualChatbotDB.init();
+            }
+        });
     </script>
 
     <?php include 'includes/simulators-modal.php'; ?>

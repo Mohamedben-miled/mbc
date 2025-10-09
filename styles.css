@@ -6668,6 +6668,7 @@ input:checked + .slider:before {
     .mbc-chatbot {
         bottom: 15px;
         right: 15px;
+        z-index: 1001 !important;
     }
     
     .chatbot-window {
@@ -6677,12 +6678,26 @@ input:checked + .slider:before {
     }
     
     .chatbot-toggle {
-        padding: 12px 16px;
-        font-size: 0.9rem;
+        padding: 14px 18px;
+        font-size: 1rem;
+        min-width: 60px;
+        min-height: 60px;
+        border-radius: 50px;
+        box-shadow: 0 4px 20px rgba(41, 104, 113, 0.4);
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
     }
     
     .chatbot-toggle span {
-        display: none;
+        display: inline !important;
+        font-size: 0.85rem;
+        font-weight: 600;
+    }
+    
+    .chatbot-toggle i {
+        font-size: 1.2rem;
     }
 }
 

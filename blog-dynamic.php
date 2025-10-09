@@ -911,6 +911,14 @@ $pageDescription = __("blog.subtitle");
     <script src="js/chatbot-multilingual-db.js"></script>
     
     <script>
+        // Initialize chatbot
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize the multilingual chatbot
+            if (typeof window.multilingualChatbotDB !== 'undefined') {
+                window.multilingualChatbotDB.init();
+            }
+        });
+
         // Check for #simulators anchor on page load
         document.addEventListener('DOMContentLoaded', function() {
             if (window.location.hash === '#simulators') {

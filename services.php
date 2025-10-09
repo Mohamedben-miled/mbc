@@ -1176,6 +1176,14 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/services-twitter.jpg";
     <script src="js/modal.js"></script>
     <script src="js/chatbot-multilingual-db.js"></script>
     <script>
+        // Initialize chatbot
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize the multilingual chatbot
+            if (typeof window.multilingualChatbotDB !== 'undefined') {
+                window.multilingualChatbotDB.init();
+            }
+        });
+
         // Add event listener for simulators link
         document.addEventListener('DOMContentLoaded', function() {
             const simulatorsLink = document.querySelector('.simulators-link');
