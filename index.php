@@ -681,44 +681,6 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/twitter-image.jpg";
         if (typeof window.multilingualChatbotDB !== 'undefined') {
             window.multilingualChatbotDB.init();
         }
-        
-        // Debug chatbot visibility
-        setTimeout(() => {
-            const chatbot = document.getElementById('test-chatbot');
-            const toggle = document.querySelector('.chatbot-toggle');
-            
-            console.log('=== CHATBOT DEBUG ===');
-            console.log('Chatbot element found:', !!chatbot);
-            console.log('Toggle element found:', !!toggle);
-            
-            if (chatbot) {
-                const style = window.getComputedStyle(chatbot);
-                console.log('Chatbot display:', style.display);
-                console.log('Chatbot visibility:', style.visibility);
-                console.log('Chatbot opacity:', style.opacity);
-                console.log('Chatbot position:', style.position);
-                console.log('Chatbot z-index:', style.zIndex);
-            }
-            
-            if (toggle) {
-                const style = window.getComputedStyle(toggle);
-                console.log('Toggle display:', style.display);
-                console.log('Toggle visibility:', style.visibility);
-                console.log('Toggle opacity:', style.opacity);
-            }
-            
-            // Force make it visible if hidden
-            if (chatbot) {
-                chatbot.style.display = 'block';
-                chatbot.style.visibility = 'visible';
-                chatbot.style.opacity = '1';
-                chatbot.style.position = 'fixed';
-                chatbot.style.bottom = '15px';
-                chatbot.style.right = '15px';
-                chatbot.style.zIndex = '9999';
-                console.log('Forced chatbot to be visible');
-            }
-        }, 1000);
 
             // Header scroll effect
             const header = document.querySelector('.header');
@@ -1423,16 +1385,9 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/twitter-image.jpg";
 
     <?php include 'includes/simulators-modal.php'; ?>
 
-    <!-- EMERGENCY VISIBLE CHATBOT -->
-    <div style="position: fixed !important; bottom: 20px !important; right: 20px !important; z-index: 99999 !important; display: block !important; visibility: visible !important; opacity: 1 !important;" onclick="alert('EMERGENCY CHATBOT WORKS!')">
-        <div style="background: #ff0000 !important; color: white !important; border: 3px solid #000 !important; padding: 15px 20px !important; border-radius: 10px !important; cursor: pointer !important; font-weight: bold !important; font-size: 16px !important; display: block !important; visibility: visible !important; opacity: 1 !important; text-align: center !important; box-shadow: 0 4px 20px rgba(0,0,0,0.5) !important;">
-            🚨 EMERGENCY CHATBOT 🚨
-        </div>
-    </div>
-    
-    <!-- Original Chatbot -->
-    <div class="mbc-chatbot" id="test-chatbot" style="display: block !important; visibility: visible !important; opacity: 1 !important; position: fixed !important; bottom: 80px !important; right: 15px !important; z-index: 9999 !important;">
-        <div class="chatbot-toggle" onclick="alert('Original Chatbot clicked! This proves it is visible and working.'); window.multilingualChatbotDB && window.multilingualChatbotDB.toggleChatbot()" style="display: flex !important; visibility: visible !important; opacity: 1 !important; background: rgba(255, 255, 255, 0.95) !important; border: 2px solid #296871 !important; color: #296871 !important; padding: 8px 12px !important; border-radius: 50px !important; cursor: pointer !important;">
+    <!-- Chatbot -->
+    <div id="mbc-chatbot" class="mbc-chatbot" style="display: block !important; visibility: visible !important; opacity: 1 !important; position: fixed !important; bottom: 15px !important; right: 15px !important; z-index: 9999 !important;">
+        <div class="chatbot-toggle" onclick="window.multilingualChatbotDB && window.multilingualChatbotDB.toggleChatbot()" style="display: flex !important; visibility: visible !important; opacity: 1 !important; background: rgba(255, 255, 255, 0.95) !important; border: 2px solid #296871 !important; color: #296871 !important; padding: 8px 12px !important; border-radius: 50px !important; cursor: pointer !important;">
             <i class="fas fa-comments"></i>
             <span><?php echo __('chatbot.assistant'); ?></span>
         </div>
