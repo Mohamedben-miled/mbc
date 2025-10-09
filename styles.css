@@ -2712,7 +2712,6 @@ a:hover {
    8. MBC PAGE SECTION (OLD - REMOVED)
    ======================================== */
 .mbc-page {
-    padding: 6rem 0;
     background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
 }
 
@@ -4752,15 +4751,27 @@ input:checked + .slider:before {
 }
 
 .btn-white {
-    background: white;
-    color: #296871;
-    border: 2px solid white;
+    background: white !important;
+    color: #296871 !important;
+    border: 2px solid white !important;
+    font-weight: 600 !important;
+    padding: 12px 24px !important;
+    border-radius: 8px !important;
+    text-decoration: none !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3) !important;
 }
 
 .btn-white:hover {
-    background: transparent;
-    color: white;
-    border-color: white;
+    background: rgba(255, 255, 255, 0.9) !important;
+    color: #1e4a52 !important;
+    border-color: white !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 25px rgba(255, 255, 255, 0.4) !important;
+    text-decoration: none !important;
 }
 
 .btn-link {
@@ -10136,7 +10147,6 @@ body.mbc-page .user-dropdown-menu {
 }
 
 body.mbc-page {
-    padding-top: 80px;
 }
 
 /* Fix btn-secondary text visibility in hero sections */
