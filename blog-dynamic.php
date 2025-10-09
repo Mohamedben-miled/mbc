@@ -74,7 +74,7 @@ $pageDescription = __("blog.subtitle");
     <style>
         /* Professional Blog Styles */
         .blog-hero {
-            background: linear-gradient(135deg, #1e293b 0%, #334155 50%, #475569 100%);
+            background: linear-gradient(135deg, #296871 0%, #1e4a52 50%, #2F666B 100%);
             position: relative;
             overflow: hidden;
             padding: 120px 0 80px;
@@ -87,8 +87,8 @@ $pageDescription = __("blog.subtitle");
             left: 0;
             right: 0;
             bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
-            opacity: 0.3;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.2;
         }
         
         .blog-hero-content {
@@ -105,16 +105,18 @@ $pageDescription = __("blog.subtitle");
             font-size: 3.5rem;
             font-weight: 800;
             margin-bottom: 1.5rem;
-            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            text-shadow: 0 4px 12px rgba(0, 0, 0, 0.4), 0 2px 4px rgba(0, 0, 0, 0.2);
             line-height: 1.1;
+            color: #ffffff;
         }
         
         .blog-hero-subtitle {
             font-size: 1.25rem;
             margin-bottom: 2rem;
-            opacity: 0.9;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            opacity: 0.95;
+            text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4), 0 1px 2px rgba(0, 0, 0, 0.2);
             line-height: 1.6;
+            color: #f8fafc;
         }
         
         .blog-stats {
@@ -127,20 +129,35 @@ $pageDescription = __("blog.subtitle");
         .stat-item {
             text-align: center;
             color: white;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem 2rem;
+            border-radius: 16px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .stat-item:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
         }
         
         .stat-number {
             font-size: 2.5rem;
-            font-weight: 700;
+            font-weight: 800;
             display: block;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4), 0 1px 2px rgba(0, 0, 0, 0.2);
+            color: #ffffff;
         }
         
         .stat-label {
             font-size: 1rem;
-            opacity: 0.8;
+            opacity: 0.9;
             margin-top: 0.5rem;
             font-weight: 500;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+            color: #f8fafc;
         }
         
         /* Blog Content */
@@ -534,6 +551,10 @@ $pageDescription = __("blog.subtitle");
             .blog-stats {
                 flex-direction: column;
                 gap: 1.5rem;
+            }
+            
+            .stat-item {
+                padding: 1rem 1.5rem;
             }
             
             .blog-layout {
