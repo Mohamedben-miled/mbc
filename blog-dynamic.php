@@ -695,7 +695,17 @@ $pageDescription = __("blog.subtitle");
                         <a href="admin/logout.php" class="btn btn-outline btn-sm"><?php echo __('nav.logout'); ?></a>
                     </div>
                 <?php else: ?>
-                    <!-- Login button removed from mobile navbar - available in sidebar only -->
+                    <!-- Mobile Language Selector -->
+                    <div class="mobile-language-section">
+                        <select class="language-selector mobile-language-selector" aria-label="<?php echo __('nav.select_language'); ?>" onchange="changeLanguage(this.value)">
+                            <option value="fr" <?php echo getCurrentLanguage() === 'fr' ? 'selected' : ''; ?>>FR</option>
+                            <option value="en" <?php echo getCurrentLanguage() === 'en' ? 'selected' : ''; ?>>EN</option>
+                            <option value="zh" <?php echo getCurrentLanguage() === 'zh' ? 'selected' : ''; ?>>中文</option>
+                        </select>
+                    </div>
+                    <a href="contact-form.php" class="mobile-nav-link login-btn">
+                        <i class="fas fa-sign-in-alt"></i> <?php echo __('nav.login'); ?>
+                    </a>
                 <?php endif; ?>
             </div>
         </div>

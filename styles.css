@@ -617,6 +617,47 @@ header, .header, .header-content {
     background: #ffffff;
     color: #296871;
     border: none;
+    position: relative;
+}
+
+/* Add flag indicators using CSS pseudo-elements with fallback */
+.language-selector option[value="fr"]::before {
+    content: "🇫🇷 ";
+    font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
+}
+
+.language-selector option[value="en"]::before {
+    content: "🇬🇧 ";
+    font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
+}
+
+.language-selector option[value="zh"]::before {
+    content: "🇨🇳 ";
+    font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
+}
+
+/* Fallback for systems without emoji support */
+@supports not (font-family: "Apple Color Emoji") {
+    .language-selector option[value="fr"]::before {
+        content: "[FR] ";
+        font-family: inherit;
+        color: #296871;
+        font-weight: bold;
+    }
+    
+    .language-selector option[value="en"]::before {
+        content: "[EN] ";
+        font-family: inherit;
+        color: #296871;
+        font-weight: bold;
+    }
+    
+    .language-selector option[value="zh"]::before {
+        content: "[CN] ";
+        font-family: inherit;
+        color: #296871;
+        font-weight: bold;
+    }
 }
 
 .language-selector option:hover {
@@ -659,6 +700,46 @@ header, .header, .header-content {
     outline: none;
     border-color: #1e4a52 !important;
     box-shadow: 0 0 0 3px rgba(41, 104, 113, 0.15);
+}
+
+/* Mobile language selector flag support */
+.mobile-language-selector option[value="fr"]::before {
+    content: "🇫🇷 ";
+    font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
+}
+
+.mobile-language-selector option[value="en"]::before {
+    content: "🇬🇧 ";
+    font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
+}
+
+.mobile-language-selector option[value="zh"]::before {
+    content: "🇨🇳 ";
+    font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
+}
+
+/* Mobile fallback for systems without emoji support */
+@supports not (font-family: "Apple Color Emoji") {
+    .mobile-language-selector option[value="fr"]::before {
+        content: "[FR] ";
+        font-family: inherit;
+        color: #296871;
+        font-weight: bold;
+    }
+    
+    .mobile-language-selector option[value="en"]::before {
+        content: "[EN] ";
+        font-family: inherit;
+        color: #296871;
+        font-weight: bold;
+    }
+    
+    .mobile-language-selector option[value="zh"]::before {
+        content: "[CN] ";
+        font-family: inherit;
+        color: #296871;
+        font-weight: bold;
+    }
 }
 
 /* Custom dropdown arrow for language selector */
