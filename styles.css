@@ -561,7 +561,7 @@ header, .header, .header-content {
     color: #296871;
     cursor: pointer;
     transition: all 0.3s ease;
-    min-width: 100px;
+    min-width: 80px;
     box-shadow: 0 2px 8px rgba(41, 104, 113, 0.1);
     position: relative;
     overflow: hidden;
@@ -570,6 +570,8 @@ header, .header, .header-content {
     background-repeat: no-repeat;
     background-position: right 0.75rem center;
     background-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .language-selector::before {
@@ -641,6 +643,8 @@ header, .header, .header-content {
     font-size: 0.875rem;
     font-weight: 600;
     box-shadow: 0 2px 8px rgba(41, 104, 113, 0.2);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .mobile-language-selector:hover {

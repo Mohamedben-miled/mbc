@@ -609,9 +609,9 @@ $pageDescription = __("blog.subtitle");
                 <!-- Header Utils -->
                 <div class="header-utils">
                     <select class="language-selector" aria-label="<?php echo __('nav.select_language'); ?>" onchange="changeLanguage(this.value)">
-                        <option value="fr" <?php echo getCurrentLanguage() === 'fr' ? 'selected' : ''; ?>>🇫🇷 FR</option>
-                        <option value="en" <?php echo getCurrentLanguage() === 'en' ? 'selected' : ''; ?>>🇬🇧 EN</option>
-                        <option value="zh" <?php echo getCurrentLanguage() === 'zh' ? 'selected' : ''; ?>>🇨🇳 中文</option>
+                        <option value="fr" <?php echo getCurrentLanguage() === 'fr' ? 'selected' : ''; ?>>FR</option>
+                        <option value="en" <?php echo getCurrentLanguage() === 'en' ? 'selected' : ''; ?>>EN</option>
+                        <option value="zh" <?php echo getCurrentLanguage() === 'zh' ? 'selected' : ''; ?>>中文</option>
                     </select>
                     
                     <!-- Authentication Section -->

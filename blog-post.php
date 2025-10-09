@@ -300,9 +300,9 @@ $categories = $blog->getCategories();
                 <div class="header-utils">
                     <!-- Language Selector -->
                     <select class="language-selector" aria-label="Sélectionner la langue" onchange="changeLanguage(this.value)">
-                        <option value="fr" selected>🇫🇷 FR</option>
-                        <option value="en">🇬🇧 EN</option>
-                        <option value="zh">🇨🇳 中文</option>
+                        <option value="fr" selected>FR</option>
+                        <option value="en">EN</option>
+                        <option value="zh">中文</option>
                     </select>
                     
                     <!-- Authentication Section -->
@@ -412,9 +412,9 @@ $categories = $blog->getCategories();
                     <!-- Mobile Language Selector -->
                     <div class="mobile-language-section">
                         <select class="language-selector mobile-language-selector" aria-label="<?php echo __('nav.select_language'); ?>" onchange="changeLanguage(this.value)">
-                            <option value="fr" <?php echo getCurrentLanguage() === 'fr' ? 'selected' : ''; ?>>🇫🇷 FR</option>
-                            <option value="en" <?php echo getCurrentLanguage() === 'en' ? 'selected' : ''; ?>>🇬🇧 EN</option>
-                            <option value="zh" <?php echo getCurrentLanguage() === 'zh' ? 'selected' : ''; ?>>🇨🇳 中文</option>
+                            <option value="fr" <?php echo getCurrentLanguage() === 'fr' ? 'selected' : ''; ?>>FR</option>
+                            <option value="en" <?php echo getCurrentLanguage() === 'en' ? 'selected' : ''; ?>>EN</option>
+                            <option value="zh" <?php echo getCurrentLanguage() === 'zh' ? 'selected' : ''; ?>>中文</option>
                         </select>
                     </div>
                     <a href="contact-form.php" class="mobile-nav-link login-btn">
