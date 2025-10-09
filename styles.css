@@ -10033,6 +10033,48 @@ body.blog-page {
     padding-top: 80px;
 }
 
+/* MBC Page Specific Styles */
+body.mbc-page .header {
+    background: linear-gradient(135deg, #2F666B 0%, #1A4A4F 100%) !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+body.mbc-page .header.scrolled {
+    background: linear-gradient(135deg, #2F666B 0%, #1A4A4F 100%) !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+body.mbc-page .nav-link {
+    color: white;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+body.mbc-page .nav-link:hover,
+body.mbc-page .nav-link.active {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+body.mbc-page .header-utils button,
+body.mbc-page .header-utils .social-link {
+    color: white;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+body.mbc-page .header-utils button:hover,
+body.mbc-page .header-utils .social-link:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+body.mbc-page .user-dropdown-menu {
+    z-index: 10003;
+}
+
+body.mbc-page {
+    padding-top: 80px;
+}
+
 /* Contact Hero Section */
 .contact-hero {
     padding: 80px 0;

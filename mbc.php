@@ -58,7 +58,7 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/Majdi.png";
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
 </head>
-<body>
+<body class="mbc-page">
     <!-- Header -->
     <header class="header" role="banner">
         <div class="container">
@@ -1378,55 +1378,6 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/Majdi.png";
         </div>
     </div>
 
-    <!-- Scripts -->
-    <script src="script.js"></script>
-    <script src="js/mobile-nav.js"></script>
-    <script src="js/main.js"></script>
-    <script src="js/modal.js"></script>
-    <script src="js/chatbot-multilingual-db.js"></script>
-    <script>
-        // Add event listener for simulators link
-        document.addEventListener('DOMContentLoaded', function() {
-            const simulatorsLink = document.querySelector('.simulators-link');
-            if (simulatorsLink) {
-                simulatorsLink.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    openSimulatorsModal();
-                });
-            }
-        });
-
-        // Check for #simulators anchor on page load
-        document.addEventListener('DOMContentLoaded', function() {
-            if (window.location.hash === '#simulators') {
-                openSimulatorsModal();
-            }
-        });
-        
-        // Listen for hash changes
-        window.addEventListener('hashchange', function() {
-            if (window.location.hash === '#simulators') {
-                openSimulatorsModal();
-            } else {
-                closeSimulatorsModal();
-            }
-        });
-        
-        // Language change function
-        function changeLanguage(lang) {
-            const form = document.createElement('form');
-            form.method = 'POST';
-            form.action = 'change-language.php';
-            
-            const input = document.createElement('input');
-            input.type = 'hidden';
-            input.name = 'lang';
-            input.value = lang;
-            
-            form.appendChild(input);
-            document.body.appendChild(form);
-            form.submit();
-        }
-    </script>
+    <!-- Duplicate scripts removed - handled by first script section -->
 </body>
 </html>
