@@ -10570,7 +10570,7 @@ body.blog-page .header.scrolled {
 
 /* Add top padding to body to account for fixed header */
 body.blog-page {
-    padding-top: 80px;
+    /* padding-top removed */
 }
 
 /* MBC Page Specific Styles */
