@@ -10271,8 +10271,8 @@ body.blog-page .header.scrolled .header-utils .social-link:hover {
 
 /* Contact Page Fixed Header */
 body.contact-page .header {
-    background: transparent !important;
-    background-color: transparent !important;
+    background: #296871 !important;
+    background-color: #296871 !important;
     color: white !important;
     position: fixed;
     top: 0;
@@ -10281,7 +10281,7 @@ body.contact-page .header {
     z-index: 1000;
     transition: all 0.3s ease;
     border: none !important;
-    box-shadow: none !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15) !important;
 }
 
 /* Contact Page User Dropdown Fix */
