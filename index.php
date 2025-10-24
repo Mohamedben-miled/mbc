@@ -92,52 +92,7 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/twitter-image.jpg";
                         <option value="zh" <?php echo getCurrentLanguage() === 'zh' ? 'selected' : ''; ?>>中文</option>
                     </select>
                     
-                    <!-- Authentication Section -->
-                    <div class="auth-section">
-                        <?php
-                        if ($auth->isLoggedIn()): 
-                            $currentUser = $auth->getCurrentUser(); ?>
-                            <!-- User is logged in -->
-                            <div class="user-menu">
-                                <span class="user-greeting"><?php echo __('nav.hello'); ?>, <?php echo htmlspecialchars($currentUser['full_name']); ?></span>
-                            </div>
-                            <div class="user-dropdown">
-                                <button class="user-dropdown-toggle" aria-expanded="false">
-                                    <i class="fas fa-user-circle"></i>
-                                    <i class="fas fa-chevron-down"></i>
-                                </button>
-                                <div class="user-dropdown-menu">
-                                    <?php if ($auth->isAdmin()): ?>
-                                        <a href="admin/dashboard.php" class="dropdown-item">
-                                            <i class="fas fa-tachometer-alt"></i> <?php echo __('nav.dashboard'); ?>
-                                        </a>
-                                        <a href="admin/blog.php" class="dropdown-item">
-                                            <i class="fas fa-blog"></i> <?php echo __('nav.manage_blog'); ?>
-                                        </a>
-                                        <a href="admin/contact.php" class="dropdown-item">
-                                            <i class="fas fa-envelope"></i> <?php echo __('nav.messages'); ?>
-                                        </a>
-                                        <a href="admin/users.php" class="dropdown-item">
-                                            <i class="fas fa-users"></i> <?php echo __('nav.users'); ?>
-                                        </a>
-                                        <a href="admin/profile.php" class="dropdown-item">
-                                            <i class="fas fa-user-edit"></i> <?php echo __('nav.my_profile'); ?>
-                                        </a>
-                                    <?php endif; ?>
-                                    <a href="admin/logout.php" class="dropdown-item logout">
-                                        <i class="fas fa-sign-out-alt"></i> <?php echo __('nav.logout'); ?>
-                                    </a>
-                                </div>
-                            </div>
-                        <?php else: ?>
-                            <!-- User is not logged in -->
-                            <div class="auth-buttons">
-                                <a href="admin/login.php" class="btn btn-connection">
-                                    <i class="fas fa-sign-in-alt"></i> <?php echo __('btn.login'); ?>
-                                </a>
-                            </div>
-                        <?php endif; ?>
-                    </div>
+                    <!-- Authentication Section Removed -->
                     
                     <button class="mobile-menu-toggle" aria-label="<?php echo __('btn.open_mobile_menu'); ?>">
                         <i class="fas fa-bars"></i>
@@ -162,35 +117,7 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/twitter-image.jpg";
                 <li><a href="contact-form.php" class="mobile-nav-link"><?php echo __('nav.contact'); ?></a></li>
             </ul>
             
-            <!-- Mobile Auth Section -->
-            <div class="mobile-auth">
-                <!-- Mobile Language Selector -->
-                <div class="mobile-language-section">
-                    <select class="language-selector mobile-language-selector" aria-label="<?php echo __('nav.select_language'); ?>" onchange="changeLanguage(this.value)">
-                        <option value="fr" <?php echo getCurrentLanguage() === 'fr' ? 'selected' : ''; ?>>FR</option>
-                        <option value="en" <?php echo getCurrentLanguage() === 'en' ? 'selected' : ''; ?>>EN</option>
-                        <option value="zh" <?php echo getCurrentLanguage() === 'zh' ? 'selected' : ''; ?>>中文</option>
-                    </select>
-                </div>
-                
-                <?php if ($auth->isLoggedIn()): ?>
-                    <div class="mobile-user-info">
-                        <p><?php echo __('nav.hello'); ?>, <?php echo htmlspecialchars($currentUser['full_name']); ?></p>
-                        <?php if ($auth->isAdmin()): ?>
-                            <a href="admin/dashboard.php" class="btn btn-primary btn-sm"><?php echo __('nav.dashboard'); ?></a>
-                        <?php endif; ?>
-                        <a href="admin/logout.php" class="btn btn-outline btn-sm"><?php echo __('nav.logout'); ?></a>
-                    </div>
-                <?php else: ?>
-                    <!-- Mobile Login Button -->
-                    <div class="mobile-login-section">
-                        <a href="admin/login.php" class="btn btn-primary btn-mobile">
-                            <i class="fas fa-sign-in-alt"></i>
-                            <?php echo __('btn.login'); ?>
-                        </a>
-                    </div>
-                <?php endif; ?>
-            </div>
+            <!-- Mobile Auth Section Removed -->
         </div>
     </div>
 
