@@ -3784,21 +3784,21 @@ a:hover {
     font-size: 4rem;
     font-weight: 900;
     line-height: 1.1;
-    color: #296871;
+    color: #1e4a52;
     margin: 0;
-    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
+    text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.5);
     letter-spacing: -2px;
 }
 
 .services-hero .hero-subtitle {
     font-size: 1.5rem;
     font-weight: 600;
-    color: #296871;
+    color: white;
     margin: 0;
     text-transform: uppercase;
     letter-spacing: 2px;
-    text-shadow: none;
-    background: rgba(41, 104, 113, 0.8);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(135deg, #296871 0%, #1e4a52 100%);
     padding: 1rem 2rem;
     border-radius: 8px;
     backdrop-filter: blur(10px);
@@ -3811,8 +3811,9 @@ a:hover {
     color: #1e4a52;
     line-height: 1.7;
     margin: 0;
-    text-shadow: none;
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
     max-width: 500px;
+    font-weight: 600;
 }
 
 .services-hero .hero-cta {
@@ -5900,8 +5901,8 @@ input:checked + .slider:before {
 /* Services Hero Section */
 .services-hero {
     padding: 8rem 0 6rem;
-    background: linear-gradient(135deg, #296871 0%, #1e4a52 50%, #f8f9fa 100%);
-    color: white;
+    background: linear-gradient(135deg, #e0f2f7 0%, #f0f9fa 50%, #ffffff 100%);
+    color: #1e4a52;
     position: relative;
     overflow: hidden;
     min-height: 80vh;
@@ -5933,25 +5934,28 @@ input:checked + .slider:before {
 .services-hero-title {
     font-size: 3.5rem;
     font-weight: 900;
-    color: #296871;
+    color: #1e4a52;
     margin: 0 0 1.5rem 0;
     line-height: 1.1;
-    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.5);
 }
 
 .services-hero-subtitle {
     font-size: 1.3rem;
-    color: #296871;
+    color: #1e4a52;
     margin: 0 0 1rem 0;
     line-height: 1.4;
     font-weight: 600;
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
 }
 
 .services-hero-description {
     font-size: 1.1rem;
-    color: rgba(255, 255, 255, 0.8);
+    color: #1e4a52;
     margin: 0 0 2.5rem 0;
     line-height: 1.6;
+    font-weight: 600;
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
 }
 
 .services-hero-cta {
@@ -8572,7 +8576,7 @@ input:checked + .slider:before {
     .simulators-nav {
         -webkit-overflow-scrolling: touch;
         overscroll-behavior-x: contain;
-    }
+}
     
     .cta-buttons {
         flex-direction: column;
@@ -11358,7 +11362,7 @@ body.mbc-page {
     overflow: hidden;
     margin-top: -80px;
     padding-top: 80px;
-    background: linear-gradient(135deg, #296871 0%, #1e4a52 100%);
+    background: linear-gradient(135deg, #e0f2f7 0%, #f0f9fa 50%, #ffffff 100%);
 }
 
 .services-hero::before {
