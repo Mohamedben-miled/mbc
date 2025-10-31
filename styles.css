@@ -1228,15 +1228,17 @@ header, .header, .header-content {
 .mobile-nav-link {
     display: block;
     padding: 1rem 0;
-    color: #1f2937;
+    color: white !important;
     text-decoration: none;
     font-weight: 500;
-    border-bottom: 1px solid #e5e7eb;
-    transition: color 0.3s ease;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
 }
 
 .mobile-nav-link:hover {
-    color: #296871;
+    color: #a7f3d0 !important;
+    background-color: rgba(255, 255, 255, 0.05);
+    padding-left: 0.5rem;
 }
 
 .mobile-auth {
@@ -1410,15 +1412,17 @@ header, .header, .header-content {
     .mobile-nav-link {
         display: block;
         padding: 1rem 0;
-        color: #296871;
+        color: white !important;
         text-decoration: none;
         font-weight: 500;
         border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        transition: color 0.3s ease;
+        transition: all 0.3s ease;
     }
     
     .mobile-nav-link:hover {
-        color: #a7f3d0;
+        color: #a7f3d0 !important;
+        background-color: rgba(255, 255, 255, 0.05);
+        padding-left: 0.5rem;
     }
     
     .mobile-auth {
@@ -6032,7 +6036,8 @@ input:checked + .slider:before {
     
     /* Mobile navigation is handled by js/mobile-nav.js with dedicated mobile-nav structure */
     
-    .nav-link {
+    /* Desktop nav-link styles - but only if not in mobile-nav */
+    .nav-list .nav-link {
         font-size: 1.5rem;
         font-weight: 600;
         color: #296871;
@@ -6044,10 +6049,25 @@ input:checked + .slider:before {
         min-width: 200px;
     }
     
-    .nav-link:hover,
-    .nav-link.active {
+    .nav-list .nav-link:hover,
+    .nav-list .nav-link.active {
         background: rgba(41, 104, 113, 0.2);
         transform: scale(1.05);
+    }
+    
+    /* Mobile nav links should be white */
+    .mobile-nav .nav-link,
+    .mobile-nav-content .nav-link,
+    .mobile-nav-list .nav-link {
+        color: white !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .mobile-nav .nav-link:hover,
+    .mobile-nav-content .nav-link:hover,
+    .mobile-nav-list .nav-link:hover {
+        color: #a7f3d0 !important;
+        background-color: rgba(255, 255, 255, 0.05);
     }
     
     .mobile-menu-toggle {
