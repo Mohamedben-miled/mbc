@@ -42,6 +42,10 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     };
     
+    window.closeSimulatorsModal = function() {
+        closeModal();
+    };
+    
     // Close modal when clicking outside
     document.addEventListener('click', function(e) {
         const modal = document.getElementById('simulatorsModal');

@@ -10,8 +10,8 @@ $user = $auth->getCurrentUser();
 
 // Get dashboard statistics
 $totalPosts = $blog->countAllPosts();
-$publishedPosts = $blog->countAllPosts(); // All posts are published
-$draftPosts = 0; // No draft posts for now
+$publishedPosts = $blog->countPublishedPosts();
+$draftPosts = $blog->countDraftPosts();
 $newSubmissions = $contact->getNewSubmissionsCount();
 $totalSubmissions = $contact->getSubmissionsCount();
 
@@ -488,6 +488,7 @@ $recentSubmissions = $contact->getSubmissions(1, 5);
             <ul class="mobile-nav-list">
                 <li><a href="../index.php" class="mobile-nav-link">Accueil</a></li>
                 <li><a href="../mbc.php" class="mobile-nav-link">MBC</a></li>
+                <li><a href="../about-us.php" class="mobile-nav-link">À propos</a></li>
                 <li><a href="../services.php" class="mobile-nav-link">Services</a></li>
                 <li><a href="#simulators" class="mobile-nav-link">Simulateurs</a></li>
                 <li><a href="../blog-dynamic.php" class="mobile-nav-link">Blog</a></li>

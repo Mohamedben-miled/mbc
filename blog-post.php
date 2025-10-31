@@ -287,12 +287,13 @@ $categories = $blog->getCategories();
                 <!-- Navigation -->
                 <nav class="nav" role="navigation" aria-label="<?php echo __('common.main_navigation'); ?>">
                     <ul class="nav-list">
-                        <li><a href="index.php#accueil" class="nav-link">Accueil</a></li>
-                        <li><a href="mbc.php" class="nav-link">MBC</a></li>
-                        <li><a href="services.php" class="nav-link">Services</a></li>
-                        <li><a href="#simulators" class="nav-link simulators-link" onclick="openSimulatorsModal()">Simulateurs</a></li>
-                        <li><a href="blog-dynamic.php" class="nav-link active">Blog</a></li>
-                        <li><a href="contact-form.php" class="nav-link">Contact</a></li>
+                        <li><a href="index.php#accueil" class="nav-link"><?php echo __('nav.home'); ?></a></li>
+                        <li><a href="mbc.php" class="nav-link"><?php echo __('nav.about'); ?></a></li>
+                        <li><a href="about-us.php" class="nav-link"><?php echo __('nav.about_us'); ?></a></li>
+                        <li><a href="services.php" class="nav-link"><?php echo __('nav.services'); ?></a></li>
+                        <li><a href="#simulators" class="nav-link simulators-link" onclick="openSimulatorsModal()"><?php echo __('nav.simulators'); ?></a></li>
+                        <li><a href="blog-dynamic.php" class="nav-link active"><?php echo __('nav.blog'); ?></a></li>
+                        <li><a href="contact-form.php" class="nav-link"><?php echo __('nav.contact'); ?></a></li>
                     </ul>
                 </nav>
                 
@@ -379,8 +380,9 @@ $categories = $blog->getCategories();
             <ul class="mobile-nav-list">
                 <li><a href="index.php" class="mobile-nav-link"><?php echo __('nav.home'); ?></a></li>
                 <li><a href="mbc.php" class="mobile-nav-link"><?php echo __('nav.about'); ?></a></li>
+                <li><a href="about-us.php" class="mobile-nav-link"><?php echo __('nav.about_us'); ?></a></li>
                 <li><a href="services.php" class="mobile-nav-link"><?php echo __('nav.services'); ?></a></li>
-                <li><a href="#simulators" class="mobile-nav-link"><?php echo __('nav.simulators'); ?></a></li>
+                <li><a href="#simulators" class="mobile-nav-link" onclick="openSimulatorsModal(); return false;"><?php echo __('nav.simulators'); ?></a></li>
                 <li><a href="blog-dynamic.php" class="mobile-nav-link"><?php echo __('nav.blog'); ?></a></li>
                 <li><a href="contact-form.php" class="mobile-nav-link"><?php echo __('nav.contact'); ?></a></li>
             </ul>

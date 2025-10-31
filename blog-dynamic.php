@@ -74,7 +74,7 @@ $pageDescription = __("blog.subtitle");
     <style>
         /* Professional Blog Styles */
         .blog-hero {
-            background: linear-gradient(135deg, #296871 0%, #1e4a52 50%, #2F666B 100%);
+            background: linear-gradient(135deg, #e0f2f7 0%, #ffffff 100%);
             position: relative;
             overflow: hidden;
             padding: 120px 0 80px;
@@ -87,15 +87,15 @@ $pageDescription = __("blog.subtitle");
             left: 0;
             right: 0;
             bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
-            opacity: 0.2;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(41,104,113,0.05)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
         }
         
         .blog-hero-content {
             position: relative;
             z-index: 2;
             text-align: center;
-            color: white;
+            color: #1e4a52;
             max-width: 800px;
             margin: 0 auto;
             padding: 0 2rem;
@@ -105,18 +105,17 @@ $pageDescription = __("blog.subtitle");
             font-size: 3.5rem;
             font-weight: 800;
             margin-bottom: 1.5rem;
-            text-shadow: 0 4px 12px rgba(0, 0, 0, 0.4), 0 2px 4px rgba(0, 0, 0, 0.2);
+            text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.5);
             line-height: 1.1;
-            color: #ffffff;
+            color: #1e4a52;
         }
         
         .blog-hero-subtitle {
             font-size: 1.25rem;
             margin-bottom: 2rem;
-            opacity: 0.95;
-            text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4), 0 1px 2px rgba(0, 0, 0, 0.2);
             line-height: 1.6;
-            color: #f8fafc;
+            color: #1e4a52;
+            font-weight: 600;
         }
         
         .blog-stats {
@@ -128,36 +127,34 @@ $pageDescription = __("blog.subtitle");
         
         .stat-item {
             text-align: center;
-            color: white;
-            background: rgba(255, 255, 255, 0.1);
+            color: #1e4a52;
+            background: rgba(255, 255, 255, 0.8);
             padding: 1.5rem 2rem;
             border-radius: 16px;
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(41, 104, 113, 0.2);
             transition: all 0.3s ease;
         }
         
         .stat-item:hover {
-            background: rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 1);
             transform: translateY(-4px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 8px 25px rgba(41, 104, 113, 0.2);
         }
         
         .stat-number {
             font-size: 2.5rem;
             font-weight: 800;
             display: block;
-            text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4), 0 1px 2px rgba(0, 0, 0, 0.2);
-            color: #ffffff;
+            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
+            color: #296871;
         }
         
         .stat-label {
             font-size: 1rem;
-            opacity: 0.9;
             margin-top: 0.5rem;
             font-weight: 500;
-            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
-            color: #f8fafc;
+            color: #1e4a52;
         }
         
         /* Blog Content */
@@ -599,6 +596,7 @@ $pageDescription = __("blog.subtitle");
                     <ul class="nav-list">
                         <li><a href="index.php#accueil" class="nav-link"><?php echo __('nav.home'); ?></a></li>
                         <li><a href="mbc.php" class="nav-link"><?php echo __('nav.about'); ?></a></li>
+                        <li><a href="about-us.php" class="nav-link"><?php echo __('nav.about_us'); ?></a></li>
                         <li><a href="services.php" class="nav-link"><?php echo __('nav.services'); ?></a></li>
                         <li><a href="#simulators" class="nav-link" onclick="openSimulatorsModal()"><?php echo __('nav.simulators'); ?></a></li>
                         <li><a href="blog-dynamic-new.php" class="nav-link active"><?php echo __('nav.blog'); ?></a></li>
@@ -614,52 +612,7 @@ $pageDescription = __("blog.subtitle");
                         <option value="zh" <?php echo getCurrentLanguage() === 'zh' ? 'selected' : ''; ?>>中文</option>
                     </select>
                     
-                    <!-- Authentication Section -->
-                    <div class="auth-section">
-                        <?php
-                        if ($auth->isLoggedIn()): 
-                            $currentUser = $auth->getCurrentUser(); ?>
-                            <!-- User is logged in -->
-                            <div class="user-menu">
-                                <span class="user-greeting"><?php echo __('nav.hello'); ?>, <?php echo htmlspecialchars($currentUser['full_name']); ?></span>
-                            </div>
-                            <div class="user-dropdown">
-                                <button class="user-dropdown-toggle" aria-expanded="false">
-                                    <i class="fas fa-user-circle"></i>
-                                    <i class="fas fa-chevron-down"></i>
-                                </button>
-                                <div class="user-dropdown-menu">
-                                    <?php if ($auth->isAdmin()): ?>
-                                        <a href="admin/dashboard.php" class="dropdown-item">
-                                            <i class="fas fa-tachometer-alt"></i> <?php echo __('nav.dashboard'); ?>
-                                        </a>
-                                        <a href="admin/blog.php" class="dropdown-item">
-                                            <i class="fas fa-blog"></i> <?php echo __('nav.manage_blog'); ?>
-                                        </a>
-                                        <a href="admin/contact.php" class="dropdown-item">
-                                            <i class="fas fa-envelope"></i> <?php echo __('nav.messages'); ?>
-                                        </a>
-                                        <a href="admin/users.php" class="dropdown-item">
-                                            <i class="fas fa-users"></i> <?php echo __('nav.users'); ?>
-                                        </a>
-                                        <a href="admin/profile.php" class="dropdown-item">
-                                            <i class="fas fa-user-edit"></i> <?php echo __('nav.my_profile'); ?>
-                                        </a>
-                                    <?php endif; ?>
-                                    <a href="admin/logout.php" class="dropdown-item logout">
-                                        <i class="fas fa-sign-out-alt"></i> <?php echo __('nav.logout'); ?>
-                                    </a>
-                                </div>
-                            </div>
-                        <?php else: ?>
-                            <!-- User is not logged in -->
-                            <div class="auth-buttons">
-                                <a href="admin/login.php" class="btn btn-connection">
-                                    <i class="fas fa-sign-in-alt"></i> <?php echo __('btn.login'); ?>
-                                </a>
-                            </div>
-                        <?php endif; ?>
-                    </div>
+                    <!-- Authentication Section Removed -->
                     
                     <button class="mobile-menu-toggle" aria-label="<?php echo __('btn.open_mobile_menu'); ?>">
                         <i class="fas fa-bars"></i>
@@ -678,8 +631,9 @@ $pageDescription = __("blog.subtitle");
             <ul class="mobile-nav-list">
                 <li><a href="index.php#accueil" class="mobile-nav-link"><?php echo __('nav.home'); ?></a></li>
                 <li><a href="mbc.php" class="mobile-nav-link"><?php echo __('nav.about'); ?></a></li>
+                <li><a href="about-us.php" class="mobile-nav-link"><?php echo __('nav.about_us'); ?></a></li>
                 <li><a href="services.php" class="mobile-nav-link"><?php echo __('nav.services'); ?></a></li>
-                <li><a href="#simulators" class="mobile-nav-link"><?php echo __('nav.simulators'); ?></a></li>
+                <li><a href="#simulators" class="mobile-nav-link" onclick="openSimulatorsModal(); return false;"><?php echo __('nav.simulators'); ?></a></li>
                 <li><a href="blog-dynamic.php" class="mobile-nav-link active"><?php echo __('nav.blog'); ?></a></li>
                 <li><a href="contact-form.php" class="mobile-nav-link"><?php echo __('nav.contact'); ?></a></li>
             </ul>
@@ -695,19 +649,7 @@ $pageDescription = __("blog.subtitle");
                     </select>
                 </div>
                 
-                <?php if ($auth->isLoggedIn()): ?>
-                    <div class="mobile-user-info">
-                        <p><?php echo __('nav.hello'); ?>, <?php echo htmlspecialchars($currentUser['full_name']); ?></p>
-                        <?php if ($auth->isAdmin()): ?>
-                            <a href="admin/dashboard.php" class="btn btn-primary btn-sm"><?php echo __('nav.dashboard'); ?></a>
-                        <?php endif; ?>
-                        <a href="admin/logout.php" class="btn btn-outline btn-sm"><?php echo __('nav.logout'); ?></a>
-                    </div>
-                <?php else: ?>
-                    <a href="contact-form.php" class="mobile-nav-link login-btn">
-                        <i class="fas fa-sign-in-alt"></i> <?php echo __('nav.login'); ?>
-                    </a>
-                <?php endif; ?>
+                <!-- Mobile Auth Section Removed -->
             </div>
         </div>
     </div>

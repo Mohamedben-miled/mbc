@@ -332,13 +332,48 @@ class Blog {
         try {
             $stmt = $this->db->prepare("
                 SELECT COUNT(*) 
-                FROM blog_posts bp 
-                WHERE bp.status = 'published'
+                FROM blog_posts
             ");
             $stmt->execute();
             return $stmt->fetchColumn();
         } catch (PDOException $e) {
             error_log("Count all posts error: " . $e->getMessage());
+            return 0;
+        }
+    }
+
+    /**
+     * Count published posts
+     */
+    public function countPublishedPosts() {
+        try {
+            $stmt = $this->db->prepare("
+                SELECT COUNT(*) 
+                FROM blog_posts 
+                WHERE status = 'published'
+            ");
+            $stmt->execute();
+            return $stmt->fetchColumn();
+        } catch (PDOException $e) {
+            error_log("Count published posts error: " . $e->getMessage());
+            return 0;
+        }
+    }
+
+    /**
+     * Count draft posts
+     */
+    public function countDraftPosts() {
+        try {
+            $stmt = $this->db->prepare("
+                SELECT COUNT(*) 
+                FROM blog_posts 
+                WHERE status = 'draft'
+            ");
+            $stmt->execute();
+            return $stmt->fetchColumn();
+        } catch (PDOException $e) {
+            error_log("Count draft posts error: " . $e->getMessage());
             return 0;
         }
     }

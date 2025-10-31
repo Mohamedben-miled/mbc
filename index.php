@@ -77,6 +77,7 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/twitter-image.jpg";
                     <ul class="nav-list">
                         <li><a href="#accueil" class="nav-link active" aria-current="page"><?php echo __('nav.home'); ?></a></li>
                         <li><a href="mbc.php" class="nav-link"><?php echo __('nav.about'); ?></a></li>
+                        <li><a href="about-us.php" class="nav-link"><?php echo __('nav.about_us'); ?></a></li>
                         <li><a href="services.php" class="nav-link"><?php echo __('nav.services'); ?></a></li>
                         <li><a href="#simulators" class="nav-link" onclick="openSimulatorsModal()"><?php echo __('nav.simulators'); ?></a></li>
                         <li><a href="blog-dynamic.php" class="nav-link"><?php echo __('nav.blog'); ?></a></li>
@@ -111,8 +112,9 @@ $twitterImage = "https://mbc-expertcomptable.fr/assets/twitter-image.jpg";
             <ul class="mobile-nav-list">
                 <li><a href="#accueil" class="mobile-nav-link"><?php echo __('nav.home'); ?></a></li>
                 <li><a href="mbc.php" class="mobile-nav-link"><?php echo __('nav.about'); ?></a></li>
+                <li><a href="about-us.php" class="mobile-nav-link"><?php echo __('nav.about_us'); ?></a></li>
                 <li><a href="services.php" class="mobile-nav-link"><?php echo __('nav.services'); ?></a></li>
-                <li><a href="#simulators" class="mobile-nav-link"><?php echo __('nav.simulators'); ?></a></li>
+                <li><a href="#simulators" class="mobile-nav-link" onclick="openSimulatorsModal(); return false;"><?php echo __('nav.simulators'); ?></a></li>
                 <li><a href="blog-dynamic.php" class="mobile-nav-link"><?php echo __('nav.blog'); ?></a></li>
                 <li><a href="contact-form.php" class="mobile-nav-link"><?php echo __('nav.contact'); ?></a></li>
             </ul>

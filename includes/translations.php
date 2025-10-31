@@ -16,6 +16,7 @@ $translations = [
         // Navigation
         'nav.home' => 'Accueil',
         'nav.about' => 'MBC',
+        'nav.about_us' => 'À propos',
         'nav.services' => 'Services',
         'nav.simulators' => 'Simulateurs',
         'nav.blog' => 'Blog',
@@ -1280,7 +1281,8 @@ $translations = [
     'en' => [
         // Navigation
         'nav.home' => 'Home',
-        'nav.about' => 'About',
+        'nav.about' => 'MBC',
+        'nav.about_us' => 'About Us',
         'nav.services' => 'Services',
         'nav.simulators' => 'Simulators',
         'nav.blog' => 'Blog',
@@ -2540,7 +2542,8 @@ $translations = [
     'zh' => [
         // Navigation
         'nav.home' => '首页',
-        'nav.about' => '关于我们',
+        'nav.about' => 'MBC',
+        'nav.about_us' => '关于我们',
         'nav.services' => '服务',
         'nav.simulators' => '计算器',
         'nav.blog' => '博客',
