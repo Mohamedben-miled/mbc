@@ -19,7 +19,7 @@ $translations = [
         'nav.about_us' => 'À propos',
         'nav.services' => 'Services',
         'nav.simulators' => 'Simulateurs',
-        'nav.blog' => 'Blog',
+        'nav.blog' => 'Ressources et documentation',
         'nav.contact' => 'Contact',
         
         // Auth
@@ -48,11 +48,11 @@ $translations = [
         'contact.error' => 'Une erreur est survenue lors de l\'envoi de votre message. Veuillez réessayer.',
         
         // Blog
-        'blog.title' => 'Blog',
+        'blog.title' => 'Ressources et documentation',
         'blog.subtitle' => 'Découvrez nos articles sur la comptabilité, fiscalité et conseils pour entrepreneurs',
         'blog.read_more' => 'Lire l\'article',
         'blog.read' => 'Lire',
-        'blog.back_to_blog' => 'Retour au blog',
+        'blog.back_to_blog' => 'Retour aux ressources',
         'blog.search' => 'Rechercher un article...',
         'blog.categories' => 'Catégories',
         'blog.recent_articles' => 'Articles récents',
@@ -262,7 +262,7 @@ $translations = [
         'services.simulators.subtitle' => 'Calculez facilement vos charges et optimisations',
         
         // Blog Page Content
-        'blog.hero.title' => 'Blog MBC',
+        'blog.hero.title' => 'Ressources et documentation MBC',
         'blog.hero.subtitle' => 'Découvrez nos articles sur la comptabilité, fiscalité et conseils pour entrepreneurs',
         'blog.search.placeholder' => 'Rechercher un article...',
         'blog.categories.title' => 'Catégories',
@@ -628,7 +628,7 @@ $translations = [
         'btn.free_consultation' => 'Consultation gratuite',
         'btn.learn_more' => 'En savoir plus',
         'btn.read_article' => 'Lire l\'article',
-        'btn.back_to_blog' => 'Retour au blog',
+        'btn.back_to_blog' => 'Retour aux ressources',
         'btn.download' => 'Télécharger',
         'btn.view_google' => 'Voir sur Google',
         'btn.useful' => 'Utile',
@@ -685,7 +685,7 @@ $translations = [
         'blog.search.button' => 'Rechercher',
         'blog.newsletter.button' => 'S\'abonner',
         'blog.read_more' => 'Lire l\'article',
-        'blog.back_to_blog' => 'Retour au blog',
+        'blog.back_to_blog' => 'Retour aux ressources',
         
         'contact.form.submit' => 'Envoyer le message',
         
@@ -1146,7 +1146,7 @@ $translations = [
         'common.youssef_kaddouri' => 'Youssef Kaddouri',
         'common.majdi_besbes' => 'Majdi Besbes, Expert-Comptable',
         'common.google' => 'Google',
-        'common.blog_meta_title' => 'Blog - MBC Expert Comptable',
+        'common.blog_meta_title' => 'Ressources et documentation - MBC Expert Comptable',
         'common.blog_meta_description' => 'Articles d\'experts sur l\'expertise comptable et la création d\'entreprise',
         'common.blog_meta_title_old' => 'Blog - MBC High Value Business Consulting',
         'common.utf8_encoding_complete' => 'All tables and columns now use UTF-8 encoding.',
@@ -1285,7 +1285,7 @@ $translations = [
         'nav.about_us' => 'About Us',
         'nav.services' => 'Services',
         'nav.simulators' => 'Simulators',
-        'nav.blog' => 'Blog',
+        'nav.blog' => 'Resources and Documentation',
         'nav.contact' => 'Contact',
         
         // Auth
@@ -1314,11 +1314,11 @@ $translations = [
         'contact.error' => 'An error occurred while sending your message. Please try again.',
         
         // Blog
-        'blog.title' => 'Blog',
+        'blog.title' => 'Resources and Documentation',
         'blog.subtitle' => 'Discover our articles on accounting, taxation and advice for entrepreneurs',
         'blog.read_more' => 'Read Article',
         'blog.read' => 'Read',
-        'blog.back_to_blog' => 'Back to Blog',
+        'blog.back_to_blog' => 'Back to Resources',
         'blog.search' => 'Search for an article...',
         'blog.categories' => 'Categories',
         'blog.recent_articles' => 'Recent Articles',
@@ -1526,7 +1526,7 @@ $translations = [
         'services.simulators.subtitle' => 'Easily calculate your charges and optimizations',
         
         // Blog Page Content
-        'blog.hero.title' => 'MBC Blog',
+        'blog.hero.title' => 'MBC Resources and Documentation',
         'blog.hero.subtitle' => 'Discover our articles on accounting, taxation and advice for entrepreneurs',
         'blog.search.placeholder' => 'Search for an article...',
         'blog.categories.title' => 'Categories',
@@ -2407,7 +2407,7 @@ $translations = [
         'common.youssef_kaddouri' => 'Youssef Kaddouri',
         'common.majdi_besbes' => 'Majdi Besbes, Chartered Accountant',
         'common.google' => 'Google',
-        'common.blog_meta_title' => 'Blog - MBC Expert Comptable',
+        'common.blog_meta_title' => 'Resources and Documentation - MBC Expert Comptable',
         'common.blog_meta_description' => 'Expert articles on accounting expertise and business creation',
         'common.blog_meta_title_old' => 'Blog - MBC High Value Business Consulting',
         'common.utf8_encoding_complete' => 'All tables and columns now use UTF-8 encoding.',
@@ -2546,7 +2546,7 @@ $translations = [
         'nav.about_us' => '关于我们',
         'nav.services' => '服务',
         'nav.simulators' => '计算器',
-        'nav.blog' => '博客',
+        'nav.blog' => '资源和文档',
         'nav.contact' => '联系我们',
         
         // Auth

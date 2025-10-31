@@ -52,8 +52,5 @@ function ensureUtf8Output($data) {
 }
 
 // Set headers for UTF-8
-if (!headers_sent()) {
-    header('Content-Type: text/html; charset=UTF-8');
-}
-?>
+// Headers are set by the main page, not by included files
 

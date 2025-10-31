@@ -299,6 +299,11 @@ $categories = $blog->getCategories();
                 
                 <!-- Header Utils -->
                 <div class="header-utils">
+                    <!-- Search Button -->
+                    <button class="search-btn-header" onclick="openSearchModal()" aria-label="Rechercher">
+                        <i class="fas fa-search"></i>
+                    </button>
+                    
                     <!-- Language Selector -->
                     <select class="language-selector" aria-label="Sélectionner la langue" onchange="changeLanguage(this.value)">
                         <option value="fr" selected>FR</option>
@@ -347,15 +352,6 @@ $categories = $blog->getCategories();
                                         </a>
                                     </div>
                                 </div>
-                            </div>
-                            <?php
-                        } else {
-                            ?>
-                            <!-- User is not logged in -->
-                            <div class="auth-buttons">
-                                <a href="admin/login.php" class="btn btn-outline btn-sm">
-                                    <i class="fas fa-sign-in-alt"></i> Connexion
-                                </a>
                             </div>
                             <?php
                         }
@@ -420,13 +416,6 @@ $categories = $blog->getCategories();
                         </select>
                     </div>
                     
-                    <!-- Mobile Login Button -->
-                    <div class="mobile-login-section">
-                        <a href="admin/login.php" class="btn btn-primary btn-mobile">
-                            <i class="fas fa-sign-in-alt"></i>
-                            <?php echo __('btn.login'); ?>
-                        </a>
-                    </div>
                 <?php endif; ?>
             </div>
         </div>
@@ -717,5 +706,31 @@ $categories = $blog->getCategories();
             }
         });
     </script>
+
+    <!-- Search Modal -->
+    <div id="searchModal" class="modal search-modal">
+        <div class="modal-content search-modal-content">
+            <div class="modal-header search-modal-header">
+                <h2>Rechercher sur le site</h2>
+                <button class="modal-close" onclick="closeSearchModal()">&times;</button>
+            </div>
+            <div class="modal-body search-modal-body">
+                <div class="search-modal-input-wrapper">
+                    <input type="text" id="siteSearchInput" class="search-modal-input" placeholder="Tapez votre recherche..." autocomplete="off">
+                    <button class="search-modal-btn" onclick="performSiteSearch()">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+                <div class="search-modal-results" id="searchModalResults">
+                    <div class="search-placeholder">
+                        <i class="fas fa-search"></i>
+                        <p>Tapez un mot-clé pour rechercher dans tout le site</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/search-modal.js"></script>
 </body>
 </html>

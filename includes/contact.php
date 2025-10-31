@@ -5,14 +5,17 @@
 
 require_once __DIR__ . '/../config/database.php';
 require_once __DIR__ . '/encoding.php';
+require_once __DIR__ . '/email.php';
 
 class Contact {
     private $db;
+    private $emailManager;
 
     public function __construct() {
         $this->db = Database::getInstance();
         // Ensure UTF-8 encoding for database connection
         ensureUtf8Encoding($this->db->getConnection());
+        $this->emailManager = new EmailManager();
     }
 
     /**
@@ -25,17 +28,40 @@ class Contact {
                 VALUES (?, ?, ?, ?, ?)
             ");
             
-            return $stmt->execute([
+            $result = $stmt->execute([
                 $data['name'],
                 $data['email'],
                 $data['phone'] ?? '',
                 $data['subject'],
                 $data['message']
             ]);
+
+            // Send email notification if submission was successful
+            if ($result) {
+                $this->sendEmailNotification([
+                    'name' => $data['name'],
+                    'email' => $data['email'],
+                    'phone' => $data['phone'] ?? '',
+                    'subject' => $data['subject'],
+                    'message' => $data['message']
+                ]);
+            }
+
+            return $result;
         } catch (PDOException $e) {
             error_log("Contact submission error: " . $e->getMessage());
             return false;
         }
+    }
+
+    /**
+     * Send email notification for new contact submission
+     */
+    public function sendEmailNotification($submission) {
+        if ($this->emailManager && $this->emailManager->isEnabled()) {
+            return $this->emailManager->sendContactNotification($submission);
+        }
+        return false;
     }
 
     /**
@@ -203,34 +229,6 @@ class Contact {
         return $errors;
     }
 
-    /**
-     * Send email notification (placeholder - implement with your email service)
-     */
-    public function sendEmailNotification($submission) {
-        // This is a placeholder function
-        // Implement with your preferred email service (PHPMailer, SendGrid, etc.)
-        
-        $to = 'contact@mbc-expertcomptable.fr';
-        $subject = 'Nouveau message de contact - ' . $submission['subject'];
-        $message = "
-        Nouveau message de contact reçu :
-        
-        Nom: {$submission['name']}
-        Email: {$submission['email']}
-        Téléphone: {$submission['phone']}
-        Sujet: {$submission['subject']}
-        
-        Message:
-        {$submission['message']}
-        
-        Date: " . formatDateTime($submission['created_at']);
-        
-        $headers = "From: {$submission['email']}\r\n";
-        $headers .= "Reply-To: {$submission['email']}\r\n";
-        $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
-        
-        return mail($to, $subject, $message, $headers);
-    }
 }
 
 // Initialize contact instance

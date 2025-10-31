@@ -53,6 +53,11 @@ $pageDescription = "MB Consulting est un cabinet d'expertise comptable spéciali
 
                 <!-- Header Utils -->
                 <div class="header-utils">
+                    <!-- Search Button -->
+                    <button class="search-btn-header" onclick="openSearchModal()" aria-label="Rechercher">
+                        <i class="fas fa-search"></i>
+                    </button>
+                    
                     <select class="language-selector" aria-label="<?php echo __('nav.select_language'); ?>" onchange="changeLanguage(this.value)">
                         <option value="fr" <?php echo getCurrentLanguage() === 'fr' ? 'selected' : ''; ?>>FR</option>
                         <option value="en" <?php echo getCurrentLanguage() === 'en' ? 'selected' : ''; ?>>EN</option>
@@ -587,6 +592,32 @@ $pageDescription = "MB Consulting est un cabinet d'expertise comptable spéciali
             form.submit();
         }
     </script>
+
+    <!-- Search Modal -->
+    <div id="searchModal" class="modal search-modal">
+        <div class="modal-content search-modal-content">
+            <div class="modal-header search-modal-header">
+                <h2>Rechercher sur le site</h2>
+                <button class="modal-close" onclick="closeSearchModal()">&times;</button>
+            </div>
+            <div class="modal-body search-modal-body">
+                <div class="search-modal-input-wrapper">
+                    <input type="text" id="siteSearchInput" class="search-modal-input" placeholder="Tapez votre recherche..." autocomplete="off">
+                    <button class="search-modal-btn" onclick="performSiteSearch()">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+                <div class="search-modal-results" id="searchModalResults">
+                    <div class="search-placeholder">
+                        <i class="fas fa-search"></i>
+                        <p>Tapez un mot-clé pour rechercher dans tout le site</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/search-modal.js"></script>
 </body>
 </html>
 

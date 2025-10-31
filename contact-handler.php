@@ -5,6 +5,8 @@
 
 require_once __DIR__ . '/includes/contact.php';
 
+$contact = new Contact();
+
 header('Content-Type: application/json');
 
 if (!isset($_SERVER['REQUEST_METHOD']) || $_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -69,10 +71,7 @@ $submissionData = [
 ];
 
 if ($contact->submitContact($submissionData)) {
-    // Send email notification
-    $db = Database::getInstance();
-    $submission = $contact->getSubmission($db->lastInsertId());
-    $contact->sendEmailNotification($submission);
+    // Email notification is automatically sent by submitContact method
     
     echo json_encode([
         'success' => true,

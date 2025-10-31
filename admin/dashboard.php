@@ -2,6 +2,10 @@
 require_once __DIR__ . '/../includes/auth.php';
 require_once __DIR__ . '/../includes/blog.php';
 require_once __DIR__ . '/../includes/contact.php';
+require_once __DIR__ . '/../includes/traffic.php';
+
+// Initialize traffic tracker (other instances are created in their respective include files)
+$trafficTracker = new TrafficTracker();
 
 // Require admin access
 $auth->requireAdmin();
@@ -15,6 +19,12 @@ $draftPosts = $blog->countDraftPosts();
 $newSubmissions = $contact->getNewSubmissionsCount();
 $totalSubmissions = $contact->getSubmissionsCount();
 
+// Get traffic statistics
+$trafficSummary = $trafficTracker->getTrafficSummary(30);
+$dailyTraffic = $trafficTracker->getDailyTraffic(30);
+$mostVisitedPages = $trafficTracker->getMostVisitedPages(5);
+$hourlyTraffic = $trafficTracker->getHourlyTraffic(7);
+
 // Get recent data
 $recentPosts = $blog->getRecentPosts(5);
 $recentSubmissions = $contact->getSubmissions(1, 5);
@@ -27,6 +37,7 @@ $recentSubmissions = $contact->getSubmissions(1, 5);
     <title>Tableau de bord - MBC Expert Comptable</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -516,6 +527,9 @@ $recentSubmissions = $contact->getSubmissions(1, 5);
                     <a href="support-config.php" class="mobile-nav-link">
                         <i class="fas fa-robot"></i> Configuration Support
                     </a>
+                    <a href="smtp-config.php" class="mobile-nav-link">
+                        <i class="fas fa-envelope"></i> Configuration SMTP
+                    </a>
                     <a href="logout.php" class="mobile-nav-link logout">
                         <i class="fas fa-sign-out-alt"></i> Déconnexion
                     </a>
@@ -568,6 +582,10 @@ $recentSubmissions = $contact->getSubmissions(1, 5);
                     <i class="fas fa-robot"></i>
                     Configuration Support
                 </a>
+                <a href="smtp-config.php" class="nav-item">
+                    <i class="fas fa-envelope"></i>
+                    Configuration SMTP
+                </a>
             </nav>
 
             <div class="logout-btn">
@@ -619,6 +637,68 @@ $recentSubmissions = $contact->getSubmissions(1, 5);
                     <h3>Total messages</h3>
                     <div class="number"><?php echo $totalSubmissions; ?></div>
                     <div class="change">Tous les messages</div>
+                </div>
+                
+                <!-- Traffic Statistics -->
+                <div class="stat-card" style="border-left-color: #10b981;">
+                    <h3>Visites (30j)</h3>
+                    <div class="number"><?php echo number_format($trafficSummary['total_visits']); ?></div>
+                    <div class="change"><?php echo number_format($trafficSummary['unique_visitors']); ?> visiteurs uniques</div>
+                </div>
+
+                <div class="stat-card" style="border-left-color: #3b82f6;">
+                    <h3>Pages visitées</h3>
+                    <div class="number"><?php echo number_format($trafficSummary['total_pages']); ?></div>
+                    <div class="change"><?php echo number_format($trafficSummary['active_days']); ?> jours actifs</div>
+                </div>
+            </div>
+
+            <!-- Traffic Charts Section -->
+            <div class="traffic-section" style="margin-top: 30px;">
+                <div class="card" style="margin-bottom: 30px;">
+                    <div class="card-header">
+                        <h3>Trafic quotidien (30 derniers jours)</h3>
+                    </div>
+                    <div class="card-content">
+                        <canvas id="dailyTrafficChart" style="max-height: 300px;"></canvas>
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 30px;">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Pages les plus visitées</h3>
+                        </div>
+                        <div class="card-content">
+                            <?php if (empty($mostVisitedPages)): ?>
+                                <p style="color: #64748b; text-align: center; padding: 20px;">Aucune donnée de trafic disponible</p>
+                            <?php else: ?>
+                                <?php foreach ($mostVisitedPages as $page): ?>
+                                    <div class="list-item">
+                                        <div class="list-item-icon">
+                                            <i class="fas fa-file"></i>
+                                        </div>
+                                        <div class="list-item-content">
+                                            <div class="list-item-title"><?php echo htmlspecialchars($page['page_title'] ?: $page['page_url']); ?></div>
+                                            <div class="list-item-meta">
+                                                <?php echo number_format($page['views']); ?> vues • 
+                                                <?php echo number_format($page['unique_visitors']); ?> visiteurs uniques
+                                            </div>
+                                        </div>
+                                    </div>
+                                <?php endforeach; ?>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Trafic par heure</h3>
+                        </div>
+                        <div class="card-content">
+                            <canvas id="hourlyTrafficChart" style="max-height: 250px;"></canvas>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -698,6 +778,96 @@ $recentSubmissions = $contact->getSubmissions(1, 5);
     </div>
 
     <script>
+        // Traffic Charts Data
+        const dailyTrafficData = <?php echo json_encode($dailyTraffic); ?>;
+        const hourlyTrafficData = <?php echo json_encode($hourlyTraffic); ?>;
+
+        // Daily Traffic Chart
+        if (document.getElementById('dailyTrafficChart')) {
+            const ctx = document.getElementById('dailyTrafficChart').getContext('2d');
+            const labels = dailyTrafficData.map(item => {
+                const date = new Date(item.date);
+                return date.toLocaleDateString('fr-FR', { day: '2-digit', month: '2-digit' });
+            });
+            const visits = dailyTrafficData.map(item => parseInt(item.total_visits));
+            const visitors = dailyTrafficData.map(item => parseInt(item.unique_visitors));
+
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Visites',
+                        data: visits,
+                        borderColor: '#296871',
+                        backgroundColor: 'rgba(41, 104, 113, 0.1)',
+                        tension: 0.4,
+                        fill: true
+                    }, {
+                        label: 'Visiteurs uniques',
+                        data: visitors,
+                        borderColor: '#10b981',
+                        backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                        tension: 0.4,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+
+        // Hourly Traffic Chart
+        if (document.getElementById('hourlyTrafficChart')) {
+            const ctx2 = document.getElementById('hourlyTrafficChart').getContext('2d');
+            
+            // Create array for all 24 hours
+            const hourlyData = new Array(24).fill(0);
+            hourlyTrafficData.forEach(item => {
+                hourlyData[item.hour] = parseInt(item.visits);
+            });
+
+            new Chart(ctx2, {
+                type: 'bar',
+                data: {
+                    labels: Array.from({length: 24}, (_, i) => i + 'h'),
+                    datasets: [{
+                        label: 'Visites',
+                        data: hourlyData,
+                        backgroundColor: 'rgba(59, 130, 246, 0.6)',
+                        borderColor: '#3b82f6',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+
         // Auto-refresh stats every 30 seconds
         setInterval(function() {
             location.reload();
